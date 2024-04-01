@@ -19,5 +19,7 @@ use App\Http\Controllers\HomeController;
 //  });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/category', [HomeController::class, 'category']);
+Route::get('/subcategory', [HomeController::class, 'subcategory']);
 
 

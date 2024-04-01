@@ -26,8 +26,30 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-  <script src="{{asset('/assets/slick/slick.js')}}" type="text/javascript" charset="utf-8"></script>
-  
+  <script src="{{asset('/assets/slick/slick.js')}}" type="text/javascript" charset="utf-8"></
+  <script type="text/javascript">
+        $(document).on('ready', function () {
+            $(".regular").slick({
+                dots: true,
+                prevArrow: false,
+                nextArrow: false,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+            });
+            $(".center").slick({
+                dots: false,
+                infinite: true,
+                centerMode: true,
+                slidesToShow: 5,
+                slidesToScroll: 3,
+                autoplay: true,
+                autoplaySpeed: 5000,
+            });
+        });
+    </script>
   @stack('js')
 </body>
 
