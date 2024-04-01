@@ -8,7 +8,7 @@
                         <a href="" class="activeCategory">Business Offerings</a>
                         <a href="">Consulting Services</a>
                         <a href="">Events/Conferences</a>
-                        <a href="">Health Authority Sites</a
+                        <a href="">Health Authority Sites</a>
                         <a href="">Jobs</a>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                         <h5>Search By Category</h5>
                                         <div>
                                             <input placeholder="Category name here..." type="text">
-                                            <button><img src="assetsassets./images/search.png" alt="search" /></button>
+                                            <button><img src="assets/images/search.png" alt="search" /></button>
                                         </div>
                                     </span>
                                 </div>

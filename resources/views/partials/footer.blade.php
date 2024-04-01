@@ -58,7 +58,8 @@
       </div>
       <div class="copyrighter">PharmConnect | ©copyright 2024</div>
     </footer>
-    <script>
+    @push('js')
+<script>
     function partnerFunction() {
       var element = document.getElementById("partnerOption");
       element.classList.toggle("openPartnerOption");
@@ -98,3 +99,4 @@
       });
     });
   </script>
+@endpush
