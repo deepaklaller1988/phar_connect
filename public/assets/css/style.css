@@ -351,7 +351,13 @@ ul.slick-dots li.slick-active button {
 .pharmCategory.pharmPartnersLogo button.slick-arrow {
     display: none !important;
 }
-
+.pharmCategory.pharmPartnersLogo .slick-slide>div h6 {
+    height: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #3b9d63;
+}
 button.slick-arrow {
     border-left: 4px solid;
     border-bottom: 4px solid;

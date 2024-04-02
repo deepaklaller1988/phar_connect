@@ -207,7 +207,7 @@
                   <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
                 </div>
                 <div>
-                  <img src="{{asset('/assets/images/logos/1.png') }}" alt="logo" />
+                <h6>Collesto.IN</h6>
                 </div>
                 <div>
                   <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
