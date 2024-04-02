@@ -55,7 +55,7 @@ class LoginController extends Controller
             }else if (auth()->user()->type == 'partner') {
                 return redirect()->route('partner.dashboard');
             }else{
-                return redirect()->route('/');
+                return redirect()->route('/home');
             }
         }else{
             return redirect()->route('login')
