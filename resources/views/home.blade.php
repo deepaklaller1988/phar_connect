@@ -168,13 +168,7 @@
                   <b>Learn More</b>
                 </a>
               </div>
-              <div>
-                <a href="">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
+             
             </section>
           </div>
         </div>
