@@ -2,6 +2,78 @@
 
 @section('content')
 <div class="midContainer">
+  <div class="selectYourCategory">
+    <div class="selectSetCategory">
+      <div class="selectedCategoryHead">
+      <h6>WELCOME KATRINA KAIF</h6>
+      <p>Choose a category you want to display on your feed.</p>
+      <span>Selcted <b>5</b></span>
+</div>
+      <ul>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+        <li>
+          <input type="checkbox"/>
+          <section>
+            <span>
+              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+            </span>
+            <h6>Consulting Services</h6>
+            <p>Seeting up services</p>
+          </section>
+        </li>
+
+      </ul>
+    </div>
+  </div>
       <div class="bannerSet">
         <section class="regular slider">
           <div>

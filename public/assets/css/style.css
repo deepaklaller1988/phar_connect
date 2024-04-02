@@ -1076,3 +1076,134 @@ ul.linksCategories>li ul.linksSubcategories li a:hover {
 ul.linksSubcategories.activeLinkSet {
     display: flex;
 }
+.selectYourCategory {
+    position: fixed;
+    background: #000000b8;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    display: ;
+}
+
+.selectSetCategory {
+    width: 830px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.selectSetCategory ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.selectSetCategory ul li {
+    width: calc(33.33% - 10px);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.selectedCategoryHead {
+    padding-bottom: 10px;
+    position: relative;
+    padding-right: 150px;
+}
+
+.selectedCategoryHead h6 {
+    color: #1fc8ec;
+}
+.selectedCategoryHead span {
+    position: absolute;
+    right: 0;
+    font-weight: 700;
+    top: 15px;
+}
+
+.selectedCategoryHead span b {
+    background: #00BCD4;
+    display: inline-block;
+    text-align: center;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+}
+.selectSetCategory ul li input[type="checkbox"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.selectSetCategory ul li span {
+    background: #959595;
+    display: inline-block;
+    border-radius: 100px;
+    padding: 10px;
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.selectSetCategory ul li span img {
+    display: block;
+}
+
+.selectSetCategory ul li input[type="checkbox"]:checked+section, .selectSetCategory ul li:hover section {
+    background: #f5fcff;
+    border: 2px solid #00BCD4;
+    border-radius: 10px;
+}
+
+.selectSetCategory ul li section {
+    padding: 25px 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.selectSetCategory ul li input[type="checkbox"]:checked+section span {
+    background: #00BCD4;
+}
+
+.selectSetCategory ul li input[type="checkbox"]:checked+section:after {
+    content: '';
+    width: 10px;
+    height: 18px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    transform: rotate(45deg) scale(.5);
+    opacity: 1;
+}
+
+.selectSetCategory ul li * {
+    transition: .5s;
+}
+
+.selectSetCategory ul li section:after {
+    content: '';
+    width: 10px;
+    height: 18px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    transform: rotate(0deg) scale(0);
+    opacity: 0;
+    transition: .5s;
+}
