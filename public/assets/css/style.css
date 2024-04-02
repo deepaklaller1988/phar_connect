@@ -352,6 +352,14 @@ ul.slick-dots li.slick-active button {
     display: none !important;
 }
 
+.pharmCategory.pharmPartnersLogo .slick-slide>div h6 {
+    height: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #3b9d63;
+}
+
 button.slick-arrow {
     border-left: 4px solid;
     border-bottom: 4px solid;
@@ -1076,6 +1084,7 @@ ul.linksCategories>li ul.linksSubcategories li a:hover {
 ul.linksSubcategories.activeLinkSet {
     display: flex;
 }
+
 .selectYourCategory {
     position: fixed;
     background: #000000b8;
@@ -1107,7 +1116,7 @@ ul.linksSubcategories.activeLinkSet {
 }
 
 .selectSetCategory ul li {
-    width: calc(33.33% - 10px);
+    width: 100%;
     text-align: center;
     cursor: pointer;
     position: relative;
@@ -1122,6 +1131,7 @@ ul.linksSubcategories.activeLinkSet {
 .selectedCategoryHead h6 {
     color: #1fc8ec;
 }
+
 .selectedCategoryHead span {
     position: absolute;
     right: 0;
@@ -1138,6 +1148,7 @@ ul.linksSubcategories.activeLinkSet {
     color: white;
     font-weight: 500;
 }
+
 .selectSetCategory ul li input[type="checkbox"] {
     position: absolute;
     width: 100%;
@@ -1153,24 +1164,27 @@ ul.linksSubcategories.activeLinkSet {
     display: inline-block;
     border-radius: 100px;
     padding: 10px;
-    width: 50px;
-    margin-bottom: 10px;
+    width: 40px;
 }
 
 .selectSetCategory ul li span img {
     display: block;
 }
 
-.selectSetCategory ul li input[type="checkbox"]:checked+section, .selectSetCategory ul li:hover section {
+.selectSetCategory ul li input[type="checkbox"]:checked+section,
+.selectSetCategory ul li:hover section {
     background: #f5fcff;
     border: 2px solid #00BCD4;
     border-radius: 10px;
 }
 
 .selectSetCategory ul li section {
-    padding: 25px 15px;
+    padding: 5px;
     border: 2px solid #e5e5e5;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .selectSetCategory ul li input[type="checkbox"]:checked+section span {
@@ -1178,15 +1192,7 @@ ul.linksSubcategories.activeLinkSet {
 }
 
 .selectSetCategory ul li input[type="checkbox"]:checked+section:after {
-    content: '';
-    width: 10px;
-    height: 18px;
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    border-right: 3px solid black;
-    border-bottom: 3px solid black;
-    transform: rotate(45deg) scale(.5);
+    transform: rotate(45deg) scale(.8);
     opacity: 1;
 }
 
@@ -1199,11 +1205,336 @@ ul.linksSubcategories.activeLinkSet {
     width: 10px;
     height: 18px;
     position: absolute;
-    right: 10px;
-    top: 5px;
+    right: 20px;
+    top: 14px;
     border-right: 3px solid black;
     border-bottom: 3px solid black;
-    transform: rotate(0deg) scale(0);
-    opacity: 0;
+    transform: rotate(45deg) scale(.5);
+    opacity: .2;
     transition: .5s;
+}
+
+.singlePageDetailHub {
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+.leftSideSlider {
+    width: 500px;
+}
+
+.rightCategoryInfo {
+    width: 100%;
+    padding: 25px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px silver;
+}
+
+.singlePageDetail {
+    padding: 50px 0;
+}
+
+.sideCategoryInfo h6 {
+    font-size: 16px;
+}
+
+.sideCategoryInfo p {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sideCategoryInfo span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sideCategoryInfo b,
+.sideCategoryInfo span {
+    font-size: 12px;
+}
+
+.partnerName a {
+    text-decoration: underline;
+    color: #1fc8ec;
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+}
+
+.sideCategoryInfo {
+    padding-bottom: 20px;
+}
+
+.partnerName {
+    padding: 10px 0;
+}
+
+.sideCategoryInfo p img {
+    width: 20px;
+}
+
+.categorySliding {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px silver;
+}
+
+.categorySliding .slick-slide img {
+    width: 100%;
+}
+
+.categorySliding .slider-nav-thumbnails .slick-slide {
+    width: 100px;
+    padding: 5px;
+}
+
+.categorySliding .slider-nav-thumbnails .slick-slide img {
+    height: 70px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.categorySliding .slider-nav-thumbnails .slick-list.draggable {
+    padding: 0 10px;
+}
+
+.categorySliding .slider-nav-thumbnails .slick-slide {
+    opacity: .5;
+    cursor: pointer;
+}
+
+.categorySliding .slider-nav-thumbnails .slick-slide.slick-current {
+    opacity: 1;
+}
+
+.rightCategoryInfo li {
+    background: #efefef;
+    padding: 10px 20px 10px 40px;
+    border-radius: 40px;
+    margin: 5px 0;
+    position: relative;
+}
+
+.rightCategoryInfo li:before {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: black;
+    content: '';
+    left: 15px;
+    top: 17px;
+    transform: rotate(45deg);
+}
+
+.rightCategoryInfo p {
+    line-height: 25px;
+}
+
+.rightCategoryInfo ul {
+    padding: 15px 0;
+    border-top: 1px dashed silver;
+    border-bottom: 1px dashed silver;
+    margin: 15px 0;
+}
+
+.buttonsCategory section {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: #efefef;
+    border-radius: 6px;
+    margin-top: 21px;
+}
+
+.buttonsCategory section button {
+    outline: none;
+    position: relative;
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.buttonsCategory section button:last-child {
+    color: black;
+    background: transparent;
+    border: 1px solid black;
+}
+
+.rightCategoryInfo h6 {
+    padding: 15px 0;
+}
+
+.container.loginRegister {
+    width: 400px;
+    margin: 15vh auto;
+    padding: 15px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ebebeb;
+}
+
+.container.loginRegister .card-header {
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.container.loginRegister input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ededed;
+    margin-top: 5px;
+    outline: none;
+}
+
+.container.loginRegister .row.mb-3 label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+}
+
+.container.loginRegister .row.mb-3 {
+    margin: 10px 0;
+}
+
+.container.loginRegister .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.container.loginRegister .form-check input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.container.loginRegister button {
+    position: relative;
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 40px 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    min-width: 250px;
+    max-width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container.loginRegister .col-md-8.offset-md-4 {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
+}
+
+.container.loginRegister .col-md-8.offset-md-4 a.btn.btn-link {
+    position: absolute;
+    top: -38px;
+    right: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+}
+
+.container.loginRegister .col-md-8.width100.offset-md-4 button {
+    max-width: 100%;
+}
+
+.selectSetCategory ul li input[type="checkbox"]:checked~.allListBelow {
+    max-height: 1000px;
+}
+
+.allListBelow {
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    transition: .5s;
+}
+
+.selectSetCategory .allListBelow ul li {
+    width: calc(33.33% - 10px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border: 1px solid silver;
+    border-radius: 6px;
+}
+
+.selectSetCategory .allListBelow ul li span {
+    width: auto;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.selectSetCategory .allListBelow ul li span input[type="checkbox"] {}
+
+.selectSetCategory .allListBelow ul li span input[type="checkbox"]:checked+b {
+    border: 1px solid black;
+}
+
+.selectSetCategory .allListBelow ul li span b {
+    width: 14px;
+    height: 14px;
+    background: white;
+    position: absolute;
+    border-radius: 100px;
+    left: 10px;
+    top: 50%;
+    margin-top: -7px;
+    border: 1px solid #cbcbcb;
+    transition: .5s;
+}
+
+.selectSetCategory .allListBelow ul li span b:before {
+    width: 8px;
+    height: 8px;
+    content: '';
+    position: absolute;
+    background: black;
+    left: 2px;
+    top: 2px;
+    border-radius: 100px;
+    opacity: 0;
+    transform: scale(.2);
+    transition: .5s;
+}
+
+.selectSetCategory .allListBelow ul li span input[type="checkbox"]:checked+b:before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.submItCategory {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.submItCategory button {
+    position: relative;
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 40px 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    min-width: 250px;
+    max-width: 250px;
 }

@@ -11,67 +11,114 @@
 </div>
       <ul>
         <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
+          <div class="catgeroyAccordion">
+            <input type="checkbox"/>
+            <section>
+              <span>
+                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+              </span>
+              <h6>Consulting Services</h6>
+            </section>
+            <div class="allListBelow">
+              <ul>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+            </ul>
+            </div>
+          </div>
         </li>
         <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
+          <div class="catgeroyAccordion">
+            <input type="checkbox"/>
+            <section>
+              <span>
+                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+              </span>
+              <h6>Consulting Services</h6>
+            </section>
+            <div class="allListBelow">
+              <ul>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+            </ul>
+            </div>
+          </div>
         </li>
         <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
+          <div class="catgeroyAccordion">
+            <input type="checkbox"/>
+            <section>
+              <span>
+                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+              </span>
+              <h6>Consulting Services</h6>
+            </section>
+            <div class="allListBelow">
+              <ul>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+            </ul>
+            </div>
+          </div>
         </li>
         <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
+          <div class="catgeroyAccordion">
+            <input type="checkbox"/>
+            <section>
+              <span>
+                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+              </span>
+              <h6>Consulting Services</h6>
+            </section>
+            <div class="allListBelow">
+              <ul>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+            </ul>
+            </div>
+          </div>
         </li>
         <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
+          <div class="catgeroyAccordion">
+            <input type="checkbox"/>
+            <section>
+              <span>
+                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
+              </span>
+              <h6>Consulting Services</h6>
+            </section>
+            <div class="allListBelow">
+              <ul>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+            </ul>
+            </div>
+          </div>
         </li>
-        <li>
-          <input type="checkbox"/>
-          <section>
-            <span>
-              <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-            </span>
-            <h6>Consulting Services</h6>
-            <p>Seeting up services</p>
-          </section>
-        </li>
-
       </ul>
+      <div class="submItCategory">
+      <button>Submit</button>
+</div>
     </div>
   </div>
       <div class="bannerSet">
@@ -168,13 +215,7 @@
                   <b>Learn More</b>
                 </a>
               </div>
-              <div>
-                <a href="">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
+             
             </section>
           </div>
         </div>
@@ -213,7 +254,7 @@
                   <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
                 </div>
                 <div>
-                  <img src="{{asset('/assets/images/logos/1.png') }}" alt="logo" />
+                <h6>Collesto.IN</h6>
                 </div>
                 <div>
                   <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />

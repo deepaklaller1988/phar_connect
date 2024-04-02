@@ -66,7 +66,7 @@
     }
     $(window).scroll(function() {    
     var scroll = $(window).scrollTop();
-    if (scroll >= 150) {
+    if (scroll > 300) {
         $("header").addClass("fixHeader");
     } 
     else {
@@ -99,4 +99,39 @@
       });
     });
   </script>
+  
+<script>
+    $('.videos-slider-2').slick({
+  autoplay: true,
+  slidesToScroll: 1,
+  slidesToShow: 1,
+  arrows: false,
+  dots: false,
+  asNavFor: '.slider-nav-thumbnails',
+});
+
+$('.slider-nav-thumbnails').slick({
+  autoplay: true,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  asNavFor: '.videos-slider-2',
+  dots: false,
+  focusOnSelect: true,
+  variableWidth: true,
+  arrows: false,
+});
+
+// Remove active class from all thumbnail slides
+$('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+
+// Set active class to first thumbnail slides
+$('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+
+// On before slide change match active thumbnail to current slide
+$('.videos-slider-2').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+  var mySlideNumber = nextSlide;
+  $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+  $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+});
+</script>
 @endpush
