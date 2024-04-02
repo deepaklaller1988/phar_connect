@@ -23,5 +23,7 @@ class HomeController extends Controller
     {
         return view('single_category');
     }
+
+    
     
 }

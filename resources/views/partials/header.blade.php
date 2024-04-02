@@ -1,7 +1,7 @@
 <header class="">
       <div class="wrapper">
         <div class="headerHub">
-          <a href=""><img src="{{asset('/assets/images/logo.jpg') }}" alt="logo" /></a>
+          <a href="{{ url('/') }}"><img src="{{asset('/assets/images/logo.jpg') }}" alt="logo" /></a>
           <div class="headerNav">
             <nav>
               <span>
@@ -96,16 +96,37 @@
               </span>
               <a href="">About us</a>
               <a href="">Contact us</a>
-              <a href="">Sign in</a>
+              @if (Route::has('login'))
+              @auth
+              <a href="{{ url('/') }}">Dashboard</a>
+              @else
+              <a href="{{ route('login') }}">Sign in</a>
+              @endauth
+              @endif
             </nav>
+            @if (Route::has('login'))
+            @auth
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+            @else
             <div class="dropOption">
               <button onclick="partnerFunction()">CREATE AN ACCOUNT</button>
               <ul id="partnerOption">
-                <li><a href="">Become a Partner</a></li>
-                <li><a href="">Become a Member</a></li>
+                
+                @if (Route::has('register'))
+                <li><a href="{{ route('partner.register') }}">Become a Partner</a></li>
+                <li><a href="{{ route('register') }}">Become a Member</a></li>
+                @endif
               </ul>
             </div>
+            @endauth
+            @endif
           </div>
         </div>
       </div>
     </header>
+  
