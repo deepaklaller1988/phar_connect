@@ -1087,7 +1087,7 @@ ul.linksSubcategories.activeLinkSet {
     align-items: center;
     justify-content: center;
     padding: 15px;
-    display: ;
+    display: none;
 }
 
 .selectSetCategory {

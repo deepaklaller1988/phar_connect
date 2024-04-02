@@ -58,3 +58,45 @@
       </div>
       <div class="copyrighter">PharmConnect | ©copyright 2024</div>
     </footer>
+    @push('js')
+<script>
+    function partnerFunction() {
+      var element = document.getElementById("partnerOption");
+      element.classList.toggle("openPartnerOption");
+    }
+    $(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+    if (scroll >= 150) {
+        $("header").addClass("fixHeader");
+    } 
+    else {
+        $("header").removeClass("fixHeader");
+    }
+});
+
+  </script>
+
+<script type="text/javascript">
+    $(document).on('ready', function () {
+      $(".regular").slick({
+        dots: true,
+        prevArrow: false,
+        nextArrow: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+      });
+      $(".center").slick({
+        dots: false,
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 5,
+        slidesToScroll: 3,
+        autoplay: true,
+        autoplaySpeed: 5000,
+      });
+    });
+  </script>
+@endpush
