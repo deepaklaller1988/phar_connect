@@ -56,4 +56,28 @@
         </div>
     </div>
 </div>
+<div class="modal" id="addcategory">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Category</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="mb-3 mt-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <input type="text" class="form-control" id="category" placeholder="Enter category" name="category">
+                    </div>
+                    <input type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @endsection
