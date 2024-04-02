@@ -1238,11 +1238,35 @@ ul.linksSubcategories.activeLinkSet {
     font-size: 16px;
 }
 
-.sideCategoryInfo p,
-.sideCategoryInfo p * {
-    padding: 10px 0;
+.sideCategoryInfo p {
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+.sideCategoryInfo span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.sideCategoryInfo b, .sideCategoryInfo span{
+    font-size: 12px;}
+    .partnerName a {
+        text-decoration: underline;
+        color: #1fc8ec;
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+    }
+    .sideCategoryInfo {
+        padding-bottom: 20px;
+    }
+    .partnerName {
+        padding: 10px 0;
+    }
+    .sideCategoryInfo p img {
+        width: 20px;
+    }
 
 .categorySliding {
     border-radius: 10px;
@@ -1337,4 +1361,86 @@ ul.linksSubcategories.activeLinkSet {
 
 .rightCategoryInfo h6 {
     padding: 15px 0;
+}
+.container.loginRegister {
+    width: 400px;
+    margin: 15vh auto;
+    padding: 15px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ebebeb;
+}
+
+.container.loginRegister .card-header {
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.container.loginRegister input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ededed;
+    margin-top: 5px;
+    outline: none;
+}
+
+.container.loginRegister .row.mb-3 label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+}
+
+.container.loginRegister .row.mb-3 {
+    margin: 10px 0;
+}
+
+.container.loginRegister .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.container.loginRegister .form-check input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.container.loginRegister button {
+    position: relative;
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 40px 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    min-width: 250px;
+    max-width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container.loginRegister .col-md-8.offset-md-4 {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
+}
+
+.container.loginRegister .col-md-8.offset-md-4 a.btn.btn-link {
+    position: absolute;
+    top: -38px;
+    right: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+}
+.container.loginRegister .col-md-8.width100.offset-md-4 button {
+    max-width: 100%;
 }

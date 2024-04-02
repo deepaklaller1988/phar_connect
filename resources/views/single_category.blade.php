@@ -5,9 +5,13 @@
   <div class="wrapper">
     <div class="singlePageDetailHub">
       <div class="leftSideSlider">
+        
         <div class="sideCategoryInfo">
           <h6>Universal Phone Stand Mirror Mount Navigation Accessories Vehicle.</h6>
-          <p><b>23</b> Views | <span>Canada</span></p>
+          <div class="partnerName">
+            <a href="">Dongyang Hongya Art&Crafts Co.</a>
+        </div>
+          <p><b>23</b> Views | <span><img src="{{asset('/assets/images/verify.png') }}" alt="categoriy" /> Verified | 12 Years</span> | <span>Canada</span></p>
         </div>
         <div class="categorySliding">
           <div class="videos-slider-2">
