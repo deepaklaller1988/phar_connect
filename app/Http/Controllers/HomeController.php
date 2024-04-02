@@ -18,5 +18,10 @@ class HomeController extends Controller
     {
         return view('subcategory');
     }
+
+    public function categoryDetail()
+    {
+        return view('single_category');
+    }
     
 }
