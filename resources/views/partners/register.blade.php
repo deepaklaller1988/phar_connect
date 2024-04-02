@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Partner With Us!') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -58,6 +58,46 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Company Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control " name="company_name" value="{{ old('company_name') }}" >
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('How Can We Help You') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="help_input">
+                                    <option disabled>Choose your option</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Country/Region') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="help_input">
+                                    <option disabled>Choose your option</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Please let us know more about your need') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="more_info"></textarea>
                             </div>
                         </div>
                         <input type="hidden" name="type" value="2">

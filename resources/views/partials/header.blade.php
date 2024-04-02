@@ -98,7 +98,11 @@
               <a href="">Contact us</a>
               @if (Route::has('login'))
               @auth
+              @if(auth()->user()->type == "partner")
+              <a href="{{ url('/partner/dashboard') }}">Dashboard</a>
+              @else
               <a href="{{ url('/') }}">Dashboard</a>
+              @endif
               @else
               <a href="{{ route('login') }}">Sign in</a>
               @endauth
