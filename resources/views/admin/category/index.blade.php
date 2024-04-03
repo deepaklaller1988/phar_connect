@@ -11,7 +11,7 @@
                         <h4>Categories</h4>
                         <div class="box_right d-flex lms_block">
                             <div class="add_button ms-2">
-                                <a href="javascript:void(0)" id="createNewCategory" class="btn_1">Add New</a>
+                                <a href="{{ route('admin.category.add') }}" id="createNewCategory" class="btn_1">Add New</a>
                             </div>
                         </div>
                     </div>
@@ -20,7 +20,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Parent</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
                                     <th width="280px">Action</th>
                                 </tr>
                             </thead>

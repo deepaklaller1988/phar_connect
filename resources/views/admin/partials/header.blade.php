@@ -12,17 +12,13 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{ asset('assets/admin/img/menu-icon/2.svg') }} " alt>
-                <span>Category</span>
+        <li class="">
+            <a class="" href="{{ route('admin.categories') }}" aria-expanded="false">
+                <img src="{{ asset('assets/admin/img/menu-icon/2.svg') }}" alt>
+                <span>Categories</span>
             </a>
-            <ul>
-                <li><a href="{{ route('admin.categories') }}">Main Category</a></li>
-                <li><a href="{{ route('admin.subcategories') }}">Catgory</a></li>
-                <li><a href="#">Sub Category</a></li>
-            </ul>
         </li>
+
         <li class>
             <a class="has-arrow" href="#" aria-expanded="false">
                 <img src="{{ asset('assets/admin/img/menu-icon/6.svg') }} " alt>
@@ -58,26 +54,14 @@
                     </div>
                     <div class="serach_field-area">
                         <div class="search_inner">
-                            <form action="#">
-                                <div class="search_field">
-                                    <input type="text" placeholder="Search here...">
-                                </div>
-                                <button type="submit"> <img src="{{ asset('assets/admin/img/icon/icon_search.svg') }}"
-                                        alt> </button>
-                            </form>
+                            
                         </div>
                     </div>
                     <div class="header_right d-flex justify-content-between align-items-center">
                         <div class="profile_info">
-                            <img src="{{ asset('assets/admin/img/client_img.png') }}" alt="#">
+                        <h5>Admin</h5>
                             <div class="profile_info_iner">
-                                <p>Neurologist </p>
-                                <h5>Dr. Robar Smith</h5>
-                                <div class="profile_info_details">
-                                    <a href="#">My Profile <i class="ti-user"></i></a>
-                                    <a href="#">Settings <i class="ti-settings"></i></a>
-                                    <a href="#">Log Out <i class="ti-shift-left"></i></a>
-                                </div>
+                                <a href="#">Log Out <i class="ti-shift-left"></i></a>
                             </div>
                         </div>
                     </div>

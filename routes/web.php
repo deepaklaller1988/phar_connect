@@ -31,20 +31,11 @@ Auth::routes();
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
+    Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
     Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
     Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
     Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
-    
-
-    Route::get('/admin/subcategories',[SubCategoryController::class,'index'])->name('admin.subcategories');
-    Route::post('/admin/subcategory/store',[SubCategoryController::class,'store'])->name('admin.subcategory.store');
-    Route::get('/admin/allcategories',[SubCategoryController::class,'get_categories'])->name('admin.allcategories');
-    Route::get('/admin/subcategory/edit/{id}',[SubCategoryController::class,'edit'])->name('admin.subcategory.edit');
-    Route::delete('/admin/subcategory/delete/{id}',[SubCategoryController::class,'destroy'])->name('admin.subcategory.delete');
-    
 }); 
-
-
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
   
