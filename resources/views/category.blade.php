@@ -18,98 +18,98 @@
           <div class="pharmCategoryInner">
             <section class="categorySet">
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/2.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/3.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/2.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('subcategory') }}">
                   <span><img src="assets/images/categoriesIcon/1.png" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>

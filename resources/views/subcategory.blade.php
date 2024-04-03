@@ -89,23 +89,23 @@
                             <p>Manufacturers / Drug Substance / Advanced/Cell and Gene Therapy</p>
                             <section>
                                 <ul>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href=""><span><img src="assets/images/allcategories/1.jpg"
+                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
                                                     alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
                                 </ul>
                             </section>

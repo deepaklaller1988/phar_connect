@@ -5,6 +5,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pharm Connect</title>
     <link rel="icon" href="{{ asset('assets/images/fav.png') }}" type="image/png">
 
@@ -85,6 +86,7 @@
     <script src="{{ asset('assets/admin/vendors/tagsinput/tagsinput.js') }}"></script>
 
     <script src="{{ asset('assets/admin/vendors/text_editor/summernote-bs4.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
     @stack('js')

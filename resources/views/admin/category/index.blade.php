@@ -10,44 +10,21 @@
                     <div class="white_box_tittle list_header">
                         <h4>Categories</h4>
                         <div class="box_right d-flex lms_block">
-                            <div class="serach_field_2">
-                                <div class="search_inner">
-                                    <form Active="#">
-                                        <div class="search_field">
-                                            <input type="text" placeholder="Search content here...">
-                                        </div>
-                                        <button type="submit"> <i class="ti-search"></i> </button>
-                                    </form>
-                                </div>
-                            </div>
                             <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addcategory" class="btn_1">Add
-                                    New</a>
+                                <a href="javascript:void(0)" id="createNewCategory" class="btn_1">Add New</a>
                             </div>
                         </div>
                     </div>
                     <div class="QA_table mb_30">
-
-                        <table class="table lms_table_active">
+                        <table class="table table-bordered data-table" data-url="{{route('admin.categories')}}">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sr. No.</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th width="280px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i= 1; @endphp
-                                @foreach($categories as $category)
-                                <tr>
-                                    <td>{{$i}}</td>
-                                    <td>{{ $category->title }}</td>
-                                    <td>{{ ($category->status == 1 ? 'Active' : 'Deactive')}}</td>
-                                    <td><i class="fa fa-edit"></i><i class="fa fa-trash-alt ml-3"></i></td>
-                                </tr>
-                                @php $i++; @endphp
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -56,26 +33,30 @@
         </div>
     </div>
 </div>
-<div class="modal" id="addcategory">
+<div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Category</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h4 class="modal-title" id="modelHeading"></h4>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="mb-3 mt-3">
-                        <label for="category" class="form-label">Category:</label>
-                        <input type="text" class="form-control" id="category" placeholder="Enter category" name="category">
+                <form id="categoryForm" name="categoryForm" class="form-horizontal">
+                    <input type="hidden" name="id" id="category_id">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="name" name="category" placeholder="Enter Name"
+                                value="" maxlength="50" required="">
+                        </div>
+                        <span class="text-danger d-none" id="inputerror">This field is required</span>
                     </div>
-                    <input type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-sm-offset-2 col-sm-10 mt-3">
+                        <button type="submit" class="btn btn-primary" id="saveBtn" value="create"
+                            data-url="{{route('admin.category.store')}}">Save
+                        </button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-
         </div>
     </div>
 </div>

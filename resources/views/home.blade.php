@@ -181,28 +181,28 @@
           <div class="pharmCategoryInner">
             <section class="center slider">
               <div>
-                <a href="">
+                <a href="{{ route('category') }}">
                   <span><img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('category') }}">
                   <span><img src="{{asset('/assets/images/categoriesIcon/2.png') }}" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('category') }}">
                   <span><img src="{{asset('/assets/images/categoriesIcon/3.png') }}" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="{{ route('category') }}">
                   <span><img src="{{asset('/assets/images/categoriesIcon/2.png') }}" alt="categoriy" /></span>
                   <h4>Consulting Services</h4>
                   <b>Learn More</b>

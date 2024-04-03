@@ -19,7 +19,7 @@
             </a>
             <ul>
                 <li><a href="{{ route('admin.categories') }}">Main Category</a></li>
-                <li><a href="#">Catgory</a></li>
+                <li><a href="{{ route('admin.subcategories') }}">Catgory</a></li>
                 <li><a href="#">Sub Category</a></li>
             </ul>
         </li>
