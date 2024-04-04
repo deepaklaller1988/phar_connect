@@ -86,7 +86,7 @@
                             </section>
                         </div>
                         <div class="rightCategories">
-                            <p>Manufacturers / Drug Substance / Advanced/Cell and Gene Therapy</p>
+                            <p>Manufacturers / Drug Substance / Advanced / Cell and Gene Therapy</p>
                             <section>
                                 <ul>
                                     <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"

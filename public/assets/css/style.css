@@ -56,6 +56,10 @@ header.fixHeader .headerHub>a {
     max-width: 150px;
 }
 
+.headerHub>a img {
+    display: block;
+}
+
 .wrapper {
     max-width: 1430px;
     margin: 0 auto;
@@ -1484,7 +1488,6 @@ ul.linksSubcategories.activeLinkSet {
     margin-right: 5px;
 }
 
-.selectSetCategory .allListBelow ul li span input[type="checkbox"] {}
 
 .selectSetCategory .allListBelow ul li span input[type="checkbox"]:checked+b {
     border: 1px solid black;
@@ -1537,4 +1540,255 @@ ul.linksSubcategories.activeLinkSet {
     cursor: pointer;
     min-width: 250px;
     max-width: 250px;
+}
+
+section.consultingServicesSet {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+section.consultingServicesSet section>div {
+    width: 500px;
+    padding: 7px;
+}
+
+ul.consultList {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+section.consultingServicesSet section>div a {
+    padding: 20px;
+    background: white;
+    border: 1px solid #ecf3f5;
+    border-radius: 6px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    position: relative;
+    padding-bottom: 45px;
+}
+
+section.consultingServicesSet h4 {
+    font-size: 18px;
+}
+
+section.consultingServicesSet span p {
+    font-size: 14px;
+}
+
+ul.tagsConsult {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+
+ul.tagsConsult li {
+    font-size: 12px;
+    background: #e7e7e7;
+    padding: 5px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #666;
+}
+ul.tagsConsult.certifyMe li{padding:0;}
+ul.tagsConsult.certifyMe li a {
+    font-size: 12px;
+    padding: 5px;
+    display: block;
+    text-decoration: underline;
+}
+.leftRightPartnerSet {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.leftRightPartnerSet section {
+    width: 50%;
+}
+.consultInfo.partnerPageMain .consultInfoIndeed a {
+    text-decoration: underline;
+}
+section.consultingServicesSet section>div a>p,
+section.consultingServicesSet section>div a>p b {
+    font-size: 14px;
+    color: #555;
+}
+
+ul.consultList li {
+    font-size: 14px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+ul.consultList li b {
+    font-size: 14px;
+}
+
+section.consultingServicesSet section>div a>b {
+    display: flex;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    bottom: 15px;
+}
+
+section.consultingServicesSet section>div:hover h4 {
+    color: #1fc8ec;
+}
+
+section.consultingServicesSet section>div:hover a {
+    border-color: black;
+}
+
+section.consultingServicesSet section>div * {
+    transition: .5s;
+}
+
+section.consultingServicesSet section>div a.allConsultShow {
+    background: #e0f7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+section.consultingServicesSet section>div a.allConsultShow:hover {
+    border-color: #cce3eb;
+    background: #c6f0ff;
+}
+
+section.consultingServicesSet section>div a.allConsultShow b {
+    position: initial;
+    background: black;
+    color: white;
+    width: auto;
+    padding: 8px 20px;
+    font-size: 16px;
+    border-radius: 100px;
+}
+
+.headConsult {
+    position: relative;
+}
+
+.headConsult section img {
+    height: 120px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.headConsult span {
+    position: absolute;
+    width: 60px;
+    border: 3px solid white;
+    border-radius: 4px;
+    bottom: -30px;
+    left: 20px;
+    box-shadow: 0 0 10px #00000085;
+}
+
+.headConsult span img {
+    display: block;
+}
+
+.consultInfo {
+    width: calc(100% - 525px);
+    border-radius: 10px;
+    box-shadow: 0 0 10px silver;
+    position: sticky;
+    top: 80px;
+    margin-top: 8px;
+    max-height: calc(100vh - 100px);
+    overflow: auto;
+    z-index: 0;
+    background: white;
+}
+
+.consultInfo h4 {
+    margin-top: 50px;
+    font-size: 20px !important;
+    padding-bottom: 6px;
+}
+
+.consultInfoIndeed {
+    font-size: 12px;
+    color: #34b300;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.consultInfo span {
+    padding: 0px 0px;
+}
+
+.consultInfo ul.tagsConsult {
+    margin: 10px 0;
+}
+
+.consultInfo h6 {
+    margin-top: 20px;
+    border-top: 1px dashed silver;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.consultInfo .wrapper>p {
+    margin: 10px 0;
+    line-height: 22px;
+}
+
+.consultInfo .wrapper>b {
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.consultInfo .wrapper>.buttonsCategory {
+    margin-bottom: 20px;
+}
+.consultInfo.partnerPageMain {
+    position: relative;
+    top: 0;
+    width: calc(100% - 30px);
+    max-height: initial;
+    margin-left: 15px;
+    box-shadow: none;
+    border: 1px solid #f1f1f1;
+    padding-bottom: 15px;
+}
+.consultInfo.partnerPageMain .wrapper {
+    position: relative;
+}
+.partnerCallEmail {
+    display: flex;
+    padding: 15px;
+    margin-top: 20px;
+    border-top: 1px dashed silver;
+    padding-top: 30px;
+    gap: 30px;
+    padding-left: 0;
+}
+.partnerCallEmail p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.partnerCallEmail a {
+    outline: none;
+    position: relative;
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
 }
