@@ -1,68 +1,152 @@
 @extends('admin.layouts.master')
 
 @section('content')
+<div class="pcoded-content">
 
-<div class="main_content_iner ">
-    <div class="container-fluid p-0">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="QA_section">
-                    <div class="white_box_tittle list_header">
-                        <h4>Categories</h4>
-                        <div class="box_right d-flex lms_block">
-                            <div class="add_button ms-2">
-                                <a href="{{ route('admin.category.add') }}" id="createNewCategory" class="btn_1">Add New</a>
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="feather icon-server bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Categories</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.categories') }}">categories</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    @if(session('success'))
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="alert alert-success">
+                                {{ session('success') }}
                             </div>
                         </div>
                     </div>
-                    <div class="QA_table mb_30">
-                        <table class="table table-bordered data-table" data-url="{{route('admin.categories')}}">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Title</th>
-                                    <th>Parent</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <th width="280px">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                    @endif
+                    @if(session('error'))
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Categories</h5>
+                            <a href="{{ route('admin.category.add') }}"
+                                clas="btn btn-success waves-effect waves-light">Add Category</a>
+                        </div>
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+                                <table id="dt-http" class="table table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Parent</th>
+                                            <th>Images</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading"></h4>
-            </div>
-            <div class="modal-body">
-                <form id="categoryForm" name="categoryForm" class="form-horizontal">
-                    <input type="hidden" name="id" id="category_id">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="name" name="category" placeholder="Enter Name"
-                                value="" maxlength="50" required="">
-                        </div>
-                        <span class="text-danger d-none" id="inputerror">This field is required</span>
-                    </div>
-                    <div class="col-sm-offset-2 col-sm-10 mt-3">
-                        <button type="submit" class="btn btn-primary" id="saveBtn" value="create"
-                            data-url="{{route('admin.category.store')}}">Save
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $(function() {
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        var table = $('#dt-http').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.categories') }}",
+            columns: [
+                { 
+                    data: 'DT_RowIndex', 
+                    name: 'DT_RowIndex', 
+                    orderable: false, 
+                    searchable: false 
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'parent_id',
+                    name: 'parent_id'
+                },
+                {
+                    data: 'image',
+                    name: 'image'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
 
-@endsection
+        $(document).on('click', '#deleteCategory', function () {
+        var url = $(this).data('url');
+        Swal.fire({
+            title: "Warning!",
+            text: "Are you sure want to delete Category !",
+            icon: "warning"
+          }).then(function(){         
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function (data) {
+                    Swal.fire({
+                        title: "Great!",
+                        text: "Category Deleted Successfully",
+                        icon: "success"
+                      }).then(function(){ 
+                        table.draw();
+                        })
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+    });
+    })
+    </script>
+
+    @endsection

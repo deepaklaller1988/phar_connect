@@ -180,42 +180,15 @@
           </div>
           <div class="pharmCategoryInner">
             <section class="center slider">
+              @foreach($data['categories'] as $category)
               <div>
-                <a href="{{ route('category') }}">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
+                <a href="{{ route('category',$category->id) }}">
+                  <span><img src="{{ url('storage/'.$category->image) }}" alt="categoriy" /></span>
+                  <h4>{{ $category->title}}</h4>
                   <b>Learn More</b>
                 </a>
               </div>
-              <div>
-                <a href="{{ route('category') }}">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/2.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
-              <div>
-                <a href="{{ route('category') }}">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/3.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
-              <div>
-                <a href="{{ route('category') }}">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/2.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <span><img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" /></span>
-                  <h4>Consulting Services</h4>
-                  <b>Learn More</b>
-                </a>
-              </div>
-             
+              @endforeach         
             </section>
           </div>
         </div>

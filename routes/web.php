@@ -23,8 +23,8 @@ use App\http\Controllers\Admin\SubCategoryController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
-Route::get('/category', [HomeController::class, 'category'])->name('category');
-Route::get('/subcategory', [HomeController::class, 'subcategory'])->name('subcategory');
+Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
+Route::get('/subcategory/{id}', [HomeController::class, 'subcategory'])->name('subcategory');
 Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('categorydetails');
 Auth::routes();
 
@@ -34,6 +34,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
     Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
     Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
+    Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
     Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
 }); 
 

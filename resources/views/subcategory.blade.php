@@ -89,24 +89,17 @@
                             <p>Manufacturers / Drug Substance / Advanced/Cell and Gene Therapy</p>
                             <section>
                                 <ul>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
-                                    <li><a href="{{ route('categorydetails') }}"><span><img src="assets/images/allcategories/1.jpg"
-                                                    alt="ategories" /></span><b>Cell and Gene Therapy</b></a></li>
+                                    @foreach($data['categories']  as $category )
+                                    <li>
+                                        <a href="{{ route('categorydetails',['id'=>$category->id]) }}">
+                                            <span>
+                                                <img src="{{ url('storage/'.$category->image) }}"
+                                                    alt="ategories" />
+                                            </span>
+                                            <b>{{ $category->title }}</b>
+                                        </a>
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </section>
                         </div>

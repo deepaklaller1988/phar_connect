@@ -3,20 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
+        return view('home')->with('data',$data);
     }
-    public function category()
+    public function category($id)
     {
-        return view('category');
+        $data['categories'] = Category::where(['parent_id'=> $id,'status'=> 1 ])->orderBy('title','asc')->get();
+        if(count($data['categories']) > 0){
+            return view('category')->with('data',$data);
+        }else{
+            return redirect()->route('categorydetails',['id' => $id]);
+        }
     }
-    public function subcategory()
+    public function subcategory($id)
     {
-        return view('subcategory');
+        $data['categories'] = Category::where(['parent_id'=> $id,'status'=> 1 ])->orderBy('title','asc')->get();
+        if(count($data['categories']) > 0){
+            return view('subcategory')->with('data',$data);
+        }else{
+            return redirect()->route('categorydetails',['id' => $id]);
+        }
     }
 
     public function categoryDetail()
