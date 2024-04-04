@@ -86,7 +86,7 @@
                             </section>
                         </div>
                         <div class="rightCategories">
-                            <p>Manufacturers / Drug Substance / Advanced/Cell and Gene Therapy</p>
+                            <p>Manufacturers / Drug Substance / Advanced / Cell and Gene Therapy</p>
                             <section>
                                 <ul>
                                     @foreach($data['categories']  as $category )
