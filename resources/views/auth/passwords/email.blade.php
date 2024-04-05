@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container loginRegister ">
+<div class="container loginRegister loginRegisterSet">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header headerBG-register">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -31,9 +31,9 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-0 width100Set">
                             <div class="col-md-8 width100 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary sendLink">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
