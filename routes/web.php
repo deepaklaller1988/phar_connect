@@ -26,6 +26,9 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
 Route::get('/subcategory/{id}', [HomeController::class, 'subcategory'])->name('subcategory');
 Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('categorydetails');
+Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
+Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
+Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

@@ -36,6 +36,19 @@ class HomeController extends Controller
         return view('single_category');
     }
 
+    public function partner_details()
+    {
+        return view('partner-details');
+    }
+
     
-    
+    public function jobs()
+    {
+        return view('jobs');
+    }
+
+    public function consultants()
+    {
+        return view('consultants');
+    }
 }
