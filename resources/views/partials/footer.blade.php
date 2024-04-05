@@ -66,7 +66,7 @@
     }
     $(window).scroll(function() {    
     var scroll = $(window).scrollTop();
-    if (scroll > 300) {
+    if (scroll > 1) {
         $("header").addClass("fixHeader");
     } 
     else {

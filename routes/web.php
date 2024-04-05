@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,11 +41,17 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
     Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
     Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
+    Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
+    Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
+    Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
+    Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
+    Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
   
     Route::get('/partner/dashboard', [PartnerController::class, 'dashboard'])->name('partner.dashboard');
+    Route::get('/partner/profile',[PartnerController::class, 'profile'])->name('partner.profile');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');

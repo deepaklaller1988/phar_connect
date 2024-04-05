@@ -26,24 +26,40 @@
                     </a>
                     <ul class="pcoded-submenu">
                         <li class=" ">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.partners') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Partners</span>
                             </a>
                         </li>
                         <li class=" ">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.members') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Members</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="{{ route('admin.plans') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-box"></i>
+                        </span>
+                        <span class="pcoded-mtext">Plans</span>
+                    </a>
+                </li>
                 <li class=" ">
-                    <a href="#" class="waves-effect waves-dark">
+                    @if (Route::has('login'))
+                    @auth
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-log-out"></i>
                         </span>
                         <span class="pcoded-mtext">Logout</span>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                    @endauth
+                    @endif
                 </li>
             </ul>
         </div>
