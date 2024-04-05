@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="index.html">
-                <img class="img-fluid" src="{{ asset('assets/images/logo.jpg') }}" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{ asset('assets/admin/logo.png') }}" alt="Theme-Logo" />
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
@@ -31,9 +31,18 @@
                             data-dropdown-out="fadeOut">
 
                             <li>
-                                <a href="auth-sign-in-social.html">
+                                @if (Route::has('login'))
+                                @auth
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="feather icon-log-out"></i> Logout
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                                @endauth
+                                @endif
                             </li>
                         </ul>
                     </div>
