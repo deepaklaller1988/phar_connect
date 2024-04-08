@@ -29,6 +29,22 @@
                     </div>
                     <div class="white_card_body">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="common_input mb_15">
+                                    <label>Company Picture:</label>
+                                    <div class="pictureAdmin"><span><input type="file"><b>+</b></span><img src="../assets/images/consultBanner.jpg" alt="profile banner"/></div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="common_input mb_15">
+                                    <label>Company Banner:</label>
+                                    <div class="bannerAdmin"><span><input type="file"><b>Upload Banner</b><p>Prefferable Size 1186px x 120px</p></span><img src="../assets/images/consultBanner.jpg" alt="profile banner"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="row">
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Name:</label>
@@ -38,7 +54,7 @@
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Email:</label>
-                                    <input type="text" name="email" value="{{ auth()->user()->email }}" placeholder="Email Address">
+                                    <input disabled type="text" name="email" value="{{ auth()->user()->email }}" placeholder="Email Address">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -50,7 +66,7 @@
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Password:</label>
-                                    <input type="password" name="password" value="{{ auth()->user()->password }}" placeholder="Password">
+                                    <input disabled type="password" name="password" value="{{ auth()->user()->password }}" placeholder="Password">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -62,30 +78,33 @@
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Location</label>
-                                    <input type="text" name="location" value="{{ auth()->user()->location }}" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <label>Company Profile</label>
-                                    <textarea name="company_profile" class="form-control">{{ auth()->user()->company_profile }}</textarea>
+                                    <input type="text" name="location" value="{{ auth()->user()->location }}" placeholder="Location">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Key Services:</label>
                                     <textarea name="company_profile" class="form-control">{{ auth()->user()->key_services }}</textarea>
+                                    <small>Preference:- Drugs, Anabolics, Menabolics.</small>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="common_input mb_15">
                                     <label>Certifications : </label>
                                     <textarea name="company_profile" class="form-control">{{ auth()->user()->certifications }}</textarea>
+                                    <small>Preference:- ASMO, Robotics.</small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="common_input mb_15">
+                                    <label>Company Profile</label>
+                                    <textarea name="company_profile" class="form-control">{{ auth()->user()->company_profile }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="create_report_btn mt_30">
-                                    <a href="#" class="btn_1 radius_btn d-block text-center">Add Admin</a>
+                                    <a href="#" class="btn_1 radius_btn d-block text-center">Update Profile</a>
                                 </div>
                             </div>
                         </div>
