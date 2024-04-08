@@ -33,6 +33,7 @@ Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
 Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
 Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
 Route::get('/categories',[HomeCategory::class,'index'])->name('categories');
+Route::get('/health-authority',[HomeController::class,'health_authority'])->name('health-authority');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

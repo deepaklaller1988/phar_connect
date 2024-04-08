@@ -31,9 +31,15 @@ class HomeController extends Controller
         }
     }
 
-    public function categoryDetail()
+    public function categoryDetail(Request $request)
     {
-        return view('single_category');
+        $getcat = Category::where('id',$request->id)->get();
+
+        if($getcat[0]->title == "Health Authority Sites"){
+            return view('health-authority');
+        }else{
+            return view('single_category');
+        }
     }
 
     public function partner_details()
@@ -50,5 +56,10 @@ class HomeController extends Controller
     public function consultants()
     {
         return view('consultants');
+    }
+
+    public function health_authority()
+    {
+         return view('health-authority');
     }
 }
