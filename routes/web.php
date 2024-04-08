@@ -55,7 +55,9 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
   
     Route::get('/partner/dashboard', [PartnerController::class, 'dashboard'])->name('partner.dashboard');
     Route::get('/partner/profile',[PartnerController::class, 'profile'])->name('partner.profile');
+    Route::post('/partner/update/{id}',[PartnerController::class, 'update'])->name('partner.update');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
+Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name('citySuggestion');
