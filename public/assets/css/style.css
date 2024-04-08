@@ -211,7 +211,9 @@ header.fixHeader nav span {
     width: 100%;
     transform: translate(0, -50%);
 }
-
+.bannerInner {
+    height: auto !important;
+}
 .textPanel {
     max-width: 630px;
     padding: 30px;
@@ -453,6 +455,8 @@ section.categorySet>div a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100%;
+    max-width: 100%;
 }
 
 .pharmCategory.categoriesAll a:hover {
@@ -492,6 +496,7 @@ section.categorySet>div a {
     width: auto;
     padding: 8px 20px;
     position: initial;
+    transform: none;
 }
 
 .bannerSet.bannerSetcategory {
@@ -1430,9 +1435,10 @@ ul.linksSubcategories.activeLinkSet {
     border: 1px solid #ededed;
     margin-top: 5px;
     outline: none;
+    max-width:100%;
 }
 .width100Set {
-    width: 100%;
+    width: 100% !important;
 }
 .container.loginRegister .row.mb-3 label {
     font-size: 14px;
@@ -1624,7 +1630,10 @@ button.btn.btn-primary.sendLink {
     min-width: 250px;
     max-width: 250px;
 }
-
+.consultingServicesInner {
+    padding-top: 10px;
+    padding-bottom: 100px;
+}
 section.consultingServicesSet {
     position: relative;
     display: flex;
@@ -1872,6 +1881,7 @@ section.consultingServicesSet section>div a.allConsultShow b {
     border: 1px solid #f1f1f1;
     padding-bottom: 15px;
     margin-bottom:50px;
+    margin-top:15px;
 }
 .consultInfo.partnerPageMain .wrapper {
     position: relative;
@@ -1900,3 +1910,58 @@ section.consultingServicesSet section>div a.allConsultShow b {
     border-radius: 100px;
     cursor: pointer;
 }
+.healthAthaurity {
+    padding-top: 15px;
+    padding-bottom:100px;
+}
+
+.fullHealthDetails {
+    display: flex;
+    align-items: flex-start;
+}
+
+.globalHeaderSet {
+    background: #1fc8ec;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+section.healthLinksRedirect .width100Set {
+    padding-top: 80px;
+}
+section.healthAreas {
+    min-width: 250px;
+    padding: 10px 15px;
+    background: #efefef;
+    border-radius: 8px;
+    position: sticky;
+    top: 80px;
+    margin-top:80px;
+}
+
+section.healthLinksRedirect {
+    width: 100%;
+    padding-left: 20px;
+    color: #1fc8ec;
+}
+
+.fullHealthDetails a {padding: 8px 0;display: block;color: black;}
+
+section.healthAreas a {
+    font-weight: bold;
+    color: black;
+}
+
+section.healthAreas li {
+    border-bottom: 1px dashed silver;
+}
+section.healthAreas ul li:last-child {
+    border: none;
+}
+section.healthLinksRedirect ul {
+    padding: 10px 0;
+}
+
+section.healthLinksRedirect a:hover {text-decoration: underline;}

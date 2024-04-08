@@ -87,7 +87,7 @@
                             </div>
                         </div>
                        
-                        <div class="row mb-3">
+                        <div class="row mb-3 width100Set">
                             <label for="location" class="col-md-4 col-form-label text-md-end">Location (If Applicable)</label>
 
                             <div class="col-md-6">
@@ -100,7 +100,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="key_services" class="col-md-4 col-form-label text-md-end">Key Services</label>
 
                             <div class="col-md-6">
@@ -112,8 +112,9 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div></div>
-                        <div class="row mb-3  width100Set">
+                        </div> -->
+                    </div>
+                        <!-- <div class="row mb-3  width100Set">
                             <label for="certifications" class="col-md-4 col-form-label text-md-end">Certifications</label>
 
                             <div class="col-md-6 attachmentsSet">
@@ -126,7 +127,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> -->
                         <input type="hidden" name="type" value="2">
                         <div class="row mb-3 width100Set">
                             <label for="company_profile" class="col-md-4 col-form-label text-md-end">{{ __('Company Profile') }}</label>

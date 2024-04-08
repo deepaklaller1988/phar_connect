@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('assets/partner/css/metisMenu.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/partner/css/style1.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/partner/css/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/partner/css/colors/default.css') }}" id="colorSkinCSS">
 </head>
 
