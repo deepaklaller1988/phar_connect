@@ -323,7 +323,7 @@
                         <span><img src="{{asset('/assets/images/logoconsult.jpg')}}" alt="img"></span>
                     </div>
                     <div class="wrapper">
-                        <h4>Central Technical Consultant</h4>
+                        <h4>Central Technical Consultant <a href=""><img src="{{asset('/assets/images/globe.svg')}}" alt="img"> Visit</a></h4>
                         <div class="consultInfoIndeed">You must create an account before continuing to the
                             company website to apply</div>
                         <span>

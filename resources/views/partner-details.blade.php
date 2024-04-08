@@ -40,8 +40,8 @@
                             <li><b>Class A:</b> Making sensor sets as per your need.</li>
                         </ul> -->
         <div class="partnerCallEmail">
-            <p>Contact:- <a href="">amazon@gmail.com</a></p>
-            <p>Email:- <a href="">9898-767-989</a></p>
+            <p>Email:- <a href="">amazon@gmail.com</a></p>
+            <p>Contact:- <a href="">9898-767-989</a></p>
         </div>
         <h6>Full Company description</h6>
         <p>Level: Senior Consultant</p>

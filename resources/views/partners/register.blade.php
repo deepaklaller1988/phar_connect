@@ -5,10 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Partner With Us!') }}</div>
+                <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
+                        <div class="flexSet"
                         @csrf
 
                         <div class="row mb-3">
@@ -85,18 +86,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="hidden" name="type" value="2">
-                        <div class="row mb-3">
-                            <label for="company_profile" class="col-md-4 col-form-label text-md-end">{{ __('Company Profile') }}</label>
-                            <div class="col-md-6">
-                                <textarea class="form-control" name="company_profile" maxlength="300" placeholder="add company description around 300 word"></textarea>
-                                @error('company_profile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                       
                         <div class="row mb-3">
                             <label for="location" class="col-md-4 col-form-label text-md-end">Location (If Applicable)</label>
 
@@ -122,13 +112,14 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row mb-3">
+                        </div></div>
+                        <div class="row mb-3  width100Set">
                             <label for="certifications" class="col-md-4 col-form-label text-md-end">Certifications</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 attachmentsSet">
                                 <input id="certifications" type="text" class="form-control" name="certifications" value="{{ old('certifications') }}" autocomplete="certifications" >
-
+<p><img src="{{asset('/assets/images/adobe.png')}}" alt="img"> Adobe.pdf</p>
+                                <section><input type="file"/> Upload</section>
                                 @error('certifications')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -136,13 +127,26 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-0">
+                        <input type="hidden" name="type" value="2">
+                        <div class="row mb-3 width100Set">
+                            <label for="company_profile" class="col-md-4 col-form-label text-md-end">{{ __('Company Profile') }}</label>
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="company_profile" maxlength="300" placeholder="add company description around 300 word"></textarea>
+                                @error('company_profile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-0  width100Set">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

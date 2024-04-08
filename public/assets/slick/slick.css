@@ -1,4 +1,16 @@
 /* Slider */
+.slick-track {
+    display: flex !important;
+  }
+  
+  .slick-slide {
+    height: auto !important;
+  }
+  
+  .slick-slide div, .slick-slide div a {
+      height: 100%;
+  }
+
 .slick-slider
 {
     position: relative;
