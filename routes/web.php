@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController as HomeCategory;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,7 @@ Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('
 Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
 Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
 Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
+Route::get('/categories',[HomeCategory::class,'index'])->name('categories');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

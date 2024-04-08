@@ -9,88 +9,27 @@
                 All categories</a>
                 <div class="hubAllLinksMenu">
               <ul class="linksCategories">
-                <li><a href="">Business Offerings by Category</a>
+              @foreach($allcategories['maincategories'] as $key => $mcategory)
+                <li><a href="{{ route('category',$mcategory->id) }}">{{ $mcategory->title }} </a>
                   <ul class="linksSubcategories activeLinkSet">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
+                    @foreach($allcategories[$key]['childcategories'] as $childcat)
+                    <li><a href="">{{ $childcat->title }}</a>
+                      <div class="sub-linksCategories">
+<ul>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+  <li><a href=""><span><img src="{{asset('/assets/images/logo.jpg') }}" alt="sub category"/></span><b>Drug Substance</b></a></li>
+</ul>
+                      </div>
+                    </li>
+                    @endforeach
                   </ul>
                 </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
-                <li><a href="">Business Offerings by Category</a>
-                  <ul class="linksSubcategories">
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                    <li><a href="">Active Pharmaceutical Ingredients (Chemical Entities )</a></li>
-                    <li><a href="">Drug Substance</a></li>
-                  </ul>
-                </li>
+              @endforeach
               </ul>
             </div>
               </span>
@@ -133,4 +72,3 @@
         </div>
       </div>
     </header>
-  

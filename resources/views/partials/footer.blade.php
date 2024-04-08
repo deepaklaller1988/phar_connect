@@ -1,12 +1,10 @@
 <footer>
       <div class="footerLinks">
         <ul>
-          <li><b>Get Support</b></li>
-          <li><a href="">Contact Us</a></li>
-          <li><a href="">Help Center</a></li>
-          <li><a href="">Live Chat</a></li>
-          <li><a href="">Check Status</a></li>
-          <li><a href="">Reports</a></li>
+          <li><b>Top Categories</b></li>
+            @foreach ($allcategories['maincategories'] as $category)
+            <li><a href="{{ route('category',$category->id)}}">{{ $category->title }}</a></li>
+            @endforeach
         </ul>
         <ul>
           <li><b>Assurance</b></li>

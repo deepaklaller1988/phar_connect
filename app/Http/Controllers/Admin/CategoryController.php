@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $check = Category::where('title',$request->name)->get()->toArray();
+        $check = Category::where(['title'=> $request->name,'parent_id' => $request->parent_id])->get()->toArray();
         if(!empty($check)){
             return redirect()->back()->with('error', 'Category already added..');
         }else{

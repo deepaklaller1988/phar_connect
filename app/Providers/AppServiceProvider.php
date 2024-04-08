@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\Category;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('partials.footer', function ($view) {
+            $categories = Category::where('parent_id',NULL)->get();
+            $view->with('categories', $categories);
+        });
     }
 }
