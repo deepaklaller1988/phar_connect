@@ -42,7 +42,7 @@
                                     <h5>{{ $plan->id ? 'Edit' : 'Add' }} Plan</h5>
                                 </div>
                                 <div class="card-block">
-                                    <form method="post" action="">
+                                    <form method="post" action="#">
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Title</label>
                                             <div class="col-sm-10">
