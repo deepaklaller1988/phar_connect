@@ -8,10 +8,10 @@
         </ul>
         <ul>
           <li><b>Assurance</b></li>
-          <li><a href="">Contact Us</a></li>
-          <li><a href="">Help Center</a></li>
-          <li><a href="">Live Chat</a></li>
-          <li><a href="">Check Status</a></li>
+          <li><a href="{{ route('about-us') }}">About Us</a></li>
+          <li><a href="{{ route('terms-and-conditions') }}">Terms and Conditions</a></li>
+          <li><a href="{{ route('privacy-policies') }}">Privacy Policy</a></li>
+          <li><a href="{{ route('faq') }}">Frequently Ask Questions</a></li>
         </ul>
         <ul>
           <li><b>Source on PharmConnect</b></li>

@@ -31,7 +31,7 @@
                             </ul>
                         </div>
                     </span>
-                    <a href="">About us</a>
+                    <a href="{{ route('about-us') }}">About us</a>
                     <a href="">Contact us</a>
                     @if (Route::has('login'))
                     @auth

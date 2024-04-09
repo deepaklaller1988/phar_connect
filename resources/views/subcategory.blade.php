@@ -30,7 +30,7 @@
                                         <h5>Search By Category</h5>
                                         <div>
                                             <input placeholder="Category name here..." type="text">
-                                            <button><img src="assets/images/search.png" alt="search" /></button>
+                                            <button><img src="{{ asset('assets/images/search.png') }}" alt="search" /></button>
                                         </div>
                                     </span>
                                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Page;
 class HomeController extends Controller
 {
     public function index()
@@ -62,5 +63,26 @@ class HomeController extends Controller
     public function health_authority()
     {
          return view('health-authority');
+    }
+
+    public function about_us()
+    {
+        $aboutus = Page::get('about_us');
+        return view('about-us')->with('aboutus',$aboutus);
+    }
+
+    public function terms_and_conditions()
+    {
+        return view('terms_and_conditions');
+    }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+
+    public function privacy_policy()
+    {
+        return view('privacy-policy');
     }
 }

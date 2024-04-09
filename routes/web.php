@@ -7,6 +7,7 @@ use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController as HomeCategory;
 /*
@@ -34,6 +35,10 @@ Route::get('/consultants',[HomeController::class,'consultants'])->name('consulta
 Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
 Route::get('/categories',[HomeCategory::class,'index'])->name('categories');
 Route::get('/health-authority',[HomeController::class,'health_authority'])->name('health-authority');
+Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
+Route::get('/privacy-policies',[HomeController::class,'privacy_policy'])->name('privacy-policies');
+Route::get('/faq',[HomeController::class,'faq'])->name('faq');
+Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -51,6 +56,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
     Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
     Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
+    Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
+    Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

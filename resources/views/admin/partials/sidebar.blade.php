@@ -52,7 +52,7 @@
                     </a>
                     <ul class="pcoded-submenu" style="display: none;">
                         <li class="">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.pages.about-us') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">About Us</span>
                             </a>
                         </li>
