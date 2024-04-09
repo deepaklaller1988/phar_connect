@@ -862,8 +862,17 @@ a.activeCategory {
     padding: 15px;
     background: white;
     border-radius: 6px;
+    max-height: 0px;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: .5s;
 }
-
+li.activeSidebarCategory .searchSubCategory {
+    max-height: 2000px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 .searchSubCategory a {
     color: #666666;
     font-size: 15px;
