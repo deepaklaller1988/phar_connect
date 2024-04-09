@@ -5,16 +5,16 @@
             <div class="headerNav">
                 <nav>
                     <span>
-                        <a href=""><i class="fa fa-bars" aria-hidden="true"></i>
+                        <a href="" id="main-category"><i class="fa fa-bars" aria-hidden="true"></i>
                             All categories</a>
                         <div class="hubAllLinksMenu">
                             <ul class="linksCategories">
                                 @foreach($allcategories['maincategories'] as $key => $mcategory)
                                 <li><a href="{{ route('category',$mcategory->id) }}">{{ $mcategory->title }} </a>
-                                    <ul class="linksSubcategories activeLinkSet">
+                                    <ul class="linksSubcategories activeLinkSet" id="child-cat">
                                         @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
                                         <li><a href="{{ route('category',$childcat->id) }}">{{ $childcat->title }}</a>
-                                            <div class="sub-linksCategories">
+                                            <div class="sub-linksCategories" id="sub-cat">
                                                 <ul>
                                                   @foreach($allcategories[$key][$skey]['subcategories'] as $childcat)
                                                     <li><a href=""><span><img
@@ -71,3 +71,9 @@
         </div>
     </div>
 </header>
+<script>
+    $("#main-category").hover(function(){
+    $('#child-cat').css('z-index',2);
+    $('#sub-cat').css('z-index',2);
+});
+</script>

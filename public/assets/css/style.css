@@ -985,7 +985,51 @@ li.activeSidebarCategory span::before {
 .rightCategories section ul li a:hover b {
     color: #1fc8ec;
 }
+/* start new mega menu */
+.hubAllLinksMenuSet {
+    display: flex;
+}
 
+.hubAllLinksMenuSet section {
+    width: 33.33%;
+    overflow: auto;
+}
+
+.hubAllLinksMenuSet section ul.linksSubcategories a {
+    font-size: 14px;
+    color: #444;
+    width: 300px;
+    padding: 10px;
+    font-weight: 500;
+    position: relative;
+    padding-left: 15px;
+}
+
+.hubAllLinksMenuSet section ul.linksSubcategories a:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #7f7f7f;
+    left: 0;
+    position: absolute;
+    top: 14px;
+    opacity: 1;
+    transform: rotate(0);
+    border-right: 0;
+}
+
+section ul.linksSubcategories {
+    position: initial;
+    width: auto;
+}
+
+.hubAllLinksMenuSet section ul.linksSubcategories a:hover {
+    color: #1fc8ec;
+    padding-left: 20px;
+}
+/* End mega menu */
 .hubAllLinksMenu {
     position: absolute;
     background: #f9f9f9;
@@ -1012,10 +1056,11 @@ ul.linksCategories>li {
 }
 
 ul.linksSubcategories {
+    display: flex;
     position: absolute;
     left: 320px;
     top: 0;
-    display: none;
+    /* display: none; */
     width: calc(100% - 320px);
     flex-direction: column;
     z-index: 1;
@@ -1028,7 +1073,6 @@ ul.linksSubcategories {
 }
 
 ul.linksCategories>li:hover ul.linksSubcategories {
-    display: flex;
     z-index: 2;
 }
 
@@ -1065,9 +1109,11 @@ ul.linksSubcategories li {
 ul.linksSubcategories li a {
     display: block;
 }
-
+.sub-linksCategories ul li a:hover {
+    padding-left: 15px !important;
+}
 ul.linksCategories>li ul.linksSubcategories li a {
-    width: 100%;
+    width: 300px;
     font-size: 14px;
     color: #444;
     font-weight: 600;
@@ -1099,10 +1145,61 @@ ul.linksCategories>li ul.linksSubcategories li a:hover {
     padding-left: 20px;
 }
 
-ul.linksSubcategories.activeLinkSet {
-    display: flex;
+ul.linksSubcategories li:hover .sub-linksCategories, ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
+    z-index: 2;
+}
+.sub-linksCategories {
+    position: absolute;
+    left: 300px;
+    top: 0;
+    width: calc(100% - 320px);
+    height: 100%;
+    overflow: auto;
+    background: white;
+    z-index: 1;
+    border-left: 1px solid #efefef;
+    margin-left: 20px;
 }
 
+.sub-linksCategories ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sub-linksCategories ul li {
+    width: 33.33%;
+}
+
+.sub-linksCategories ul li a {
+    max-width: 100%;
+}
+
+.sub-linksCategories ul li a::before {
+    display: none;
+}
+
+.sub-linksCategories ul li a span {
+    min-height: auto;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 100px;
+    border: 1px solid #ebebeb;
+}
+
+.sub-linksCategories ul li a b {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 6px;
+}
+
+.sub-linksCategories ul li a span img {
+    height: 100%;
+    object-fit: cover;
+}
 .selectYourCategory {
     position: fixed;
     background: #000000b8;
@@ -1911,7 +2008,6 @@ section.consultingServicesSet section>div a.allConsultShow b {
     cursor: pointer;
 }
 .healthAthaurity {
-    padding-top: 15px;
     padding-bottom:100px;
 }
 
