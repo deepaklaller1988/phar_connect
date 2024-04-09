@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-
+use App\Models\User;
 class HomeController extends Controller
 {
     public function index()
     {
+        $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
         $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
         return view('home')->with('data',$data);
     }

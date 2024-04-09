@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="{{ asset('assets/partner/css/style1.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/partner/css/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/partner/css/colors/default.css') }}" id="colorSkinCSS">
+    <script src="{{ asset('assets/partner/js/jquery1-3.4.1.min.js') }}"></script>
 </head>
 
 <body class="crm_body_bg">
@@ -54,7 +55,7 @@
         @include('partners.partials.footer')
     </section>
 
-    <script src="{{ asset('assets/partner/js/jquery1-3.4.1.min.js') }}"></script>
+    
 
     <script src="{{ asset('assets/partner/js/popper1.min.js') }}"></script>
 

@@ -48,8 +48,8 @@
         </div>
         <div class="socialPartner">
           <ul>
-            <li><a href="">Become a Partner</a></li> |
-            <li><a href="">Become a Member</a></li>
+            <li><a href="{{ route('partner.register') }}">Become a Partner</a></li> |
+            <li><a href="{{ route('register') }}">Become a Member</a></li>
           </ul>
           <a href="">Feedback <img src="{{asset('/assets/images/partner.png')}}" alt="partner" /></a>
         </div>

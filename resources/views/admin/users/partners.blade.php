@@ -64,10 +64,11 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Company Website</th>
-                                            <th>Company  Profile</th>
                                             <th>Location</th>
                                             <th>Key services</th>
                                             <th>Certifications</th>
+                                            <th>Is Featured</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -110,10 +111,6 @@
                     name: 'company_website'
                 },
                 {
-                    data: 'company_profile',
-                    name: 'company_profile'
-                },
-                {
                     data: 'location',
                     name: 'location'
                 },
@@ -124,6 +121,14 @@
                 {
                     data: 'certifications',
                     name: 'certifications'
+                },
+                {
+                    data: 'is_featured',
+                    name: 'is_featured'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
                 },
                 {
                     data: 'action',

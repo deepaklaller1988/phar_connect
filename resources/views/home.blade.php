@@ -199,7 +199,7 @@
             <div class="callLeft">
               <h3>Share your services, events and
                 jobs with a global community . </h3>
-              <a href="">BECOME A PARTNER</a>
+              <a href="{{ route('partner.register') }}">BECOME A PARTNER</a>
             </div>
             <div class="callLeft">
               <img src="{{asset('/assets/images/media.png') }}" alt="call to action" />
@@ -217,33 +217,17 @@
             <div class="innerDifferentSection">
               <h4>Partners/Services</h4>
               <section class="center slider">
+                @foreach($data['featured_partners'] as $featured_partner)
+                @if($featured_partner->logo == '')
                 <div>
-                  <img src="{{asset('/assets/images/logos/1.png') }}" alt="logo" />
+                <h6>{{ $featured_partner->name }}</h6>
                 </div>
+                @else
                 <div>
-                  <img src="{{asset('/assets/images/logos/2.png') }}" alt="logo" />
+                  <img src="{{asset('storage/'.$featured_partner->logo) }}" alt="logo" />
                 </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
-                </div>
-                <div>
-                <h6>Collesto.IN</h6>
-                </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
-                </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/2.png') }}" alt="logo" />
-                </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/1.png') }}" alt="logo" />
-                </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/2.png') }}" alt="logo" />
-                </div>
-                <div>
-                  <img src="{{asset('/assets/images/logos/3.png') }}" alt="logo" />
-                </div>
+                @endif
+                @endforeach
               </section>
             </div>
             <div class="innerDifferentSection">
