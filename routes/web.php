@@ -57,6 +57,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
     Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
     Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
+    Route::get('admin/pages/terms-and-conditions',[PageController::class,'terms_and_conditions'])->name('admin.pages.terms-and-conditions');
+    Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
+    Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
     Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
 }); 
 

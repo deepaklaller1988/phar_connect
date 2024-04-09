@@ -57,17 +57,17 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.pages.faq') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">FAQ</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.pages.terms-and-conditions') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Terms & Conditions</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#" class="waves-effect waves-dark">
+                            <a href="{{ route('admin.pages.privacy-policies') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Privacy Policy</span>
                             </a>
                         </li>

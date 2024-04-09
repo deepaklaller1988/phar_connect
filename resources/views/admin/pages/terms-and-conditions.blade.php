@@ -11,7 +11,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-file-plus bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>About Us</h5>
+                        <h5>Terms and Conditions</h5>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">About Us</a>
+                        <li class="breadcrumb-item"><a href="#!">Terms And Conditions</a>
                         </li>
                     </ul>
                 </div>
@@ -57,14 +57,14 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>About Us</h5>
+                                    <h5>Terms and Conditions</h5>
                                 </div>
                                 <form method="post" action="{{ route('admin.pages.store') }}">
                                     @csrf
                                     <div class="card-block">
-                                        <textarea id="summernote">{{ $aboutus[0]->about_us }}</textarea>
+                                        <textarea id="summernote">{{ $tnc[0]->terms_and_conditions }}</textarea>
                                     </div>
-                                    <input type="hidden" name="page" value="aboutus">
+                                    <input type="hidden" name="page" value="tnc">
                                     <input type="hidden" name="content"  id="content">
                                     <div class="mb-3 row">
                                         <label class="form-label col-sm-2"></label>

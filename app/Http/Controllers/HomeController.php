@@ -73,16 +73,19 @@ class HomeController extends Controller
 
     public function terms_and_conditions()
     {
-        return view('terms_and_conditions');
+        $tnc = Page::get('terms_and_conditions');
+        return view('terms_and_conditions')->with('tnc',$tnc);
     }
 
     public function faq()
     {
-        return view('faq');
+        $faq = Page::get('faq');
+        return view('faq')->with('faq',$faq);
     }
 
     public function privacy_policy()
     {
-        return view('privacy-policy');
+        $pp = Page::get('privacy_policies');
+        return view('privacy-policy')->with('pp',$pp);
     }
 }

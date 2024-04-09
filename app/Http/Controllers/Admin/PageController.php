@@ -13,16 +13,40 @@ class PageController extends Controller
         return view('admin.pages.about-us')->with('aboutus',$aboutus);
     }
 
+    public function terms_and_conditions()
+    {
+        $tnc = Page::get('terms_and_conditions');
+        return view('admin.pages.terms-and-conditions')->with('tnc',$tnc);
+    }
+
+    public function faq()
+    {
+        $faq = Page::get('faq');
+        return view('admin.pages.faq')->with('faq',$faq);
+    }
+
+    public function privacy_policies()
+    {
+        $pp = Page::get('privacy_policies');
+        return view('admin.pages.privacy-policy')->with('pp',$pp);
+    }
+
     public function store(Request $request)
     {
         $data = Page::findOrFail(1);
         if($request->page == 'aboutus'){
             $data->about_us = $request->content;
+        }elseif($request->page == 'tnc'){
+            $data->terms_and_conditions = $request->content;
+        }elseif($request->page == 'pp'){
+            $data->privacy_policies = $request->content;
+        }else{
+            $data->faq = $request->content;
         }
         if($data->save()){
-            return redirect()->route('admin.pages.about-us')->with('success', 'New Category created successfully.');
+            return redirect()->back()->with('success', 'Content Saved successfully.');
         }else{
-            return redirect()->route('admin.pages.about-us')->with('error', 'Error while creating new category');
+            return redirect()->route()->with('error', 'Error while creating new category');
         }
     }
 }
