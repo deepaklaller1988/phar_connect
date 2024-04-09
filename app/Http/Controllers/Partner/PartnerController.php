@@ -25,6 +25,7 @@ class PartnerController extends Controller
 
     public function update(Request $request,$id)
     {
+
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->phone = $request->phone;

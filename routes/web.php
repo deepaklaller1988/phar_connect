@@ -49,6 +49,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
     Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
     Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
+    Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
+    Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

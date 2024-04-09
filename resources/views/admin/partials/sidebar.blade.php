@@ -45,11 +45,40 @@
                         <span class="pcoded-mtext">Plans</span>
                     </a>
                 </li>
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
+                        <span class="pcoded-mtext">Pages</span>
+                    </a>
+                    <ul class="pcoded-submenu" style="display: none;">
+                        <li class="">
+                            <a href="#" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">About Us</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">FAQ</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Terms & Conditions</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Privacy Policy</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class=" ">
                     @if (Route::has('login'))
                     @auth
                     <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="waves-effect waves-dark">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-log-out"></i>
                         </span>
