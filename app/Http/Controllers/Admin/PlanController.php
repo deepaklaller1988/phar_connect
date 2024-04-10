@@ -23,4 +23,52 @@ class PlanController extends Controller
     {
         return view('admin.plans.add');
     }
+
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'status' => 'required',
+        ]);
+        $plan = new Plan();
+        $plan->title = $request->title;   
+        $plan->description = $request->description;
+        $plan->amount= $request->amount; 
+        $plan->status = $request->status;
+        if($plan->save()){
+            return redirect()->route('admin.plans')->with('success','Plan Added Successfully');
+        }
+        else{
+            return redirect()->route('admin.plans')->with('error','Something went wrong');
+        }
+    }
+
+    public function update(Request $request, $id)  
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'status' => 'required',
+        ]);
+        $plan = Plan::findOrFail($id);
+        $plan->title = $request->title;   
+        $plan->description = $request->description;
+        $plan->amount= $request->amount; 
+        $plan->status = $request->status;
+        if($plan->save()){
+            return redirect()->route('admin.plans')->with('success','Plan Updated Successfully');
+        }
+        else{
+            return redirect()->route('admin.plans')->with('error','Something went wrong');
+        }
+    }
+    public function delete($id)
+    {
+        $record = Plan::findOrFail($id);
+        $record->delete();
+        return response()->json(['success' => true]);
+    }
 }
