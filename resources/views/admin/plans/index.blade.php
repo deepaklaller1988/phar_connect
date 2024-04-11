@@ -10,6 +10,7 @@
                     <i class="feather icon-pie-chart bg-c-blue"></i>
                     <div class="d-inline">
                         <h5>Plans</h5>
+                        <a href="{{ route('admin.plan.add') }}" class="btn btn-primary"> Add Plan</a> 
                     </div>
                 </div>
             </div>
@@ -26,10 +27,29 @@
             </div>
         </div>
     </div>
+
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
+                @if(session('success'))
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @if(session('error'))
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="row">
                         @foreach($plans as $plan)
                         <div class="col-md-12 col-lg-4 peity-chart">
@@ -53,7 +73,7 @@
                                             <li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i class="feather icon-edit-1"></i></a></li>
                                             <li><i class="feather icon-minus minimize-card"></i></li>
                                             <li><i class="feather icon-note reload-card"></i></li>
-                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li id="planDelete" data-id="{{ $plan->id }}"><i class="feather icon-trash close-card"></i></li>
                                             <li><i class="feather icon-chevron-left open-card-option"></i></li>
                                         </ul>
                                     </div>
@@ -78,4 +98,38 @@
         </div>
     </div>
 </div>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $(function() {
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
+    $(document).on('click','#planDelete',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');   
+        $.ajax({
+            url: "{{ url('admin/plan/delete')}}" +'/'+ id,
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (data) {
+                    Swal.fire({
+                        title: "Great!",
+                        text: "Plan Deleted Successfully",
+                        icon: "success"
+                      }).then(function(){ 
+                        window.location.reload();    
+                    })
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+        });
+    });
+})
+</script>
 @endsection

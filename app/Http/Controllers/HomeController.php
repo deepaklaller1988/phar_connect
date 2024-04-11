@@ -25,9 +25,21 @@ class HomeController extends Controller
     }
     public function subcategory($id)
     {
+        $parent = Category::where('id',$id)->get();
+        if($parent[0]->parent_id != NULL){
+            $datas['maincategories'] = Category::where('parent_id',$parent[0]->parent_id)->get();
+        }
+        foreach($datas['maincategories'] as $key=> $mcategory){
+            $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->get();
+            foreach($datas[$key]['subcategories'] as $skey => $scategory){
+                $datas[$key][$skey]['childcategory'] = Category::where('parent_id',$scategory->id)->get();
+            }
+        }
+       
         $data['categories'] = Category::where(['parent_id'=> $id,'status'=> 1 ])->orderBy('title','asc')->get();
+        // dd($data);
         if(count($data['categories']) > 0){
-            return view('subcategory')->with('data',$data);
+            return view('subcategory')->with(['data'=> $data,'categories'=>$datas]);
         }else{
             return redirect()->route('categorydetails',['id' => $id]);
         }

@@ -39,17 +39,18 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>{{ $plan->id ? 'Edit' : 'Add' }} Plan</h5>
+                                    <h5>Edit Plan</h5>
                                 </div>
                                 <div class="card-block">
-                                    <form method="post" action="#">
+                                    <form method="POST" action="{{ route('admin.plan.update', $plan->id) }}">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Title</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="title" value="{{ $plan->title ? $plan->title : '' }}" class="form-control">
                                             </div>
                                         </div>
-                                        <input type="hidden" value="{{ $plan->id ? $plan->id: '' }}" name="id">
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Amount</label>
                                             <div class="col-sm-10">
