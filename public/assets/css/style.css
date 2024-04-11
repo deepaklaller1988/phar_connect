@@ -7,10 +7,28 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 16px;
 }
-
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 img {
     max-width: 100%;
 }
@@ -1756,7 +1774,14 @@ ul.consultList {
     flex-direction: column;
     gap: 5px;
 }
+section.consultingServicesSet.postAll section>div {
+    width: 33.33%;
+}
 
+section.consultingServicesSet.postAll section {
+    display: flex;
+    flex-wrap: wrap;
+}
 section.consultingServicesSet section>div a {
     padding: 20px;
     background: white;
@@ -2070,3 +2095,33 @@ section.healthLinksRedirect ul {
 }
 
 section.healthLinksRedirect a:hover {text-decoration: underline;}
+.staticContent>span {
+    background: #1fc8ec;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.staticPages {
+    padding: 80px 0;
+    line-height: 24px;
+}
+
+.staticPages p {
+    padding: 10px 0;
+}
+
+.staticPages ol li {
+    list-style: auto;
+    font-weight: bold;
+    background: #efefef;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.staticPages ol {
+    padding: 20px;
+}

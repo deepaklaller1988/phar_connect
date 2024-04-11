@@ -40,6 +40,7 @@ Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
 Route::get('/privacy-policies',[HomeController::class,'privacy_policy'])->name('privacy-policies');
 Route::get('/faq',[HomeController::class,'faq'])->name('faq');
 Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
+Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

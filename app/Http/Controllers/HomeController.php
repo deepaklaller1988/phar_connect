@@ -100,4 +100,9 @@ class HomeController extends Controller
         $pp = Page::get('privacy_policies');
         return view('privacy-policy')->with('pp',$pp);
     }
+
+    public function posts()
+    {
+        return view('post-list');
+    }
 }
