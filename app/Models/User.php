@@ -60,4 +60,9 @@ class User extends Authenticatable
             fn ($value) =>  ["user", "admin", "partner"][$value],
         );
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

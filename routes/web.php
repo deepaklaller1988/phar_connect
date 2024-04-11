@@ -9,6 +9,7 @@ use App\http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Partner\PostController;
 use App\Http\Controllers\CategoryController as HomeCategory;
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,12 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/dashboard', [PartnerController::class, 'dashboard'])->name('partner.dashboard');
     Route::get('/partner/profile',[PartnerController::class, 'profile'])->name('partner.profile');
     Route::post('/partner/update/{id}',[PartnerController::class, 'update'])->name('partner.update');
+    Route::get('/partner/posts',[PostController::class, 'index'])->name('partner.posts');
+    Route::get('/partner/post/add',[PostController::class, 'add'])->name('partner.post.add');
+    Route::post('/partner/post/store',[PostController::class, 'store'])->name('partner.post.store');
+    Route::get('/partner/post/edit/{id}',[PostController::class, 'edit'])->name('partner.post.edit');   
+    Route::put('/partner/post/update/{id}',[PostController::class, 'update'])->name('partner.post.update');
+    Route::delete('/partner/post/delete/{id}',[PostController::class, 'destroy'])->name('partner.post.delete');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');

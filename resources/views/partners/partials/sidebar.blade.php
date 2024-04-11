@@ -17,6 +17,16 @@
                 </div>
             </a>
         </li>
+        <li class="">
+            <a class="has-arrow" href="{{ route('partner.posts') }}" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('assets/partner/img/menu-icon/3.svg') }} " alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Posts</span>
+                </div>
+            </a>
+        </li>
         <li>
             @if (Route::has('login'))
             @auth
