@@ -224,7 +224,7 @@
                                     @if($post->images)
                                     <div class="img-wrap d-flex justify-content-center">
                                         @foreach(explode(',', $post->images) as $image)
-                                        <img src="{{ asset('storage/uploads/posts/'.$image) }}" alt="{{ $image }}" class="img-fluid ml-2" width="300px" height="300px">
+                                        <img src="{{ asset('storage/uploads/posts/'.$image) }}" alt="{{ $image }}" class="img-fluid ml-2" width="300px" height="300px" data-image = "{{ $image}}" >
                                         @endforeach
                                     </div>
                                     @endif

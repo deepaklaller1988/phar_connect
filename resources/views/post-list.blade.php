@@ -5,314 +5,35 @@
         <div class="consultingServicesInner">
             <section class="consultingServicesSet postAll">
                 <section>
+                    @foreach($posts as $post)
                     <div class="consult-Active">
-                        <a href="">
-                            <h4>Central Technical Consultant</h4>
+                        <a href="{{ route('post-details',['id'=>$post->id]) }}">
+                            <h4>{{ $post->title }}</h4>
                             <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
+                                <p>{{ $post->user->name }}</p>
+                                <p>{{ $post->user->location }}</p>
                             </span>
                             <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
+                                @foreach(explode(',',$post->key_services) as $key_service)
+                                <li>{{ $key_service }}</li>
+                                @endforeach
                             </ul>
                             <ul class="consultList">
-                                <li><b>Partition:</b> Partition with other team members, such as functional
-                                    <b>consultants</b>, provide
-                                    technical…
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
+                                @php
+                                $htmlContent = "$post->description";
+                                $truncatedContent = Illuminate\Support\Str::limit(strip_tags($htmlContent), 200);
+                                $isTruncated = strlen(strip_tags($htmlContent)) > strlen($truncatedContent);
+                                @endphp
+                                {!! $truncatedContent !!}
 
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="">
-                            <h4>Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Partition:</b> Partition with other team members, such as functional
-                                    <b>consultants</b>, provide
-                                    technical…
-                                </li>
-                                <li><b>Rebate:</b> Best with other team members, such as functional
-                                    <b>consultants</b>,
-                                    provide
-                                    technical…
-                                </li>
 
                             </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
+                            <b>Active for
+                                {{ date_diff(new \DateTime($post->time), new \DateTime())->format(" %d days"); }}</b>
 
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Partition:</b> Partition with other team members, such as functional
-                                    <b>consultants</b>, provide
-                                    technical…
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
                         </a>
                     </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Partition:</b> Partition with other team members, such as functional
-                                    <b>consultants</b>, provide
-                                    technical…
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="">
-                            <h4>Dynamics 365 Business Central Technical Consultant</h4>
-                            <span>
-                                <p>Robosol Systems Private Limited</p>
-                                <p>Mulund West, Mumbai, Maharashtra</p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>₹5,00,000 - ₹15,00,000 a year</li>
-                                <li>Full Time</li>
-                                <li>Night Shift</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Rebate:</b> Rebate with other team members, such as functional
-                                    <b>consultants</b>, project
-                                    managers, and end-users, to gather requirements.
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="" class="allConsultShow">
-                            <b>View All</b>
-                        </a>
-                    </div>
+                    @endforeach
                 </section>
             </section>
         </div>
