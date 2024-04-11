@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Post;
 class HomeController extends Controller
 {
     public function index()
@@ -52,9 +53,11 @@ class HomeController extends Controller
         if($getcat[0]->title == "Health Authority Sites"){
             return view('health-authority');
         }else{
-            return view('single_category');
+            return redirect()->route('posts',['id' => $request->id]);
         }
     }
+
+   
 
     public function partner_details()
     {
@@ -101,8 +104,21 @@ class HomeController extends Controller
         return view('privacy-policy')->with('pp',$pp);
     }
 
-    public function posts()
+    public function posts(Request $request)
+    {   
+        $getcat = Category::where('id',$request->id)->first();
+        if($getcat->title == 'Jobs'){
+            return redirect()->route('jobs');
+        }else{
+            $posts = Post::with('user')->where('category_id',$request->id)->get();
+            // dd($posts);
+            return view('post-list',compact('posts'));
+        }
+    }
+
+    public function post_details(Request $request)
     {
-        return view('post-list');
+        $post = Post::with('user')->where('id',$request->id)->first();
+        return view('single_category',compact('post'));
     }
 }

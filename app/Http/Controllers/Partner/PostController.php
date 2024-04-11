@@ -81,7 +81,7 @@ class PostController extends Controller
                 $images[] =  $imageFilename;
                 $post->images = implode(',',$images);
             }
-            }
+        }
         if($post->save()){
             return redirect()->route('partner.posts')->with('success','Post Added Successfully');
         }else{
@@ -102,7 +102,29 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->email = $request->email;
+        $post->contact_info = $request->phone;
+        $post->description = $request->description;
+        $post->time = $request->time;
+        $post->category_id = $request->category;
+        $post->partner_id = auth()->user()->id;
+        $post->key_services = $request->key_services;
+        $images = []; 
+        if ($request->hasFile('images')) {    
+            foreach ($request->file('images') as $key => $image ) {
+                $imageFilename = $key . time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('uploads/posts', $imageFilename);
+                $images[] =  $imageFilename;
+                $post->images = $post->images.','. implode(',',$images);
+            }
+        }
+        if($post->save()){
+            return redirect()->route('partner.posts')->with('success','Post Updated Successfully');
+        }else{
+            return redirect()->route('partner.posts')->with('error','Something went wrong');
+        }
     }
 
     public function destroy($id)

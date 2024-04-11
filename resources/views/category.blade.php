@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
+<style>
+.item-category{
+    display:none;
+}
+</style>
 
 <div class="midContainer">
     <div class="bannerSet bannerSetcategory">
@@ -20,8 +24,10 @@
         <div class="wrapper">
             <div class="pharmCategoryInner">
                 <section class="categorySet">
+                    @php $count = 0; @endphp
                     @foreach($data['categories'] as $category)
-                    <div>
+                    @php $count++; @endphp
+                    <div class=" @if($count > 9) item-category @endif" >
                         <a href="{{ route('subcategory',$category->id) }}">
                             <span><img src="{{ url('storage/'.$category->image) }}" alt="categoriy" /></span>
                             <h4>{{ $category->title}}</h4>
@@ -29,11 +35,13 @@
                         </a>
                     </div>
                     @endforeach
-                    <div>
-                        <a href="" class="allcategoryShow">
+                    @if(count($data['categories']) > 9)
+                    <div id="all_categories">
+                        <a href="javacript:void(0)"  class="allcategoryShow">
                             <b>View All</b>
                         </a>
                     </div>
+                    @endif
                 </section>
             </div>
         </div>
@@ -88,6 +96,13 @@
 </div>
 
 </div>
-
+<script>
+$(document).ready(function() {
+    $(".allcategoryShow").click(function() {
+        $(".item-category").show();
+        $("#all_categories").hide();
+    });
+})
+</script>
 
 @endsection

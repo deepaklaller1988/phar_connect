@@ -41,6 +41,7 @@ Route::get('/privacy-policies',[HomeController::class,'privacy_policy'])->name('
 Route::get('/faq',[HomeController::class,'faq'])->name('faq');
 Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
 Route::get('/posts',[HomeController::class,'posts'])->name('posts');
+Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
     Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
     Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
+    Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
+    Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
     Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
     Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
     Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');

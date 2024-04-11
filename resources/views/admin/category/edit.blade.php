@@ -59,8 +59,8 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Parent Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" name="parent_id">
-                                                    <option value="">Choose Category</option>
+                                                <select class="form-control" id="category_select">
+                                                <option>chooose an option</option>
                                                     @foreach($data['categories'] as $category)
                                                     <option value="{{ $category->id }}" @if($data['category']->parent_id
                                                         == $category->id) selected @endif >{{ $category->title }}
@@ -69,6 +69,24 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="mb-3 row" id="sub_category_div" style="display: none">
+                                            <label class="form-label col-sm-2 col-form-label">Sub Category : </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" id="sub_category_select">
+                                                    <option>chooose an option</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row" id="sub_sub_category_div" style="display: none">
+                                            <label class="form-label col-sm-2 col-form-label">child Category : </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" id="sub_sub_category_select">
+                                                    <option>chooose an option</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="parent_id" id="parent_id"
+                                            value="{{ $data['category']->id }}">
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Category Image : </label>
                                             <div class="col-sm-10">
@@ -106,4 +124,110 @@
             </div>
         </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        var selected_category_id = $('#parent_id').val();
+        $.ajax({
+            url: "{{ route('admin.cat') }}?id=" + selected_category_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $.each(response, function(index, obj) {
+                    $('#sub_sub_category_div').css('display', '');
+                    var option = $('<option></option>');
+                    option.attr('value', obj.id);
+                    option.text(obj.title);
+                    if (index === 0) { 
+                        option.attr('selected', 'selected');
+                    }
+                    $('#sub_sub_category_select').append(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+        setTimeout(function () {
+        var selected_sub_category_id = $('#sub_sub_category_select').val();
+        $.ajax({
+            url: "{{ route('admin.cat') }}?id=" + selected_sub_category_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $.each(response, function(index, obj) {
+                    $('#sub_category_div').css('display', '');
+                    var option = $('<option></option>');
+                    option.attr('value', obj.id);
+                    option.text(obj.title);
+                    if (index === 0) { 
+                        option.attr('selected', 'selected');
+                    }
+                    $('#sub_category_select').append(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    },1000);
+    })
+
+    $(document).ready(function() {
+        $(document).on('change', '#category_select', function() {
+            var category_id = $(this).val();
+            $('#sub_sub_category_div').css('display', 'none');
+            $('#sub_sub_category_select').html('');
+            $('#sub_category_div').css('display', 'none');
+            $('#sub_category_select').html('');
+            $('#parent_id').val(category_id);
+            $.ajax({
+                url: "{{ route('admin.subcategories') }}?parent_id=" + category_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $.each(response, function(index, item) {
+
+                        $('#sub_category_div').css('display', '');
+                        $('#sub_category_select').append('<option value="' + item
+                            .id + '">' + item.title + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+
+        $(document).on('change', '#sub_category_select', function() {
+            var category_id = $(this).val();
+            $('#parent_id').val(category_id);
+            $('#sub_sub_category_div').css('display', 'none');
+            $('#sub_sub_category_select').html('');
+            $.ajax({
+                url: "{{ route('admin.subcategories') }}?parent_id=" + category_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $.each(response, function(index, item) {
+
+                        $('#sub_sub_category_div').css('display', '');
+                        $('#sub_sub_category_select').append('<option value="' + item
+                            .id + '">' + item.title + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        $(document).on('change', '#sub_sub_category_select', function() {
+            var category_id = $(this).val();
+            $('#parent_id').val(category_id);
+        });
+    });
+    </script>
     @endsection

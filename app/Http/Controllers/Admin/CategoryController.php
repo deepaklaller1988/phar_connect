@@ -43,8 +43,16 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::where('status','1')->get();
+        $categories = Category::where(['status'=>'1','parent_id'=>NULL])->orderBy('title')->get();
         return view('admin.category.add')->with('categories',$categories);
+    }
+
+    public function get_categories(Request $request)
+    {
+        if($request->parent_id != NULL){
+            $categories = Category::where(['status'=>'1','parent_id'=>$request->parent_id])->orderBy('title')->get();
+            return response()->json($categories);
+        }
     }
 
     public function store(Request $request)
@@ -76,8 +84,25 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data['category'] = Category::find($id);
-        $data['categories'] = Category::where('status','1')->get();
+        $data['categories'] = Category::where(['status'=>'1','parent_id'=>NULL])->orderBy('title')->get();
         return view('admin.category.edit')->with('data',$data);
+    }
+
+    public function get_cat(Request $request)
+    {
+        $category = Category::find($request->id);
+        if($category->parent_id == null ){
+                
+        }else{
+            $categorie = Category::where(['status'=>'1','parent_id'=>$category->parent_id])->orderBy('title')->get();
+            $categoriee = Category::where(['status'=>'1','id'=>$categorie[0]->parent_id])->orderBy('title')->get();
+            $categories = Category::where(['status'=>'1','parent_id'=>$categoriee[0]->parent_id])->orderBy('title')->get();
+            if($categories[0]->parent_id == null){
+
+            }else{
+                return response()->json($categories);
+            }
+        }
     }
 
     public function update(Request $request, $id)
