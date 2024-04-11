@@ -59,7 +59,7 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Parent Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" name="parent_id">
+                                                <select class="form-control czSelectSet" name="parent_id">
                                                     <option value="">Choose Category</option>
                                                     @foreach($data['categories'] as $category)
                                                     <option value="{{ $category->id }}" @if($data['category']->parent_id
@@ -83,7 +83,7 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Status : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" name="status">
+                                                <select class="form-control czSelectSet" name="status">
                                                     <option value="1" @if($data['category']->status == 1 ) selected
                                                         @endif>Active</option>
                                                     <option value="2" @if($data['category']->status == 2 ) selected

@@ -160,14 +160,14 @@
                                     <div class="common_input mb_15">
                                         <label>Location : </label>
                                         <input type="text" name="location" value="{{ $data['user']->location }}"
-                                            placeholder="Email">
+                                            placeholder="Location">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
                                         <label>Category : </label>
-                                        <select name="category" class="form-control">
+                                        <select name="category" class="form-control selectFixCZ">
                                             <option value="">Select Category</option>
                                             @foreach($data['categories'] as $category)
                                             <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -186,20 +186,21 @@
                                         <label>Images : </label>
                                         <div class="upload__box">
                                             <div class="upload__btn-box">
-                                                <label class="upload__btn">
-                                                    <p>Upload images</p>
-                                                    <input type="file" name="images[]" multiple="" data-max_length="20"
+                                                <label class="upload__btn uploadFileCZ">
+                                                    
+                                                    <span><p>Upload images</p><input type="file" name="images[]" multiple="" data-max_length="20"
                                                         class="upload__inputfile">
+</span>
                                                 </label>
                                             </div>
-                                            <div class="upload__img-wrap"></div>
+                                            <div class="upload__img-wrap uploadFilesAllCZ"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
                                         <label>Key Services:</label>
-                                        <textarea name="key_services" class="form-control"></textarea>
+                                        <textarea name="key_services" class="form-control textareaCZ"></textarea>
                                         <small>Preference:- Drugs, Anabolics, Menabolics.</small>
 
                                     </div>
@@ -214,7 +215,7 @@
                                 <input type="hidden" id="description" name="description">
                                 <div class="col-12">
                                     <div class="create_report_btn mt_30">
-                                        <button type="submit" class="btn_1 radius_btn d-block text-center">
+                                        <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
                                             {{ __('Save') }}
                                         </button>
                                     </div>
@@ -268,7 +269,7 @@ function ImgUpload() {
                         var reader = new FileReader();
                         reader.onload = function(e) {
                             var html =
-                                "<div class='upload__img-box'><div style='background-image: url(" +
+                                "<div class='upload__img-box'><span class='closeUploadImages' title='Delete Image'>+</span><div style='background-image: url(" +
                                 e.target.result + ")' data-number='" + $(
                                     ".upload__img-close").length + "' data-file='" + f
                                 .name +

@@ -50,7 +50,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>Categories</h5>
+                            <h5>Add New Categories</h5>
                             <a href="{{ route('admin.category.add') }}"
                                 clas="btn btn-success waves-effect waves-light">Add Category</a>
                         </div>

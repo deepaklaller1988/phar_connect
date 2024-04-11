@@ -43,7 +43,7 @@
                 <div class="white_card card_height_100 mb_30">
                     <div class="white_card_header">
                         <div class="box_header m-0">
-                            <div class="main-title">
+                            <div class="main-title main-titleCZ">
                                 <h3 class="m-0">Posts </h3>
                                 <a href="{{ route('partner.post.add') }}" class="btn btn-success">Add Post</a>
                             </div>
