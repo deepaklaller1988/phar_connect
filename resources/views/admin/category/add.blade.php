@@ -65,11 +65,7 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Parent Category : </label>
                                             <div class="col-sm-10">
-<<<<<<< HEAD
-                                                <select class="form-control czSelectSet" name="parent_id">
-=======
-                                                <select class="form-control" id="category_select">
->>>>>>> d8c7695d891787e32f91df678804c78212918084
+                                                <select class="form-control czSelectSet" id="category_select">
                                                     <option value="">Choose Category</option>
                                                     @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -77,7 +73,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row" id="sub_category_div" style="display: none">
+                                        <div class="mb-3 row" id="sub_category_div czSelectSet" style="display: none">
                                             <label class="form-label col-sm-2 col-form-label">Sub Category : </label>
                                             <div class="col-sm-10">
                                                 <select class="form-control" id="sub_category_select">

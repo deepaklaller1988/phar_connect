@@ -1,49 +1,45 @@
-<div class="container-fluid g-0">
-    <div class="row">
-        <div class="col-lg-12 p-0 ">
-            <div class="header_iner d-flex justify-content-between align-items-center">
-                <div class="sidebar_icon d-lg-none">
-                    <i class="ti-menu"></i>
-                </div>
-                <div class="line_icon open_miniSide d-none d-lg-block">
-                    <img src="{{ asset('assets/partner/img/line_img.png') }}" alt>
-                </div>
-                <div class="header_right d-flex justify-content-between align-items-center">
-                    <div class="header_notification_warp d-flex align-items-center">
-                        <li>
-                            <a class="bell_notification_clicker" href="#"> <img
-                                    src="{{ asset('assets/partner/img/icon/bell.svg') }}" alt="">
-                                <span>2</span>
-                            </a>
-                            <div class="Menu_NOtification_Wrap">
-                                <div class="notification_Header">
-                                    <h4>Notifications</h4>
-                                </div>
-                                <div class="Notification_body">
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_content">
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_content">
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="profile_info">
-                        <img src="{{ asset('assets/partner/img/client_img.png') }}" alt="#">
-                        <div class="profile_info_iner">
-                            <div class="profile_info_details">
-                                <a href="{{ route('partner.profile') }}">My Profile </a>
+<nav class="navbar header-navbar pcoded-header">
+    <div class="navbar-wrapper">
+        <div class="navbar-logo">
+            <a href="{{ route('partner.dashboard' ) }}">
+                <img class="img-fluid" src="{{ asset('assets/admin/logo.png') }}" alt="Theme-Logo" />
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#!">
+                <i class="feather icon-menu icon-toggle-right"></i>
+            </a>
+            <a class="mobile-options waves-effect waves-light">
+                <i class="feather icon-more-horizontal"></i>
+            </a>
+        </div>
+        <div class="navbar-container container-fluid">
+            <ul class="nav-left">
+
+                <li>
+                    <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                        <i class="full-screen feather icon-maximize"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li class="user-profile header-notification">
+                    <div class="dropdown-primary dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <span>Welcome, {{ auth()->user()->name }}</span>
+                            <i class="feather icon-chevron-down"></i>
+                        </div>
+                        <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn"
+                            data-dropdown-out="fadeOut">
+                            <li>
+                                <a href="{{ route('partner.profile') }}">
+                                    <i class="feather icon-user"></i> Profile
+                                </a>
+                            </li>
+                            <li>
                                 @if (Route::has('login'))
                                 @auth
-                                <a href="{{ route('logout') }}" class="has-arrow"
+                                <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Log Out
+                                    <i class="feather icon-log-out"></i> Logout
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
@@ -51,11 +47,11 @@
                                 </form>
                                 @endauth
                                 @endif
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
     </div>
-</div>
+</nav>

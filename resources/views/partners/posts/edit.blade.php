@@ -88,163 +88,159 @@
     padding-bottom: 100%;
 }
 </style>
-<div class="main_content_iner overly_inner ">
-    <div class="container-fluid p-0 ">
+<div class="pcoded-content">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="page_title_left d-flex align-items-center">
-                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Post</h3>
-                        <ol class="breadcrumb page_bradcam mb-0">
-                            <li class="breadcrumb-item"><a href="{{ route('partner.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Post</li>
-                        </ol>
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="feather icon-home bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Edit Post</h5>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('partner.dashboard') }}"><i class="feather icon-home"></i></a>
+                        </li>
+                        <li class=""><a href="#!">Edit Post</a> </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="white_card card_height_100 mb_30">
-                    <div class="white_card_header">
-                        <div class="box_header m-0">
-                            <div class="main-title">
-                                <h3 class="m-0">Edit Post</h3>
-                            </div>
-                        </div>
-                    </div>
-                    @if(session('success'))
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    @if(session('error'))
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    <form action="{{ route('partner.post.update', $post->id ) }}" method="post" enctype='multipart/form-data'>
-                        @csrf
-                        @method('PUT')
-                        <div class="white_card_body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Title :</label>
-                                        <input type="text" name="title" value="{{ $post->title }}" placeholder="Title.."
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Email:</label>
-                                        <input type="text" name="email" value="{{ $data['user']->email }}"
-                                            placeholder="Email Address">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Phone Number : </label>
-                                    <div class="common_input mb_15">
-                                        <input type="text" name="phone" value="{{ $data['user']->phone }}"
-                                            placeholder="Mobile No">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Location : </label>
-                                        <input type="text" name="location" value="{{ $data['user']->location }}"
-                                            placeholder="Location">
-                                    </div>
-                                </div>
+    </div>
 
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Category : </label>
-                                        <select name="category" class="form-control selectFixCZ">
-                                            <option value="">Select Category</option>
-                                            @foreach($data['categories'] as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ $category->id == $post->category_id ? 'selected' : ''}}>
-                                                {{ $category->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Time : </label>
-                                        <input type="date" name="time" placeholder="Time" value="{{ $post->time }}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Images : </label>
-                                        <div class="upload__box">
-                                            <div class="upload__btn-box">
-                                                <label class="upload__btn uploadFileCZ">
-                                                    
-                                                    <span><p>Upload images</p>
-                                                    <input type="file" name="images[]" multiple="" data-max_length="20"
-                                                        class="upload__inputfile">
-</span>
-                                                </label>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Edit Post Details</h5>
+                        </div>
+                        <div class="card-block">
+                            <form id="main" enctype="multipart/form-data" method="post"
+                                action="{{ route('partner.post.update',$post->id ) }}">
+                                @csrf
+                                <div class="white_card_body">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Title :</label>
+                                                <input type="text" name="title" value="{{ $post->title }}"
+                                                    class="form-control" placeholder="Title.." required>
                                             </div>
-                                            <div class="upload__img-wrap uploadFilesAllCZ"></div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Email:</label>
+                                                <input type="text" name="email" class="form-control"
+                                                    value="{{ $data['user']->email }}" placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <label>Phone Number : </label>
+                                            <div class="common_input mb_15">
+                                                <input type="text" name="phone" class="form-control"
+                                                    value="{{ $data['user']->phone }}" placeholder="Mobile No">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Location : </label>
+                                                <input type="text" name="location" class="form-control"
+                                                    value="{{ $data['user']->location }}" placeholder="Location">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Category : </label>
+                                                <select name="category" class="form-control selectFixCZ">
+                                                    <option value="">Select Category</option>
+                                                    @foreach($data['categories'] as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $post->category_id ? 'selected' : ''}}>
+                                                        {{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Time : </label>
+                                                <input type="date" name="time" value="{{ $post->time }}"
+                                                    class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Images : </label>
+                                                <div class="upload__box">
+                                                    <div class="upload__btn-box">
+                                                        <label class="upload__btn uploadFileCZ">
+
+                                                            <span>
+                                                                <p>Upload images</p><input type="file" name="images[]"
+                                                                    multiple="" data-max_length="20"
+                                                                    class="upload__inputfile">
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="upload__img-wrap uploadFilesAllCZ"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Key Services:</label>
+                                                <textarea name="key_services"
+                                                    class="form-control textareaCZ">{{ $post->key_services }}</textarea>
+                                                <small>Preference:- Drugs, Anabolics, Menabolics.</small>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Description</label>
+                                                <textarea id="summernote" name="">{{ $post->description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="description" value="{{ $post->description }}"
+                                            name="description">
+                                        <div class="col-12">
+                                            @if($post->images)
+                                            <div class="img-wrap d-flex justify-content-center">
+                                                @foreach(explode(',', $post->images) as $image)
+                                                <img src="{{ asset('storage/uploads/posts/'.$image) }}"
+                                                    alt="{{ $image }}" class="img-fluid ml-2" width="300px"
+                                                    height="300px" data-image="{{ $image}}">
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <div class="create_report_btn mt_30">
+                                                <button type="submit"
+                                                    class="btn_1 radius_btn d-block text-center btnsCZ">
+                                                    {{ __('Save') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="common_input mb_15">
-                                        <label>Key Services:</label>
-                                        <textarea name="key_services"
-                                            class="form-control textareaCZ">{{ $post->key_services }}</textarea>
-                                        <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="common_input mb_15">
-                                        <label>Description</label>
-                                        <textarea id="summernote" name="">{{ $post->description }}</textarea>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="description" name="description"
-                                    value="{{ $post->description }}">
-                                <div class="col-12">
-                                    @if($post->images)
-                                    <div class="img-wrap d-flex justify-content-center">
-                                        @foreach(explode(',', $post->images) as $image)
-                                        <img src="{{ asset('storage/uploads/posts/'.$image) }}" alt="{{ $image }}" class="img-fluid ml-2" width="300px" height="300px" data-image = "{{ $image}}" >
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                </div>
-                                <div class="col-12">
-                                    <div class="create_report_btn mt_30">
-                                        <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
-                                            {{ __('Save') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script>
 jQuery(document).ready(function() {
     ImgUpload();

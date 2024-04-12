@@ -865,6 +865,7 @@ a.activeCategory {
     line-height: 20px;
     font-weight: normal;
     top: 8px;
+    opacity:0;
 }
 
 .searchCategories li span:after {
@@ -874,6 +875,7 @@ a.activeCategory {
     font-size: 24px;
     line-height: 20px;
     font-weight: normal;
+    top:11px;
 }
 
 .searchSubCategory {

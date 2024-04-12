@@ -1,118 +1,98 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
+
 <head>
+    <title>Pharm Connect</title>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Pharma Connect</title>
-    <link rel="icon" href="{{ asset('assets/images/fav.png') }}" type="image/png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description"
+        content="Admindek Bootstrap admin template made using Bootstrap 5 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="colorlib" />
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/css/bootstrap1.min.css') }}" />
+    <link rel="icon" href="{{ asset('assets/images/fav.png') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/themefy_icon/themify-icons.css') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/niceselect/css/nice-select.css') }}" />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/admin/bower_components/bootstrap/css/bootstrap.min.css' ) }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/owl_carousel/css/owl.carousel.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/pages/waves/css/waves.min.css ') }}" type="text/css"
+        media="all">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/gijgo/gijgo.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/icon/feather/css/feather.css') }} ">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/font_awesome/css/all.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/tagsinput/tagsinput.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/font-awesome-n.min.css') }} ">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/datepicker/date-picker.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/vectormap-home/vectormap-2.0.2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/bower_components/chartist/css/chartist.css') }}" type="text/css"
+        media="all">
 
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/scroll/scrollable.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/datatable/css/jquery.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/datatable/css/responsive.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/datatable/css/buttons.dataTables.min.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/text_editor/summernote-bs4.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/morris/morris.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/vendors/material_icon/material-icons.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/css/metisMenu.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/partner/css/style1.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/css/custom.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/partner/css/colors/default.css') }}" id="colorSkinCSS">
-    <script src="{{ asset('assets/partner/js/jquery1-3.4.1.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/widget.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
+    <script type="text/javascript" src="{{ asset('assets/admin/bower_components/jquery/js/jquery.min.js')}}"></script>
 </head>
 
-<body class="crm_body_bg">
+<body>
 
-    @include('partners.partials.sidebar')
-    <section class="main_content dashboard_part large_header_bg">
+    <div class="loader-bg">
+        <div class="loader-bar"></div>
+    </div>
 
-        @include('partners.partials.header')
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            @include('partners.partials.header')
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
 
-        @yield('content')
+                    @include('partners.partials.sidebar')
 
-        @include('partners.partials.footer')
-    </section>
+                    @yield('content')
 
-    
+                    <div id="styleSelector">
+                    </div>
 
-    <script src="{{ asset('assets/partner/js/popper1.min.js') }}"></script>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="{{ asset('assets/partner/js/bootstrap1.min.js') }}"></script>
 
-    <script src="{{ asset('assets/partner/js/metisMenu.js') }}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/count_up/jquery.waypoints.min.js') }}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/chartlist/Chart.min.js') }}"></script>
+   
+    <script type="text/javascript" src="{{ asset('assets/admin/bower_components/jquery-ui/js/jquery-ui.min.js')}}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/admin/bower_components/popper.js/js/popper.min.js')}}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/admin/bower_components/bootstrap/js/bootstrap.min.js')}}">
+    </script>
 
-    <script src="{{ asset('assets/partner/vendors/count_up/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/pages/waves/js/waves.min.js')}}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ asset('assets/admin/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/pages/chart/float/jquery.flot.js')}}"></script>
+    <script src="{{ asset('assets/admin/pages/chart/float/jquery.flot.categories.js')}}"></script>
+    <script src="{{ asset('assets/admin/pages/chart/float/curvedLines.js')}}"></script>
+    <script src="{{ asset('assets/admin/pages/chart/float/jquery.flot.tooltip.min.js')}}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/pages/widget/amchart/amcharts.js')}}"></script>
+    <script src="{{ asset('assets/admin/pages/widget/amchart/serial.js')}}"></script>
+    <script src="{{ asset('assets/admin/pages/widget/amchart/light.js')}}"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="{{ asset('assets/admin/pages/google-maps/gmaps.js')}}"></script>
 
-    <script src="{{ asset('assets/partner/vendors/datepicker/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datepicker/datepicker.en.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/datepicker/datepicker.custom.js') }}"></script>
-    <script src="{{ asset('assets/partner/js/chart.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/chartjs/roundedBar.min.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/progressbar/jquery.barfiller.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/tagsinput/tagsinput.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/text_editor/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/am_chart/amcharts.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/scroll/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/scroll/scrollable-custom.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/vectormap-home/vectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/vectormap-home/vectormap-world-mill-en.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/apex_chart/apex-chart2.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/apex_chart/apex_dashboard.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/vendors/chart_am/core.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/chart_am/charts.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/chart_am/animated.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/chart_am/kelly.js') }}"></script>
-    <script src="{{ asset('assets/partner/vendors/chart_am/chart-custom.js') }}"></script>
-
-    <script src="{{ asset('assets/partner/js/dashboard_init.js') }}"></script>
-    <script src="{{ asset('assets/partner/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/pcoded.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/vertical/vertical-layout.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/admin/pages/dashboard/crm-dashboard.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/admin/js/script.min.js')}}"></script>
 </body>
 
 </html>

@@ -1,0 +1,231 @@
+.bannerAdmin {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bannerAdmin img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+.bannerAdmin span {
+    position: absolute;
+    text-align: center;
+}
+
+.bannerAdmin span b {
+    border: 2px solid silver;
+    border-radius: 100px;
+    padding: 10px;
+    color: white;
+    box-shadow: 0 0 50px black;
+    display: block;
+}
+
+.bannerAdmin span p {
+    font-size: 12px;
+    color: yellow;
+    box-shadow: 0 0 50px black;
+    margin-top: 5px;
+}
+
+.bannerAdmin span input[type="file"] {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.pictureAdmin {
+    position: relative;
+}
+
+.pictureAdmin img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.pictureAdmin span {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.pictureAdmin span b {
+    background: white;
+    color: black;
+    width: 30px;
+    position: absolute;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 100px;
+    right: 0;
+    box-shadow: 0 0 10px;
+    bottom: 0;
+}
+
+.pictureAdmin span input[type="file"] {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Custome css style */
+
+select.form-control.selectFixCZ {
+    height: 47px;
+    border-radius: 10px;
+    padding-left: 25px;;
+}
+.uploadFileCZ {
+    width: 100%;
+    cursor: pointer;
+}
+
+.uploadFileCZ span {
+    display: block;
+    position: relative;
+    height: 47px;
+    border: 1px solid #e5ecff;
+    border-radius: 10px;
+}
+
+.uploadFileCZ span input.upload__inputfile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.textareaCZ {
+    border-radius: 10px;
+}
+.note-toolbar {
+    background: #efefef !important;
+}
+
+.uploadFileCZ span p {position: absolute;background: #e5ecff;right: 0;height: 100%;display: flex;align-items: center;justify-content: center;padding: 15px;border-radius: 10px;}
+.btnsCZ {
+    min-width: 100px;
+}
+.main-titleCZ {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.main-titleCZ a {
+    padding-right: 38px;
+    position: relative;
+}
+
+.main-titleCZ a:after {
+    position: absolute;
+    content: '+';
+    background: white;
+    color: #198754;
+    width: 20px;
+    border-radius: 100px;
+    text-align: center;
+    right: 10px;
+    height: 20px;
+    top: 8px;
+    line-height: 19px;
+}
+.white_card .white_card_header {
+    border-bottom: 1px solid #efefef;
+}
+.dataTables_length {
+    padding: 15px;
+}
+
+.dataTables_length select {
+    border: 1px solid silver;
+    border-radius: 4px;
+}
+
+.dataTables_filter {
+    padding: 15px;
+}
+
+.dataTables_filter input[type="search"] {
+    border-radius: 4px;
+    border: 1px solid silver;
+    height: 35px;
+}
+table {
+    border: 1px solid #eeeeee !important;
+}
+
+table th, table tr td:first-child {
+    font-weight: bold !important;
+}
+
+table tr td:last-child a {padding: 8px;font-size: 16px;color: #2ed8b6;}
+
+table tr td:last-child a#deletePost {
+    color: red;
+}
+
+.dataTables_paginate.paging_simple_numbers {
+    margin: 10px;
+}
+
+.dataTables_paginate.paging_simple_numbers a {
+    background: #1e1e2d !important;
+    color: red !important;
+    border-radius: 100px !important;
+}
+
+.dataTables_paginate.paging_simple_numbers a.previous, .dataTables_paginate.paging_simple_numbers a.next {
+    width: auto;
+    padding: 0 10px !important;
+}
+
+.dataTables_info {
+    padding: 15px;
+    position: relative;
+    top: 5px;
+}
+.upload__img-wrap.uploadFilesAllCZ {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.upload__img-wrap.uploadFilesAllCZ .upload__img-box {
+    width: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+span.closeUploadImages {
+    position: absolute;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    transform: rotate(45deg);
+    top: 14px;
+    right: 14px;
+    border-radius: 100px;
+    text-shadow: 0 0 10px black;
+    cursor: pointer;
+}
+/* Custome css style */
