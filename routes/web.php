@@ -86,6 +86,8 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/post/edit/{id}',[PostController::class, 'edit'])->name('partner.post.edit');   
     Route::put('/partner/post/update/{id}',[PostController::class, 'update'])->name('partner.post.update');
     Route::delete('/partner/post/delete/{id}',[PostController::class, 'destroy'])->name('partner.post.delete');
+    Route::get('/partner/subcategories',[CategoryController::class,'get_categories'])->name('partner.subcategories');
+    Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');

@@ -159,7 +159,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Category : </label>
-                                                <select name="category" class="form-control selectFixCZ">
+                                                <select id="category_select" class="form-control selectFixCZ">
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -167,6 +167,31 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6 mb-3 " id="sub_category_div" style="display: none">
+                                            <div class="common_input mb_15">
+                                                <label>Sub Category : </label>
+                                                <select id="sub_category_select" class="form-control selectFixCZ">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3 " id="sub_sub_category_div" style="display: none">
+                                            <div class="common_input mb_15">
+                                                <label>Sub Sub Category : </label>
+                                                <select id="sub_sub_category_select" class="form-control selectFixCZ">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3 " id="child_category_div" style="display: none">
+                                            <div class="common_input mb_15">
+                                                <label>Child Category : </label>
+                                                <select id="child_category_select" class="form-control selectFixCZ">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="category_id" id="parent_id">
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Time : </label>
@@ -298,5 +323,87 @@ $(document).ready(function() {
 $(document).on('focusout', '.note-editable', function() {
     $('#description').val($(this).html());
 });
+
+$(document).on('change', '#category_select', function() {
+    $('#sub_sub_category_div').css('display', 'none');
+    $('#sub_sub_category_select').html('');
+    $('#sub_category_div').css('display', 'none');
+    $('#sub_category_select').html('');
+    var category_id = $(this).val();
+    $('#parent_id').val(category_id);
+    $.ajax({
+        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#sub_category_select').html('<option value="">Choose Sub Category</option>');
+            $.each(response, function(index, item) {
+
+                $('#sub_category_div').css('display', '');
+
+                $('#sub_category_select').append('<option value="' + item
+                    .id + '">' + item.title + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            // Handle errors
+            console.error(xhr.responseText);
+        }
+    });
+});
+$(document).on('change', '#sub_category_select', function() {
+    var category_id = $(this).val();
+    $('#parent_id').val(category_id);
+    $('#sub_sub_category_div').css('display', 'none');
+    $('#sub_sub_category_select').html('');
+    $.ajax({
+        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#sub_sub_category_select').html('<option value="">Choose an Option</option>');
+            $.each(response, function(index, item) {
+
+                $('#sub_sub_category_div').css('display', '');
+                $('#sub_sub_category_select').append('<option value="' + item
+                    .id + '">' + item.title + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            // Handle errors
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+$(document).on('change', '#sub_sub_category_select', function() {
+    var category_id = $(this).val();
+    $('#parent_id').val(category_id);
+    $('#child_category_div').css('display', 'none');
+    $('#child_category_select').html('');
+    $.ajax({
+        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#child_category_select').html('<option value="">Choose an Option</option>');
+            $.each(response, function(index, item) {
+
+                $('#child_category_div').css('display', '');
+                $('#child_category_select').append('<option value="' + item
+                    .id + '">' + item.title + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            // Handle errors
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+$(document).on('change', '#child_category_select', function() {
+            var category_id = $(this).val();
+            $('#parent_id').val(category_id);
+        });
 </script>
 @endsection

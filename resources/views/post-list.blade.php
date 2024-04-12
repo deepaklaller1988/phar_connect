@@ -3,6 +3,7 @@
 <div class="consultingServices">
     <div class="wrapper">
         <div class="consultingServicesInner">
+            @if(count($posts) > 0)
             <section class="consultingServicesSet postAll">
                 <section>
                     @foreach($posts as $post)
@@ -36,6 +37,13 @@
                     @endforeach
                 </section>
             </section>
+            @else
+            <section>
+                <div class="noDataFound">
+                    <img src="{{ asset('assets/images/no-data-found.png') }}" class="img-fluid">
+                </div>
+            </section>
+            @endif
         </div>
     </div>
 </div>

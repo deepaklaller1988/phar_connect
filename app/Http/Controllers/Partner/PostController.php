@@ -56,6 +56,7 @@ class PostController extends Controller
 
     public function store(request $request)
     {
+    
        $this->validate($request, [
            'title' => 'required',
            'description' => 'required', 
@@ -71,7 +72,7 @@ class PostController extends Controller
        $post->contact_info = $request->phone;
        $post->description = $request->description;
        $post->time = $request->time;
-       $post->category_id = $request->category;
+       $post->category_id = $request->category_id;
        $post->partner_id = auth()->user()->id;
        $post->key_services = $request->key_services;
        $images = []; 
