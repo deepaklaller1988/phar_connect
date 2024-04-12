@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Partner\PostController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\CategoryController as HomeCategory;
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ use App\Http\Controllers\CategoryController as HomeCategory;
 //  });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
+
 Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
 Route::get('/subcategory/{id}', [HomeController::class, 'subcategory'])->name('subcategory');
 Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('categorydetails');
@@ -43,6 +44,8 @@ Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'
 Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
 Auth::routes();
+Route::get('/home', [HomeController::class, 'index']);
+
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -69,6 +72,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
     Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
     Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
+    Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

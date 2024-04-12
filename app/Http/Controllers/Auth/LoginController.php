@@ -63,4 +63,14 @@ class LoginController extends Controller
         }
           
     }
+
+    protected function authenticated($request,$user){
+        if($user->type === 'admin'){
+            return redirect()->intended('admin.dashboard'); //redirect to admin panel
+        }elseif($user->type === 'partner'){
+            return redirect()->intended('partner.dashboard');
+        }
+    
+        return redirect()->intended('/'); //redirect to standard user homepage
+    }
 }

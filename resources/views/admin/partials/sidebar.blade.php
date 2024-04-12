@@ -73,6 +73,14 @@
                         </li>
                     </ul>
                 </li>
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="{{ route('admin.posts') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-server"></i>
+                        </span>
+                        <span class="pcoded-mtext">Posts</span>
+                    </a>
+                </li>
                 <li class=" ">
                     @if (Route::has('login'))
                     @auth

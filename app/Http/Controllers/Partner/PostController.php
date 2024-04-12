@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Notification;
 use DataTables;
 
 class PostController extends Controller
@@ -83,6 +84,13 @@ class PostController extends Controller
             }
         }
         if($post->save()){
+            $notification = new Notification;
+            $notification->user_id = auth()->user()->id;
+            $notification->status = 0;
+            $notification->notification = 'A new Post has beed added By '.auth()->user()->name;
+            $notification->type = "post";
+            $notification->notification_for = $post->id;
+            $notification->save();
             return redirect()->route('partner.posts')->with('success','Post Added Successfully');
         }else{
             return redirect()->route('partner.posts')->with('error','Something went wrong');
@@ -121,6 +129,20 @@ class PostController extends Controller
             }
         }
         if($post->save()){
+            
+            $note = Notification::where('notification_for',$id)->first();
+            if($note){
+                $note->status = 0;
+                $note->save();
+            }else{
+                $notification = new Notification;
+                $notification->user_id = auth()->user()->id;
+                $notification->status = 0;
+                $notification->notification = 'An Post Updated By '.auth()->user()->name;
+                $notification->type = "post";
+                $notification->notification_for = $id;
+                $notification->save();
+            }
             return redirect()->route('partner.posts')->with('success','Post Updated Successfully');
         }else{
             return redirect()->route('partner.posts')->with('error','Something went wrong');

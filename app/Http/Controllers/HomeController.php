@@ -11,9 +11,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
-        $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
-        return view('home')->with('data',$data);
+        if(isset(auth()->user()->type) && auth()->user()->type == 'partner'){
+           return redirect()->route('partner.dashboard');
+        }else{
+            $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
+            $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
+            return view('home')->with('data',$data);
+        }
     }
     public function category($id)
     {

@@ -56,10 +56,8 @@ class RegisterController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'phone' => ['required','numeric'],
-                'company_website' => ['required','url'],
+                'company_website' => ['required'],
                 'company_profile' => ['required','string','max:300'],
-                'key_services' => ['required','string'],
-                'certifications' => ['required']
             ]);
         }else{
             return Validator::make($data, [
@@ -89,8 +87,6 @@ class RegisterController extends Controller
                 'company_website' => $data['company_website'],
                 'company_profile' => $data['company_profile'],
                 'location' => $data['location'],
-                'key_services' => $data['key_services'],
-                'certifications' => $data['certifications']
             ]);
         }else{
             // dd("0");
