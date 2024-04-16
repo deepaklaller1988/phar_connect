@@ -32,7 +32,7 @@
                         </div>
                     </span>
                     <a href="{{ route('about-us') }}">About us</a>
-                    <a href="">Contact us</a>
+                    <a href="{{ route('contact-us') }}">Contact us</a>
                     @if (Route::has('login'))
                     @auth
                     @if(auth()->user()->type == "partner")

@@ -13,6 +13,7 @@ use App\Http\Controllers\Partner\PostController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\CategoryController as HomeCategory;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ContactUsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,7 @@ Route::get('/faq',[HomeController::class,'faq'])->name('faq');
 Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
 Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
+Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
