@@ -21,7 +21,7 @@ class PostController extends Controller
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
                         // $status = $model->status == 1 ? '<label class="form-label label label-inverse-success">Approved</label>' : '<label class="form-label label label-inverse-danger">Inactive</label>';
-                       if($model->status == 3){
+                       if($model->status == 2){
                            $status = '<label class="form-label label label-inverse-danger">Rejected</label>';
                        }elseif($model->status == 1){
                            $status = '<label class="form-label label label-inverse-success">Approved</label>';

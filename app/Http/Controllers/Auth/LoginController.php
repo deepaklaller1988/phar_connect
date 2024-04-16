@@ -52,7 +52,7 @@ class LoginController extends Controller
             // dd(auth()->user()->type);
             if (auth()->user()->type == 'admin') {
                 return redirect()->route('admin.dashboard');
-            }else if (auth()->user()->type == 'partner') {
+            }elseif (auth()->user()->type == 'partner') {
                 return redirect()->route('partner.dashboard');
             }else{
                 return redirect()->route('/home');

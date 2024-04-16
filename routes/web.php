@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Partner\PostController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\CategoryController as HomeCategory;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,6 +74,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
     Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
     Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
+    Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
+    Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
+    Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
@@ -93,3 +97,4 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
 Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name('citySuggestion');
+Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');

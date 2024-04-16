@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/widget.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
     <script type="text/javascript" src="{{ asset('assets/admin/bower_components/jquery/js/jquery.min.js')}}"></script>
 </head>
 

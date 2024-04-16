@@ -33,11 +33,13 @@
                                 <h6>Notifications</h6>
                                 <label class="form-label label label-danger">New</label>
                             </li>
-                           @foreach($allnotifications as $notification)
-                            <li>
+                            @foreach($allnotifications as $notification)
+                            @if($notification->type == "post")
+                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('partner.post.edit', $notification->notification_for) }}" id="noteupdate" data-id="{{ $notification->id }}">
                                 <p class="notification-msg">{{ $notification->notification }}</p>
                             </li>
-                           @endforeach
+                            @endif
+                            @endforeach
                         </ul>
                     </div>
                 </li>

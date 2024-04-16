@@ -11,13 +11,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if(isset(auth()->user()->type) && auth()->user()->type == 'partner'){
-           return redirect()->route('partner.dashboard');
-        }else{
+        // if(isset(auth()->user()->type) && auth()->user()->type == 'partner'){
+        //    return redirect()->route('partner.dashboard');
+        // }else{
             $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
             $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
             return view('home')->with('data',$data);
-        }
+        // }
     }
     public function category($id)
     {
@@ -114,7 +114,7 @@ class HomeController extends Controller
         if($getcat->title == 'Jobs'){
             return redirect()->route('jobs');
         }else{
-            $posts = Post::with('user')->where('category_id',$request->id)->get();
+            $posts = Post::with('user')->where(['category_id'=>$request->id, 'status'=>1])->get();
             // dd($posts);
             return view('post-list',compact('posts'));
         }

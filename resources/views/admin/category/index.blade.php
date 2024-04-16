@@ -105,8 +105,8 @@
                     name: 'status'
                 },
                 {
-                    data: 'parent_id',
-                    name: 'parent_id'
+                    data: 'parent_name',
+                    name: 'parent_name'
                 },
                 {
                     data: 'image',

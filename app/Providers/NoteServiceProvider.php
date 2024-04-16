@@ -24,11 +24,11 @@ class NoteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', function ($view) {
-            if(auth()->user()){
-            $data = Notification::where(['user_id'=>auth()->user()->id, 'status'=>0])->get();   
-            $view->with('allnotifications', $data );
-            }
-        });
+        // view()->composer('*', function ($view) {
+        //     if(auth()->user()){
+        //     $data = Notification::where(['user_id'=>auth()->user()->id, 'status'=>0])->get();   
+        //     $view->with('allnotifications', $data );
+        //     }
+        // });
     }
 }
