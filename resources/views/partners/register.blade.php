@@ -76,7 +76,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control " name="phone"
+                                    <input  type="text" id="phone" class="form-control " name="phone"
                                         value="{{ old('phone') }}">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                                     <input id="company_website" type="text"
                                         class="form-control @error('company_website') is-invalid @enderror"
                                         name="company_website" value="{{ old('company_website') }}" required
-                                        autocomplete="company_website" autofocus>
+                                        autocomplete="company_website" id="company_website" autofocus>
 
                                     @error('company_website')
                                     <span class="invalid-feedback" role="alert">
@@ -118,41 +118,15 @@
                                     @enderror
                                 </div>
                             </div>
-                            <!-- <div class="row mb-3">
-                            <label for="key_services" class="col-md-4 col-form-label text-md-end">Key Services</label>
-
-                            <div class="col-md-6">
-                                <input id="key_services" type="text" class="form-control" name="key_services" value="{{ old('key_services') }}" autocomplete="key_services" autofocus>
-
-                                @error('key_services')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> -->
                         </div>
-                        <!-- <div class="row mb-3  width100Set">
-                            <label for="certifications" class="col-md-4 col-form-label text-md-end">Certifications</label>
 
-                            <div class="col-md-6 attachmentsSet">
-                                <input id="certifications" type="text" class="form-control" name="certifications" value="{{ old('certifications') }}" autocomplete="certifications" >
-<p><img src="{{asset('/assets/images/adobe.png')}}" alt="img"> Adobe.pdf</p>
-                                <section><input type="file"/> Upload</section>
-                                @error('certifications')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> -->
                         <input type="hidden" name="type" value="2">
                         <div class="row mb-3 width100Set">
                             <label for="company_profile"
                                 class="col-md-4 col-form-label text-md-end">{{ __('Company Profile') }}</label>
                             <div class="col-md-6">
                                 <textarea class="form-control" name="company_profile" maxlength="300"
-                                    placeholder="add company description around 300 word"></textarea>
+                                    placeholder="add company description around 300 word" id="company_profile">{{ old('company_profile') }}</textarea>
                                 @error('company_profile')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -203,14 +177,73 @@ if ("geolocation" in navigator) {
     alert("Geolocation is not supported by your browser");
 }
 
-
-$("#location").on('keypress', function() {
-    $.ajax({
-        url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true',
-        success: function(data) {
-            alert(data.results[0].formatted_address);
-            /*or you could iterate the components for only the city and state*/
+$(document).ready(function() {
+    $(document).on('focusout', '#email', function() {
+        var email = $(this).val();
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(email)) {
+            $('#email').after(
+                '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
+                );
         }
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 2000);
+    });
+
+    $(document).on('focusout', '#password', function() {
+        var password = $(this).val();
+        if (password.length < 8) {
+            $('#password').after(
+                '<span class="invalid-feedback" role="alert"><strong>Password length must be greater than 8 </strong></span>'
+            );
+        }
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 2000);
+    });
+
+    $(document).on('focusout', '#password-confirm', function() {
+        var password = $(this).val();
+        var password_confirm = $('#password').val();
+        if (password != password_confirm) {
+            $('#password-confirm').after(
+                '<span class="invalid-feedback" role="alert"><strong>Confirmed password does not match </strong></span>'
+            );
+        }
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 2000);
+    });
+
+    $(document).on('focusout', '#phone', function() {
+        var phoneNumber = $(this).val();
+        var regex = /^\d{10}$/; 
+        if (!regex.test(phoneNumber)) {
+            $('#phone').after(
+                '<span class="invalid-feedback" role="alert"><strong>Enter a valid phone number </strong></span>'
+            );
+        }
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 2000);
+    });
+    var errorAppended = false;
+    $('#phone').keypress(function(event) {
+
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode >= 48 && charCode <= 57 || charCode === 8 || charCode === 46) {
+
+        } else {
+            $('#phone').after(
+                '<span class="invalid-feedback" role="alert"><strong>Numbers allowed only</strong></span>'
+            );
+            errorAppended = false;
+        }
+
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
     });
 });
 </script>

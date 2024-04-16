@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\models\Notification;
 class HeaderServiceProvider extends ServiceProvider
 {
     /**
@@ -32,7 +33,16 @@ class HeaderServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with('allcategories', $data );
+            if(isset(auth()->user()->id) && auth()->user()->id){
+                $in = array('1','2');
+                $allnotifications = Notification::where(['user_id'=> auth()->user()->id,'read'=> 0])->whereIn('status',$in)->get(); 
+                $adminnotifications = Notification::where([ 'status'=>0])->get(); 
+            }else{
+                $allnotifications = [];
+                $adminnotifications = [];
+            }
+
+            $view->with(['allcategories' => $data,'allnotifications' => $allnotifications,'adminnotifications' => $adminnotifications ]);
         });
-    }
+    } 
 }

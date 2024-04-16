@@ -9,6 +9,7 @@
                         <span class="pcoded-mtext">Dashboard</span>
                     </a>
                 </li>
+                @if(auth()->user()->status == 1)
                 <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
                     <a href="{{ route('partner.posts') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
@@ -17,7 +18,7 @@
                         <span class="pcoded-mtext">Posts</span>
                     </a> 
                 </li>
-
+                @endif
                 <li class=" ">
                     @if (Route::has('login'))
                     @auth

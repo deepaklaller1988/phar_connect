@@ -1,7 +1,8 @@
-
 @extends('admin.layouts.master')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -71,11 +72,12 @@
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Description</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" name="description">
+                                                <textarea class="form-control" id="summernote">
 
                                                         </textarea>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="description" id="description">
                                         <div class="row mb-3">
                                             <input type="submit" name="submit" value="Save" class="btn btn-success">
                                         </div>
@@ -89,5 +91,12 @@
         </div>
     </div>
 </div>
-
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
+$(document).on('focusout', '.note-editable', function() {
+    $('#description').val($(this).html());
+});
+</script>
 @endsection

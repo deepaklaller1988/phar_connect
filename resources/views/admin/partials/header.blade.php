@@ -21,6 +21,26 @@
                 </li>
             </ul>
             <ul class="nav-right">
+            <li class="header-notification">
+                    <div class="dropdown-primary dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="feather icon-bell"></i>
+                            <span class="badge bg-c-red">{{ count($adminnotifications)}}</span>
+                        </div>
+                        <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn"
+                            data-dropdown-out="fadeOut">
+                            <li>
+                                <h6>Notifications</h6>
+                                <label class="form-label label label-danger">New</label>
+                            </li>
+                           @foreach($adminnotifications as $notification)
+                            <li>
+                                <p class="notification-msg">{{ $notification->notification }}</p>
+                            </li>
+                           @endforeach
+                        </ul>
+                    </div>
+                </li>
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">

@@ -52,7 +52,7 @@ class LoginController extends Controller
             // dd(auth()->user()->type);
             if (auth()->user()->type == 'admin') {
                 return redirect()->route('admin.dashboard');
-            }else if (auth()->user()->type == 'partner') {
+            }elseif (auth()->user()->type == 'partner') {
                 return redirect()->route('partner.dashboard');
             }else{
                 return redirect()->route('/home');
@@ -62,5 +62,15 @@ class LoginController extends Controller
                 ->with('error','Email-Address And Password Are Wrong.');
         }
           
+    }
+
+    protected function authenticated($request,$user){
+        if($user->type === 'admin'){
+            return redirect()->intended('admin.dashboard'); //redirect to admin panel
+        }elseif($user->type === 'partner'){
+            return redirect()->intended('partner.dashboard');
+        }
+    
+        return redirect()->intended('/'); //redirect to standard user homepage
     }
 }

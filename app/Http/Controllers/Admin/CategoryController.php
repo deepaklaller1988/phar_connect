@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = Category::orderBy('title')->get();
+            $data = Category::with('parent')->orderBy('title')->get();
             // $data = Category::with('descendants')->whereNull('parent_id')->get();
   
             return Datatables::of($data)
@@ -22,7 +22,10 @@ class CategoryController extends Controller
                         $status = $model->status == 1 ? '<label class="form-label label label-inverse-success">Active</label>' : '<label class="form-label label label-inverse-danger">Inactive</label>';
                         return $status;
                     })
-                    ->addColumn('action', function($row){
+                    ->addColumn('parent_name', function ($item) {
+                        return $item->parent ? $item->parent->title : '';
+                    })
+                     ->addColumn('action', function($row){
    
                            $btn = '<a href="'.url('admin/category/edit/'.$row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editCategory" data-url="'.url('admin/category/edit/'.$row->id).'"><i class="fa fa-edit" ></i></a>';
    
@@ -34,7 +37,7 @@ class CategoryController extends Controller
                         $image = $model->status ? '<img src="'.url('storage/'.$model->image).'">' : '';
                         return $image;
                     })
-                    ->rawColumns(['status','action','image'])
+                    ->rawColumns(['status','action','image','parent_name'])
                     ->make(true);
         }
         

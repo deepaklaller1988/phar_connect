@@ -73,10 +73,10 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row" id="sub_category_div czSelectSet" style="display: none">
+                                        <div class="mb-3 row" id="sub_category_div" style="display: none">
                                             <label class="form-label col-sm-2 col-form-label">Sub Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="sub_category_select">
+                                                <select class="form-control czSelectSet" id="sub_category_select">
                                                     <option>Choose Sub Category</option>
                                                 </select>
                                             </div>
@@ -84,7 +84,7 @@
                                         <div class="mb-3 row" id="sub_sub_category_div" style="display: none">
                                             <label class="form-label col-sm-2 col-form-label">child Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="sub_sub_category_select">
+                                                <select class="form-control czSelectSet" id="sub_sub_category_select">
                                                     <option> Choose an option</option>
                                                 </select>
                                             </div>

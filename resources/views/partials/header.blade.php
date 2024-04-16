@@ -17,7 +17,7 @@
                                             <div class="sub-linksCategories" id="sub-cat">
                                                 <ul>
                                                   @foreach($allcategories[$key][$skey]['subcategories'] as $childcat)
-                                                    <li><a href=""><span><img
+                                                    <li><a href="{{ route('posts',['id' => $childcat->id]) }}"><span><img
                                                                     src="{{ url('storage/'.$childcat->image) }}"
                                                                     alt="sub category" /></span><b>{{ $childcat->title }}</b></a></li>
                                                   @endforeach

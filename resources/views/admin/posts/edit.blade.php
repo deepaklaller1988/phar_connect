@@ -1,4 +1,4 @@
-@extends('partners.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -96,7 +96,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-home bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Add Posts</h5>
+                        <h5>Edit Post</h5>
                     </div>
                 </div>
             </div>
@@ -104,9 +104,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('partner.dashboard') }}"><i class="feather icon-home"></i></a>
+                            <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class=""><a href="#!">Add Posts</a> </li>
+                        <li class=""><a href="#!">Edit Post</a> </li>
                     </ul>
                 </div>
             </div>
@@ -119,19 +119,33 @@
                 <div class="page-body">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Add Post Details</h5>
+                            <h5>Edit Post Details</h5>
                         </div>
                         <div class="card-block">
                             <form id="main" enctype="multipart/form-data" method="post"
-                                action="{{ route('partner.post.store' ) }}">
+                                action="{{ route('admin.post.update',$post->id ) }}">
                                 @csrf
+                                @method('put')
                                 <div class="white_card_body">
                                     <div class="row">
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
+                                                <label>Action:</label>
+                                                <select class="form-select" name="action">
+                                                    <option value="">Select Action</option>
+                                                    <option value="1">Approve</option>
+                                                    <option value="2">Reject</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="common_input mb_15">
                                                 <label>Title :</label>
-                                                <input type="text" name="title" class="form-control"
-                                                    placeholder="Title.." required>
+                                                <input type="text" name="title" value="{{ $post->title }}"
+                                                    class="form-control" placeholder="Title.." required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
@@ -159,43 +173,56 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Category : </label>
-                                                <select id="category_select" class="form-control selectFixCZ">
+                                                <select name="category" class="form-control selectFixCZ">
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $post->category_id ? 'selected' : ''}}
+                                                        @if($cat)
+                                                        {{$cat['childcategories'][0]->parent_id == $category->id ? 'selected' : '' }}
+                                                        @endif>
+                                                        {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 mb-3 " id="sub_category_div" style="display: none">
+                                        @if($cat)
+                                        @if($cat['childcategories'])
+                                        <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
-                                                <label>Sub Category : </label>
-                                                <select id="sub_category_select" class="form-control selectFixCZ">
-
+                                                <label>Category : </label>
+                                                <select name="category" class="form-control selectFixCZ">
+                                                    @foreach($cat['childcategories'] as $childcategory)
+                                                    <option value="{{ $childcategory->id }}"
+                                                        {{ $childcategory->id == $cat['grandchildcategories'][0]->parent_id ? 'selected' : ''}}>
+                                                        {{ $childcategory->title }}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 mb-3 " id="sub_sub_category_div" style="display: none">
+                                        @endif
+                                        @if($cat['grandchildcategories'])
+                                        <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
-                                                <label>Sub Sub Category : </label>
-                                                <select id="sub_sub_category_select" class="form-control selectFixCZ">
-
+                                                <label>Category : </label>
+                                                <select name="category" class="form-control selectFixCZ">
+                                                    @foreach($cat['grandchildcategories'] as $childcategory)
+                                                    <option value="{{ $childcategory->id }}"
+                                                        {{ $childcategory->id == $post->category_id ? 'selected' : ''}}>
+                                                        {{ $childcategory->title }}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 mb-3 " id="child_category_div" style="display: none">
-                                            <div class="common_input mb_15">
-                                                <label>Child Category : </label>
-                                                <select id="child_category_select" class="form-control selectFixCZ">
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="category_id" id="parent_id">
+                                        @endif
+                                        @endif
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Time : </label>
-                                                <input type="date" name="time" class="form-control" placeholder="Email">
+                                                <input type="date" name="time" value="{{ $post->time }}"
+                                                    class="form-control" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
@@ -220,7 +247,7 @@
                                             <div class="common_input mb_15">
                                                 <label>Key Services:</label>
                                                 <textarea name="key_services"
-                                                    class="form-control textareaCZ"></textarea>
+                                                    class="form-control textareaCZ">{{ $post->key_services }}</textarea>
                                                 <small>Preference:- Drugs, Anabolics, Menabolics.</small>
 
                                             </div>
@@ -229,10 +256,22 @@
                                         <div class="col-12 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Description</label>
-                                                <textarea id="summernote" name=""></textarea>
+                                                <textarea id="summernote" name="">{{ $post->description }}</textarea>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="description" name="description">
+                                        <input type="hidden" id="description" value="{{ $post->description }}"
+                                            name="description">
+                                        <div class="col-12">
+                                            @if($post->images)
+                                            <div class="img-wrap d-flex justify-content-center">
+                                                @foreach(explode(',', $post->images) as $image)
+                                                <img src="{{ asset('storage/uploads/posts/'.$image) }}"
+                                                    alt="{{ $image }}" class="img-fluid ml-2" width="300px"
+                                                    height="300px" data-image="{{ $image}}">
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
                                         <div class="col-12 mb-3">
                                             <div class="create_report_btn mt_30">
                                                 <button type="submit"
@@ -323,87 +362,5 @@ $(document).ready(function() {
 $(document).on('focusout', '.note-editable', function() {
     $('#description').val($(this).html());
 });
-
-$(document).on('change', '#category_select', function() {
-    $('#sub_sub_category_div').css('display', 'none');
-    $('#sub_sub_category_select').html('');
-    $('#sub_category_div').css('display', 'none');
-    $('#sub_category_select').html('');
-    var category_id = $(this).val();
-    $('#parent_id').val(category_id);
-    $.ajax({
-        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            $('#sub_category_select').html('<option value="">Choose Sub Category</option>');
-            $.each(response, function(index, item) {
-
-                $('#sub_category_div').css('display', '');
-
-                $('#sub_category_select').append('<option value="' + item
-                    .id + '">' + item.title + '</option>');
-            });
-        },
-        error: function(xhr, status, error) {
-            // Handle errors
-            console.error(xhr.responseText);
-        }
-    });
-});
-$(document).on('change', '#sub_category_select', function() {
-    var category_id = $(this).val();
-    $('#parent_id').val(category_id);
-    $('#sub_sub_category_div').css('display', 'none');
-    $('#sub_sub_category_select').html('');
-    $.ajax({
-        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            $('#sub_sub_category_select').html('<option value="">Choose an Option</option>');
-            $.each(response, function(index, item) {
-
-                $('#sub_sub_category_div').css('display', '');
-                $('#sub_sub_category_select').append('<option value="' + item
-                    .id + '">' + item.title + '</option>');
-            });
-        },
-        error: function(xhr, status, error) {
-            // Handle errors
-            console.error(xhr.responseText);
-        }
-    });
-});
-
-$(document).on('change', '#sub_sub_category_select', function() {
-    var category_id = $(this).val();
-    $('#parent_id').val(category_id);
-    $('#child_category_div').css('display', 'none');
-    $('#child_category_select').html('');
-    $.ajax({
-        url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            $('#child_category_select').html('<option value="">Choose an Option</option>');
-            $.each(response, function(index, item) {
-
-                $('#child_category_div').css('display', '');
-                $('#child_category_select').append('<option value="' + item
-                    .id + '">' + item.title + '</option>');
-            });
-        },
-        error: function(xhr, status, error) {
-            // Handle errors
-            console.error(xhr.responseText);
-        }
-    });
-});
-
-$(document).on('change', '#child_category_select', function() {
-            var category_id = $(this).val();
-            $('#parent_id').val(category_id);
-        });
 </script>
 @endsection

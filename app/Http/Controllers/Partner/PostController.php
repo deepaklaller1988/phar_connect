@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Notification;
 use DataTables;
 
 class PostController extends Controller
@@ -20,7 +21,7 @@ class PostController extends Controller
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
                         // $status = $model->status == 1 ? '<label class="form-label label label-inverse-success">Approved</label>' : '<label class="form-label label label-inverse-danger">Inactive</label>';
-                       if($model->status == 3){
+                       if($model->status == 2){
                            $status = '<label class="form-label label label-inverse-danger">Rejected</label>';
                        }elseif($model->status == 1){
                            $status = '<label class="form-label label label-inverse-success">Approved</label>';
@@ -55,6 +56,7 @@ class PostController extends Controller
 
     public function store(request $request)
     {
+    
        $this->validate($request, [
            'title' => 'required',
            'description' => 'required', 
@@ -70,7 +72,7 @@ class PostController extends Controller
        $post->contact_info = $request->phone;
        $post->description = $request->description;
        $post->time = $request->time;
-       $post->category_id = $request->category;
+       $post->category_id = $request->category_id;
        $post->partner_id = auth()->user()->id;
        $post->key_services = $request->key_services;
        $images = []; 
@@ -83,6 +85,13 @@ class PostController extends Controller
             }
         }
         if($post->save()){
+            $notification = new Notification;
+            $notification->user_id = auth()->user()->id;
+            $notification->status = 0;
+            $notification->notification = 'A new Post has beed added By '.auth()->user()->name;
+            $notification->type = "post";
+            $notification->notification_for = $post->id;
+            $notification->save();
             return redirect()->route('partner.posts')->with('success','Post Added Successfully');
         }else{
             return redirect()->route('partner.posts')->with('error','Something went wrong');
@@ -121,6 +130,20 @@ class PostController extends Controller
             }
         }
         if($post->save()){
+            
+            $note = Notification::where('notification_for',$id)->first();
+            if($note){
+                $note->status = 0;
+                $note->save();
+            }else{
+                $notification = new Notification;
+                $notification->user_id = auth()->user()->id;
+                $notification->status = 0;
+                $notification->notification = 'An Post Updated By '.auth()->user()->name;
+                $notification->type = "post";
+                $notification->notification_for = $id;
+                $notification->save();
+            }
             return redirect()->route('partner.posts')->with('success','Post Updated Successfully');
         }else{
             return redirect()->route('partner.posts')->with('error','Something went wrong');

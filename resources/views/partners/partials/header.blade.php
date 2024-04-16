@@ -21,6 +21,28 @@
                 </li>
             </ul>
             <ul class="nav-right">
+                <li class="header-notification">
+                    <div class="dropdown-primary dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="feather icon-bell"></i>
+                            <span class="badge bg-c-red">{{ count($allnotifications)}}</span>
+                        </div>
+                        <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn"
+                            data-dropdown-out="fadeOut">
+                            <li>
+                                <h6>Notifications</h6>
+                                <label class="form-label label label-danger">New</label>
+                            </li>
+                            @foreach($allnotifications as $notification)
+                            @if($notification->type == "post")
+                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('partner.post.edit', $notification->notification_for) }}" id="noteupdate" data-id="{{ $notification->id }}">
+                                <p class="notification-msg">{{ $notification->notification }}</p>
+                            </li>
+                            @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -30,7 +52,7 @@
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn"
                             data-dropdown-out="fadeOut">
                             <li>
-                                <a href="{{ route('partner.profile') }}">
+                                <a href="{{ route('partner.profile' )}}">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
                             </li>

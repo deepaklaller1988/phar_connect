@@ -125,6 +125,7 @@
                             <form id="main" enctype="multipart/form-data" method="post"
                                 action="{{ route('partner.post.update',$post->id ) }}">
                                 @csrf
+                                @method('put')
                                 <div class="white_card_body">
                                     <div class="row">
                                         <div class="col-lg-6 mb-3">

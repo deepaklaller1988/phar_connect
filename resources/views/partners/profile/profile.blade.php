@@ -27,7 +27,7 @@
         </div>
     </div>
     @if(session('success'))
-    <div class="card">
+    <div class="card" id="successMessage">
         <div class="card-header">
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -36,7 +36,7 @@
     </div>
     @endif
     @if(session('error'))
-    <div class="card">
+    <div class="card" id="successMessage">
         <div class="card-header">
             <div class="alert alert-danger">
                 {{ session('error') }}

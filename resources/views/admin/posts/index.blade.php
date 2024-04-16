@@ -1,4 +1,4 @@
-@extends('partners.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 <div class="pcoded-content">
@@ -17,9 +17,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('partner.dashboard') }}"><i class="feather icon-home"></i></a>
+                            <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('partner.posts') }}">Posts</a>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.posts') }}">Posts</a>
                         </li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
             <div class="page-wrapper">
                 <div class="page-body">
                     @if(session('success'))
-                    <div class="card" id="successMessage">
+                    <div class="card">
                         <div class="card-header">
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -40,7 +40,7 @@
                     </div>
                     @endif
                     @if(session('error'))
-                    <div class="card" id="successMessage">
+                    <div class="card">
                         <div class="card-header">
                             <div class="alert alert-danger">
                                 {{ session('error') }}
@@ -50,16 +50,16 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>Posts</h5>
-                            <a href="{{ route('partner.post.add') }}" clas="btn btn-success waves-effect waves-light">Add Post</a>
+                            <h5>All Posts</h5>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
-                                <table id="data-posts" class="table table-striped table-bordered nowrap">
+                                <table id="dt-http" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
-                                            <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Partner Name</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -78,21 +78,28 @@
     <script>
     $(function() {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-        var table = $('#data-posts').DataTable({
+        var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('partner.posts') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
+            ajax: "{{ route('admin.posts') }}",
+            columns: [
+                { 
+                    data: 'DT_RowIndex', 
+                    name: 'DT_RowIndex', 
+                    orderable: false, 
+                    searchable: false 
                 },
                 {
                     data: 'title',
                     name: 'title'
+                },
+                {
+                    data: 'partner',
+                    name: 'partner'
                 },
                 {
                     data: 'status',
@@ -104,35 +111,10 @@
                     orderable: false,
                     searchable: false
                 },
-
-
             ]
         });
-        $(document).on('click', '#deletePost', function() {
-            var url = $(this).data('url');
-            Swal.fire({
-                title: "Warning!",
-                text: "Are you sure want to delete Post !",
-                icon: "warning"
-            }).then(function() {
-                $.ajax({
-                    type: "DELETE",
-                    url: url,
-                    success: function(data) {
-                        Swal.fire({
-                            title: "Great!",
-                            text: "Post Deleted Successfully",
-                            icon: "success"
-                        }).then(function() {
-                            table.draw();
-                        })
-                    },
-                    error: function(data) {
-                        console.log('Error:', data);
-                    }
-                });
-            });
-        });
-    });
+
+    })
     </script>
+
     @endsection

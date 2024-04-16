@@ -22,15 +22,15 @@
                         <li class=""><a href="#!">Dashboard</a> </li>
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 
-    <div class="pcoded-inner-content">
+    <di v class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
-
+                    @if(auth()->user()->status == 1)
                     <div class="row">
 
                         <div class="col-xl-3 col-md-6">
@@ -143,9 +143,20 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="row">
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p>Waiting for approval</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection
