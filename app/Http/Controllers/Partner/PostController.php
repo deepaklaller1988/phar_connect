@@ -64,7 +64,9 @@ class PostController extends Controller
            'email' => 'required',
            'phone'  => 'required',
            'location' => 'required',
-           'key_services' => 'required'
+           'key_services' => 'required',
+           'images' => 'required',
+           'category_id' => 'required'
        ]);
        $post = new Post;
        $post->title = $request->title;

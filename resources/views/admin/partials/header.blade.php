@@ -20,7 +20,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="nav-right">
+            <ul class="nav-right"> 
             <li class="header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,11 +33,13 @@
                                 <h6>Notifications</h6>
                                 <label class="form-label label label-danger">New</label>
                             </li>
-                           @foreach($adminnotifications as $notification)
-                            <li>
+                            @foreach($adminnotifications as $notification)
+                            @if($notification->type == "post")
+                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('admin.post.edit', $notification->notification_for) }}" id="noteupdate" data-id="{{ $notification->id }}">
                                 <p class="notification-msg">{{ $notification->notification }}</p>
                             </li>
-                           @endforeach
+                            @endif
+                            @endforeach
                         </ul>
                     </div>
                 </li>
