@@ -1186,7 +1186,6 @@ ul.linksSubcategories li:hover .sub-linksCategories, ul.linksSubcategories li:ho
     overflow: auto;
     background: white;
     z-index: 1;
-    border-left: 1px solid #efefef;
     margin-left: 20px;
 }
 
@@ -2126,4 +2125,9 @@ section.healthLinksRedirect a:hover {text-decoration: underline;}
 
 .staticPages ol {
     padding: 20px;
+}
+span.invalid-feedback, span.invalid-feedback * {
+    font-size: 10px;
+    color: red;
+    display: block;
 }
