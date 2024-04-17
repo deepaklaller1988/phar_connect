@@ -39,7 +39,7 @@
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
                                             <h6 class="m-b-5 text-white">Total Posts</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">12</h3>
+                                            <h3 class="m-b-0 f-w-700 text-white">{{ $posts }}</h3>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-money-bill-alt text-c-red f-18"></i>

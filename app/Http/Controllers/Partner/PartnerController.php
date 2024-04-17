@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Partner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 
 class PartnerController extends Controller
 {
     public function dashboard()
     {
-        return view('partners.dashboard');
+        $posts = Post::where('partner_id',auth()->user()->id)->count();
+        return view('partners.dashboard',compact('posts'));
     }
 
     public function register()

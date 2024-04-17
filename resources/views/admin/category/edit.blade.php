@@ -86,7 +86,7 @@
                                             </div>
                                         </div>
                                         <input type="hidden" name="parent_id" id="parent_id"
-                                            value="{{ $data['category']->parent_id }}">
+                                            value="{{ $data['category']->id }}">
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Category Image : </label>
                                             <div class="col-sm-10">
@@ -130,6 +130,7 @@
     <script>
     $(document).ready(function() {
         var selected_category_id = $('#parent_id').val();
+        alert(selected_category_id);
         $.ajax({
             url: "{{ route('admin.cat') }}?id=" + selected_category_id,
             type: 'GET',
@@ -150,29 +151,29 @@
                 console.error(xhr.responseText);
             }
         });
-        setTimeout(function () {
-        var selected_sub_category_id = $('#sub_sub_category_select').val();
-        $.ajax({
-            url: "{{ route('admin.cat') }}?id=" + selected_sub_category_id,
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                $.each(response, function(index, obj) {
-                    $('#sub_category_div').css('display', '');
-                    var option = $('<option></option>');
-                    option.attr('value', obj.id);
-                    option.text(obj.title);
-                    if (index === 0) { 
-                        option.attr('selected', 'selected');
-                    }
-                    $('#sub_category_select').append(option);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    },1000);
+    //     setTimeout(function () {
+    //     var selected_sub_category_id = $('#sub_sub_category_select').val();
+    //     $.ajax({
+    //         url: "{{ route('admin.cat') }}?id=" + selected_sub_category_id,
+    //         type: 'GET',
+    //         dataType: 'json',
+    //         success: function(response) {
+    //             $.each(response, function(index, obj) {
+    //                 $('#sub_category_div').css('display', '');
+    //                 var option = $('<option></option>');
+    //                 option.attr('value', obj.id);
+    //                 option.text(obj.title);
+    //                 if (index === 0) { 
+    //                     option.attr('selected', 'selected');
+    //                 }
+    //                 $('#sub_category_select').append(option);
+    //             });
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error(xhr.responseText);
+    //         }
+    //     });
+    // },1000);
     })
 
     $(document).ready(function() {
