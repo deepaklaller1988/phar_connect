@@ -57,22 +57,34 @@
                         </div>
                         <div class="row">
                             @foreach($plans as $plan)
-                            <div class="col-md-12 col-lg-4 peity-chart">
+                            <div class="col-md-12 col-lg-4 peity-chart priceSetting">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>{{ $plan->title }}</h5>
-                                        @if($plan->status == 1)
+                                        <h5>
+                                            {{ $plan->title }}
+                                            <div class="planAct">
+                                            @if($plan->status == 1)
                                         <div class="label-main">
-                                            <label class="form-label label label-success">Active
-                                                Success</label>
+                                            <label class="form-label label label-success">Active</label>
                                         </div>
                                         @else
                                         <div class="label-main">
-                                            <label class="form-label label label-danger">Inactive
-                                                Success</label>
+                                            <label class="form-label label label-danger">Inactive</label>
                                         </div>
                                         @endif
-                                        <div class="card-header-right">
+                                            </div>
+                                        </h5>
+                                        <div class="editDeletePlans">
+                                        <ul><li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
+                                                            class="feather icon-edit-1"></i></a></li>
+                                                            <li>
+                                                                <a id="planDelete" data-id="{{ $plan->id }}"><i
+                                                        class="feather icon-trash close-card"></i></a></li>
+</ul>
+
+</div>
+                                       
+                                        <!-- <div class="card-header-right">
                                             <ul class="list-unstyled card-option">
                                                 <li class="first-opt"><i
                                                         class="feather icon-chevron-left open-card-option"></i></li>
@@ -84,14 +96,14 @@
                                                         class="feather icon-trash close-card"></i></li>
                                                 <li><i class="feather icon-chevron-left open-card-option"></i></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="card-block">
                                         <ul class="basic-list list-icons">
                                             <li>
                                                 <i
                                                     class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
-                                                <h6>Amount : {{ $plan->amount}}</h6>
+                                                <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
 
                                                 <p>{!! $plan->description !!}</p>
                                             </li>
@@ -121,23 +133,39 @@ $(function() {
     $(document).on('click', '#planDelete', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
-        $.ajax({
-            url: "{{ url('admin/plan/delete')}}" + '/' + id,
-            type: 'DELETE',
-            dataType: 'json',
-            success: function(data) {
-                Swal.fire({
-                    title: "Great!",
-                    text: "Plan Deleted Successfully",
-                    icon: "success"
-                }).then(function() {
-                    window.location.reload();
-                })
-            },
-            error: function(data) {
-                console.log('Error:', data);
-            }
-        });
+        swal.fire({
+                title: "Are you sure?",
+                text: "Once confirmed, the plan will be deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showConfirmButton: true,
+                allowOutsideClick: false,
+                showCloseButton: true,
+            })
+            .then((result) => {
+                if (result['isConfirmed']) {
+                    $.ajax({
+                        url: "{{ url('admin/plan/delete')}}" + '/' + id,
+                        type: 'DELETE',
+                        dataType: 'json',
+                        success: function(data) {
+                            Swal.fire({
+                                title: "Great!",
+                                text: "Plan Deleted Successfully",
+                                icon: "success"
+                            }).then(function() {
+                                window.location.reload();
+                            })
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                } else {
+                    // alert("23455");
+                }
+            });
     });
 })
 </script>

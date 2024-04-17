@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'phone' => ['required','numeric'],
+                'phone' => ['required','numeric','regex:/^([0-9\s\-\+\(\)]*)$/'],
                 'company_website' => ['required'],
                 'company_profile' => ['required','string','max:300'],
             ]);
@@ -79,7 +80,7 @@ class RegisterController extends Controller
     {
         if($data['type'] == 2){
             // dd("2");
-            return User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
@@ -89,6 +90,15 @@ class RegisterController extends Controller
                 'company_profile' => $data['company_profile'],
                 'location' => $data['location'],
             ]);
+           $note =  Notification::create([
+                'user_id' =>  $user->id,
+                'notification' => 'A new user '.$user->name.' has been registered.',
+                'status' => 0 ,
+                'type' => 'user',
+                'read' => 0,
+                'notification_for' => $user->id
+            ]);
+            return $user;
         }else{
             // dd("0");
             return User::create([

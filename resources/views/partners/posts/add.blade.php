@@ -210,7 +210,7 @@
                                         <input type="hidden" name="category_id" id="parent_id">
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
-                                                <label>Time : </label>
+                                                <label>Date upto : </label>
                                                 <input type="date" name="time" value="{{ old('time') }}" class="form-control" placeholder="Email">
                                                 @if($errors->has('time'))
                                                 <div class="error">{{ $errors->first('time') }}</div>

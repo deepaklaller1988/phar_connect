@@ -38,6 +38,10 @@
                             <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('admin.post.edit', $notification->notification_for) }}" id="noteupdate" data-id="{{ $notification->id }}">
                                 <p class="notification-msg">{{ $notification->notification }}</p>
                             </li>
+                            @elseif($notification->type == "user")
+                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('admin.partner.edit', $notification->user_id) }}" id="noteupdate" data-id="{{ $notification->id }}">
+                                <p class="notification-msg">{{ $notification->notification }}</p>
+                            </li>
                             @endif
                             @endforeach
                         </ul>

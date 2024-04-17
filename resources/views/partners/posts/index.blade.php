@@ -74,6 +74,8 @@
         </div>
     </div>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -87,7 +89,7 @@
             processing: true,
             serverSide: true,
             drawCallback: function(settings) {
-                if ($(this).find('tbody tr').length <= 10) {
+                if ($(this).find('tbody tr').length < 10) {
                     $('#data-posts_paginate').hide();
                     $('#data-posts_info').hide();
                 }
@@ -117,17 +119,22 @@
         $(document).on('click', '#deletePost', function() {
             var url = $(this).data('url');
             Swal.fire({
-                title: "Warning!",
-                text: "Are you sure want to delete Post !",
-                icon: "warning"
-            }).then(function() {
-                if (result.isConfirmed) {
+                title: "Are you sure?",
+                text: "Once confirmed, the post will be deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showConfirmButton: true,
+                allowOutsideClick: false,
+                showCloseButton: true,
+            }).then(function(result) {
+                if (result['isConfirmed']) {
                     $.ajax({
                         type: "DELETE",
                         url: url,
                         success: function(data) {
                             Swal.fire({
-                                title: "Great!",
+                                 title: "Great!",
                                 text: "Post Deleted Successfully",
                                 icon: "success"
                             }).then(function() {

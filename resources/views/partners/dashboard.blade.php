@@ -39,7 +39,7 @@
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
                                             <h6 class="m-b-5 text-white">Total Posts</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">12</h3>
+                                            <h3 class="m-b-0 f-w-700 text-white">{{ $posts }}</h3>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-money-bill-alt text-c-red f-18"></i>
@@ -148,8 +148,11 @@
 
                         <div class="col-xl-12 col-md-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <p>Waiting for approval</p>
+                                <div class="card-body waitingAprroval">
+                                    <p>
+                                        <b>Waiting for approval</b>
+                                        At Cipla, we constantly work towards ensuring access to high quality and affordable medicines to support patients in need. Which is why, we have been trusted by health care professionals and patients across geographies for the last 8 decades.
+                                </p>
                                 </div>
                             </div>
                         </div>
