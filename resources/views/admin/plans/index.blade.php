@@ -57,7 +57,7 @@
                         </div>
                         <div class="row">
                             @foreach($plans as $plan)
-                            <div class="col-md-12 col-lg-4 peity-chart">
+                            <div class="col-md-12 col-lg-4 peity-chart priceSetting">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5>
@@ -103,7 +103,7 @@
                                             <li>
                                                 <i
                                                     class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
-                                                <h6>Amount : {{ $plan->amount}}</h6>
+                                                <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
 
                                                 <p>{!! $plan->description !!}</p>
                                             </li>

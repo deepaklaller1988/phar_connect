@@ -148,8 +148,11 @@
 
                         <div class="col-xl-12 col-md-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <p>Waiting for approval</p>
+                                <div class="card-body waitingAprroval">
+                                    <p>
+                                        <b>Waiting for approval</b>
+                                        At Cipla, we constantly work towards ensuring access to high quality and affordable medicines to support patients in need. Which is why, we have been trusted by health care professionals and patients across geographies for the last 8 decades.
+                                </p>
                                 </div>
                             </div>
                         </div>
