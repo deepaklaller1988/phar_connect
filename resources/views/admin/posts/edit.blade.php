@@ -243,33 +243,35 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 mb-3">
-                                    <div class="common_input mb_15">
-                                        <label>Description</label>
-                                        <textarea id="summernote" disabled name="">{{ $post->description }}</textarea>
+                                        <div class="col-12 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Description</label>
+                                                <textarea id="summernote" disabled name="">{{ $post->description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="description" value="{{ $post->description }}"
+                                            name="description">
+                                        <div class="col-12">
+                                            @if($post->images)
+                                            <div class="img-wrap d-flex justify-content-center">
+                                                @foreach(explode(',', $post->images) as $image)
+                                                <img src="{{ asset('storage/uploads/posts/'.$image) }}"
+                                                    alt="{{ $image }}" class="img-fluid ml-2" width="300px"
+                                                    height="300px" data-image="{{ $image}}">
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+    
                                     </div>
                                 </div>
-                                <input type="hidden" id="description" value="{{ $post->description }}"
-                                    name="description">
-                                <div class="col-12">
-                                    @if($post->images)
-                                    <div class="img-wrap d-flex justify-content-center">
-                                        @foreach(explode(',', $post->images) as $image)
-                                        <img src="{{ asset('storage/uploads/posts/'.$image) }}" alt="{{ $image }}"
-                                            class="img-fluid ml-2" width="300px" height="300px"
-                                            data-image="{{ $image}}">
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script>
 jQuery(document).ready(function() {
