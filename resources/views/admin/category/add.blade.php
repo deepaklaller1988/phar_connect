@@ -57,9 +57,13 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Category Name : </label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="name" id="name"
+                                                <input type="text" class="form-control" value="{{old('name')}}" name="name" id="name"
                                                     placeholder="Enter Category Name">
-                                                <span class="messages"></span>
+                                                @if($errors->has('name'))
+                                                <span class="messages">
+                                                    {{ $errors->first('name') }}
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -94,7 +98,11 @@
                                             <label class="form-label col-sm-2 col-form-label">Category Image : </label>
                                             <div class="col-sm-10">
                                                 <input type="file" class="form-control" name="category_image">
-                                                <span class="messages"></span>
+                                                @if($errors->has('category_image'))
+                                                <span class="messages">
+                                                    {{ $errors->first('category_image') }}
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -135,7 +143,8 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    $('#sub_category_select').html('<option value="">Choose Sub Category</option>');
+                    $('#sub_category_select').html(
+                        '<option value="">Choose Sub Category</option>');
                     $.each(response, function(index, item) {
 
                         $('#sub_category_div').css('display', '');
@@ -162,11 +171,13 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    $('#sub_sub_category_select').html('<option value="">Choose an Option</option>');
+                    $('#sub_sub_category_select').html(
+                        '<option value="">Choose an Option</option>');
                     $.each(response, function(index, item) {
 
                         $('#sub_sub_category_div').css('display', '');
-                        $('#sub_sub_category_select').append('<option value="' + item
+                        $('#sub_sub_category_select').append('<option value="' +
+                            item
                             .id + '">' + item.title + '</option>');
                     });
                 },

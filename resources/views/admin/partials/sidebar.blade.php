@@ -17,7 +17,7 @@
                         <span class="pcoded-mtext">Categories</span>
                     </a>
                 </li>
-                <li class="pcoded-hasmenu pcoded-trigger" dropdown-icon="style1" subitem-icon="style1">
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-users"></i>

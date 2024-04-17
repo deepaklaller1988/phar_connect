@@ -88,6 +88,12 @@
         var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
+            drawCallback: function(settings) {
+                if ($(this).find('tbody tr').length < 10) {
+                    $('#data-posts_paginate').hide();
+                    $('#data-posts_info').hide();
+                }
+            },
             ajax: "{{ route('admin.categories') }}",
             columns: [
                 { 
