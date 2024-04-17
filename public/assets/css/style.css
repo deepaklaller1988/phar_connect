@@ -60,7 +60,13 @@ button {
     transition: .5s;
     cursor: pointer;
 }
-
+.text-danger {
+    color: red;
+}
+.alert-success {
+    background-color: green;
+    color: white;
+}
 header {
     position: sticky;
     top: 0;

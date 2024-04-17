@@ -9,7 +9,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-server bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Members</h5>
+                        <h5>Categories</h5>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.members') }}">members</a>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.categories') }}">categories</a>
                         </li>
                     </ul>
                 </div>
@@ -50,20 +50,19 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>Members</h5>
-                            <a href="#"
-                                clas="btn btn-success waves-effect waves-light">Add Member</a>
+                            <h5>All Categories</h5>
+                            <a href="{{ route('admin.category.add') }}"
+                                clas="btn btn-success waves-effect waves-light">Add Category</a>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
-                                <table id="data-members" class="table table-striped table-bordered nowrap">
+                                <table id="dt-http" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Action</th>
+                                            <th>Status</th>
+                                            <th>User</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -74,13 +73,26 @@
             </div>
         </div>
     </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $(function() {
-        var table = $('#data-members').DataTable({
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('admin.members') }}",
+            drawCallback: function(settings) {
+                if ($(this).find('tbody tr').length < 10) {
+                    $('#data-posts_paginate').hide();
+                    $('#data-posts_info').hide();
+                }
+            },
+            ajax: "{{ route('admin.notifications') }}",
             columns: [
                 { 
                     data: 'DT_RowIndex', 
@@ -89,27 +101,27 @@
                     searchable: false 
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'title',
+                    name: 'title'
                 },
                 {
-                    data: 'email',
-                    name: 'email'
+                    data: 'status',
+                    name: 'status'
                 },
                 {
-                    data: 'phone',
-                    name: 'phone'
+                    data: 'user_id',
+                    name: 'user_id'
                 },
-                
+
                 {
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
                 },
-                
             ]
         });
+
     })
     </script>
 

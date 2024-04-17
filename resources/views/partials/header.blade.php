@@ -56,7 +56,7 @@
                 </form>
                 @else
                 <div class="dropOption">
-                    <button onclick="partnerFunction()">CREATE AN ACCOUNT</button>
+                    <button onclick="partnerFunction()">CREATE AN ACCOUNT</button>dsds
                     <ul id="partnerOption">
 
                         @if (Route::has('register'))

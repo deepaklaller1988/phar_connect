@@ -46,6 +46,7 @@ Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'
 Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
 Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
+Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('store.contact-us');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -94,6 +95,7 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::delete('/partner/post/delete/{id}',[PostController::class, 'destroy'])->name('partner.post.delete');
     Route::get('/partner/subcategories',[CategoryController::class,'get_categories'])->name('partner.subcategories');
     Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
+    Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
