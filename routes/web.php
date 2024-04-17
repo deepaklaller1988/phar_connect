@@ -79,6 +79,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
     Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
     Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
+    Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
@@ -94,6 +95,7 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::delete('/partner/post/delete/{id}',[PostController::class, 'destroy'])->name('partner.post.delete');
     Route::get('/partner/subcategories',[CategoryController::class,'get_categories'])->name('partner.subcategories');
     Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
+    Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');

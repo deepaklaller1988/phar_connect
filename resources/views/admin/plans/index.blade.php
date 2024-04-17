@@ -52,39 +52,42 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Plans</h5>
-                            <a href="{{ route('admin.plan.add') }}"
-                                clas="btn btn-success waves-effect waves-light">Add Plan</a> 
+                            <a href="{{ route('admin.plan.add') }}" clas="btn btn-success waves-effect waves-light">Add
+                                Plan</a>
                         </div>
-                        <div class="row">
-                            @foreach($plans as $plan)
-                            <div class="col-md-12 col-lg-4 peity-chart priceSetting">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>
-                                            {{ $plan->title }}
-                                            <div class="planAct">
-                                            @if($plan->status == 1)
-                                        <div class="label-main">
-                                            <label class="form-label label label-success">Active</label>
-                                        </div>
-                                        @else
-                                        <div class="label-main">
-                                            <label class="form-label label label-danger">Inactive</label>
-                                        </div>
-                                        @endif
-                                            </div>
-                                        </h5>
-                                        <div class="editDeletePlans">
-                                        <ul><li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
-                                                            class="feather icon-edit-1"></i></a></li>
-                                                            <li>
-                                                                <a id="planDelete" data-id="{{ $plan->id }}"><i
-                                                        class="feather icon-trash close-card"></i></a></li>
-</ul>
+                        <div class="card-block">
+                            <div class="row">
+                                @foreach($plans as $plan)
+                                <div class="col-md-12 col-lg-4 peity-chart priceSetting">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>
+                                                {{ $plan->title }}
+                                                <div class="planAct">
+                                                    @if($plan->status == 1)
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-success">Active</label>
+                                                    </div>
+                                                    @else
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-danger">Inactive</label>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </h5>
+                                            <div class="editDeletePlans">
+                                                <ul>
+                                                    <li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
+                                                                class="feather icon-edit-1"></i></a></li>
+                                                    <li>
+                                                        <a id="planDelete" data-id="{{ $plan->id }}"><i
+                                                                class="feather icon-trash close-card"></i></a>
+                                                    </li>
+                                                </ul>
 
-</div>
-                                       
-                                        <!-- <div class="card-header-right">
+                                            </div>
+
+                                            <!-- <div class="card-header-right">
                                             <ul class="list-unstyled card-option">
                                                 <li class="first-opt"><i
                                                         class="feather icon-chevron-left open-card-option"></i></li>
@@ -97,21 +100,22 @@
                                                 <li><i class="feather icon-chevron-left open-card-option"></i></li>
                                             </ul>
                                         </div> -->
-                                    </div>
-                                    <div class="card-block">
-                                        <ul class="basic-list list-icons">
-                                            <li>
-                                                <i
-                                                    class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
-                                                <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
+                                        </div>
+                                        <div class="card-block">
+                                            <ul class="basic-list list-icons">
+                                                <li>
+                                                    <i
+                                                        class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
+                                                    <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
 
-                                                <p>{!! $plan->description !!}</p>
-                                            </li>
-                                        </ul>
+                                                    <p>{!! $plan->description !!}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
