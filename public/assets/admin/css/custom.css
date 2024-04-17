@@ -290,4 +290,31 @@ span.closeUploadImages {
     top: 27px;
     cursor: pointer;
 }
+.planAct .label-main {
+    margin-left: 0;
+}
+
+.planAct {
+    position: absolute;
+    top: -38px;
+}
+.editDeletePlans a:after {
+    display: none;
+}
+
+.editDeletePlans a {
+    padding: 5px;
+}
+
+.editDeletePlans ul {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.editDeletePlans ul li a#planDelete {
+    background: red;
+    color: white;
+}
 /* Custome css style */

@@ -60,19 +60,31 @@
                             <div class="col-md-12 col-lg-4 peity-chart">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>{{ $plan->title }}</h5>
-                                        @if($plan->status == 1)
+                                        <h5>
+                                            {{ $plan->title }}
+                                            <div class="planAct">
+                                            @if($plan->status == 1)
                                         <div class="label-main">
-                                            <label class="form-label label label-success">Active
-                                                Success</label>
+                                            <label class="form-label label label-success">Active</label>
                                         </div>
                                         @else
                                         <div class="label-main">
-                                            <label class="form-label label label-danger">Inactive
-                                                Success</label>
+                                            <label class="form-label label label-danger">Inactive</label>
                                         </div>
                                         @endif
-                                        <div class="card-header-right">
+                                            </div>
+                                        </h5>
+                                        <div class="editDeletePlans">
+                                        <ul><li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
+                                                            class="feather icon-edit-1"></i></a></li>
+                                                            <li>
+                                                                <a id="planDelete" data-id="{{ $plan->id }}"><i
+                                                        class="feather icon-trash close-card"></i></a></li>
+</ul>
+
+</div>
+                                       
+                                        <!-- <div class="card-header-right">
                                             <ul class="list-unstyled card-option">
                                                 <li class="first-opt"><i
                                                         class="feather icon-chevron-left open-card-option"></i></li>
@@ -84,7 +96,7 @@
                                                         class="feather icon-trash close-card"></i></li>
                                                 <li><i class="feather icon-chevron-left open-card-option"></i></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="card-block">
                                         <ul class="basic-list list-icons">
