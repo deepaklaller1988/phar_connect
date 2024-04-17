@@ -159,7 +159,7 @@
                                         value="{{ auth()->user()->company_profile }}">
                                     <div class="col-12 mb-3">
                                         <div class="create_report_btn mt_30">
-                                            <button type="submit" class="btn_1 radius_btn d-block text-center">
+                                            <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
                                                 {{ __('Update Profile') }}
                                             </button>
                                         </div>

@@ -46,8 +46,9 @@
 .pictureAdmin img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 100px;
+    border: 1px solid silver;
 }
 
 .pictureAdmin span {
@@ -83,10 +84,9 @@
 /* Custome css style */
 
 select.form-control.selectFixCZ {
-    height: 47px;
-    border-radius: 10px;
-    padding-left: 25px;;
+    border: 1px solid #ccc;
 }
+
 .uploadFileCZ {
     width: 100%;
     cursor: pointer;
@@ -95,9 +95,9 @@ select.form-control.selectFixCZ {
 .uploadFileCZ span {
     display: block;
     position: relative;
-    height: 47px;
-    border: 1px solid #e5ecff;
-    border-radius: 10px;
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
 }
 
 .uploadFileCZ span input.upload__inputfile {
@@ -108,17 +108,36 @@ select.form-control.selectFixCZ {
     height: 100%;
     opacity: 0;
 }
+
 .textareaCZ {
-    border-radius: 10px;
+    border-radius: 2px;
 }
+
 .note-toolbar {
     background: #efefef !important;
 }
 
-.uploadFileCZ span p {position: absolute;background: #e5ecff;right: 0;height: 100%;display: flex;align-items: center;justify-content: center;padding: 15px;border-radius: 10px;}
+.uploadFileCZ span p {
+    position: absolute;
+    background: #e5ecff;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 2px;
+}
+
 .btnsCZ {
     min-width: 100px;
+    background: #263544;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 100px;
+    color: white;
 }
+
 .main-titleCZ {
     display: flex;
     align-items: center;
@@ -144,11 +163,13 @@ select.form-control.selectFixCZ {
     top: 8px;
     line-height: 19px;
 }
+
 .white_card .white_card_header {
     border-bottom: 1px solid #efefef;
 }
+
 .dataTables_length {
-    padding: 15px;
+    padding: 10px 0 0;
 }
 
 .dataTables_length select {
@@ -156,24 +177,27 @@ select.form-control.selectFixCZ {
     border-radius: 4px;
 }
 
-.dataTables_filter {
-    padding: 15px;
-}
 
 .dataTables_filter input[type="search"] {
     border-radius: 4px;
     border: 1px solid silver;
     height: 35px;
 }
+
 table {
     border: 1px solid #eeeeee !important;
 }
 
-table th, table tr td:first-child {
+table th,
+table tr td:first-child {
     font-weight: bold !important;
 }
 
-table tr td:last-child a {padding: 8px;font-size: 16px;color: #2ed8b6;}
+table tr td:last-child a {
+    padding: 8px;
+    font-size: 16px;
+    color: #2ed8b6;
+}
 
 table tr td:last-child a#deletePost {
     color: red;
@@ -183,22 +207,20 @@ table tr td:last-child a#deletePost {
     margin: 10px;
 }
 
-.dataTables_paginate.paging_simple_numbers a {
-    background: #1e1e2d !important;
-    color: red !important;
-    border-radius: 100px !important;
-}
-
-.dataTables_paginate.paging_simple_numbers a.previous, .dataTables_paginate.paging_simple_numbers a.next {
+.dataTables_paginate.paging_simple_numbers a.previous,
+.dataTables_paginate.paging_simple_numbers a.next {
     width: auto;
     padding: 0 10px !important;
+    background: #d1d1d1;
+    border-radius: 100px;
+    color: black !important;
 }
 
 .dataTables_info {
-    padding: 15px;
     position: relative;
     top: 5px;
 }
+
 .upload__img-wrap.uploadFilesAllCZ {
     display: flex;
     gap: 5px;
@@ -211,6 +233,7 @@ table tr td:last-child a#deletePost {
     overflow: hidden;
     position: relative;
 }
+
 span.closeUploadImages {
     position: absolute;
     z-index: 1;
@@ -226,6 +249,45 @@ span.closeUploadImages {
     right: 14px;
     border-radius: 100px;
     text-shadow: 0 0 10px black;
+    cursor: pointer;
+}
+
+.dataTables_wrapper {
+    min-height: 700px;
+}
+
+.label-inverse-default {
+    border-color: red;
+    color: red;
+}
+.czGroupImages {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.czGroupImages span {
+    background: #efefef;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.czGroupImages span img {
+    width: 100%;
+    height: 100%;
+}
+
+.czGroupImages span b {
+    position: absolute;
+    font-size: 30px;
+    transform: rotate(45deg);
+    right: 40px;
+    top: 27px;
     cursor: pointer;
 }
 /* Custome css style */

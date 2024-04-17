@@ -72,7 +72,7 @@
                                         <div class="mb-3 row" id="sub_category_div" style="display: none">
                                             <label class="form-label col-sm-2 col-form-label">Sub Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="sub_category_select">
+                                                <select class="form-control czSelectSet" id="sub_category_select">
                                                     <option>chooose an option</option>
                                                 </select>
                                             </div>
@@ -80,7 +80,7 @@
                                         <div class="mb-3 row" id="sub_sub_category_div" style="display: none">
                                             <label class="form-label col-sm-2 col-form-label">child Category : </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="sub_sub_category_select">
+                                                <select class="form-control czSelectSet" id="sub_sub_category_select">
                                                     <option>chooose an option</option>
                                                 </select>
                                             </div>
@@ -94,10 +94,13 @@
                                                 <span class="messages"></span>
                                             </div>
                                         </div>
+                                        <div class="czGroupImages">
                                         @if($data['category']->image)
-                                        <img width="150px" height="150px"
-                                            src="{{ asset('storage/'.$data['category']->image) }}">
+                                        <span><img width="150px" height="150px"
+                                            src="{{ asset('storage/'.$data['category']->image) }}"> <b>+</b>
+</span>
                                         @endif
+</div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Status : </label>
                                             <div class="col-sm-10">

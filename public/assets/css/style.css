@@ -1538,7 +1538,7 @@ ul.linksSubcategories li:hover .sub-linksCategories, ul.linksSubcategories li:ho
     flex-wrap: wrap;
     gap: 10px;
 }
-.card-header.headerBG-register{ background-image: url('../images/registerBG.png');}
+/* .card-header.headerBG-register{ background-image: url('../images/registerBG.png');} */
 .container.loginRegister .card-header {
     font-weight: 600;
     font-size: 25px;
@@ -2130,4 +2130,107 @@ span.invalid-feedback, span.invalid-feedback * {
     font-size: 10px;
     color: red;
     display: block;
+}
+.noDataFound {
+    text-align: center;
+    padding: 100px;
+}
+.noDataFound img {
+    background: #ffc04c;
+    display: block;
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+.contactForm {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ebebeb;
+    overflow: hidden;
+}
+.contactFormInner {
+    padding: 25px;
+    display: flex;
+    gap: 30px;
+}
+.contactForm label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+    display: block;
+}
+
+.contactForm input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ededed;
+    margin-top: 5px;
+    outline: none;
+    max-width: 100%;
+}
+
+.contactForm form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.contactForm form section {
+    width: 100%;
+}
+
+.contactForm textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ededed;
+    margin-top: 5px;
+    outline: none;
+    max-width: 100%;
+}
+
+.contactForm input[type="submit"] {
+    background: #1fc8ec;
+    border: none;
+    color: white;
+    padding: 10px 40px 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    min-width: 250px;
+    max-width: 250px;
+    margin: 10px auto;
+    display: block;
+}
+.contactForm .card-header {
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    padding: 15px 0;
+}
+.contactAdress {
+    min-width: 300px;
+}
+
+.contactAdress section p {
+    padding: 5px 0;
+    color: #666;
+}
+
+.contactAdress section p b {color: black;margin-right: 5px;}
+
+.contactAdress h6 {
+    padding-bottom: 15px;
+}
+
+.contactAdress section {
+    background: #efefef;
+    border-radius: 6px;
+    padding: 25px;
 }
