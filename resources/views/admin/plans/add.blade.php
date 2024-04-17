@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-2 col-form-label">Amount</label>
+                                            <label class="form-label col-sm-2 col-form-label">Amount (in $)</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="amount" class="form-control">
                                             </div>
