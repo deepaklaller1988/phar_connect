@@ -71,6 +71,11 @@
                                 <span class="pcoded-mtext">Privacy Policy</span>
                             </a>
                         </li>
+                        <li class="">
+                            <a href="{{ route('admin.pages.contact-us')}}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Contact Us</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">

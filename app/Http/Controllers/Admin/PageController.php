@@ -31,6 +31,12 @@ class PageController extends Controller
         return view('admin.pages.privacy-policy')->with('pp',$pp);
     }
 
+    public function contact_us()
+    {
+        $contactus = Page::get('contact_info');
+        return view('admin.pages.contact-us')->with('contactus',$contactus);
+    }
+
     public function store(Request $request)
     {
         $data = Page::findOrFail(1);
@@ -40,6 +46,8 @@ class PageController extends Controller
             $data->terms_and_conditions = $request->content;
         }elseif($request->page == 'pp'){
             $data->privacy_policies = $request->content;
+        }elseif($request->page == 'contactus'){
+            $data->contact_info = $request->content;
         }else{
             $data->faq = $request->content;
         }

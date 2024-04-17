@@ -46,6 +46,7 @@ Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'
 Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
 Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
+Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('store.contact-us');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -79,6 +80,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
     Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
     Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
+    Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
