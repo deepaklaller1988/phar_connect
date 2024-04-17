@@ -145,27 +145,27 @@
                                             <div class="common_input mb_15">
                                                 <label>Title :</label>
                                                 <input type="text" name="title" value="{{ $post->title }}"
-                                                    class="form-control" placeholder="Title.." required>
+                                                    class="form-control" placeholder="Title.." disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Email:</label>
                                                 <input type="text" name="email" class="form-control"
-                                                    value="{{ $data['user']->email }}" placeholder="Email Address">
+                                                    value="{{ $data['user']->email }}" disabled placeholder="Email Address">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <label>Phone Number : </label>
                                             <div class="common_input mb_15">
-                                                <input type="text" name="phone" class="form-control"
+                                                <input type="text" name="phone" disabled class="form-control"
                                                     value="{{ $data['user']->phone }}" placeholder="Mobile No">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Location : </label>
-                                                <input type="text" name="location" class="form-control"
+                                                <input type="text" name="location" disabled class="form-control"
                                                     value="{{ $data['user']->location }}" placeholder="Location">
                                             </div>
                                         </div>
@@ -173,25 +173,26 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Category : </label>
-                                                <select name="category" class="form-control selectFixCZ">
+                                                <select name="category" disabled class="form-control selectFixCZ">
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
                                                     <option value="{{ $category->id }}"
                                                         {{ $category->id == $post->category_id ? 'selected' : ''}}
                                                         @if($cat)
+                                                        @if(isset($cat['childcategories']))
                                                         {{$cat['childcategories'][0]->parent_id == $category->id ? 'selected' : '' }}
-                                                        @endif>
+                                                        @endif @endif>
                                                         {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         @if($cat)
-                                        @if($cat['childcategories'])
+                                        @if(isset($cat['childcategories']))
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Category : </label>
-                                                <select name="category" class="form-control selectFixCZ">
+                                                <select name="category" disabled class="form-control selectFixCZ">
                                                     @foreach($cat['childcategories'] as $childcategory)
                                                     <option value="{{ $childcategory->id }}"
                                                         {{ $childcategory->id == $cat['grandchildcategories'][0]->parent_id ? 'selected' : ''}}>
@@ -206,7 +207,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Category : </label>
-                                                <select name="category" class="form-control selectFixCZ">
+                                                <select name="category" disabled class="form-control selectFixCZ">
                                                     @foreach($cat['grandchildcategories'] as $childcategory)
                                                     <option value="{{ $childcategory->id }}"
                                                         {{ $childcategory->id == $post->category_id ? 'selected' : ''}}>
@@ -221,7 +222,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Time : </label>
-                                                <input type="date" name="time" value="{{ $post->time }}"
+                                                <input type="date" name="time" disabled value="{{ $post->time }}"
                                                     class="form-control" placeholder="">
                                             </div>
                                         </div>
@@ -246,7 +247,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Key Services:</label>
-                                                <textarea name="key_services"
+                                                <textarea name="key_services" disabled
                                                     class="form-control textareaCZ">{{ $post->key_services }}</textarea>
                                                 <small>Preference:- Drugs, Anabolics, Menabolics.</small>
 
@@ -256,7 +257,7 @@
                                         <div class="col-12 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Description</label>
-                                                <textarea id="summernote" name="">{{ $post->description }}</textarea>
+                                                <textarea id="summernote" disabled name="">{{ $post->description }}</textarea>
                                             </div>
                                         </div>
                                         <input type="hidden" id="description" value="{{ $post->description }}"

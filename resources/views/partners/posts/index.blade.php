@@ -51,7 +51,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Posts</h5>
-                            <a href="{{ route('partner.post.add') }}" clas="btn btn-success waves-effect waves-light">Add Post</a>
+                            <a href="{{ route('partner.post.add') }}"
+                                clas="btn btn-success waves-effect waves-light">Add Post</a>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
@@ -115,22 +116,24 @@
                 text: "Are you sure want to delete Post !",
                 icon: "warning"
             }).then(function() {
-                $.ajax({
-                    type: "DELETE",
-                    url: url,
-                    success: function(data) {
-                        Swal.fire({
-                            title: "Great!",
-                            text: "Post Deleted Successfully",
-                            icon: "success"
-                        }).then(function() {
-                            table.draw();
-                        })
-                    },
-                    error: function(data) {
-                        console.log('Error:', data);
-                    }
-                });
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        success: function(data) {
+                            Swal.fire({
+                                title: "Great!",
+                                text: "Post Deleted Successfully",
+                                icon: "success"
+                            }).then(function() {
+                                table.draw();
+                            })
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                }
             });
         });
     });

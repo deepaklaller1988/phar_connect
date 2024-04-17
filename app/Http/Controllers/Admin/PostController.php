@@ -68,6 +68,7 @@ class PostController extends Controller
                 }
             }
         }
+        // dd($cat);
        
         return view('admin.posts.edit',compact('data','post','cat'));
     }

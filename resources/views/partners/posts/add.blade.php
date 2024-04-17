@@ -131,7 +131,10 @@
                                             <div class="common_input mb_15">
                                                 <label>Title :</label>
                                                 <input type="text" name="title" class="form-control"
-                                                    placeholder="Title.." required>
+                                                    placeholder="Title.." required value="{{ old('title') }}">
+                                                @if($errors->has('title'))
+                                                <div class="error">{{ $errors->first('title') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
@@ -139,20 +142,30 @@
                                                 <label>Email:</label>
                                                 <input type="text" name="email" class="form-control"
                                                     value="{{ $data['user']->email }}" placeholder="Email Address">
+                                                @if($errors->has('email'))
+                                                <div class="error">{{ $errors->first('email') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <label>Phone Number : </label>
                                             <div class="common_input mb_15">
                                                 <input type="text" name="phone" class="form-control"
-                                                    value="{{ $data['user']->phone }}" placeholder="Mobile No">
+                                                    value="{{ $data['user']->phone }}" id="phone"
+                                                    placeholder="Mobile No">
+                                                @if($errors->has('phone'))
+                                                <div class="error">{{ $errors->first('phone') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Location : </label>
-                                                <input type="text" name="location" class="form-control"
+                                                <input type="text" name="location" id="location" class="form-control"
                                                     value="{{ $data['user']->location }}" placeholder="Location">
+                                                @if($errors->has('location'))
+                                                <div class="error">{{ $errors->first('location') }}</div>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -165,6 +178,9 @@
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
+                                                @if($errors->has('category_id'))
+                                                <div class="error">{{ $errors->first('category_id') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3 " id="sub_category_div" style="display: none">
@@ -195,7 +211,10 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Time : </label>
-                                                <input type="date" name="time" class="form-control" placeholder="Email">
+                                                <input type="date" name="time" value="{{ old('time') }}" class="form-control" placeholder="Email">
+                                                @if($errors->has('time'))
+                                                <div class="error">{{ $errors->first('time') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
@@ -211,6 +230,9 @@
                                                                     class="upload__inputfile">
                                                             </span>
                                                         </label>
+                                                        @if($errors->has('images'))
+                                                        <div class="error">{{ $errors->first('images') }}</div>
+                                                        @endif
                                                     </div>
                                                     <div class="upload__img-wrap uploadFilesAllCZ"></div>
                                                 </div>
@@ -220,16 +242,18 @@
                                             <div class="common_input mb_15">
                                                 <label>Key Services:</label>
                                                 <textarea name="key_services"
-                                                    class="form-control textareaCZ"></textarea>
+                                                    class="form-control textareaCZ">{{ old('key_services') }}</textarea>
                                                 <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-
+                                                @if($errors->has('key_services'))
+                                                <div class="error">{{ $errors->first('key_services') }}</div>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="col-12 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Description</label>
-                                                <textarea id="summernote" name=""></textarea>
+                                                <textarea id="summernote" name="">{{  old('description') }}</textarea>
                                             </div>
                                         </div>
                                         <input type="hidden" id="description" name="description">
@@ -255,6 +279,32 @@
 jQuery(document).ready(function() {
     ImgUpload();
 });
+if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        // Make a request to reverse geocoding service
+        $.getJSON('https://nominatim.openstreetmap.org/reverse', {
+            lat: latitude,
+            lon: longitude,
+            format: 'json',
+            zoom: 10
+        }).done(function(data) {
+            var city = data.address.city;
+            if (!city) {
+                city = data.address.town || data.address.village || data.address.hamlet ||
+                    data.address
+                    .suburb || data.address.state;
+            }
+            $('#location').val(city)
+        }).fail(function() {
+            alert("Failed to retrieve city information.");
+        });
+    });
+} else {
+    alert("Geolocation is not supported by your browser");
+}
 
 function ImgUpload() {
     var imgWrap = "";
@@ -402,8 +452,8 @@ $(document).on('change', '#sub_sub_category_select', function() {
 });
 
 $(document).on('change', '#child_category_select', function() {
-            var category_id = $(this).val();
-            $('#parent_id').val(category_id);
-        });
+    var category_id = $(this).val();
+    $('#parent_id').val(category_id);
+});
 </script>
 @endsection
