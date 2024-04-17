@@ -76,10 +76,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
     Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
     Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
+    Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
     Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
     Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
     Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
     Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
+    Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
