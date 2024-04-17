@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('partners.layouts.master')
 
 @section('content')
 <div class="pcoded-content">
@@ -9,7 +9,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-server bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Categories</h5>
+                        <h5>Notifications</h5>
                     </div>
                 </div>
             </div>
@@ -17,9 +17,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
+                            <a href="{{ route('partner.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.categories') }}">categories</a>
+                        <li class="breadcrumb-item"><a href="#">Notifications</a>
                         </li>
                     </ul>
                 </div>
@@ -50,9 +50,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>All Categories</h5>
-                            <a href="{{ route('admin.category.add') }}"
-                                clas="btn btn-success waves-effect waves-light">Add Category</a>
+                            <h5>All Notifications</h5>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
@@ -93,7 +91,7 @@
                     $('#data-posts_info').hide();
                 }
             },
-            ajax: "{{ route('admin.notifications') }}",
+            ajax: "{{ route('partner.notifications') }}",
             columns: [
                 { 
                     data: 'DT_RowIndex', 

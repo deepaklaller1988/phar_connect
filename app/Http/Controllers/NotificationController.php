@@ -30,9 +30,9 @@ class NotificationController extends Controller
                         return $status;
                     })
                     ->addColumn('parent_name', function ($item) {
-                        return $item->parent ? $item->parent->title : '';
+                        return $item->usernote ? $item->usernote->name : '';
                     })
-                    ->rawColumns(['status','action','image','parent_name'])
+                    ->rawColumns(['status','parent_name'])
                     ->make(true);
         }
         
@@ -43,20 +43,20 @@ class NotificationController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = Notification::where('user_id',auth()->user()->id)->with('user')->orderBy('created_at','desc')->get();
+            $data = Notification::where('user_id',auth()->user()->id)->with('usernote')->orderBy('created_at','desc')->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
-                        $status = $model->status == 1 ? '<label class="form-label label label-inverse-success">Active</label>' : '<label class="form-label label label-inverse-danger">Inactive</label>';
+                        $status = $model->status == 1 ? '<label class="form-label label label-inverse-success">Read</label>' : '<label class="form-label label label-inverse-danger">Unread</label>';
                         return $status;
                     })
                     ->addColumn('parent_name', function ($item) {
-                        return $item->parent ? $item->parent->title : '';
+                        return $item->usernote ? $item->usernote->name : '';
                     })
-                    ->rawColumns(['status','action','image','parent_name'])
+                    ->rawColumns(['status','parent_name'])
                     ->make(true);
         }
         
-        return view('partner.notifications.index');
+        return view('partners.notifications.index');
     }
 }

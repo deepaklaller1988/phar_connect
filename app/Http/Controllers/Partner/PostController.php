@@ -90,7 +90,7 @@ class PostController extends Controller
             $notification = new Notification;
             $notification->user_id = auth()->user()->id;
             $notification->status = 0;
-            $notification->notification = 'A new Post has beed added By '.auth()->user()->name;
+            $notification->notification = 'A new Post has been added By '.auth()->user()->name;
             $notification->type = "post";
             $notification->notification_for = $post->id;
             $notification->save();

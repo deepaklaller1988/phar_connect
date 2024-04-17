@@ -99,6 +99,7 @@ class RegisterController extends Controller
                 'notification_for' => $user->id
             ]);
             return $user;
+         
         }else{
             // dd("0");
             return User::create([
@@ -108,6 +109,13 @@ class RegisterController extends Controller
                 'type' => $data['type'],
                 'phone' => $data['phone']
             ]);
+        }
+    }
+
+    protected function redirectTo()
+    {
+        if(auth()->user()->type  == 'partners' && auth()->user()->plan_id == null){
+            dd("hsdgfh");
         }
     }
 }
