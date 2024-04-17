@@ -61,21 +61,22 @@
                                     <div class="col-12 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Company Picture:</label>
-                                            <div class="pictureAdmin"><span><input type="file"
+                                            <div class="pictureAdmin"><span><input id="logo-input" type="file"
                                                         name="logo"><b>+</b></span><img
                                                     src="{{ auth()->user()->logo ? asset('storage/' .auth()->user()->logo) : asset('assets/images/consultBanner.jpg')}} "
-                                                    alt="profile banner" /></div>
+                                                    alt="profile banner" id="logo" /></div>
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Company Banner:</label>
-                                            <div class="bannerAdmin"><span><input type="file" name="banner"><b>Upload
+                                            <div class="bannerAdmin"><span><input id="banner-input" type="file"
+                                                        name="banner"><b>Upload
                                                         Banner</b>
                                                     <p>Prefferable Size 1186px x 120px</p>
                                                 </span><img
                                                     src="{{ auth()->user()->banner ? asset('storage/' .auth()->user()->banner) : asset('assets/images/consultBanner.jpg')}}"
-                                                    alt="profile banner" />
+                                                    alt="profile banner" id="banner" />
                                             </div>
                                         </div>
                                     </div>
@@ -208,6 +209,28 @@ if ("geolocation" in navigator) {
 
 $(document).on('focusout', '.note-editable', function() {
     $('#company_profile').val($(this).html());
+});
+
+$('#logo-input').change(function() {
+    var input = this;
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#logo').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
+$('#banner-input').change(function() {
+    var input = this;
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#banner').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 });
 </script>
 @endsection
