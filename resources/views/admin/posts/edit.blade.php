@@ -264,11 +264,12 @@
                                             name="description">
                                         <div class="col-12">
                                             @if($post->images)
-                                            <div class="img-wrap d-flex justify-content-center">
+                                            <div class="img-wrap d-flex uploadPPostImages">
+                                            <h5>Uploaded Images</h5>
                                                 @foreach(explode(',', $post->images) as $image)
-                                                <img src="{{ asset('storage/uploads/posts/'.$image) }}"
+                                                <section><img src="{{ asset('storage/uploads/posts/'.$image) }}"
                                                     alt="{{ $image }}" class="img-fluid ml-2" width="300px"
-                                                    height="300px" data-image="{{ $image}}">
+                                                    height="300px" data-image="{{ $image}}"><span>+</span></section>
                                                 @endforeach
                                             </div>
                                             @endif
