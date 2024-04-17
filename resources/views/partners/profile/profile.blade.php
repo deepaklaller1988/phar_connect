@@ -65,6 +65,9 @@
                                                         name="logo"><b>+</b></span><img
                                                     src="{{ auth()->user()->logo ? asset('storage/' .auth()->user()->logo) : asset('assets/images/consultBanner.jpg')}} "
                                                     alt="profile banner" id="logo" /></div>
+                                            @if($errors->has('logo'))
+                                            <div class="error">{{ $errors->first('logo') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
@@ -73,6 +76,9 @@
                                             <div class="bannerAdmin"><span><input id="banner-input" type="file"
                                                         name="banner"><b>Upload
                                                         Banner</b>
+                                                    @if($errors->has('banner'))
+                                                    <div class="error">{{ $errors->first('banner') }}</div>
+                                                    @endif
                                                     <p>Prefferable Size 1186px x 120px</p>
                                                 </span><img
                                                     src="{{ auth()->user()->banner ? asset('storage/' .auth()->user()->banner) : asset('assets/images/consultBanner.jpg')}}"
@@ -89,7 +95,9 @@
                                             <label>Name:</label>
                                             <input type="text" class="form-control" name="name"
                                                 value="{{ auth()->user()->name }}" required>
-                                            {{$errors->first('name')}}
+                                            @if($errors->has('name'))
+                                            <div class="error">{{ $errors->first('name') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -97,15 +105,17 @@
                                             <label>Email:</label>
                                             <input disabled type="text" class="form-control" name="email"
                                                 value="{{ auth()->user()->email }}" placeholder="Email Address">
-                                            {{$errors->first('email')}}
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <label>Phone Number : </label>
                                         <div class="common_input mb_15">
                                             <input type="text" name="phone" class="form-control"
-                                                value="{{ auth()->user()->phone }}" placeholder="Mobile No">
-                                            {{$errors->first('phone')}}
+                                                value="{{ auth()->user()->phone }}" id="phone" pattern="[987][0-9]{9}" placeholder="Mobile No">
+                                            @if($errors->has('phone'))
+                                            <div class="error">{{ $errors->first('phone') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -113,6 +123,7 @@
                                             <label>Password:</label>
                                             <input disabled type="password" class="form-control" name="password"
                                                 value="{{ auth()->user()->password }}" placeholder="Password">
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -120,7 +131,9 @@
                                             <label>Company Website</label>
                                             <input type="text" name="company_website" class="form-control"
                                                 value="{{ auth()->user()->company_website }}" placeholder="Email">
-                                            {{$errors->first('company_website')}}
+                                            @if($errors->has('company_website'))
+                                            <div class="error">{{ $errors->first('company_website') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -128,7 +141,9 @@
                                             <label>Location</label>
                                             <input type="text" id="location" class="form-control" name="location"
                                                 value="{{ auth()->user()->location }}" placeholder="Location">
-                                            {{$errors->first('location')}}
+                                            @if($errors->has('location'))
+                                            <div class="error">{{ $errors->first('location') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -137,7 +152,9 @@
                                             <textarea name="key_services"
                                                 class="form-control">{{ auth()->user()->key_services }}</textarea>
                                             <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-                                            {{$errors->first('key_services')}}
+                                            @if($errors->has('key_services'))
+                                            <div class="error">{{ $errors->first('key_services') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -175,7 +192,9 @@
         </div>
     </div>
 </div>
-
+<script
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCRYmAROkEbregKex58kHyj64JnpSXRDWg">
+</script>
 <script>
 $(document).ready(function() {
     $('#summernote').summernote();
@@ -231,6 +250,10 @@ $('#banner-input').change(function() {
         }
         reader.readAsDataURL(input.files[0]);
     }
+});
+
+$(document).on('keypress', '#phone', function(key) {
+    if (key.charCode < 48 || key.charCode > 57) return false;
 });
 </script>
 @endsection

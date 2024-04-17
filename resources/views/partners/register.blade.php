@@ -77,7 +77,7 @@
 
                                 <div class="col-md-6">
                                     <input  type="text" id="phone" class="form-control " name="phone"
-                                        value="{{ old('phone') }}">
+                                        value="{{ old('phone') }}" pattern="[789][0-9]{9}">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -51,12 +51,18 @@
                                             <label class="form-label col-sm-2 col-form-label">Title</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="title" value="{{ $plan->title ? $plan->title : '' }}" class="form-control">
+                                                @if($errors->has('title'))
+                                                <div class="error">{{ $errors->first('title') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Amount</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="amount" value="{{ $plan->title ? $plan->amount : '' }}" class="form-control">
+                                                <input type="text" name="amount" value="{{ $plan->amount ? $plan->amount : '' }}" class="form-control">
+                                                @if($errors->has('amount'))
+                                                <div class="error">{{ $errors->first('amount') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -74,9 +80,12 @@
                                                 <textarea class="form-control" id="summernote">
                                                 {{ $plan->description ? $plan->description : '' }}  
                                                         </textarea>
+                                                        @if($errors->has('description'))
+                                                <div class="error">{{ $errors->first('description') }}</div>
+                                                @endif
                                             </div>
                                         </div>
-                                        <input type="hidden" name="description" id="description">
+                                        <input type="hidden" name="description" id="description" value="{{ $plan->description ? $plan->description : '' }} ">
                                         <div class="row mb-3">
                                             <input type="submit" name="submit" value="Save" class="btn btn-success">
                                         </div>

@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/widget.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('assets/admin/bower_components/jquery/js/jquery.min.js')}}"></script>
 </head>
 

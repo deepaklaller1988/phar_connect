@@ -29,10 +29,10 @@ class PlanController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric',
             'status' => 'required',
         ]);
-        $plan = new Plan();
+        $plan = new Plan(); 
         $plan->title = $request->title;   
         $plan->description = $request->description;
         $plan->amount= $request->amount; 
@@ -50,7 +50,7 @@ class PlanController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric',
             'status' => 'required',
         ]);
         $plan = Plan::findOrFail($id);

@@ -27,7 +27,16 @@ class PartnerController extends Controller
 
     public function update(Request $request,$id)
     {
-
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 
+            'key_services' => 'required',
+            'location' => 'required',
+            'company_profile' => 'required',
+            'company_website' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'banner' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->phone = $request->phone;

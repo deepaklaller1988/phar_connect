@@ -49,13 +49,21 @@
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Title</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="title" class="form-control">
+                                                <input type="text" name="title" value="{{ old('title') }}"
+                                                    class="form-control">
+                                                @if($errors->has('title'))
+                                                <div class="error">{{ $errors->first('title') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Amount (in $)</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="amount" class="form-control">
+                                                <input type="text" name="amount" value="{{ old('amount') }}"
+                                                    class="form-control">
+                                                @if($errors->has('amount'))
+                                                <div class="error">{{ $errors->first('amount') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -73,8 +81,11 @@
                                             <label class="form-label col-sm-2 col-form-label">Description</label>
                                             <div class="col-sm-10">
                                                 <textarea class="form-control" id="summernote">
-
+                                                {{ old('description') }}
                                                         </textarea>
+                                                @if($errors->has('description'))
+                                                <div class="error">{{ $errors->first('description') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <input type="hidden" name="description" id="description">

@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = User::where('type',2)->orderBy('name')->get();  
+            $data = User::where('type',2)->orderBy('id','desc')->get();  
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('is_featured', function($row){

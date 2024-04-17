@@ -133,163 +133,143 @@
                                                 <label>Action:</label>
                                                 <select class="form-select" name="action">
                                                     <option value="">Select Action</option>
-                                                    <option value="1">Approve</option>
-                                                    <option value="2">Reject</option>
+                                                    <option value="1" {{ $post->status == 1 ? 'selected' : ''}}>Approve</option>
+                                                    <option value="2" {{ $post->status == 2 ? 'selected' : ''}}>Reject</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Title :</label>
-                                                <input type="text" name="title" value="{{ $post->title }}"
-                                                    class="form-control" placeholder="Title.." disabled>
-                                            </div>
+                                    <div class="col-12 mb-3">
+                                        <div class="create_report_btn mt_30">
+                                            <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
+                                                {{ __('Save') }}
+                                            </button>
                                         </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Email:</label>
-                                                <input type="text" name="email" class="form-control"
-                                                    value="{{ $data['user']->email }}" disabled placeholder="Email Address">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <label>Phone Number : </label>
-                                            <div class="common_input mb_15">
-                                                <input type="text" name="phone" disabled class="form-control"
-                                                    value="{{ $data['user']->phone }}" placeholder="Mobile No">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Location : </label>
-                                                <input type="text" name="location" disabled class="form-control"
-                                                    value="{{ $data['user']->location }}" placeholder="Location">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Category : </label>
-                                                <select name="category" disabled class="form-control selectFixCZ">
-                                                    <option value="">Select Category</option>
-                                                    @foreach($data['categories'] as $category)
-                                                    <option value="{{ $category->id }}"
-                                                        {{ $category->id == $post->category_id ? 'selected' : ''}}
-                                                        @if($cat)
-                                                        @if(isset($cat['childcategories']))
-                                                        {{$cat['childcategories'][0]->parent_id == $category->id ? 'selected' : '' }}
-                                                        @endif @endif>
-                                                        {{ $category->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        @if($cat)
-                                        @if(isset($cat['childcategories']))
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Category : </label>
-                                                <select name="category" disabled class="form-control selectFixCZ">
-                                                    @foreach($cat['childcategories'] as $childcategory)
-                                                    <option value="{{ $childcategory->id }}"
-                                                        {{ $childcategory->id == $cat['grandchildcategories'][0]->parent_id ? 'selected' : ''}}>
-                                                        {{ $childcategory->title }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($cat['grandchildcategories'])
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Category : </label>
-                                                <select name="category" disabled class="form-control selectFixCZ">
-                                                    @foreach($cat['grandchildcategories'] as $childcategory)
-                                                    <option value="{{ $childcategory->id }}"
-                                                        {{ $childcategory->id == $post->category_id ? 'selected' : ''}}>
-                                                        {{ $childcategory->title }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @endif
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Time : </label>
-                                                <input type="date" name="time" disabled value="{{ $post->time }}"
-                                                    class="form-control" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Images : </label>
-                                                <div class="upload__box">
-                                                    <div class="upload__btn-box">
-                                                        <label class="upload__btn uploadFileCZ">
-
-                                                            <span>
-                                                                <p>Upload images</p><input type="file" name="images[]"
-                                                                    multiple="" data-max_length="20"
-                                                                    class="upload__inputfile">
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="upload__img-wrap uploadFilesAllCZ"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Key Services:</label>
-                                                <textarea name="key_services" disabled
-                                                    class="form-control textareaCZ">{{ $post->key_services }}</textarea>
-                                                <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 mb-3">
-                                            <div class="common_input mb_15">
-                                                <label>Description</label>
-                                                <textarea id="summernote" disabled name="">{{ $post->description }}</textarea>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" id="description" value="{{ $post->description }}"
-                                            name="description">
-                                        <div class="col-12">
-                                            @if($post->images)
-                                            <div class="img-wrap d-flex justify-content-center">
-                                                @foreach(explode(',', $post->images) as $image)
-                                                <img src="{{ asset('storage/uploads/posts/'.$image) }}"
-                                                    alt="{{ $image }}" class="img-fluid ml-2" width="300px"
-                                                    height="300px" data-image="{{ $image}}">
-                                                @endforeach
-                                            </div>
-                                            @endif
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <div class="create_report_btn mt_30">
-                                                <button type="submit"
-                                                    class="btn_1 radius_btn d-block text-center btnsCZ">
-                                                    {{ __('Save') }}
-                                                </button>
-                                            </div>
-                                        </div>
+                                    </div>
+                            </form>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Title :</label>
+                                        <input type="text" name="title" value="{{ $post->title }}" class="form-control"
+                                            placeholder="Title.." disabled>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Email:</label>
+                                        <input type="text" name="email" class="form-control"
+                                            value="{{ $data['user']->email }}" disabled placeholder="Email Address">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label>Phone Number : </label>
+                                    <div class="common_input mb_15">
+                                        <input type="text" name="phone" disabled class="form-control"
+                                            value="{{ $data['user']->phone }}" placeholder="Mobile No">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Location : </label>
+                                        <input type="text" name="location" disabled class="form-control"
+                                            value="{{ $data['user']->location }}" placeholder="Location">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Category : </label>
+                                        <select name="category" disabled class="form-control selectFixCZ">
+                                            <option value="">Select Category</option>
+                                            @foreach($data['categories'] as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ $category->id == $post->category_id ? 'selected' : ''}} @if($cat)
+                                                @if(isset($cat['childcategories']))
+                                                {{$cat['childcategories'][0]->parent_id == $category->id ? 'selected' : '' }}
+                                                @endif @endif>
+                                                {{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                @if($cat)
+                                @if(isset($cat['childcategories']))
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Category : </label>
+                                        <select name="category" disabled class="form-control selectFixCZ">
+                                            @foreach($cat['childcategories'] as $childcategory)
+                                            <option value="{{ $childcategory->id }}"
+                                                {{ $childcategory->id == $cat['grandchildcategories'][0]->parent_id ? 'selected' : ''}}>
+                                                {{ $childcategory->title }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($cat['grandchildcategories'])
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Category : </label>
+                                        <select name="category" disabled class="form-control selectFixCZ">
+                                            @foreach($cat['grandchildcategories'] as $childcategory)
+                                            <option value="{{ $childcategory->id }}"
+                                                {{ $childcategory->id == $post->category_id ? 'selected' : ''}}>
+                                                {{ $childcategory->title }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                @endif
+                                @endif
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Time : </label>
+                                        <input type="date" name="time" disabled value="{{ $post->time }}"
+                                            class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Key Services:</label>
+                                        <textarea name="key_services" disabled
+                                            class="form-control textareaCZ">{{ $post->key_services }}</textarea>
+                                        <small>Preference:- Drugs, Anabolics, Menabolics.</small>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <div class="common_input mb_15">
+                                        <label>Description</label>
+                                        <textarea id="summernote" disabled name="">{{ $post->description }}</textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="description" value="{{ $post->description }}"
+                                    name="description">
+                                <div class="col-12">
+                                    @if($post->images)
+                                    <div class="img-wrap d-flex justify-content-center">
+                                        @foreach(explode(',', $post->images) as $image)
+                                        <img src="{{ asset('storage/uploads/posts/'.$image) }}" alt="{{ $image }}"
+                                            class="img-fluid ml-2" width="300px" height="300px"
+                                            data-image="{{ $image}}">
+                                        @endforeach
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
 jQuery(document).ready(function() {
