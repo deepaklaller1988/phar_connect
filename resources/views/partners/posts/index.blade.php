@@ -86,6 +86,12 @@
         var table = $('#data-posts').DataTable({
             processing: true,
             serverSide: true,
+            drawCallback: function(settings) {
+                if ($(this).find('tbody tr').length <= 10) {
+                    $('#data-posts_paginate').hide();
+                    $('#data-posts_info').hide();
+                }
+            },
             ajax: "{{ route('partner.posts') }}",
             columns: [{
                     data: 'DT_RowIndex',
@@ -105,9 +111,8 @@
                     orderable: false,
                     searchable: false
                 },
-
-
             ]
+            
         });
         $(document).on('click', '#deletePost', function() {
             var url = $(this).data('url');
