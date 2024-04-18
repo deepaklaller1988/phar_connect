@@ -11,12 +11,12 @@ class PartnerController extends Controller
 {
     public function dashboard()
     {
-        if(auth()->user()->plan_id != null){
+        // if(auth()->user()->plan_id != null){
             $posts = Post::where('partner_id',auth()->user()->id)->count();
             return view('partners.dashboard',compact('posts'));
-        }else{
-            dd("kdjgj");
-        }
+        // }else{
+        //     dd("kdjgj");
+        // }
     }
 
     public function register()

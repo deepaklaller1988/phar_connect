@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Notification;
+use Illuminate\Support\Facades\View;
 use DataTables;
 
 class PostController extends Controller
@@ -54,20 +55,41 @@ class PostController extends Controller
         return view('partners.posts.add')->with('data' , $data);
     }
 
+    public function loadBlade(Request $request)
+    {
+        $data['categories'] = Category::where(['status'=>'1','parent_id'=>$request->id])->orderBy('title')->get();
+        $data['user'] = User::where('id',auth()->user()->id)->first();
+        $data['parent_id'] = $request->id;
+        if($request->id == 1){
+            $html = View::make('partners.posts.business-offering')->with('data',$data)->render();
+        }elseif($request->id == 2){
+            $html = View::make('partners.posts.consulting')->render();
+        }elseif($request->id == 3){
+            $html = View::make('partners.posts.events')->render();
+        }elseif($request->id == 4){
+            
+        }elseif($request->id == 5){
+            $html = View::make('partners.posts.jobs')->render();
+        }else{
+
+        }
+        return response()->json(['html' => $html]);
+    }
+
     public function store(request $request)
     {
-    
-       $this->validate($request, [
-           'title' => 'required',
-           'description' => 'required', 
-           'time' => 'required',
-           'email' => 'required',
-           'phone'  => 'required',
-           'location' => 'required',
-           'key_services' => 'required',
-           'images' => 'required',
-           'category_id' => 'required'
-       ]);
+    dd($request);
+    //    $this->validate($request, [
+    //        'title' => 'required',
+    //        'description' => 'required', 
+    //        'time' => 'required',
+    //        'email' => 'required',
+    //        'phone'  => 'required',
+    //        'location' => 'required',
+    //        'key_services' => 'required',
+    //        'images' => 'required',
+    //        'category_id' => 'required'
+    //    ]);
        $post = new Post;
        $post->title = $request->title;
        $post->email = $request->email;
