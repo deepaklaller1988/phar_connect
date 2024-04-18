@@ -112,10 +112,5 @@ class RegisterController extends Controller
         }
     }
 
-    protected function redirectTo()
-    {
-        if(auth()->user()->type  == 'partners' && auth()->user()->plan_id == null){
-            dd("hsdgfh");
-        }
-    }
+  
 }

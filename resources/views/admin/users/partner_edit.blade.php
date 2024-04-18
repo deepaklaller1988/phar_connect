@@ -140,18 +140,22 @@
                                             <div class="col-sm-5">
                                                 <input type="file" class="form-control" name="logo"> 
                                             </div>
+                                            @if($partner->logo != null)
                                             <div class="col-sm-5">
                                                 <img src="{{ asset('storage/'.$partner->logo )}}" width="150px" height="150px"> 
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Banner : </label>
                                             <div class="col-sm-5">
                                                 <input type="file" class="form-control" name="banner"> 
                                             </div>
+                                            @if($partner->banner != null)
                                             <div class="col-sm-5">
                                                 <img src="{{ asset('storage/'.$partner->banner )}}" width="400px" height="150px"> 
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2"></label>
