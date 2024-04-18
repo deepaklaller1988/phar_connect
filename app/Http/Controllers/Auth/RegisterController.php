@@ -89,6 +89,7 @@ class RegisterController extends Controller
                 'company_website' => $data['company_website'],
                 'company_profile' => $data['company_profile'],
                 'location' => $data['location'],
+                'country_id' => $data['country_id'],
             ]);
            $note =  Notification::create([
                 'user_id' =>  $user->id,
