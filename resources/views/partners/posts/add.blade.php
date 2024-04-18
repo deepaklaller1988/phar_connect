@@ -1,6 +1,8 @@
 @extends('partners.layouts.master')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -56,7 +58,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function() {
     $(document).on('change', '#select_main_cayegory', function() {
@@ -130,7 +132,7 @@ $(document).ready(function() {
         var category_id = $(this).val();
         $('#parent_id').val(category_id);
     });
-    $(document).on('submit','#post-form',function(e) {
+    $(document).on('submit', '#post-form', function(e) {
 
         e.preventDefault();
         if ($('#company_name').val() == '') {
@@ -145,11 +147,12 @@ $(document).ready(function() {
             $('#conname').text('please enter Contact name');
             return false;
         }
-        if ($('#email').val() == '') {
-            $('#emailerror').text('please enter company website');
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if ($('#email').val() == '' || !emailRegex.test($('#email').val())) {
+            $('#emailerror').text('please enter valid email address');
             return false;
         }
-        if ($('#hone').val() == '') {
+        if ($('#phone').val() == '') {
             $('#pherror').text('please enter valid phone number');
             return false;
         }
@@ -157,14 +160,54 @@ $(document).ready(function() {
             $('#keyserviceerror').text('please enter key services');
             return false;
         }
-        var formData = $(this).serialize();
+        if ($('#image').val() == '') {
+            $('#imageerror').text('please choose an image');
+            return false;
+        }
+        if ($('#document').val() == '') {
+            $('#docerror').text('please choose an appropriate document');
+            return false;
+        }
+        if ($('#languages').val() == '') {
+            $('#langerror').text('please enter languages');
+            return false;
+        }
+        if ($('#hourly_rate').val() == '') {
+            $('#hrate').text('please Hourly Rate');
+            return false;
+        }
+        if ($('#profile_summary').val() == '') {
+            $('#summaryerror').text('please enter your profile summary');
+            return false;
+        }
+        // var formData = $(this).serialize();
+        var formData = new FormData(this);
+        if($('#image').val()){
+            formData.append('image', $('#image')[0].files[0]);
+            formData.append('document', $('#document')[0].files[0]);
+        }
         $.ajax({
             url: "{{ route('partner.post.store') }}",
             type: "POST",
             data: formData,
+            processData: false,
+            contentType: false,
             success: function(response) {
-                console.log(response);
-                // Handle success response
+                if (response.status == true) {
+                    Swal.fire({
+                        title: "Awesome",
+                        text: "Your post has been added successfully",
+                        icon: "success",
+                        buttons: true,
+                        dangerMode: true,
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                    }).then(function(result) {
+                        if (result['isConfirmed']) {
+                            window.location.href = "{{ route('partner.posts') }}";
+                        }
+                    });
+                }
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
@@ -173,6 +216,10 @@ $(document).ready(function() {
         });
 
     });
+   
+    $(document).on('focusout', '.note-editable', function() {
+    $('#profile_summary').val($(this).html());
+});
 });
 </script>
 

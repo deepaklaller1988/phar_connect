@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddContactinfoToPostsTable extends Migration
+class AddDefaultImagevalueToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,9 @@ class AddContactinfoToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('contact_name')->after('email')->nullable();
-            $table->string('company_website')->after('contact_name')->nullable();
-            $table->string('country')->after('company_website')->nullable();
-            $table->string('certifications')->after('key_services')->nullable();
+            $table->string('images')->nullable()->change();
+            $table->longText('description')->nullable()->change();
+            $table->string('time')->nullable()->change();
         });
     }
 
@@ -29,7 +28,9 @@ class AddContactinfoToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->string('images')->nullable(false)->change();
+            $table->longText('description')->nullable(false)->change();
+            $table->string('time')->nullable(false)->change();
         });
     }
 }

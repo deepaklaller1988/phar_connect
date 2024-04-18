@@ -1,3 +1,7 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+
 <form id="post-form">
     @csrf
     <div class="white_card_body">
@@ -5,8 +9,8 @@
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Company Name :</label>
-                    <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Company Name..." required
-                        value="{{ old('company_name') }}">
+                    <input type="text" name="company_name" id="company_name" class="form-control"
+                        placeholder="Company Name..." required value="{{ old('company_name') }}">
                     <span id="cnerror"></span>
                     @if($errors->has('company_name'))
                     <div class="error">{{ $errors->first('company_name') }}</div>
@@ -16,9 +20,9 @@
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Company Website :</label>
-                    <input type="text" name="company_website" id="company_website" class="form-control" placeholder="Company Website..."
-                        required value="{{ old('company_website') }}">
-                        <span id="cwerror"></span>
+                    <input type="text" name="company_website" id="company_website" class="form-control"
+                        placeholder="Company Website..." required value="{{ old('company_website') }}">
+                    <span id="cwerror"></span>
                     @if($errors->has('company_website'))
                     <div class="error">{{ $errors->first('company_website') }}</div>
                     @endif
@@ -27,9 +31,9 @@
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Contact Name :</label>
-                    <input type="text" name="contact_name" id="contact_name" class="form-control" placeholder="Contact Name..." required
-                        value="{{ $data['user']->name }}">
-                        <span id="conname"></span>
+                    <input type="text" name="contact_name" id="contact_name" class="form-control"
+                        placeholder="Contact Name..." required value="{{ $data['user']->name }}">
+                    <span id="conname"></span>
                     @if($errors->has('contact_name'))
                     <div class="error">{{ $errors->first('contact_name') }}</div>
                     @endif
@@ -40,7 +44,7 @@
                     <label>Email:</label>
                     <input type="text" name="email" id="email" class="form-control" value="{{ $data['user']->email }}"
                         placeholder="Email Address">
-                        <span id="emailerror"></span>
+                    <span id="emailerror"></span>
                     @if($errors->has('email'))
                     <div class="error">{{ $errors->first('email') }}</div>
                     @endif
@@ -51,10 +55,20 @@
                 <div class="common_input mb_15">
                     <input type="text" name="phone" class="form-control" value="{{ $data['user']->phone }}" id="phone"
                         placeholder="Mobile No">
-                        <span id="pherror"></span>
+                    <span id="pherror"></span>
                     @if($errors->has('phone'))
                     <div class="error">{{ $errors->first('phone') }}</div>
                     @endif
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <label>Country : </label>
+                <div class="common_input mb_15">
+                    <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect" name="country[]" multiple="multiple">
+                        @foreach($data['countries'] as $country)
+                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             @if(isset($data['categories']))
@@ -90,10 +104,12 @@
             </div>
             @endif
             <input type="hidden" name="category_id" id="parent_id" value="{{ $data['parent_id']}}">
+            <input type="hidden" name="parent_id" value="{{ $data['parent_id']}}">
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Key Services:</label>
-                    <textarea name="key_services" id="key_services" class="form-control textareaCZ">{{ old('key_services') }}</textarea>
+                    <textarea name="key_services" id="key_services"
+                        class="form-control textareaCZ">{{ old('key_services') }}</textarea>
                     <small>Preference:- Drugs, Anabolics, Menabolics.</small>
                     <span id="keyserviceerror"></span>
                     @if($errors->has('key_services'))
@@ -122,3 +138,9 @@
         </div>
     </div>
 </form>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>

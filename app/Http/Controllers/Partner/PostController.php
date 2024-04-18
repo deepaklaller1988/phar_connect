@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Notification;
+
 use Illuminate\Support\Facades\View;
 use DataTables;
 
@@ -59,11 +61,12 @@ class PostController extends Controller
     {
         $data['categories'] = Category::where(['status'=>'1','parent_id'=>$request->id])->orderBy('title')->get();
         $data['user'] = User::where('id',auth()->user()->id)->first();
+        $data['countries'] = Country::all();
         $data['parent_id'] = $request->id;
         if($request->id == 1){
             $html = View::make('partners.posts.business-offering')->with('data',$data)->render();
         }elseif($request->id == 2){
-            $html = View::make('partners.posts.consulting')->render();
+            $html = View::make('partners.posts.consulting')->with('data',$data)->render();
         }elseif($request->id == 3){
             $html = View::make('partners.posts.events')->render();
         }elseif($request->id == 4){
@@ -78,35 +81,29 @@ class PostController extends Controller
 
     public function store(request $request)
     {
-    dd($request);
-    //    $this->validate($request, [
-    //        'title' => 'required',
-    //        'description' => 'required', 
-    //        'time' => 'required',
-    //        'email' => 'required',
-    //        'phone'  => 'required',
-    //        'location' => 'required',
-    //        'key_services' => 'required',
-    //        'images' => 'required',
-    //        'category_id' => 'required'
-    //    ]);
+        // dd($request);
        $post = new Post;
-       $post->title = $request->title;
+       $post->title = $request->company_name;
        $post->email = $request->email;
        $post->contact_info = $request->phone;
-       $post->description = $request->description;
-       $post->time = $request->time;
        $post->category_id = $request->category_id;
        $post->partner_id = auth()->user()->id;
        $post->key_services = $request->key_services;
-       $images = []; 
-        if ($request->hasFile('images')) {    
-            foreach ($request->file('images') as $key => $image ) {
-                $imageFilename = $key . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('uploads/posts', $imageFilename);
-                $images[] =  $imageFilename;
-                $post->images = implode(',',$images);
-            }
+       $post->certifications = $request->certifications;
+       $post->contact_name = $request->contact_name;
+       $post->company_website = $request->company_website;
+       $post->country = implode(',', $request->country) ?? $request->country;
+       $post->hourly_rate = $request->hourly_rate;
+       $post->profile_summary = $request->profile_summary;
+       $post->languages = $request->languages;
+       $post->parent_id = $request->parent_id;
+       if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads/posts', 'public');
+            $post->images = $imagePath;
+        }
+        if($request->hasFile('document')) {
+            $imagePath = $request->file('document')->store('uploads/documents', 'public');
+            $post->document = $imagePath;
         }
         if($post->save()){
             $notification = new Notification;
@@ -116,9 +113,9 @@ class PostController extends Controller
             $notification->type = "post";
             $notification->notification_for = $post->id;
             $notification->save();
-            return redirect()->route('partner.posts')->with('success','Post Added Successfully');
+            return response()->json(['message' => 'Post submitted successfully', 'status' => true]);
         }else{
-            return redirect()->route('partner.posts')->with('error','Something went wrong');
+            return response()->json(['message' => 'Something went wrong']);
         }
     }
 
@@ -129,29 +126,71 @@ class PostController extends Controller
         $categoryIdsString = $data['user']->category_ids;
         $categoryIdsArray = explode(',', $categoryIdsString);
         $data['categories'] = Category::whereIn('id', $categoryIdsArray)->get();
-       
-        return view('partners.posts.edit',compact('post','data'));
+        $data['cat'] = Category::where('id',$post->category_id)->first();
+        $data['getparentcat'] = Category::where('id',$data['cat']->parent_id)->first();
+        $data['countries'] = Country::all();
+       if($post->parent_id == 1){
+            if($data['getparentcat']->parent_id == 1){
+                $data['subsubcategories'] = Category::where('parent_id',$data['cat']->parent_id)->get();
+                $data['childcat'] = array();
+            }else{
+                $data['subsubcategories'] = Category::where('parent_id',$data['getparentcat']->parent_id)->get();
+                $data['childcat'] = Category::where('parent_id',$data['getparentcat']->id)->get();
+            }
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.business-offering',compact('post','data'));
+       }elseif($post->parent_id == 2){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.consulting',compact('post','data'));
+        }elseif($post->parent_id == 3){
+            return view('partners.posts.edit.events',compact('post','data'));
+        }elseif($post->parent_id == 4){
+            
+        }elseif($post->parent_id == 5){
+            return view('partners.posts.edit.jobs',compact('post','data'));
+        }else{
+
+        }
+        
     }
 
     public function update(Request $request, $id)
     {
+        if($request->parent_id == 2){
+            $request->validate([
+                'company_name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required|numeric',
+                'key_services' => 'required',
+                'languages' => 'required',
+                'profile_summary' => 'required',
+                'country' => 'required',
+                'contact_name' => 'required',
+                'hourly_rate' => 'required',
+            ]);
+        }
         $post = Post::find($id);
-        $post->title = $request->title;
+        $post->title = $request->company_name;
         $post->email = $request->email;
         $post->contact_info = $request->phone;
-        $post->description = $request->description;
-        $post->time = $request->time;
-        $post->category_id = $request->category;
+        $post->category_id = $request->category_id;
         $post->partner_id = auth()->user()->id;
         $post->key_services = $request->key_services;
-        $images = []; 
-        if ($request->hasFile('images')) {    
-            foreach ($request->file('images') as $key => $image ) {
-                $imageFilename = $key . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('uploads/posts', $imageFilename);
-                $images[] =  $imageFilename;
-                $post->images = $post->images.','. implode(',',$images);
-            }
+        $post->certifications = $request->certifications;
+        $post->contact_name = $request->contact_name;
+        $post->company_website = $request->company_website;
+        $post->country = implode(',', $request->country) ?? $request->country;
+        $post->hourly_rate = $request->hourly_rate;
+        $post->profile_summary = $request->profile_summary;
+        $post->languages = $request->languages;
+
+        if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads/posts', 'public');
+            $post->images = $imagePath;
+        }
+        if($request->hasFile('document')) {
+            $imagePath = $request->file('document')->store('uploads/documents', 'public');
+            $post->document = $imagePath;
         }
         if($post->save()){
             
