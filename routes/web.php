@@ -99,6 +99,7 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/subcategories',[CategoryController::class,'get_categories'])->name('partner.subcategories');
     Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
     Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
+    Route::get('/partner/post/loadblade',[PostController::class,'loadBlade'])->name('partner.post.loadblade');
 });
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
