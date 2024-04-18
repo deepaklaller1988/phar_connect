@@ -77,4 +77,6 @@ class PartnerController extends Controller
             echo json_encode(array("error" => "Search term is required."));
         }
     }
+
+
 }

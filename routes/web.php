@@ -47,6 +47,7 @@ Route::get('/posts',[HomeController::class,'posts'])->name('posts');
 Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
 Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
 Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('store.contact-us');
+Route::get('/pricings',[HomeController::class,'pricing'])->name('pricings');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -104,3 +105,5 @@ Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login')
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
 Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name('citySuggestion');
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
+
+

@@ -123,4 +123,9 @@ class HomeController extends Controller
         $post = Post::with('user')->where('id',$request->id)->first();
         return view('single_category',compact('post'));
     }
+
+    public function pricing()
+    {
+        return view('pricing');
+    }
 }
