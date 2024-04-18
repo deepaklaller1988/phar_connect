@@ -11,8 +11,12 @@ class PartnerController extends Controller
 {
     public function dashboard()
     {
-        $posts = Post::where('partner_id',auth()->user()->id)->count();
-        return view('partners.dashboard',compact('posts'));
+        if(auth()->user()->plan_id != null){
+            $posts = Post::where('partner_id',auth()->user()->id)->count();
+            return view('partners.dashboard',compact('posts'));
+        }else{
+            dd("kdjgj");
+        }
     }
 
     public function register()
@@ -58,6 +62,11 @@ class PartnerController extends Controller
             return redirect()->route('partner.profile')->with('error', 'Error while updating information');
         }
 
+    }
+
+    public function plans()
+    {
+        dd('plans');
     }
 
     public function city_suggestion(Request $request)

@@ -18,6 +18,14 @@
                         <span class="pcoded-mtext">Posts</span>
                     </a> 
                 </li>
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="{{ route('partner.notifications') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-bell"></i>
+                        </span>
+                        <span class="pcoded-mtext">notification</span>
+                    </a> 
+                </li>
                 @endif
                 <li class=" ">
                     @if (Route::has('login'))

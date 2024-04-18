@@ -99,6 +99,7 @@ class RegisterController extends Controller
                 'notification_for' => $user->id
             ]);
             return $user;
+         
         }else{
             // dd("0");
             return User::create([
@@ -110,4 +111,6 @@ class RegisterController extends Controller
             ]);
         }
     }
+
+  
 }
