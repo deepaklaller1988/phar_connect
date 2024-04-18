@@ -76,7 +76,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input  type="text" id="phone" class="form-control " name="phone"
+                                    <input type="text" id="phone" class="form-control " name="phone"
                                         value="{{ old('phone') }}" pattern="[789][0-9]{9}">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -102,31 +102,28 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="row mb-3 width100Set">
-                                <label for="location" class="col-md-4 col-form-label text-md-end">Location (If
-                                    Applicable)</label>
-
+                            <div class="row mb-3">
+                                <label for="company_website"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Country') }}</label>
                                 <div class="col-md-6">
-                                    <input id="location" type="text" class="form-control" name="location"
-                                        value="{{ old('location') }}" autocomplete="location" autofocus>
+                                    <select class="form-control" name="country_id">
+                                        @foreach ($countries as $country)
+                                        <option value="{{$country->id}}">{{$country->country_name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
 
-                                    @error('location')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
-
                         <input type="hidden" name="type" value="2">
                         <div class="row mb-3 width100Set">
                             <label for="company_profile"
                                 class="col-md-4 col-form-label text-md-end">{{ __('Company Profile') }}</label>
                             <div class="col-md-6">
                                 <textarea class="form-control" name="company_profile" maxlength="300"
-                                    placeholder="add company description around 300 word" id="company_profile">{{ old('company_profile') }}</textarea>
+                                    placeholder="add company description around 300 word"
+                                    id="company_profile">{{ old('company_profile') }}</textarea>
                                 @error('company_profile')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -184,7 +181,7 @@ $(document).ready(function() {
         if (!regex.test(email)) {
             $('#email').after(
                 '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
-                );
+            );
         }
         setTimeout(function() {
             $('.invalid-feedback').remove();
@@ -218,7 +215,7 @@ $(document).ready(function() {
 
     $(document).on('focusout', '#phone', function() {
         var phoneNumber = $(this).val();
-        var regex = /^\d{10}$/; 
+        var regex = /^\d{10}$/;
         if (!regex.test(phoneNumber)) {
             $('#phone').after(
                 '<span class="invalid-feedback" role="alert"><strong>Enter a valid phone number </strong></span>'

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Country;
 use Illuminate\Support\Facades\Validator;
 
 class PartnerController extends Controller
@@ -21,7 +22,8 @@ class PartnerController extends Controller
 
     public function register()
     {
-        return view('partners.register');
+        $countries = Country::all();
+        return view('partners.register',compact('countries'));
     }
     public function profile()
     {
