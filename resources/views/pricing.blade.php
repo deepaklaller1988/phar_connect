@@ -9,18 +9,19 @@
       <p class="plansHero__subtitle">No contracts. No suprise fees.</p>
     </div>
     <div class="planItem__container">
+      @foreach($plans as $plan)
       <!--free plan starts -->
       <div class="planItem planItem--free">
 
         <div class="card">
           <div class="card__header">
             <div class="card__icon symbol symbol--rounded"></div>
-            <h2>Free</h2>
+            <h2>{{ $plan->title}}</h2>
           </div>
-          <div class="card__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</div>
+          <div class="card__desc">{{ $plan->description}}</div>
         </div>
 
-        <div class="price">$0<span>/ month</span></div>
+        <div class="price">{{ $plan->amount}}<span>/ month</span></div>
 
         <ul class="featureList">
           <li>2 links</li>
@@ -32,57 +33,8 @@
 
         <button class="button">Get Started</button>
       </div>
+      @endforeach
       <!--free plan ends -->
-
-      <!--pro plan starts -->
-      <div class="planItem planItem--pro">
-        <div class="card">
-          <div class="card__header">
-            <div class="card__icon symbol"></div>
-            <h2>Pro</h2>
-            <div class="card__label label">Best Value</div>
-          </div>
-          <div class="card__desc">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</div>
-        </div>
-
-        <div class="price">$18<span>/ month</span></div>
-
-        <ul class="featureList">
-          <li>2 links</li>
-          <li>Own analytics platform</li>
-          <li>Chat support</li>
-          <li class="disabled">Mobile application</li>
-          <li class="disabled">Unlimited users</li>
-        </ul>
-
-        <button class="button button--pink">Get Started</button>
-      </div>
-      <!--pro plan ends -->
-
-      <!--entp plan starts -->
-      <div class="planItem planItem--entp">
-        <div class="card">
-          <div class="card__header">
-            <div class="card__icon"></div>
-            <h2>Enterprise</h2>
-          </div>
-          <div class="card__desc">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</div>
-        </div>
-
-        <div class="price">Let's Talk</div>
-
-        <ul class="featureList">
-          <li>2 links</li>
-          <li>Own analytics platform</li>
-          <li>Chat support</li>
-          <li>Mobile application</li>
-          <li>Unlimited users</li>
-          <li>Customize Panel</li>
-        </ul>
-
-        <button class="button button--white">Get Started</button>
-      </div>
-      <!--entp plan ends -->
 
     </div>
   </div>

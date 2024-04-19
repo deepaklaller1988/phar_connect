@@ -9,6 +9,8 @@ use App\Models\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegisterController extends Controller
 {
@@ -31,7 +33,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    // protected $redirectTo = '/';
+    // protected $redirectTo = 'pricing';
 
     /**
      * Create a new controller instance.
@@ -99,7 +101,6 @@ class RegisterController extends Controller
                 'notification_for' => $user->id
             ]);
             return $user;
-         
         }else{
             // dd("0");
             return User::create([
@@ -112,5 +113,13 @@ class RegisterController extends Controller
         }
     }
 
-  
+    protected function redirectTo()
+    {
+        if (auth()->user()->type == "partner") {
+            return 'pricings';
+        }
+        return 'home';
+    }
+    
+        
 }

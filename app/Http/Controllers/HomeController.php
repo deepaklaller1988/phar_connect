@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\Plan;
 class HomeController extends Controller
 {
     public function index()
@@ -126,6 +127,7 @@ class HomeController extends Controller
 
     public function pricing()
     {
-        return view('pricing');
+        $plans = Plan::all();
+        return view('pricing', compact('plans'));
     }
 }
