@@ -62,6 +62,8 @@
                                             <th>Sr. No.</th>
                                             <th>Name</th>
                                             <th>Status</th>
+                                            <th>Parent Category</th>
+                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -87,12 +89,6 @@
         var table = $('#data-posts').DataTable({
             processing: true,
             serverSide: true,
-            drawCallback: function(settings) {
-                if ($(this).find('tbody tr').length < 10) {
-                    $('#data-posts_paginate').hide();
-                    $('#data-posts_info').hide();
-                }
-            },
             ajax: "{{ route('partner.posts') }}",
             columns: [{
                     data: 'DT_RowIndex',
@@ -105,6 +101,14 @@
                 {
                     data: 'status',
                     name: 'status'
+                },
+                {
+                    data: 'parent_category',
+                    name: 'parent_category'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
                 },
                 {
                     data: 'action',

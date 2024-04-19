@@ -42,8 +42,10 @@
                             <h5>Edit Post Details</h5>
                         </div>
                         <div class="card-block">
-                            <form method="POST" action="{{ route('partner.post.update', $post->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('partner.post.update', $post->id) }}"
+                                enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="white_card_body">
                                     <div class="row">
                                         <div class="col-lg-6 mb-3">
@@ -51,7 +53,7 @@
                                                 <label>Company Name :</label>
                                                 <input type="text" name="company_name" id="company_name"
                                                     class="form-control" placeholder="Company Name..." required
-                                                    value="{{ $post->company_name }}">
+                                                    value="{{ $post->title }}">
                                                 <span id="cnerror"></span>
                                                 @if($errors->has('company_name'))
                                                 <div class="error">{{ $errors->first('company_name') }}</div>
@@ -111,20 +113,25 @@
                                                 <select class="form-select js-example-placeholder-multiple col-sm-12"
                                                     id="multiselect" name="country[]" multiple="multiple">
                                                     @foreach($data['countries'] as $country)
-                                                    <option value="{{ $country->id }}" {{ in_array($country->id, explode(',', $post->country)) ? 'selected' : '' }}>{{ $country->country_name }}
+                                                    <option value="{{ $country->id }}"
+                                                        {{ in_array($country->id, explode(',', $post->country)) ? 'selected' : '' }}>
+                                                        {{ $country->country_name }}
                                                     </option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-lg-6 mb-3">
                                             <label>Category : </label>
                                             <div class="common_input mb_15">
-                                                <select id="sub_category_select" class="form-control selectFixCZ" disabled>
+                                                <select id="category_select" class="form-control selectFixCZ"
+                                                    disabled>
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $post->parent_id ? 'selected' : ''}}>{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $post->parent_id ? 'selected' : ''}}>
+                                                        {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if($errors->has('category'))
@@ -136,40 +143,48 @@
                                         <div class="col-lg-6 mb-3 ">
                                             <div class="common_input mb_15">
                                                 <label>Sub Category : </label>
-                                                <select id="sub_sub_category_select" class="form-control selectFixCZ">
+                                                <select id="sub_category_select" class="form-control selectFixCZ">
                                                     <option value="">Select Category</option>
                                                     @foreach($data['subcategories'] as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $data['cat']->parent_id ? 'selected' : ''}}>{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $data['cat']->parent_id ? 'selected' : ''}}
+                                                        {{ $category->id == $data['getparentcat']->parent_id ? 'selected' : ''}}>
+                                                        {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         @endif
                                         @if($data['subsubcategories'])
-                                        <div class="col-lg-6 mb-3 ">
+                                        <div class="col-lg-6 mb-3" id="child_category_div">
                                             <div class="common_input mb_15">
                                                 <label>Child Category : </label>
                                                 <select id="child_category_select" class="form-control selectFixCZ">
+                                                    <option value="">Select Category</option>
                                                     @foreach($data['subsubcategories'] as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : ''}}>{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $post->category_id ? 'selected' : ''}} {{ $category->id == $data['getparentcat']->id ? 'selected' : ''}}>
+                                                        {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         @endif
                                         @if($data['childcat'])
-                                        <div class="col-lg-6 mb-3 ">
+                                        <div class="col-lg-6 mb-3 " id="sub_child_category_div">
                                             <div class="common_input mb_15">
-                                                <label>Child Category : </label>
-                                                <select id="child_category_select" class="form-control selectFixCZ">
+                                                <label>Sub Child Category : </label>
+                                                <select id="sub_child_category_select" class="form-control selectFixCZ">
                                                     @foreach($data['childcat'] as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : ''}}>{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $post->category_id ? 'selected' : ''}}>
+                                                        {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         @endif
-                                        <input type="hidden" name="parent_id" value="">
+                                        <input type="hidden" name="category_id" id="parent_id">
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Key Services:</label>
@@ -244,40 +259,16 @@ $(document).ready(function() {
     $(document).on('change', '#sub_category_select', function() {
         var category_id = $(this).val();
         $('#parent_id').val(category_id);
-        $('#sub_sub_category_div').css('display', 'none');
-        $('#sub_sub_category_select').html('');
+        $('#child_category_div').css('display', 'none');
+        $('#child_category_select').html('');
+        $('#sub_child_category_div').css('display', 'none');
+        $('#sub_child_category_select').html('');
         $.ajax({
             url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
                 $('#sub_sub_category_select').html(
-                    '<option value="">Choose an Option</option>');
-                $.each(response, function(index, item) {
-
-                    $('#sub_sub_category_div').css('display', '');
-                    $('#sub_sub_category_select').append('<option value="' + item
-                        .id + '">' + item.title + '</option>');
-                });
-            },
-            error: function(xhr, status, error) {
-                // Handle errors
-                console.error(xhr.responseText);
-            }
-        });
-    });
-
-    $(document).on('change', '#sub_sub_category_select', function() {
-        var category_id = $(this).val();
-        $('#parent_id').val(category_id);
-        $('#child_category_div').css('display', 'none');
-        $('#child_category_select').html('');
-        $.ajax({
-            url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                $('#child_category_select').html(
                     '<option value="">Choose an Option</option>');
                 $.each(response, function(index, item) {
 
@@ -294,6 +285,32 @@ $(document).ready(function() {
     });
 
     $(document).on('change', '#child_category_select', function() {
+        var category_id = $(this).val();
+        $('#parent_id').val(category_id);
+        $('#sub_child_category_div').css('display', 'none');
+        $('#sub_child_category_select').html('');
+        $.ajax({
+            url: "{{ route('partner.subcategories') }}?parent_id=" + category_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('#sub_child_category_select').html(
+                    '<option value="">Choose an Option</option>');
+                $.each(response, function(index, item) {
+
+                    $('#sub_child_category_div').css('display', '');
+                    $('#sub_child_category_select').append('<option value="' + item
+                        .id + '">' + item.title + '</option>');
+                });
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#sub_child_category_select', function() {
         var category_id = $(this).val();
         $('#parent_id').val(category_id);
     });

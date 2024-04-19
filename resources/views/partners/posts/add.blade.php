@@ -136,53 +136,98 @@ $(document).ready(function() {
 
         e.preventDefault();
         if ($('#company_name').val() == '') {
-            $('#cnerror').text('please enter company name');
+            $('#cnerror').text('Please enter name');
             return false;
         }
         if ($('#company_website').val() == '') {
-            $('#cwerror').text('please enter company website');
+            $('#cwerror').text('Please enter company website');
             return false;
         }
-        if ($('#contact_name').val() == '') {
-            $('#conname').text('please enter Contact name');
-            return false;
+        if ($('#parent_id').val() != 4) {
+            if ($('#contact_name').val() == '') {
+                $('#conname').text('Please enter Contact name');
+                return false;
+            }
+            if ($('#email')) {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if ($('#email').val() == '' || !emailRegex.test($('#email').val())) {
+                    $('#emailerror').text('Please enter valid email address');
+                    return false;
+                }
+            }
+            if ($('#phone').val() == '') {
+                $('#pherror').text('Please enter valid phone number');
+                return false;
+            }
+            if ($('#key_services').val() == '') {
+                $('#keyserviceerror').text('Please enter key services');
+                return false;
+            }
+            if ($('#image').val() == '') {
+                $('#imageerror').text('Please choose an image');
+                return false;
+            }
+            if ($('#document').val() == '') {
+                $('#docerror').text('Please choose an appropriate document');
+                return false;
+            }
+            if ($('#languages').val() == '') {
+                $('#langerror').text('Please enter languages');
+                return false;
+            }
+            if ($('#hourly_rate').val() == '') {
+                $('#hrate').text('Please Hourly Rate');
+                return false;
+            }
+            if ($('#profile_summary').val() == '') {
+                $('#summaryerror').text('Please enter your profile summary');
+                return false;
+            }
+            if ($('#event_name').val() == '') {
+                $('#everror').text('Please enter Event Name');
+                return false;
+            }
+            if ($('#multiselect').val() == '') {
+                $('#cerror').text('Please select County');
+                return false;
+            }
+            if ($('#start_date').val() == '') {
+                $('#estarterror').text('Please enter Event start date');
+                return false;
+            }
+            if ($('#end_date').val() == '') {
+                $('#eenderror').text('Please enter Event start date');
+                return false;
+            }
+            if ($('#sub_category_select').val() == '') {
+                $('#caterror').text('Please Select Category');
+                return false;
+            }
+            if ($('#location').val() == '') {
+                $('#locerror').text('Please Enter Location');
+                return false;
+            }
+            if ($('#position_type').val() == '') {
+                $('#pterror').text('Please Select Position Type');
+                return false;
+            }
+            if ($('#education_level').val() == '') {
+                $('#ederror').text('Please Select Education Level');
+                return false;
+            }
+            if ($('#experience_level').val() == '') {
+                $('#elerror').text('Please Select Experience Level');
+                return false;
+            }
         }
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if ($('#email').val() == '' || !emailRegex.test($('#email').val())) {
-            $('#emailerror').text('please enter valid email address');
-            return false;
-        }
-        if ($('#phone').val() == '') {
-            $('#pherror').text('please enter valid phone number');
-            return false;
-        }
-        if ($('#key_services').val() == '') {
-            $('#keyserviceerror').text('please enter key services');
-            return false;
-        }
-        if ($('#image').val() == '') {
-            $('#imageerror').text('please choose an image');
-            return false;
-        }
-        if ($('#document').val() == '') {
-            $('#docerror').text('please choose an appropriate document');
-            return false;
-        }
-        if ($('#languages').val() == '') {
-            $('#langerror').text('please enter languages');
-            return false;
-        }
-        if ($('#hourly_rate').val() == '') {
-            $('#hrate').text('please Hourly Rate');
-            return false;
-        }
-        if ($('#profile_summary').val() == '') {
-            $('#summaryerror').text('please enter your profile summary');
-            return false;
-        }
+        if ($('#zone').val() == '') {
+                $('#zoneerror').text('Please Select zone');
+                return false;
+            }
+
         // var formData = $(this).serialize();
         var formData = new FormData(this);
-        if($('#image').val()){
+        if ($('#image').val()) {
             formData.append('image', $('#image')[0].files[0]);
             formData.append('document', $('#document')[0].files[0]);
         }
@@ -216,10 +261,10 @@ $(document).ready(function() {
         });
 
     });
-   
+
     $(document).on('focusout', '.note-editable', function() {
-    $('#profile_summary').val($(this).html());
-});
+        $('#profile_summary').val($(this).html());
+    });
 });
 </script>
 

@@ -60,6 +60,7 @@
                                             <th>Sr. No.</th>
                                             <th>Title</th>
                                             <th>Partner Name</th>
+                                            <th>Parent Category</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -106,6 +107,10 @@
                 {
                     data: 'partner',
                     name: 'partner'
+                },
+                {
+                    data: 'parent_category',
+                    name: 'parent_category'
                 },
                 {
                     data: 'status',

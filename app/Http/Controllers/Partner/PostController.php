@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Notification;
+use App\Models\Authorityregion;
 
 use Illuminate\Support\Facades\View;
 use DataTables;
@@ -19,7 +20,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Post::where('partner_id',auth()->user()->id)->get();  
+            $data = Post::where('partner_id',auth()->user()->id)->with('category','parent_category')->get();  
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
@@ -32,6 +33,12 @@ class PostController extends Controller
                            $status = '<label class="form-label label label-inverse-default">Waiting</label>';
                        }
                         return $status;
+                    })
+                    ->addColumn('category', function ($model) {
+                        return $model->category ? $model->category->title : '-';    
+                    })
+                    ->addColumn('parent_category', function ($model) {
+                        return $model->parent_category ? $model->parent_category->title : '-';    
                     })
                     ->addColumn('action', function($row){
    
@@ -68,11 +75,12 @@ class PostController extends Controller
         }elseif($request->id == 2){
             $html = View::make('partners.posts.consulting')->with('data',$data)->render();
         }elseif($request->id == 3){
-            $html = View::make('partners.posts.events')->render();
+            $html = View::make('partners.posts.events')->with('data',$data)->render();
         }elseif($request->id == 4){
-            
+            $data['zones'] = Authorityregion::all();
+            $html = View::make('partners.posts.authority')->with('data',$data)->render();
         }elseif($request->id == 5){
-            $html = View::make('partners.posts.jobs')->render();
+            $html = View::make('partners.posts.jobs')->with('data',$data)->render();
         }else{
 
         }
@@ -92,11 +100,21 @@ class PostController extends Controller
        $post->certifications = $request->certifications;
        $post->contact_name = $request->contact_name;
        $post->company_website = $request->company_website;
-       $post->country = implode(',', $request->country) ?? $request->country;
+       if($request->parent_id != 4){
+            $post->country = implode(',', $request->country) ?? $request->country;
+        }
        $post->hourly_rate = $request->hourly_rate;
        $post->profile_summary = $request->profile_summary;
        $post->languages = $request->languages;
        $post->parent_id = $request->parent_id;
+       $post->event_name = $request->event_name;
+       $post->start_date = $request->start_date;
+       $post->end_date = $request->end_date;
+       $post->position_type = $request->position_type;
+       $post->experience_level = $request->experience_level;
+       $post->education_level = $request->education_level;
+       $post->zone = $request->zone;
+       $post->location = $request->location;
        if($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads/posts', 'public');
             $post->images = $imagePath;
@@ -143,10 +161,14 @@ class PostController extends Controller
             $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
             return view('partners.posts.edit.consulting',compact('post','data'));
         }elseif($post->parent_id == 3){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
             return view('partners.posts.edit.events',compact('post','data'));
         }elseif($post->parent_id == 4){
-            
+            // $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            $data['zones'] = Authorityregion::all();
+            return view('partners.posts.edit.authority',compact('post','data'));
         }elseif($post->parent_id == 5){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
             return view('partners.posts.edit.jobs',compact('post','data'));
         }else{
 
@@ -156,17 +178,42 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'company_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            
+        ]);
         if($request->parent_id == 2){
             $request->validate([
-                'company_name' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required|numeric',
+                'contact_name' => 'required',
+                'country' => 'required',
                 'key_services' => 'required',
                 'languages' => 'required',
                 'profile_summary' => 'required',
-                'country' => 'required',
-                'contact_name' => 'required',
                 'hourly_rate' => 'required',
+            ]);
+        }elseif($request->parent_id == 3){
+            $request->validate([
+                'contact_name' => 'required',
+                'country' => 'required',
+                'event_name' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+            ]);
+        }elseif($request->parent_id == 5){
+            $request->validate([
+                'contact_name' => 'required',
+                'country' => 'required',
+                'location' => 'required',
+                'position_type' => 'required',
+                'experience_level' => 'required',
+                'education_level' => 'required'
+            ]);
+        }elseif($request->parent_id == 4){
+            $request->validate([
+                'zone' => 'required',
             ]);
         }
         $post = Post::find($id);
@@ -179,11 +226,20 @@ class PostController extends Controller
         $post->certifications = $request->certifications;
         $post->contact_name = $request->contact_name;
         $post->company_website = $request->company_website;
-        $post->country = implode(',', $request->country) ?? $request->country;
+        if($request->parent_id != 4){
+            $post->country = implode(',', $request->country) ?? $request->country;
+        }
         $post->hourly_rate = $request->hourly_rate;
         $post->profile_summary = $request->profile_summary;
         $post->languages = $request->languages;
-
+        $post->event_name = $request->event_name;
+        $post->start_date = $request->start_date;
+        $post->end_date = $request->end_date;
+        $post->location = $request->location;
+        $post->education_level = $request->education_level;
+        $post->position_type= $request->position_type;
+        $post->experience_level = $request->experience_level;
+        $post->zone = $request->zone;
         if($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads/posts', 'public');
             $post->images = $imagePath;

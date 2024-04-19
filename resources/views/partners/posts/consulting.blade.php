@@ -179,11 +179,26 @@
                     </button>
                 </div>
             </div>
+            <div class="col-lg-6 mb-3">
+                <div class="common_input mb_15">
+                    <img src="" id="image-preview" width="150px" height="150px">
+                </div>
+            </div>
         </div>
     </div>
 </form>
 <script>
      $('#summernote').summernote();
+     $('#image').change(function() {
+        var input = this;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}"></script>
 

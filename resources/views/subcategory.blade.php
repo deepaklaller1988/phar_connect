@@ -41,7 +41,7 @@
                                     <span>
                                         {{ $mcategory->title }}
                                     </span>
-                                    @if(!empty($categories[$mkey]['subcategories']))
+                                    @if(count($categories[$mkey]['subcategories']) > 0)
                                     <div class="searchSubCategory">
                                         @foreach($categories[$mkey]['subcategories'] as $skey => $scategory)
                                         <div>

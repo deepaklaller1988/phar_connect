@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = Post::latest()->with('user')->get();  
+            $data = Post::latest()->with('user','parent_category')->get();  
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
@@ -41,8 +41,13 @@ class PostController extends Controller
    
                         $partner =  $row->user->name;
                          return $partner;
-                 })
-                    ->rawColumns(['status','action','partner'])
+                    })
+                    ->addColumn('parent_category', function($row){
+   
+                        $parent_category =  $row->parent_category->title;
+                         return $parent_category;
+                    })
+                    ->rawColumns(['status','action','partner','parent_category'])
                     ->make(true);
         }
         

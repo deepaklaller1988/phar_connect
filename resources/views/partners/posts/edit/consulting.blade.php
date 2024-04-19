@@ -42,7 +42,8 @@
                             <h5>Edit Post Details</h5>
                         </div>
                         <div class="card-block">
-                            <form  method="post" action="{{route('partner.post.update', $post->id)}}" enctype='multipart/form-data'>
+                            <form method="post" action="{{route('partner.post.update', $post->id)}}"
+                                enctype='multipart/form-data'>
                                 @csrf
                                 @method('PUT')
                                 <div class="white_card_body">
@@ -236,7 +237,8 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Image:</label>
-                                                <img src="{{ asset('storage/'.$post->images)}}" width="150px" height="150px" />
+                                                <img id="image-preview" src="{{ asset('storage/'.$post->images)}}" width="150px"
+                                                    height="150px" />
                                             </div>
                                         </div>
                                         @endif
@@ -244,7 +246,8 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Document:</label>
-                                                <a href="{{ asset('storage/'.$post->document)}}" target="_blank" class="btn btn-success" >View</a>
+                                                <a href="{{ asset('storage/'.$post->document)}}" target="_blank"
+                                                    class="btn btn-success">View</a>
                                             </div>
                                         </div>
                                         @endif
@@ -347,6 +350,17 @@ $(document).ready(function() {
 
     $(document).on('focusout', '.note-editable', function() {
         $('#profile_summary').val($(this).html());
+    });
+
+    $('#image').change(function() {
+        var input = this;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
     });
 });
 </script>
