@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class,'parent_id'); 
     }
+
+    public function zones()
+    {
+        return $this->belongsTo(Authorityregion::class,'zone');
+    }
 }

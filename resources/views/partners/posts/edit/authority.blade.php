@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 <div class="pcoded-content">
-    <div class="page-header card">
+    <div class="page-header card"> 
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">

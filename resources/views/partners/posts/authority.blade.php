@@ -36,7 +36,7 @@
                 <div class="create_report_btn mt_30">
                     <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
                         {{ __('Save') }}
-                    </button>
+                    </button> 
                 </div>
             </div>
         </div>
