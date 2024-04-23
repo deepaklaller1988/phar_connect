@@ -63,6 +63,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
     Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
     Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
+    Route::get('admin/partners-by-admin',[UserController::class,'partners_by_admin'])->name('admin.partners-by-admin');
     Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
     Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
     Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
@@ -84,6 +85,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
     Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
     Route::get('/admin/posts/category',[PostController::class,'category'])->name('admin.posts.category');
+    Route::get('/admin/partner/add',[UserController::class,'add_partner'])->name('admin.partner.add');
+    Route::post('/admin/partner/store',[UserController::class,'store_partner'])->name('admin.partner.store');
+    Route::post('/admin/partner/bulkaction',[UserController::class,'bulkaction'])->name('admin.partner.bulkaction');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

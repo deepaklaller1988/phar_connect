@@ -8,11 +8,17 @@ use App\Models\User;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Plan;
+use App\Models\Visitor;
 class HomeController extends Controller
 {
     public function index()
     {
- 
+            $visitor = Visitor::where('ip_address', request()->ip())->first();
+            if(!$visitor){
+                Visitor::create([
+                    'ip_address' => request()->ip(),
+                ]);  
+            }
             $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
             $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
             return view('home')->with('data',$data);

@@ -31,6 +31,11 @@
                             </a>
                         </li>
                         <li class=" ">
+                            <a href="{{ route('admin.partners-by-admin') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Partners By Admin</span>
+                            </a>
+                        </li>
+                        <li class=" ">
                             <a href="{{ route('admin.members') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Members</span>
                             </a>

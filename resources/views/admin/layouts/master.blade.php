@@ -84,12 +84,7 @@
     <script src="{{ asset('assets/admin/pages/chart/float/curvedLines.js')}}"></script>
     <script src="{{ asset('assets/admin/pages/chart/float/jquery.flot.tooltip.min.js')}}"></script>
 
-    <script src="{{ asset('assets/admin/pages/widget/amchart/amcharts.js')}}"></script>
-    <script src="{{ asset('assets/admin/pages/widget/amchart/serial.js')}}"></script>
-    <script src="{{ asset('assets/admin/pages/widget/amchart/light.js')}}"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/pages/google-maps/gmaps.js')}}"></script>
-
+  
     <script src="{{ asset('assets/admin/js/pcoded.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/vertical/vertical-layout.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/admin/pages/dashboard/crm-dashboard.min.js')}}"></script>

@@ -45,32 +45,46 @@
                                     <h5>Fill Partner Details</h5>
                                 </div>
                                 <div class="card-block">
-                                    <form id="main" enctype='multipart/form-data' method="post"
-                                        action="{{ route('admin.partner.update',$partner->id) }}">
+                                    <form id="main" enctype='multipart/form-data' method="post" action="{{ route('admin.partner.store') }}">
                                         @csrf
-                                        @method('PUT')
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Name : </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="name" id="name"
-                                                    placeholder="" value="{{ $partner->name }}">
-                                                <span class="messages"></span>
+                                                    placeholder="" value="{{ old('name') }}">
+                                                @if($errors->has('name'))
+                                                <div class="error">{{ $errors->first('name') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Email : </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="email" id="email"
-                                                    value="{{ $partner->email }}">
-                                                <span class="messages"></span>
+                                                    value="{{ old('email') }}">
+                                                @if($errors->has('email'))
+                                                <div class="error">{{ $errors->first('email') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="form-label col-sm-2 col-form-label"> Password : </label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" name="password" id="password"
+                                                    value="{{ old('password') }}">
+                                                @if($errors->has('password'))
+                                                <div class="error">{{ $errors->first('password') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Phone Number : </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="phone" id="phone"
-                                                    value="{{ $partner->phone }}">
-                                                <span class="messages"></span>
+                                                    value="{{ old('phone') }}">
+                                                @if($errors->has('phone'))
+                                                <div class="error">{{ $errors->first('phone') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -78,58 +92,66 @@
                                             </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="company_website"
-                                                    id="company_website" value="{{ $partner->company_website }}">
-                                                <span class="messages"></span>
+                                                    id="company_website" value="{{ old('company_website') }}">
+                                                @if($errors->has('company_website'))
+                                                <div class="error">{{ $errors->first('company_website') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="form-label col-sm-2 col-form-label"> Location : </label>
+                                            <label class="form-label col-sm-2 col-form-label"> Country : </label>
                                             <div class="col-sm-10">
-                                                <select name="country_id" class="form-select">
-                                                    <option value="">Choose Country</option>
+                                                <select class="form-select" name="country_id">
+                                                    <option value="">Select Country</option>
                                                     @foreach($countries as $country)
-                                                    <option value="{{ $country->id }}"
-                                                        {{ $partner->country_id == $country->id ? 'selected' : '' }}>
-                                                        {{ $country->country_name }}</option>
+                                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                                                     @endforeach
                                                 </select>
+                                                @if($errors->has('country_id'))
+                                                <div class="error">{{ $errors->first('country_id') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Key Services : </label>
                                             <div class="col-sm-10">
                                                 <textarea name="key_services"
-                                                    class="form-control">{{ $partner->key_services }}</textarea>
-                                                <span class="messages"></span>
+                                                    class="form-control">{{ old('key_services') }}</textarea>
+                                                @if($errors->has('key_services'))
+                                                <div class="error">{{ $errors->first('key_services') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Certifications : </label>
                                             <div class="col-sm-10">
                                                 <textarea name="certifications"
-                                                    class="form-control">{{ $partner->certifications }}</textarea>
-                                                <span class="messages"></span>
+                                                    class="form-control">{{ old('certifications') }}</textarea>
+                                                @if($errors->has('certification'))
+                                                <div class="error">{{ $errors->first('certification') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Company Profile : </label>
                                             <div class="col-sm-10">
                                                 <textarea id="summernote"
-                                                    name="">{{ $partner->company_profile }}</textarea>
+                                                    name="">{{ old('company_profile') }}</textarea>
+                                                @if($errors->has('company_profile'))
+                                                <div class="error">{{ $errors->first('company_profile') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <input type="hidden" id="company_profile" name="company_profile"
-                                            value="{{ $partner->company_profile }}">
+                                            value="{{ old('company_profile') }}">
 
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Status : </label>
                                             <div class="col-sm-10">
                                                 <select class="form-select" name="status">
                                                     <option value="">Choose an option</option>
-                                                    <option value="1" {{ $partner->status == 1 ? 'selected' : '' }}>
-                                                        Active</option>
-                                                    <option value="0" {{ $partner->status == 0 ? 'selected' : '' }}>
-                                                        Inactive</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -138,10 +160,8 @@
                                             <div class="col-sm-10">
                                                 <select class="form-select" name="is_featured">
                                                     <option value="">Choose an option</option>
-                                                    <option value="1"
-                                                        {{ $partner->is_featured == 1 ? 'selected' : '' }}>Yes</option>
-                                                    <option value="0"
-                                                        {{ $partner->is_featured == 0 ? 'selected' : '' }}>No</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -150,24 +170,14 @@
                                             <div class="col-sm-5">
                                                 <input type="file" class="form-control" name="logo">
                                             </div>
-                                            @if($partner->logo != null)
-                                            <div class="col-sm-5">
-                                                <img src="{{ asset('storage/'.$partner->logo )}}" width="150px"
-                                                    height="150px">
-                                            </div>
-                                            @endif
+
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Banner : </label>
                                             <div class="col-sm-5">
                                                 <input type="file" class="form-control" name="banner">
                                             </div>
-                                            @if($partner->banner != null)
-                                            <div class="col-sm-5">
-                                                <img src="{{ asset('storage/'.$partner->banner )}}" width="400px"
-                                                    height="150px">
-                                            </div>
-                                            @endif
+
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2"></label>
