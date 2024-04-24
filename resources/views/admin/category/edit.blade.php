@@ -130,7 +130,7 @@
     <script>
     $(document).ready(function() {
         var selected_category_id = $('#parent_id').val();
-        alert(selected_category_id);
+
         $.ajax({
             url: "{{ route('admin.cat') }}?id=" + selected_category_id,
             type: 'GET',

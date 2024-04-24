@@ -34,8 +34,8 @@ class HeaderServiceProvider extends ServiceProvider
             }
 
             if(isset(auth()->user()->id) && auth()->user()->id){
-                $allnotifications = Notification::where(['user_id'=> auth()->user()->id,'read'=> 0,'status'=>0])->get(); 
-                $adminnotifications = Notification::where([ 'status'=>0])->get(); 
+                $allnotifications = Notification::where(['user_id'=> auth()->user()->id,'read'=> 0,'status'=>0])->orderBy('id','asc')->get(); 
+                $adminnotifications = Notification::where([ 'status'=>0])->orderBy('id','desc')->get(); 
             }else{
                 $allnotifications = [];
                 $adminnotifications = [];

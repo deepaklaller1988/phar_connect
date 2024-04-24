@@ -9,7 +9,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-server bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Categories</h5>
+                        <h5>Transactions</h5>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.categories') }}">categories</a>
+                        <li class="breadcrumb-item"><a href="!#">Transactions</a>
                         </li>
                     </ul>
                 </div>
@@ -50,12 +50,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>All Categories</h5>
-                            <select class="form-select" id="type_select" style="width:30%">
-                                <option value="">All</option>
-                                <option value="user">User</option>
-                                <option value="post">Post</option>
-                            </select>
+                            <h5>All Transactions</h5>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
@@ -63,11 +58,13 @@
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
-                                            <th>Name</th>
-                                            <th>notification</th>
-                                            <th>Notification For</th>
-                                            <th>status</th>
-                                            <th>action</th>
+                                            <th>User Name</th>
+                                            <th>Plan</th>
+                                            <th>Amount (in $)</A>
+                                            <th>Status</th>
+                                            <th>Categories</th>
+                                            <th>Expiry Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -91,14 +88,13 @@
         var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
-            // ajax: "{{ route('admin.notifications') }}",
-            ajax: {
-                url: "{{ route('admin.notifications') }}",
-                type: 'GET',
-                data: function(d) {
-                    d.type_select = $('#type_select').val();
+            drawCallback: function(settings) {
+                if ($(this).find('tbody tr').length < 10) {
+                    $('#data-posts_paginate').hide();
+                    $('#data-posts_info').hide();
                 }
             },
+            ajax: "{{ route('admin.transactions') }}",
             columns: [
                 { 
                     data: 'DT_RowIndex', 
@@ -107,34 +103,52 @@
                     searchable: false 
                 },
                 {
-                    data: 'parent_name',
-                    name: 'parent_name'
+                    data: 'title',
+                    name: 'title'
                 },
                 {
-                    data: 'notification',
-                    name: 'notification'
+                    data: 'plan',
+                    name: 'plan'
                 },
                 {
-                    data: 'type',
-                    name: 'type'
+                    data: 'amount',
+                    name: 'amount'
                 },
                 {
                     data: 'status',
                     name: 'status'
                 },
                 {
+                    data: 'categories',
+                    name: 'categories'
+                },
+                {
+                    data: 'expiry_date',
+                    name: 'expiry_date'
+                },
+                {
                     data: 'action',
                     name: 'action',
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
-                }
-                
+                },
             ]
         });
-        $('#type_select').change(function() {
-            table.ajax.reload();
-        });
 
+    })
+
+    $(document).on('click', '#invoice-download', function(){
+        var urll = $(this).data('id');
+        $.ajax({
+        url: urll,
+        type: 'GET',
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });   
     })
     </script>
 

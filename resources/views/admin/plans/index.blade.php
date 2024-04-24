@@ -86,20 +86,6 @@
                                                 </ul>
 
                                             </div>
-
-                                            <!-- <div class="card-header-right">
-                                            <ul class="list-unstyled card-option">
-                                                <li class="first-opt"><i
-                                                        class="feather icon-chevron-left open-card-option"></i></li>
-                                                <li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
-                                                            class="feather icon-edit-1"></i></a></li>
-                                                <li><i class="feather icon-minus minimize-card"></i></li>
-                                                <li><i class="feather icon-note reload-card"></i></li>
-                                                <li id="planDelete" data-id="{{ $plan->id }}"><i
-                                                        class="feather icon-trash close-card"></i></li>
-                                                <li><i class="feather icon-chevron-left open-card-option"></i></li>
-                                            </ul>
-                                        </div> -->
                                         </div>
                                         <div class="card-block">
                                             <ul class="basic-list list-icons">
@@ -107,7 +93,7 @@
                                                     <i
                                                         class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
                                                     <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
-
+                                                    <h6>For  : {{ $plan->days}} days</h6>
                                                     <p>{!! $plan->description !!}</p>
                                                 </li>
                                             </ul>

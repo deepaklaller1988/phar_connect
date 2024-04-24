@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Country;
 use App\Mail\RegistrationMail;
+use App\Models\Notification;
+use App\Models\Transaction;
+use App\Models\Plan;
+use Carbon\Carbon;
 use DataTables;
 class UserController extends Controller
 {
@@ -16,11 +20,14 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = User::where('type',2)->orderBy('id','desc')->get();  
+            $data = User::where(['type'=> 2,'plan_status' => NULL])->orderBy('id','desc')->get();  
             return Datatables::of($data)
                     ->addColumn('checkbox', function ($item) {
                         return '<input type="checkbox" value="'.$item->id.'" name="someCheckbox" />';
                       })
+                    ->addColumn('created_at', function($row){
+                        return Carbon::parse($row->created_at)->format('d-m-Y');   
+                    })
                     ->addColumn('is_featured', function($row){
                         if($row->is_featured == 1){
                            $featured = "Yes"; 
@@ -100,7 +107,18 @@ class UserController extends Controller
             $user->banner = $imagePath;
         }
         if($user->save()){
-            
+            $note = Notification::where('user_id',$id)->first();
+            if($note){
+                if($request->status == 1){
+                    $note->status = 1;
+                    $note->notification = 'Your Account is approved';
+                    $note->save();
+                }elseif($request->status == 2){
+                    $note->status = 2;
+                    $note->notification = 'Account declined by admin';
+                    $note->save();
+                }
+            }
             return redirect()->route('admin.partners')->with('success', 'Information Updated Successfully.');
         }else{
             return redirect()->route('admin.partners')->with('error', 'Error while updating information');
@@ -166,7 +184,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = User::where(['type'=> 2,'created_by' => 1])->orderBy('id','desc')->get();  
+            $data = User::where(['type'=> 2,'created_by' => 1,'plan_status' => 'active'])->orderBy('id','desc')->get();  
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('is_featured', function($row){
@@ -209,4 +227,50 @@ class UserController extends Controller
             return redirect()->route('admin.partners')->with('error', 'Error while adding partner');
         }
     }
+
+    public function archive_partners(Request $request)
+    {
+        if ($request->ajax()) {
+  
+            $data = User::where(['type' => 2, 'plan_status' => 'expired'])->orderBy('id','desc')->get();  
+            return Datatables::of($data)
+                    ->addColumn('checkbox', function ($item) {
+                        return '<input type="checkbox" value="'.$item->id.'" name="someCheckbox" />';
+                      })
+                    ->addColumn('created_at', function($row){
+                        return Carbon::parse($row->created_at)->format('d-m-Y');   
+                    })
+                    ->addColumn('is_featured', function($row){
+                        if($row->is_featured == 1){
+                           $featured = "Yes"; 
+                        }else{
+                            $featured = "No";
+                        }
+                        return $featured;
+                    })
+                    ->addColumn('status', function($row){
+                        if($row->status == 0){
+                           $status = "Inactive"; 
+                        }else{
+                            $status = "Active";
+                        }
+                        return $status;
+                    })
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<a href="'.url('admin/partner/edit',$row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editPartner" ><i class="fa fa-edit" ></i></a>';
+   
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" id="deleteCategory" ><i class="fa fa-trash-alt ml-3"></i></a>';
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['checkbox','action','is_featured','status'])
+                    ->make(true);
+        }
+        return view('admin.users.archive-partners');
+        
+    }
+   
 }
+
+        

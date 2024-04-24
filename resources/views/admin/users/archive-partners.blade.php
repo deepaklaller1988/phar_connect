@@ -14,7 +14,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-server bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Partners</h5>
+                        <h5>Archive Partners</h5>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.partners') }}">partners</a>
+                        <li class="breadcrumb-item"><a href="!#">partners</a>
                         </li>
                     </ul>
                 </div>
@@ -55,9 +55,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h5>Partners</h5>
-                            <a href="{{ route('admin.partner.add') }}"
-                                class="btn btn-success waves-effect waves-light">Add partner</a>
+                            <h5>Archive Partners</h5>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
@@ -79,8 +77,6 @@
                                     </thead>
                                 </table>
                             </div>
-                            <button type="submit" class="btn btn-success wave-effect wave-light" id="getcheckAll"
-                                value="Action">Action</button>
                         </div>
                     </div>
                 </div>
@@ -117,7 +113,7 @@
         var table = $('#data-partners').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('admin.partners') }}",
+            ajax: "{{ route('admin.archive-partners') }}",
             columns: [{
                     data: 'checkbox',
                     name: 'checkbox',

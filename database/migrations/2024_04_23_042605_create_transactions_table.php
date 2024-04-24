@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->tinyInteger('user_id');
             $table->string('transaction_id');
+            $table->string('order_id')->nullable();
             $table->string('status')->nullable();
             $table->string('amount')->nullable();
             $table->string('mode')->nullable();
