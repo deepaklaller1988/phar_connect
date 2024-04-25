@@ -5,10 +5,11 @@
         <div class="consultingServicesInner">
             @if(count($posts) > 0)
             <section class="consultingServicesSet postAll">
+            
                 <section>
-                    @foreach($posts as $post)
+                @foreach($posts as $post)
                     <div class="consult-Active">
-                        <a href="{{ route('post-details',['id'=>$post->id]) }}">
+                        <a href="{{ route('post-details', $post->slug) }}">
                             <h4>{{ $post->title }}</h4>
                             <span>
                                 <p>{{ $post->user->name }}</p>
@@ -36,6 +37,7 @@
                     </div>
                     @endforeach
                 </section>
+                
             </section>
             @else
             <section>

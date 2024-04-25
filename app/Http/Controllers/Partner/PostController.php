@@ -90,17 +90,22 @@ class PostController extends Controller
     public function store(request $request)
     {
         // dd($request);
-       $post = new Post;
-       $post->title = $request->company_name;
-       $post->email = $request->email;
-       $post->contact_info = $request->phone;
-       $post->category_id = $request->category_id;
-       $post->partner_id = auth()->user()->id;
-       $post->key_services = $request->key_services;
-       $post->certifications = $request->certifications;
-       $post->contact_name = $request->contact_name;
-       $post->company_website = $request->company_website;
-       if($request->parent_id != 4){
+        $post = new Post;
+        $post->title = $request->company_name;
+        $str = str_replace('/', ' ', $request->company_name);
+        $string = strtolower($str);
+        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string = str_replace(' ', '-', $string);
+        $post->slug = $string;
+        $post->email = $request->email;
+        $post->contact_info = $request->phone; 
+        $post->category_id = $request->category_id;
+        $post->partner_id = auth()->user()->id;
+        $post->key_services = $request->key_services;
+        $post->certifications = $request->certifications;
+        $post->contact_name = $request->contact_name;
+        $post->company_website = $request->company_website;
+        if($request->parent_id != 4){
             $post->country = implode(',', $request->country) ?? $request->country;
         }
        $post->hourly_rate = $request->hourly_rate;
@@ -218,6 +223,11 @@ class PostController extends Controller
         }
         $post = Post::find($id);
         $post->title = $request->company_name;
+        $str = str_replace('/', ' ', $request->company_name);
+        $string = strtolower($str);
+        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string = str_replace(' ', '-', $string);
+        $post->slug = $string;
         $post->email = $request->email;
         $post->contact_info = $request->phone;
         $post->category_id = $request->category_id;

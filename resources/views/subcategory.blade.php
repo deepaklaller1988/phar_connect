@@ -21,7 +21,7 @@
                     <section>
                         <div class="search-criteria">
                             <span>
-                                <h5>Search By Category</h5>
+                                <h5>Search By Country</h5>
                                 <select placeholder="Country name here...">
                                     <option>America</option>
                                 </select>
@@ -45,10 +45,10 @@
                                     <div class="searchSubCategory">
                                         @foreach($categories[$mkey]['subcategories'] as $skey => $scategory)
                                         <div>
-                                            <a href="{{ route('subcategory',$scategory->id) }}">{{ $scategory->title }}</a>
+                                            <a href="{{ route('subcategory',$scategory->slug) }}">{{ $scategory->title }}</a>
                                             <ul>
                                                 @foreach($categories[$mkey][$skey]['childcategory'] as $ckey => $ccategory)
-                                                <li><a href="{{ route('categorydetails',['id' => $scategory->id]) }}">{{ $ccategory->title }}</a></li>
+                                                <li><a href="{{ route('categorydetails',$ccategory->slug) }}">{{ $ccategory->title }}</a></li>
                                                @endforeach
                                             </ul>
                                         </div>
@@ -67,7 +67,7 @@
                         <ul>
                             @foreach($data['categories'] as $category )
                             <li>
-                                <a href="{{ route('categorydetails',['id'=>$category->id]) }}">
+                                <a href="{{ route('subcategory',$category->slug) }}">
                                     <span>
                                         <img src="{{ url('storage/'.$category->image) }}" alt="ategories" />
                                     </span>

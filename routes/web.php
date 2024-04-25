@@ -32,9 +32,9 @@ use App\Http\Controllers\Admin\TransactionController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
-Route::get('/subcategory/{id}', [HomeController::class, 'subcategory'])->name('subcategory');
-Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('categorydetails');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category');
+Route::get('/subcategory/{slug}', [HomeController::class, 'subcategory'])->name('subcategory');
+Route::get('/category-details/{slug}',[HomeController::class,'categoryDetail'])->name('categorydetails');
 Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
 Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
 Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
@@ -44,11 +44,16 @@ Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
 Route::get('/privacy-policies',[HomeController::class,'privacy_policy'])->name('privacy-policies');
 Route::get('/faq',[HomeController::class,'faq'])->name('faq');
 Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
-Route::get('/posts',[HomeController::class,'posts'])->name('posts');
-Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
+Route::get('/posts/{slug}',[HomeController::class,'posts'])->name('posts');
+Route::get('/post-details/{slug}',[HomeController::class,'post_details'])->name('post-details');
 Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
 Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('store.contact-us');
 Route::get('/pricings',[HomeController::class,'pricing'])->name('pricings');
+Route::get('/search',[HomeController::class,'search'])->name('search');
+Route::get('/country-search',[HomeController::class,'country_search'])->name('country-search');
+Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts'])->name('search-posts');
+Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
+Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -92,6 +97,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
         Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
         Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
+
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
