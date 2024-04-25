@@ -18,7 +18,7 @@ class AddPositionToPostsTable extends Migration
             $table->tinyInteger('position_type')->after('education_level')->nullable();
             $table->tinyInteger('experience_level')->after('position_type')->nullable();
             $table->string('location')->after('experience_level')->nullable();
-            $table->tineInteger('zone')->after('location')->nullable();
+            $table->tinyInteger('zone')->after('location')->nullable();
         });
     }
 
