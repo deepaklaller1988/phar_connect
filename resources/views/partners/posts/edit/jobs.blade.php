@@ -212,7 +212,7 @@
                                                 @if($errors->has('experience_level'))
                                                 <div class="error">{{ $errors->first('experience_level') }}</div>
                                                 @endif
-                                            </div>
+                                            </div> 
                                         </div>
                                         <input type="hidden" name="parent_id" 
                                             value="{{ $post->parent_id }}">

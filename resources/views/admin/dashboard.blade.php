@@ -10,7 +10,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-home bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Dashboard CRM</h5>
+                        <h5>Dashboard Pharm Connect</h5>
                     </div>
                 </div>
             </div>
@@ -34,28 +34,28 @@
 
                     <div class="row">
 
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card prod-p-card card-red">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">Total Profit</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">$1,783</h3>
+                                            <h6 class="m-b-5 text-white">Total Vistors</h6>
+                                            <h3 class="m-b-0 f-w-700 text-white">{{ $data['visitors'] }}</h3>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-money-bill-alt text-c-red f-18"></i>
+                                            <i class="fas fa-eye text-c-red f-18"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card prod-p-card card-blue">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">Total Orders</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">15,830</h3>
+                                            <h6 class="m-b-5 text-white">Total Partners</h6>
+                                            <h3 class="m-b-0 f-w-700 text-white">{{ $data['partners'] }}</h3>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-database text-c-blue f-18"></i>
@@ -64,13 +64,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card prod-p-card card-green">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">Average Price</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">$6,780</h3>
+                                            <h6 class="m-b-5 text-white">Revenue Monthly/Yearly</h6>
+                                            <h3 class="m-b-0 f-w-700 text-white">$ {{ $data['monthly_revenue']  }} / $
+                                                {{ $data['yearly_revenue'] }}</h3>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign text-c-green f-18"></i>
@@ -79,13 +80,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card prod-p-card card-yellow">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">Product Sold</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">6,784</h3>
+                                            <h6 class="m-b-5 text-white">Active / Non Active Partners</h6>
+                                            <h3 class="m-b-0 f-w-700 text-white">{{ $data['active'] }} /
+                                                {{ $data['inactive'] }}</h3>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-tags text-c-yellow f-18"></i>
@@ -94,8 +96,17 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xl-4 col-md-12">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="card o-hidden">
+                                <div class="card-header">
+                                    <h5>Users</h5>
+                                </div>
+                                <div class="card-block">
+                                </div>
+                                <div id="sal-income" style="height:100px"></div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-xl-4 col-md-12">
                             <div class="card comp-card">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -142,11 +153,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var mdata = {{ json_encode($data['users'])}};
+</script>
 @endsection

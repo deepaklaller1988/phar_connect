@@ -221,9 +221,10 @@ $(document).ready(function() {
             }
         }
         if ($('#zone').val() == '') {
-                $('#zoneerror').text('Please Select zone');
-                return false;
-            }
+            $('#zoneerror').text('Please Select zone');
+            console.log('zoerror');
+            return false;
+        }
 
         // var formData = $(this).serialize();
         var formData = new FormData(this);

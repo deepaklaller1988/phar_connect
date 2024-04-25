@@ -28,7 +28,7 @@
                     @foreach($data['categories'] as $category)
                     @php $count++; @endphp
                     <div class=" @if($count > 9) item-category @endif" >
-                        <a href="{{ route('subcategory',$category->id) }}">
+                        <a href="{{ url('subcategory',$category->slug) }}">
                             <span><img src="{{ url('storage/'.$category->image) }}" alt="categoriy" /></span>
                             <h4>{{ $category->title}}</h4>
                             <b>Learn More</b>

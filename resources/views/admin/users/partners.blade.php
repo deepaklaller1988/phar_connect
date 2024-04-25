@@ -1,6 +1,11 @@
 @extends('admin.layouts.master')
 
 @section('content')
+<style>
+.modal-backdrop {
+    z-index: -1;
+}
+</style>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -31,7 +36,7 @@
             <div class="page-wrapper">
                 <div class="page-body">
                     @if(session('success'))
-                    <div class="card">
+                    <div class="card" id="successMessage">
                         <div class="card-header">
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -40,7 +45,7 @@
                     </div>
                     @endif
                     @if(session('error'))
-                    <div class="card">
+                    <div class="card" id="successMessage">
                         <div class="card-header">
                             <div class="alert alert-danger">
                                 {{ session('error') }}
@@ -51,36 +56,61 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Partners</h5>
-                            <a href="#"
-                                clas="btn btn-success waves-effect waves-light">Add partner</a>
+                            <a href="{{ route('admin.partner.add') }}"
+                                class="btn btn-success waves-effect waves-light">Add partner</a>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
                                 <table id="data-partners" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Sr. No.</th>
+                                            <th><input type="checkbox" id="checkAll"></th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Company Website</th>
-                                            <th>Location</th>
                                             <th>Key services</th>
                                             <th>Certifications</th>
                                             <th>Is Featured</th>
                                             <th>Status</th>
+                                            <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
+                            <button type="submit" class="btn btn-success wave-effect wave-light" id="getcheckAll"
+                                value="Action">Action</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    <div class="modal fade" id="actionModal1" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eactionModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ route('admin.partner.bulkaction') }}">
+                        @csrf
+                        <input type="hidden" name="ids" id="ids" value="">
+                        <label>Action:</label>
+                        <select name="status" id="action" class="form-control">
+                            <option value="">Select Action</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <input type="submit" value="Save" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script>
     $(function() {
@@ -88,12 +118,11 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('admin.partners') }}",
-            columns: [
-                { 
-                    data: 'DT_RowIndex', 
-                    name: 'DT_RowIndex', 
-                    orderable: false, 
-                    searchable: false 
+            columns: [{
+                    data: 'checkbox',
+                    name: 'checkbox',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: 'name',
@@ -112,10 +141,6 @@
                     name: 'company_website'
                 },
                 {
-                    data: 'location',
-                    name: 'location'
-                },
-                {
                     data: 'key_services',
                     name: 'key_services'
                 },
@@ -132,14 +157,36 @@
                     name: 'status'
                 },
                 {
+                    data: 'created_at',
+                    name: 'created_at'
+                },
+                {
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
                 },
-                
+
             ]
         });
+    })
+
+    $("#checkAll").click(function() {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $('#getcheckAll').click(function() {
+        $(".modal.fade.in").modal("hide");
+        var selected = new Array();
+        $('tbody input:checked').each(function() {
+            selected.push(this.value);
+        });
+        if (selected.length > 0) {
+            $('#ids').val(selected);
+            $('#actionModal1').modal('show');
+        } else {
+            return false
+        }
     })
     </script>
 

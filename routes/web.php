@@ -16,6 +16,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PlanJobController;
 
+use App\Http\Controllers\Admin\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +34,9 @@ use App\Http\Controllers\PlanJobController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
-Route::get('/subcategory/{id}', [HomeController::class, 'subcategory'])->name('subcategory');
-Route::get('/category-details',[HomeController::class,'categoryDetail'])->name('categorydetails');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category');
+Route::get('/subcategory/{slug}', [HomeController::class, 'subcategory'])->name('subcategory');
+Route::get('/category-details/{slug}',[HomeController::class,'categoryDetail'])->name('categorydetails');
 Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
 Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
 Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
@@ -45,46 +46,60 @@ Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
 Route::get('/privacy-policies',[HomeController::class,'privacy_policy'])->name('privacy-policies');
 Route::get('/faq',[HomeController::class,'faq'])->name('faq');
 Route::get('/terms-and-conditions',[HomeController::class,'terms_and_conditions'])->name('terms-and-conditions');
-Route::get('/posts',[HomeController::class,'posts'])->name('posts');
-Route::get('/post-details',[HomeController::class,'post_details'])->name('post-details');
+Route::get('/posts/{slug}',[HomeController::class,'posts'])->name('posts');
+Route::get('/post-details/{slug}',[HomeController::class,'post_details'])->name('post-details');
 Route::get('/contact-us',[ContactUsController::class,'contactus'])->name('contact-us');
 Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('store.contact-us');
 Route::get('/pricings',[HomeController::class,'pricing'])->name('pricings');
+Route::get('/search',[HomeController::class,'search'])->name('search');
+Route::get('/country-search',[HomeController::class,'country_search'])->name('country-search');
+Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts'])->name('search-posts');
+Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
+Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
-    Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
-    Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
-    Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
-    Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
-    Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
-    Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
-    Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
-    Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
-    Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
-    Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
-    Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
-    Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
-    Route::post('/admin/plan/create',[PlanController::class,'create'])->name('admin.plan.create');
-    Route::put('/admin/plan/update/{id}',[PlanController::class,'update'])->name('admin.plan.update');
-    Route::delete('/admin/plan/delete/{id}',[PlanController::class,'delete'])->name('admin.plan.delete');
-    Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
-    Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
-    Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
-    Route::get('admin/pages/terms-and-conditions',[PageController::class,'terms_and_conditions'])->name('admin.pages.terms-and-conditions');
-    Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
-    Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
-    Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
-    Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
-    Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
-    Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
-    Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
-    Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
-    Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
+        Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
+        Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
+        Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
+        Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
+        Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
+        Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
+        Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
+        Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
+        Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
+        Route::get('admin/partners-by-admin',[UserController::class,'partners_by_admin'])->name('admin.partners-by-admin');
+        Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
+        Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
+        Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
+        Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
+        Route::post('/admin/plan/create',[PlanController::class,'create'])->name('admin.plan.create');
+        Route::put('/admin/plan/update/{id}',[PlanController::class,'update'])->name('admin.plan.update');
+        Route::delete('/admin/plan/delete/{id}',[PlanController::class,'delete'])->name('admin.plan.delete');
+        Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
+        Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
+        Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
+        Route::get('admin/pages/terms-and-conditions',[PageController::class,'terms_and_conditions'])->name('admin.pages.terms-and-conditions');
+        Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
+        Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
+        Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
+        Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
+        Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
+        Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
+        Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
+        Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
+        Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
+        Route::get('/admin/posts/category',[PostController::class,'category'])->name('admin.posts.category');
+        Route::get('/admin/partner/add',[UserController::class,'add_partner'])->name('admin.partner.add');
+        Route::post('/admin/partner/store',[UserController::class,'store_partner'])->name('admin.partner.store');
+        Route::post('/admin/partner/bulkaction',[UserController::class,'bulkaction'])->name('admin.partner.bulkaction');
+        Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
+        Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
+        Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
+
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
@@ -114,3 +129,4 @@ Route::get('plan/job',[PlanJobController::class,'planjob']);
 
 
 
+Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');

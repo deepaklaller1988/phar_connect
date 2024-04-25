@@ -1788,6 +1788,7 @@ section.consultingServicesSet.postAll section>div {
 section.consultingServicesSet.postAll section {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 section.consultingServicesSet section>div a {
     padding: 20px;

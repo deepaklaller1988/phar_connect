@@ -31,6 +31,16 @@
                             </a>
                         </li>
                         <li class=" ">
+                            <a href="{{ route('admin.partners-by-admin') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Partners By Admin</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ route('admin.archive-partners') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Archive Partners</span>
+                            </a>
+                        </li>
+                        <li class=" ">
                             <a href="{{ route('admin.members') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-mtext">Members</span>
                             </a>
@@ -91,7 +101,17 @@
                         <span class="pcoded-micon">
                             <i class="feather icon-bell"></i>
                         </span>
-                        <span class="pcoded-mtext">Notifications</span>
+                        <span class="pcoded-mtext">Notifications
+                            <span class="badge bg-c-red">{{ count($adminnotifications)}}</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ route('admin.transactions') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-server"></i>
+                        </span>
+                        <span class="pcoded-mtext">Transactions</span>
                     </a>
                 </li>
                 <li class=" ">

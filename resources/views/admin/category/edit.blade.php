@@ -86,7 +86,7 @@
                                             </div>
                                         </div>
                                         <input type="hidden" name="parent_id" id="parent_id"
-                                            value="{{ $data['category']->id }}">
+                                            value="{{ $data['category']->parent_id }}">
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label">Category Image : </label>
                                             <div class="col-sm-10">
@@ -130,7 +130,7 @@
     <script>
     $(document).ready(function() {
         var selected_category_id = $('#parent_id').val();
-        alert(selected_category_id);
+
         $.ajax({
             url: "{{ route('admin.cat') }}?id=" + selected_category_id,
             type: 'GET',
@@ -214,12 +214,15 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
+                    $html += '<option value="">Select Sub Category</option>';
                     $.each(response, function(index, item) {
 
                         $('#sub_sub_category_div').css('display', '');
-                        $('#sub_sub_category_select').append('<option value="' + item
-                            .id + '">' + item.title + '</option>');
+                        $html +='<option value="' + item
+                            .id + '">' + item.title + '</option>';
+                        
                     });
+                    $('#sub_sub_category_select').append($html);
                 },
                 error: function(xhr, status, error) {
                     // Handle errors

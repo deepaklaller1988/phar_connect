@@ -21,8 +21,18 @@ class Post extends Model
         return $this->belongsTo(Category::class,'category_id'); 
     }
 
+    public function countrie()
+    {
+        return $this->belongsTo(Country::class,'country');
+    }
+
     public function parent_category()
     {
         return $this->belongsTo(Category::class,'parent_id'); 
+    }
+
+    public function zones()
+    {
+        return $this->belongsTo(Authorityregion::class,'zone');
     }
 }
