@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\CategoryController as HomeCategory;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\PlanJobController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,5 +108,9 @@ Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login')
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
 Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name('citySuggestion');
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
+
+
+Route::get('plan/job',[PlanJobController::class,'planjob']);
+
 
 
