@@ -33,7 +33,6 @@ use App\Http\Controllers\Admin\TransactionController;
 //  });
 
 Route::get('/', [HomeController::class, 'index']);
-
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category');
 Route::get('/subcategory/{slug}', [HomeController::class, 'subcategory'])->name('subcategory');
 Route::get('/category-details/{slug}',[HomeController::class,'categoryDetail'])->name('categorydetails');
@@ -61,49 +60,48 @@ Route::get('/home', [HomeController::class, 'index']);
 
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-        Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
-        Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
-        Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
-        Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
-        Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
-        Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
-        Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
-        Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
-        Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
-        Route::get('admin/partners-by-admin',[UserController::class,'partners_by_admin'])->name('admin.partners-by-admin');
-        Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
-        Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
-        Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
-        Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
-        Route::post('/admin/plan/create',[PlanController::class,'create'])->name('admin.plan.create');
-        Route::put('/admin/plan/update/{id}',[PlanController::class,'update'])->name('admin.plan.update');
-        Route::delete('/admin/plan/delete/{id}',[PlanController::class,'delete'])->name('admin.plan.delete');
-        Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
-        Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
-        Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
-        Route::get('admin/pages/terms-and-conditions',[PageController::class,'terms_and_conditions'])->name('admin.pages.terms-and-conditions');
-        Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
-        Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
-        Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
-        Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
-        Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
-        Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
-        Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
-        Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
-        Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
-        Route::get('/admin/posts/category',[PostController::class,'category'])->name('admin.posts.category');
-        Route::get('/admin/partner/add',[UserController::class,'add_partner'])->name('admin.partner.add');
-        Route::post('/admin/partner/store',[UserController::class,'store_partner'])->name('admin.partner.store');
-        Route::post('/admin/partner/bulkaction',[UserController::class,'bulkaction'])->name('admin.partner.bulkaction');
-        Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
-        Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
-        Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
+    Route::get('/admin/category/add',[CategoryController::class,'create'])->name('admin.category.add');
+    Route::post('/admin/category/store',[CategoryController::class,'store'])->name('admin.category.store');
+    Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
+    Route::put('/admin/category/update/{id}',[CategoryController::class,'update'])->name('admin.category.update');
+    Route::delete('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('admin.category.delete');
+    Route::get('/admin/subcategories',[CategoryController::class,'get_categories'])->name('admin.subcategories');
+    Route::get('/admin/cat',[CategoryController::class,'get_cat'])->name('admin.cat');
+    Route::get('/admin/partners',[UserController::class,'partners'])->name('admin.partners');
+    Route::get('admin/partners-by-admin',[UserController::class,'partners_by_admin'])->name('admin.partners-by-admin');
+    Route::get('/admin/members',[UserController::class,'members'])->name('admin.members');
+    Route::get('/admin/plans',[PlanController::class,'index'])->name('admin.plans');
+    Route::get('/admin/plan/edit/{id}',[PlanController::class,'edit'])->name('admin.plan.edit');
+    Route::get('/admin/plan/add',[PlanController::class,'add'])->name('admin.plan.add');
+    Route::post('/admin/plan/create',[PlanController::class,'create'])->name('admin.plan.create');
+    Route::put('/admin/plan/update/{id}',[PlanController::class,'update'])->name('admin.plan.update');
+    Route::delete('/admin/plan/delete/{id}',[PlanController::class,'delete'])->name('admin.plan.delete');
+    Route::get('/admin/partner/edit/{id}',[UserController::class,'edit_partner'])->name('admin.partner.edit');
+    Route::put('/admin/partner/update/{id}',[UserController::class,'update'])->name('admin.partner.update');
+    Route::get('admin/pages/about-us',[PageController::class,'about_us'])->name('admin.pages.about-us');
+    Route::get('admin/pages/terms-and-conditions',[PageController::class,'terms_and_conditions'])->name('admin.pages.terms-and-conditions');
+    Route::get('admin/pages/faq',[PageController::class,'faq'])->name('admin.pages.faq');
+    Route::get('admin/pages/privacy-policies',[PageController::class,'privacy_policies'])->name('admin.pages.privacy-policies');
+    Route::post('admin/pages/store',[PageController::class,'store'])->name('admin.pages.store');
+    Route::get('admin/pages/contact-us',[PageController::class,'contact_us'])->name('admin.pages.contact-us');
+    Route::get('admin/posts',[AdminPostController::class,'index'])->name('admin.posts');
+    Route::get('admin/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin.post.edit');
+    Route::put('admin/post/update/{id}',[AdminPostController::class,'update'])->name('admin.post.update');
+    Route::delete('admin/post/delete/{id}',[AdminPostController::class,'destroy'])->name('admin.post.delete');
+    Route::get('/admin/notifications',[NotificationController::class,'get_admin_notifications'])->name('admin.notifications');
+    Route::get('/admin/posts/category',[PostController::class,'category'])->name('admin.posts.category');
+    Route::get('/admin/partner/add',[UserController::class,'add_partner'])->name('admin.partner.add');
+    Route::post('/admin/partner/store',[UserController::class,'store_partner'])->name('admin.partner.store');
+    Route::post('/admin/partner/bulkaction',[UserController::class,'bulkaction'])->name('admin.partner.bulkaction');
+    Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
+    Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
+    Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
 
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
-  
     Route::get('/partner/dashboard', [PartnerController::class, 'dashboard'])->name('partner.dashboard');
     Route::get('/partner/profile',[PartnerController::class, 'profile'])->name('partner.profile');
     Route::post('/partner/update/{id}',[PartnerController::class, 'update'])->name('partner.update');
@@ -118,15 +116,9 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
     Route::get('/partner/post/loadblade',[PostController::class,'loadBlade'])->name('partner.post.loadblade');
 });
-
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
 Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name('citySuggestion');
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
-
-
 Route::get('plan/job',[PlanJobController::class,'planjob']);
-
-
-
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
