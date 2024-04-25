@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Plan;
 use App\Models\Visitor;
 use App\Models\Country;
+use App\Models\Authorityregion;
 class HomeController extends Controller
 {
     public function index()
@@ -61,7 +62,14 @@ class HomeController extends Controller
         $getcat = Category::where('slug',$slug)->first();
 
         if($getcat->title == "Health Authority Sites"){
-            return view('health-authority');
+            $zones = Authorityregion::all();
+            $data = array();
+            foreach($zones as $key => $zone){
+                $data[$key]['name'] = $zone->name;
+                $data[$key]['id'] = $zone->id;
+                $data[$key]['posts'] = Post::where(['zone' => $zone->id ,'status' => 1,'category_id' => $getcat->id])->get();
+            }
+            return view('health-authority',compact('data'));
         }else{
             return redirect()->route('posts',$slug);
         }
