@@ -58,6 +58,16 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
+                                            <label class="form-label col-sm-2 col-form-label"> Company Name : </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="company_name" id="company_name"
+                                                    placeholder="" value="{{ old('company_name') }}">
+                                                @if($errors->has('company_name'))
+                                                <div class="error">{{ $errors->first('company_name') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Email : </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="email" id="email"

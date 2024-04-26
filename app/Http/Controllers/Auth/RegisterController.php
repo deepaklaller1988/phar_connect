@@ -61,6 +61,7 @@ class RegisterController extends Controller
                 'phone' => ['required','numeric','regex:/^([0-9\s\-\+\(\)]*)$/'],
                 'company_website' => ['required'],
                 'company_profile' => ['required','string','max:300'],
+                'company_name' => ['required', 'string', 'max:255'],
             ]);
         }else{
             return Validator::make($data, [
@@ -85,6 +86,7 @@ class RegisterController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'company_name' => $data['company_name'],
                 'password' => Hash::make($data['password']),
                 'type' => $data['type'],
                 'phone' => $data['phone'],

@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountrySeeder::class,
             AuthorityRegionSeeder::class,
+            EducationSeeder::class,
+            ExperienceSeeder::class,
+            PositionSeeder::class,
         ]);
     }
 }

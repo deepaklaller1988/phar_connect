@@ -102,6 +102,16 @@
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
+                                            <label>Company Name:</label>
+                                            <input type="text" class="form-control" name="company_name"
+                                                value="{{ auth()->user()->company_name }}" required>
+                                            @if($errors->has('name'))
+                                            <div class="error">{{ $errors->first('company_name') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="common_input mb_15">
                                             <label>Email:</label>
                                             <input disabled type="text" class="form-control" name="email"
                                                 value="{{ auth()->user()->email }}" placeholder="Email Address">
@@ -112,7 +122,8 @@
                                         <label>Phone Number : </label>
                                         <div class="common_input mb_15">
                                             <input type="text" name="phone" class="form-control"
-                                                value="{{ auth()->user()->phone }}" id="phone" pattern="[987][0-9]{9}" placeholder="Mobile No">
+                                                value="{{ auth()->user()->phone }}" id="phone" pattern="[987][0-9]{9}"
+                                                placeholder="Mobile No">
                                             @if($errors->has('phone'))
                                             <div class="error">{{ $errors->first('phone') }}</div>
                                             @endif
@@ -138,11 +149,17 @@
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
-                                            <label>Location</label>
-                                            <input type="text" id="location" class="form-control" name="location"
-                                                value="{{ auth()->user()->location }}" placeholder="Location">
-                                            @if($errors->has('location'))
-                                            <div class="error">{{ $errors->first('location') }}</div>
+                                            <label>Country</label>
+                                            <select name="country" class="form-control">
+                                                <option value="">Select Country</option>
+                                                @foreach($data['countries'] as $country)
+                                                <option value="{{ $country->id }}"
+                                                    {{ auth()->user()->country_id == $country->id ? 'selected' : '' }}>
+                                                    {{ $country->country_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('country'))
+                                            <div class="error">{{ $errors->first('country') }}</div>
                                             @endif
                                         </div>
                                     </div>

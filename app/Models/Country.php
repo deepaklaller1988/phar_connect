@@ -15,4 +15,9 @@ class Country extends Model
     {
         return $this->belongsToMany('App\Models\Country','id');
     }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

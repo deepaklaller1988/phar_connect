@@ -22,7 +22,12 @@
                             </ul>
                             <ul class="consultList">
                                 @php
-                                $htmlContent = "$post->description";
+                                if($post->description){
+                                    $htmlContent = "$post->description";
+                                }else{
+                                    $htmlContent = "$post->profile_summary";
+                                }
+                                
                                 $truncatedContent = Illuminate\Support\Str::limit(strip_tags($htmlContent), 200);
                                 $isTruncated = strlen(strip_tags($htmlContent)) > strlen($truncatedContent);
                                 @endphp

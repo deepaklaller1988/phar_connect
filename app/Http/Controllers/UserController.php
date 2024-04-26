@@ -90,6 +90,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->name = $request->name;
+        $user->company_name = $request->company_name;
         $user->phone = $request->phone;
         $user->key_services = $request->key_services;
         $user->certifications = $request->certifications;
@@ -144,11 +145,13 @@ class UserController extends Controller
             'company_website' => 'required',
             'company_profile' => 'required',
             'country_id' => 'required',
+            'company_name' => 'required',
         ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->company_name = $request->company_name;
         $user->password = Hash::make($request->password);
         $user->key_services = $request->key_services;
         $user->certifications = $request->certifications;
