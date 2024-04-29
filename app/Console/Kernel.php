@@ -11,6 +11,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
        
         Commands\PlanCron::class,
+        Commands\CheckPlanExpiration::class,
+
     ];
     /**
      * Define the application's command schedule.
@@ -21,6 +23,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('Plan:cron')->everyMinute();
+        $schedule->command('check:planExpiration')->daily();
+        $schedule->command('post:jobstatus')->everyMinute();
     }
 
     /**

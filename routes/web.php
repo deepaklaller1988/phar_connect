@@ -15,6 +15,9 @@ use App\Http\Controllers\CategoryController as HomeCategory;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PlanJobController;
+use App\Http\Controllers\CheckPlanDaysController;
+use App\Http\Controllers\PostJobsChangeStatusController;
+
 
 use App\Http\Controllers\Admin\TransactionController;
 /*
@@ -122,3 +125,6 @@ Route::get('/citySuggestion',[PartnerController::class,'city_suggestion'])->name
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
 Route::get('plan/job',[PlanJobController::class,'planjob']);
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
+Route::get('check/plan/days',[CheckPlanDaysController::class,'check_plan_days']);
+Route::get('post/jobs/change/status',[PostJobsChangeStatusController::class,'post_jobs_change_status']);
+
