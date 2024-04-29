@@ -53,4 +53,9 @@ class Post extends Model
     public function position(){
         return $this->hasMany(Position::class,'id','position_type');
     }
+
+    public function views()
+    {
+        return $this->hasMany(PostView::class);
+    }
 }

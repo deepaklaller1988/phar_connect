@@ -36,7 +36,7 @@
                     @if (Route::has('login'))
                     @auth
                     @if(auth()->user()->type == "partner")
-                    <a href="{{ url('/pricings') }}">Dashboard</a>
+                    <a href="{{ url('partner/dashboard') }}">Dashboard</a>
                     @endif
                     @else
                     <a href="{{ route('login') }}">Sign in</a>

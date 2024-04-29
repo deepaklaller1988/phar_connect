@@ -21,9 +21,12 @@
                         <div class="search-criteria">
                             <span>
                                 <h5>Search By Country</h5>
-                                <select placeholder="Country name here...">
-                                    <option>America</option>
-                                </select>
+                                <select name="" id="country_search" placeholder="Country name here...">
+                                    <option>Choose Country</option>
+                                    @foreach($countries as $country)
+                                    <option value="{{ $country->id }}" data-slug="{{ $country->abbreviation }}">{{ $country->country_name }}</option>
+                                    @endforeach
+                                 </select>
                             </span>
                             <span>
                                 <h5>Search By Category</h5>
@@ -31,7 +34,7 @@
                                     <input id="category_search" placeholder="Category name here..." type="text">
                                     <button><img src="{{ asset('assets/images/search.png') }}" alt="search" /></button>
                                 </div>
-                                <div id="category_search_result">
+                                <div id="category_search_result" style="display: none;">
 
                                 </div>
                             </span>
@@ -40,9 +43,15 @@
                             <ul>
                                 @foreach($categories['maincategories'] as $mkey => $mcategory)
                                 <li class="">
+                                @if(count($categories[$mkey]['subcategories']) > 0)
                                     <span>
                                         {{ $mcategory->title }}
                                     </span>
+                                    @else
+                                    <a class="myCategory" href="{{ route('subcategory',$mcategory->slug) }}">
+                                        {{ $mcategory->title }}
+                                    </a>
+                                    @endif
                                     @if(count($categories[$mkey]['subcategories']) > 0)
                                     <div class="searchSubCategory">
                                         @foreach($categories[$mkey]['subcategories'] as $skey => $scategory)
@@ -145,8 +154,8 @@ $(document).on('keyup', '#category_search', function () {
                 type: "GET",
                 data: {'query': query,'cate_id':cat_id},
                 success: function(data){
-                  
-                    $('#category_search_result').empty();
+                    $('#category_search_result').empty();      
+                    $('#category_search_result').show();
                     $html = '<select id="selected-category" class="form-select" size="8"aria-label="Default select example">';
                     $html += '<option value="">Select Category</option>';
                     $.each(data, function(index, item){
@@ -159,6 +168,17 @@ $(document).on('keyup', '#category_search', function () {
         }else{
           $('#category_search_result').empty();
         }
+      });
+
+      $(document).on('change', '#selected-category', function() {
+        var slug = $(this).find(':selected').data('slug');
+        $('#category_search_result').hide();
+        window.location.href = "{{ url('search-posts') }}"+'/'+slug;
+      })
+
+      $(document).on('change', '#country_search', function() {
+        var slug = $(this).find(':selected').data('slug');
+        window.location.href = "{{ url('search-posts') }}"+"/"+slug;
       })
 </script>
 @endsection

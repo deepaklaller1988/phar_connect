@@ -13,7 +13,14 @@ class PartnerController extends Controller
     public function dashboard()
     {
         $posts = Post::where('partner_id',auth()->user()->id)->count();
-        return view('partners.dashboard',compact('posts'));
+        $countss = Post::withCount('views')->where('partner_id',auth()->user()->id)->get();
+        $active = Post::where('partner_id',auth()->user()->id)->where('status',1)->count();
+        $archive = Post::where('partner_id',auth()->user()->id)->where('status',2)->count();
+        $count = 0;
+        foreach ($countss as $counts) {
+            $count += $counts->views_count;
+        }
+        return view('partners.dashboard',compact('posts','count','active','archive'));
     }
 
     public function register()

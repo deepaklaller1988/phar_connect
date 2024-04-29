@@ -169,7 +169,7 @@
                   <input type="text" id="category_search" placeholder="Search Category Here..." />
                   <input type="hidden" name="category" value="" id="hidden_selected-category">
                 </div>
-                <div id="category_search_result">
+                <div id="category_search_result" style="display: none;">
                  
                 </div>
                 <div class="searchSet countrySet">
@@ -177,7 +177,7 @@
                   <input type="text" id="country_search" placeholder="Search Country Here..." />
                   <input type="hidden" name="country" value="" id="hidden_selected-country">
                 </div>
-                <div id="country_search_result">
+                <div id="country_search_result" style="display: none;">
                  
                 </div>
                 <button>ENTER</button>
@@ -367,6 +367,7 @@
                 success: function(data){
                   
                     $('#category_search_result').empty();
+                    $('#category_search_result').css('display', 'block');
                     $html = '<select id="selected-category" class="form-select" size="8"aria-label="Default select example">';
                     $html += '<option value="">Select Category</option>';
                     $.each(data, function(index, item){
@@ -392,6 +393,7 @@
                 success: function(data){
                   
                     $('#country_search_result').empty();
+                    $('#country_search_result').css('display', 'block');
                     $html = '<select id="selected-country" size="8" class="form-select" aria-label="Default select example">';
                     $html += '<option value="">Select Country</option>';
                     $.each(data, function(index, item){
@@ -414,11 +416,12 @@
         if(formaction){
             $("#myform").attr('action', formaction+'/'+slug);
         }else{
-          $("#myform").attr('action', '/search-posts/-/'+slug);
+          $("#myform").attr('action', '/search-posts/'+slug);
         }
         
         $('#country_search').val(country);
         $('#country_search_result').empty();
+        $('#country_search_result').css('display', 'none');
         $('#hidden_selected-country').val(country_id);
       });
 
@@ -430,6 +433,7 @@
         $("#myform").attr('action', '/search-posts/'+slug);
         $('#category_search').val(category);
         $('#category_search_result').empty();
+        $('#category_search_result').css('display', 'none');
         $('#hidden_selected-category').val(category_id);
       });
     });
