@@ -3,7 +3,7 @@
         <ul>
           <li><b>Top Categories</b></li>
             @foreach ($allcategories['maincategories'] as $category)
-            <li><a href="{{ route('category',$category->id)}}">{{ $category->title }}</a></li>
+            <li><a href="{{ route('category',$category->slug)}}">{{ $category->title }}</a></li>
             @endforeach
         </ul>
         <ul>

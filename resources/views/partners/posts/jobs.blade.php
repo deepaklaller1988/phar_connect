@@ -3,6 +3,8 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <form id="post-form">
     @csrf
@@ -12,7 +14,7 @@
                 <div class="common_input mb_15">
                     <label>Position Title :</label>
                     <input type="text" name="company_name" id="company_name" class="form-control"
-                        placeholder="Position Title..." required value="{{ old('company_name') }}">
+                        placeholder="Position Title..." required value="{{ $data['user']->company_name }}">
                     <span id="cnerror"></span>
                     @if($errors->has('company_name'))
                     <div class="error">{{ $errors->first('company_name') }}</div>
@@ -23,7 +25,7 @@
                 <div class="common_input mb_15">
                     <label>Company Website:</label>
                     <input type="text" name="company_website" id="company_website" class="form-control"
-                        placeholder="Company Website..." required value="{{ old('company_website') }}">
+                        placeholder="Company Website..." required value="{{ $data['user']->company_website }}">
                     <span id="cwerror"></span>
                     @if($errors->has('company_website'))
                     <div class="error">{{ $errors->first('company_website') }}</div>
@@ -124,10 +126,9 @@
                     <label>Position Type:</label>
                     <select class="form-select" id="position_type" name="position_type">
                         <option value="">Select Position Type</option>
-                        <option value="1">Full Time</option>
-                        <option value="2">Part Time</option>
-                        <option value="3">Contract</option>
-                        <option value="4">Internship</option>
+                        @foreach($data['positions'] as $position_type)
+                        <option value="{{ $position_type->id }}">{{ $position_type->title }}</option>
+                        @endforeach
                     </select>
                     <span id="pterror"></span>
                     @if($errors->has('position_type'))
@@ -140,10 +141,9 @@
                     <label>Experience Level:</label>
                     <select class="form-select" id="experience_level" name="experience_level">
                         <option value="">Select Experience Level</option>
-                        <option value="1">No Experience</option>
-                        <option value="2">Entry Level</option>
-                        <option value="3">Mid Level</option>
-                        <option value="4">Senior Level</option>
+                        @foreach($data['experiences'] as $experience_level)
+                        <option value="{{ $experience_level->id }}">{{ $experience_level->title }}</option>
+                        @endforeach
                     </select>
                     <span id="elerror"></span>
                     @if($errors->has('experience_level'))
@@ -155,13 +155,10 @@
                 <div class="common_input mb_15">
                     <label>Education Level:</label>
                     <select class="form-select" id="education_level" name="education_level">
-                        <option value="">Select Experience Level</option>
-                        <option value="1">High School or Equivalent</option>
-                        <option value="2">Associate Degree</option>
-                        <option value="3">Bachelor Degree</option>
-                        <option value="4">Master Degree / MBA</option>
-                        <option value="5">Doctorate Degree/PHD/MD</option>
-                        <option value="6">Other</option>
+                        <option value="">Select Education Level</option>
+                        @foreach($data['educations'] as $education_level)
+                        <option value="{{ $education_level->id }}">{{ $education_level->title }}</option>
+                        @endforeach
                     </select>
                     <span id="ederror"></span>
                     @if($errors->has('experience_level'))
@@ -171,11 +168,18 @@
             </div>
             <input type="hidden" name="category_id" id="parent_id" value="{{ $data['parent_id']}}">
             <input type="hidden" name="parent_id" value="{{ $data['parent_id']}}">
+            <div class="col-lg-12 mb-3">
+                <div class="common_input mb_15">
+                    <label>Job Description:</label>
+                    <textarea id="job_description">{{ old('description') }}</textarea>
+                </div>
+            </div>
+            <input type="hidden" name="description" id="description" value="{{ old('description') }}">
             <div class="col-12 mb-3">
                 <div class="create_report_btn mt_30">
                     <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
                         {{ __('Save') }}
-                    </button> 
+                    </button>
                 </div>
             </div>
         </div>
@@ -190,3 +194,11 @@
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $('#job_description').summernote();
+    $(document).on('focusout', '.note-editable', function() {
+        $('#description').val($(this).html());
+    });
+});
+</script>

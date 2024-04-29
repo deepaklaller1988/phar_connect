@@ -11,6 +11,7 @@ use App\Models\Plan;
 use App\Models\Visitor;
 use App\Models\Country;
 use App\Models\Authorityregion;
+use App\Models\PostView;
 class HomeController extends Controller
 {
     public function index()
@@ -39,8 +40,25 @@ class HomeController extends Controller
     public function subcategory(Request $request,$slug)
     {
         $parent = Category::where('slug',$slug)->first();
+        $countries = Country::all();
+        if($parent){
+            $hparent = Category::where('id', $parent->parent_id)->first();
+            if($hparent){
+                $hhparent = Category::where('id', $hparent->parent_id)->first();
+            }
+        }
+        if($hhparent){
+            $prnt = $hhparent->id;
+            $cat = $hhparent->title;
+        }elseif($hparent){
+            $prnt = $hparent->id;
+            $cat = $hparent->title;
+        }else{
+            $prnt = $parent->id;
+            $cat = $parent->title;
+        }
         if($parent->parent_id != NULL){
-            $datas['maincategories'] = Category::where('parent_id',$parent->parent_id)->get();
+            $datas['maincategories'] = Category::where('parent_id',$prnt)->get();
         }
         foreach($datas['maincategories'] as $key=> $mcategory){
             $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->get();
@@ -51,7 +69,7 @@ class HomeController extends Controller
        
         $data['categories'] = Category::where(['parent_id'=> $parent->id,'status'=> 1 ])->orderBy('title','asc')->get();
         if(count($data['categories']) > 0){
-            return view('subcategory')->with(['data'=> $data,'categories'=>$datas]);
+            return view('subcategory')->with(['data'=> $data,'categories'=>$datas,'prnt'=>$prnt ,'cat' => $cat ,'countries' => $countries]);
         }else{
             return redirect()->route('categorydetails', $slug);
         }
@@ -77,12 +95,14 @@ class HomeController extends Controller
 
    
 
-    public function partner_details()
+    public function partner_details($slug)
     {
-        return view('partner-details');
+        $slug = str_replace('-',' ',$slug);
+        $partner = User::where('name',$slug)->with('country')->first();
+        return view('partner-details',compact('partner'));
     }
 
-    
+     
     public function jobs()
     {
         return view('jobs');
@@ -126,10 +146,10 @@ class HomeController extends Controller
     {   
         $getcat = Category::where('slug',$slug)->first();
         if($getcat->parent_id == 5 || $getcat->id == 5){
-            $posts = Post::with('user','countrie')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
+            $posts = Post::with('user','countrie','experience','education','position')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
             return view('jobs',compact('posts'));
         }else{
-            $posts = Post::with('user')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
+            $posts = Post::with('user',)->where(['category_id'=>$getcat->id, 'status'=>1])->get();
             return view('post-list',compact('posts'));
         }
     }
@@ -137,8 +157,20 @@ class HomeController extends Controller
     public function post_details(Request $request,$slug)
     {
         $post = Post::with('user')->where('slug',$slug)->first();
+        $countries = $post->country;
+        $countries = explode(',', $countries);
+        $countries = Country::whereIn('id', $countries)->pluck('country_name')->toArray();
+        $post->country_name = implode(',', $countries);
+        $views = new PostView();
+        $views->post_id = $post->id;
+        $views->ip_address = request()->ip();
+        $viewss = Postview::where(['post_id' => $post->id, 'ip_address' => request()->ip()])->first();
+        if(!$viewss){
+            $views->save();
+        } 
+        $post->post_views = PostView::where('post_id', $post->id)->count();
         return view('single_category',compact('post'));
-    }
+    } 
 
     public function pricing()
     {
@@ -186,19 +218,27 @@ class HomeController extends Controller
 
     public function search_posts(Request $request,$slug="",$slug2="")
     {
-        if($slug <> '-' && !$slug2 ){
+        if($slug2 == ""){
             $category = Category::where('slug',$slug)->first();
-            $posts = Post::where(['category_id'=>$category->id, 'status'=>1])->get();
+            if($category){
+                $posts = Post::where(['category_id'=>$category->id, 'status'=>1])->get();
+            }else{
+                $country = Country::where('abbreviation', $slug)->first();
+                $posts = Post::where(['country'=>$country->id, 'status'=>1])->get();
+            }
             return view('post-list',compact('posts'));
-        }elseif($slug2 && $slug == '-'){
-            $country = Country::where('abbreviation', $slug2)->first();
-            $posts = Post::where(['country'=>$country->id, 'status'=>1])->get();
-            return view('post-list',compact('posts'));
-        }elseif($slug <> '-' && $slug2){
+        }else{
             $category = Category::where('slug',$slug)->first();
             $country = Country::where('abbreviation', $slug2)->first();
             $posts = Post::where(['category_id'=>$category->id, 'country'=>$country->id, 'status'=>1])->get();
             return view('post-list',compact('posts'));
         }
+
+    }
+
+    public function getpost(Request $request,$id)
+    {
+        $post = Post::where(['id'=>$id, 'status'=>1])->with('user','countrie','experience','education','position')->first();
+        return response()->json($post);
     }
 }

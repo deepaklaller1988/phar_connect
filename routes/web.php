@@ -41,7 +41,7 @@ Route::get('/subcategory/{slug}', [HomeController::class, 'subcategory'])->name(
 Route::get('/category-details/{slug}',[HomeController::class,'categoryDetail'])->name('categorydetails');
 Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
 Route::get('/consultants',[HomeController::class,'consultants'])->name('consultants');
-Route::get('/partner-details',[HomeController::class,'partner_details'])->name('partner-details');
+Route::get('/partner-details/{slug}',[HomeController::class,'partner_details'])->name('partner-details');
 Route::get('/categories',[HomeCategory::class,'index'])->name('categories');
 Route::get('/health-authority',[HomeController::class,'health_authority'])->name('health-authority');
 Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
@@ -58,6 +58,7 @@ Route::get('/country-search',[HomeController::class,'country_search'])->name('co
 Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
+Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 

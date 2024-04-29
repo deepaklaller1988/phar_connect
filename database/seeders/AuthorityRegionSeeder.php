@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Authorityregion;
-class AuthorityRegionsSeeder extends Seeder
+class AuthorityRegionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

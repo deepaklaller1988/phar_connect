@@ -25,7 +25,7 @@ class User extends Authenticatable
         'password',
         'type',
         'phone','company_website','company_profile','location','key_services','certifications','country_id','created_at',
-        'plan_id','plan_status'
+        'plan_id','plan_status','company_name'
     ];
   
     /**
@@ -72,6 +72,12 @@ class User extends Authenticatable
         return $this->belongsTo(Plan::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    
     // public function isPlanExpired()
     // {
     //     // Assuming you have a column 'expiry_date' in the plans table

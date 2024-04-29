@@ -1,7 +1,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
-
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <form id="post-form">
     @csrf
     <div class="white_card_body">
@@ -16,7 +17,7 @@
                     <div class="error">{{ $errors->first('company_name') }}</div>
                     @endif
                 </div>
-            </div>
+            </div> 
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Company Website :</label>
@@ -128,6 +129,13 @@
                     @endif
                 </div>
             </div>
+            <div class="col-lg-12 mb-3">
+                <div class="common_input mb_15">
+                    <label>Business Description:</label>
+                    <textarea name="business_description" id="business_description"></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="description" id="description" value="{{ old('business_description') }}">
             <div class="col-12 mb-3">
                 <div class="create_report_btn mt_30">
                     <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
@@ -144,3 +152,11 @@
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $('#business_description').summernote();
+    $(document).on('focusout', '.note-editable', function() {
+    $('#description').val($(this).html());
+});
+});
+</script>

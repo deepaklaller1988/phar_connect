@@ -10,7 +10,7 @@
                 <div class="common_input mb_15">
                     <label>Company Name :</label>
                     <input type="text" name="company_name" id="company_name" class="form-control"
-                        placeholder="Company Name..." required value="{{ old('company_name') }}">
+                        placeholder="Company Name..." required value="{{ $data['user']->company_name }}">
                     <span id="cnerror"></span>
                     @if($errors->has('company_name'))
                     <div class="error">{{ $errors->first('company_name') }}</div>
@@ -21,7 +21,7 @@
                 <div class="common_input mb_15">
                     <label>Company Website :</label>
                     <input type="text" name="company_website" id="company_website" class="form-control"
-                        placeholder="Company Website..." required value="{{ old('company_website') }}">
+                        placeholder="Company Website..." required value="{{ $data['user']->company_website }}">
                     <span id="cwerror"></span>
                     @if($errors->has('company_website'))
                     <div class="error">{{ $errors->first('company_website') }}</div>

@@ -11,6 +11,9 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Notification;
 use App\Models\Authorityregion;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Position;
 
 use Illuminate\Support\Facades\View;
 use DataTables;
@@ -80,6 +83,9 @@ class PostController extends Controller
             $data['zones'] = Authorityregion::all();
             $html = View::make('partners.posts.authority')->with('data',$data)->render();
         }elseif($request->id == 5){
+            $data['educations'] = Education::all();
+            $data['positions'] = Position::all();
+            $data['experiences'] = Experience::all();
             $html = View::make('partners.posts.jobs')->with('data',$data)->render();
         }else{
 
@@ -89,12 +95,12 @@ class PostController extends Controller
 
     public function store(request $request)
     {
-        // dd($request);
         $post = new Post;
         $post->title = $request->company_name;
-        $str = str_replace('/', ' ', $request->company_name);
-        $string = strtolower($str);
+        // $str = str_replace('/', ' ', $request->company_name);
+        $string = strtolower($request->company_name);
         $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string =  preg_replace('/\s+/', ' ', $string);
         $string = str_replace(' ', '-', $string);
         $post->slug = $string;
         $post->email = $request->email;
@@ -102,9 +108,10 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->partner_id = auth()->user()->id;
         $post->key_services = $request->key_services;
-        $post->certifications = $request->certifications;
+        $post->certifications = $request->cerification;
         $post->contact_name = $request->contact_name;
         $post->company_website = $request->company_website;
+        $post->description = $request->description;
         if($request->parent_id != 4){
             $post->country = implode(',', $request->country) ?? $request->country;
         }
@@ -183,7 +190,6 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'company_name' => 'required',
             'email' => 'required|email',
@@ -236,6 +242,7 @@ class PostController extends Controller
         $post->certifications = $request->certifications;
         $post->contact_name = $request->contact_name;
         $post->company_website = $request->company_website;
+        $post->description = $request->description;
         if($request->parent_id != 4){
             $post->country = implode(',', $request->country) ?? $request->country;
         }

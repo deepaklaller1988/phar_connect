@@ -125,8 +125,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <label>Category : </label>
                                             <div class="common_input mb_15">
-                                                <select id="category_select" class="form-control selectFixCZ"
-                                                    disabled>
+                                                <select id="category_select" class="form-control selectFixCZ" disabled>
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
                                                     <option value="{{ $category->id }}"
@@ -163,7 +162,8 @@
                                                     <option value="">Select Category</option>
                                                     @foreach($data['subsubcategories'] as $category)
                                                     <option value="{{ $category->id }}"
-                                                        {{ $category->id == $post->category_id ? 'selected' : ''}} {{ $category->id == $data['getparentcat']->id ? 'selected' : ''}}>
+                                                        {{ $category->id == $post->category_id ? 'selected' : ''}}
+                                                        {{ $category->id == $data['getparentcat']->id ? 'selected' : ''}}>
                                                         {{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
@@ -184,7 +184,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        <input type="hidden" name="category_id" id="parent_id">
+                                        <input type="hidden" name="category_id" id="parent_id" value="{{ $post->category_id }}">
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Key Services:</label>
@@ -209,6 +209,15 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Business Description:</label>
+                                                <textarea name="business_description"
+                                                    id="business_description">{{ $post->description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="description" id="description"
+                                            value="{{ $post->description }}">
                                         <div class="col-12 mb-3">
                                             <div class="create_report_btn mt_30">
                                                 <button type="submit"
@@ -240,7 +249,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function() {
-    $('#summernote').summernote();
+    $('#business_description').summernote();
     $(document).on('change', '#select_main_cayegory', function() {
         $('#custom-form').html('');
         var category_id = $(this).val();
@@ -317,7 +326,7 @@ $(document).ready(function() {
 
 
     $(document).on('focusout', '.note-editable', function() {
-        $('#profile_summary').val($(this).html());
+        $('#description').val($(this).html());
     });
 });
 </script>

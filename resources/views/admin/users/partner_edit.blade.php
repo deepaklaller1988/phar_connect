@@ -58,6 +58,14 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
+                                            <label class="form-label col-sm-2 col-form-label"> Company Name : </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="company_name" id="company_name"
+                                                    placeholder="" value="{{ $partner->company_name }}">
+                                                <span class="messages"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Email : </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="email" id="email"

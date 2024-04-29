@@ -191,7 +191,7 @@
                                         <div class="common_input mb_15">
                                             <label>Certifications (if Applicable):</label>
                                             <textarea name="cerification"
-                                                class="form-control textareaCZ">{{ $post->cerification }}</textarea>
+                                                class="form-control textareaCZ">{{ $post->certifications }}</textarea>
                                             <small>Preference:- Drugs, Anabolics, Menabolics.</small>
                                             <span id="certificationerror"></span>
                                             @if($errors->has('cerification'))

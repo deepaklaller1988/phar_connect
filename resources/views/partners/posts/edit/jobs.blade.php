@@ -7,6 +7,8 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -123,10 +125,11 @@
                                         <div class="col-lg-6 mb-3">
                                             <label>Category : </label>
                                             <div class="common_input mb_15">
-                                                <select id="sub_category_select" disabled class="form-control selectFixCZ">
+                                                <select id="sub_category_select" disabled
+                                                    class="form-control selectFixCZ">
                                                     <option value="">Select Category</option>
                                                     @foreach($data['categories'] as $category)
-                                                    <option value="{{ $category->id }}" 
+                                                    <option value="{{ $category->id }}"
                                                         {{ $category->id == $post->parent_id ? 'selected' : ''}}>
                                                         {{ $category->title }}</option>
                                                     @endforeach
@@ -168,10 +171,14 @@
                                                 <label>Position Type:</label>
                                                 <select class="form-select" id="position_type" name="position_type">
                                                     <option value="">Select Position Type</option>
-                                                    <option value="1" {{ $post->position_type == 1 ? 'selected' : ''}}>Full Time</option>
-                                                    <option value="2" {{ $post->position_type == 2 ? 'selected' : ''}}>Part Time</option>
-                                                    <option value="3" {{ $post->position_type == 3 ? 'selected' : ''}}>Contract</option>
-                                                    <option value="4" {{ $post->position_type == 4 ? 'selected' : ''}}>Internship</option>
+                                                    <option value="1" {{ $post->position_type == 1 ? 'selected' : ''}}>
+                                                        Full Time</option>
+                                                    <option value="2" {{ $post->position_type == 2 ? 'selected' : ''}}>
+                                                        Part Time</option>
+                                                    <option value="3" {{ $post->position_type == 3 ? 'selected' : ''}}>
+                                                        Contract</option>
+                                                    <option value="4" {{ $post->position_type == 4 ? 'selected' : ''}}>
+                                                        Internship</option>
                                                 </select>
                                                 <span id="pterror"></span>
                                                 @if($errors->has('position_type'))
@@ -185,10 +192,18 @@
                                                 <select class="form-select" id="experience_level"
                                                     name="experience_level">
                                                     <option value="">Select Experience Level</option>
-                                                    <option value="1" {{ $post->experience_level == 1 ? 'selected' : ''}}>No Experience</option>
-                                                    <option value="2" {{ $post->experience_level == 2 ? 'selected' : ''}}>Entry Level</option>
-                                                    <option value="3" {{ $post->experience_level == 3 ? 'selected' : ''}}>Mid Level</option>
-                                                    <option value="4" {{ $post->experience_level == 4 ? 'selected' : ''}}>Senior Level</option>
+                                                    <option value="1"
+                                                        {{ $post->experience_level == 1 ? 'selected' : ''}}>No
+                                                        Experience</option>
+                                                    <option value="2"
+                                                        {{ $post->experience_level == 2 ? 'selected' : ''}}>Entry Level
+                                                    </option>
+                                                    <option value="3"
+                                                        {{ $post->experience_level == 3 ? 'selected' : ''}}>Mid Level
+                                                    </option>
+                                                    <option value="4"
+                                                        {{ $post->experience_level == 4 ? 'selected' : ''}}>Senior Level
+                                                    </option>
                                                 </select>
                                                 <span id="elerror"></span>
                                                 @if($errors->has('experience_level'))
@@ -201,23 +216,42 @@
                                                 <label>Education Level:</label>
                                                 <select class="form-select" id="education_level" name="education_level">
                                                     <option value="">Select Education Level</option>
-                                                    <option value="1" {{ $post->education_level == 1 ? 'selected' : ''}}>High School or Equivalent</option>
-                                                    <option value="2" {{ $post->education_level == 2 ? 'selected' : ''}}>Associate Degree</option>
-                                                    <option value="3" {{ $post->education_level == 3 ? 'selected' : ''}}>Bachelor Degree</option>
-                                                    <option value="4" {{ $post->education_level == 4 ? 'selected' : ''}}>Master Degree / MBA</option>
-                                                    <option value="5" {{ $post->education_level == 5 ? 'selected' : ''}}>Doctorate Degree/PHD/MD</option>
-                                                    <option value="6" {{ $post->education_level == 6 ? 'selected' : ''}}>Other</option>
+                                                    <option value="1"
+                                                        {{ $post->education_level == 1 ? 'selected' : ''}}>High School
+                                                        or Equivalent</option>
+                                                    <option value="2"
+                                                        {{ $post->education_level == 2 ? 'selected' : ''}}>Associate
+                                                        Degree</option>
+                                                    <option value="3"
+                                                        {{ $post->education_level == 3 ? 'selected' : ''}}>Bachelor
+                                                        Degree</option>
+                                                    <option value="4"
+                                                        {{ $post->education_level == 4 ? 'selected' : ''}}>Master Degree
+                                                        / MBA</option>
+                                                    <option value="5"
+                                                        {{ $post->education_level == 5 ? 'selected' : ''}}>Doctorate
+                                                        Degree/PHD/MD</option>
+                                                    <option value="6"
+                                                        {{ $post->education_level == 6 ? 'selected' : ''}}>Other
+                                                    </option>
                                                 </select>
                                                 <span id="ederror"></span>
                                                 @if($errors->has('experience_level'))
                                                 <div class="error">{{ $errors->first('experience_level') }}</div>
                                                 @endif
-                                            </div> 
+                                            </div>
                                         </div>
-                                        <input type="hidden" name="parent_id" 
-                                            value="{{ $post->parent_id }}">
+                                        <input type="hidden" name="parent_id" value="{{ $post->parent_id }}">
                                         <input type="hidden" name="category_id" id="parent_id"
                                             value="{{ $post->category_id }}">
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="common_input mb_15">
+                                                <label>Job Description:</label>
+                                                <textarea id="job_description">{{ $post->description }}</textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="description" id="description"
+                                            value="{{ $post->description }}">
                                         <div class="col-12 mb-3">
                                             <div class="create_report_btn mt_30">
                                                 <button type="submit"
@@ -252,6 +286,11 @@ $(document).ready(function() {
     $(document).on('change', '#sub_category_select', function() {
         var category_id = $(this).val();
         $('#parent_id').val(category_id);
+    });
+
+    $('#job_description').summernote();
+    $(document).on('focusout', '.note-editable', function() {
+        $('#description').val($(this).html());
     });
 });
 </script>
