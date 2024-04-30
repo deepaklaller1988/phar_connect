@@ -158,7 +158,8 @@
                                         <div class="col-lg-6 mb-3 ">
                                             <div class="common_input mb_15">
                                                 <label>Image: </label>
-                                                <input type="file" name="image" id="image" class="form-control">
+                                                <input type="file" name="image[]" id="image" class="form-control"
+                                                    multiple>
                                                 <span id="imageerror"></span>
                                                 @if($errors->has('image'))
                                                 <div class="error">{{ $errors->first('image') }}</div>
@@ -233,16 +234,33 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        @if($post->images)
+                                        <!-- @if($post->images)
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Image:</label>
-                                                <img id="image-preview" src="{{ asset('storage/'.$post->images)}}" width="150px"
-                                                    height="150px" />
+                                                <img id="image-preview" src="{{ asset('storage/'.$post->images)}}"
+                                                    width="150px" height="150px" />
                                             </div>
                                         </div>
-                                        @endif
-                                        @if($post->document)
+                                        @endif -->
+                                        <div id="image-preview-container">
+                                            <div class="col-lg-6 mb-3">
+                                                <div class="common_input mb_15">
+                                                    <label>Image:</label>
+                                                    @if (!empty($post->images) && is_string($post->images))
+                                                    @php
+                                                    $imagePaths = explode(',', $post->images);
+                                                    @endphp
+
+                                                    @foreach($imagePaths as $image)
+                                                    <img src="{{ asset('storage/' . trim($image)) }}"
+                                                        alt="multiple show" class="w-20 h-20 border border-blue-600"
+                                                        width="150px" height="150px">
+                                                    @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div @if($post->document)
                                         <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15">
                                                 <label>Document:</label>
@@ -360,6 +378,29 @@ $(document).ready(function() {
                 $('#image-preview').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    $('#image').change(function() {
+        var input = this;
+        var limit = 3;
+        var uploadedImagesCount = $('#image-preview-container').children('.image-preview').length;
+
+        if (input.files && (input.files.length + uploadedImagesCount) <= limit) {
+            $('#image-preview-container').empty(); // Clear previous previews
+            for (var i = 0; i < input.files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image-preview-container').append('<img class="image-preview" src="' + e
+                        .target.result + '">');
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        } else {
+            // Show a message or take any other appropriate action when the limit is exceeded
+            alert('You can upload maximum ' + limit + ' images.');
+            // Clear the file input to reset it
+            $('#image').val('');
         }
     });
 });

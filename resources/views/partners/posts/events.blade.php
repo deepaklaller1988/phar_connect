@@ -140,6 +140,16 @@
             @endif
             <input type="hidden" name="category_id" id="parent_id" value="{{ $data['parent_id']}}">
             <input type="hidden" name="parent_id" value="{{ $data['parent_id']}}">
+            <div class="col-lg-6 mb-3 ">
+                <div class="common_input mb_15">
+                    <label>Image: </label>
+                    <input type="file" name="image[]" id="image" class="form-control" multiple>
+                    <span id="imageerror"></span>
+                    @if($errors->has('image'))
+                    <div class="error">{{ $errors->first('image') }}</div>
+                    @endif
+                </div>
+            </div>
             <div class="col-12 mb-3">
                 <div class="create_report_btn mt_30">
                     <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">
@@ -147,9 +157,45 @@
                     </button>
                 </div>
             </div>
+            <div id="image-preview-container"></div>
         </div>
     </div>
 </form>
+<script>
+     $('#summernote').summernote();
+    //  $('#image').change(function() {
+    //     var input = this;
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $('#image-preview').attr('src', e.target.result);
+    //         }
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+    // });
+    $('#image').change(function() {
+    var input = this;
+    var limit = 3;
+    var uploadedImagesCount = $('#image-preview-container').children('.image-preview').length;
+    
+    if (input.files && (input.files.length + uploadedImagesCount) <= limit) {
+        $('#image-preview-container').empty(); // Clear previous previews
+        for (var i = 0; i < input.files.length; i++) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview-container').append('<img class="image-preview" src="' + e.target.result + '">');
+            }
+            reader.readAsDataURL(input.files[i]);
+        }
+    } else {
+        // Show a message or take any other appropriate action when the limit is exceeded
+        alert('You can upload maximum ' + limit + ' images.');
+        // Clear the file input to reset it
+        $('#image').val('');
+    }
+});
+
+</script>
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">

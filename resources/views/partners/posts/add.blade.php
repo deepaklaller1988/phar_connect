@@ -225,19 +225,31 @@ $(document).ready(function() {
             console.log('zoerror');
             return false;
         }
+        // var formData = new FormData(this);
+        // if ($('#image').val()) {
+        //     formData.append('image', $('#image')[0].files[0]);
+        //     formData.append('document', $('#document')[0].files[0]);
+        // }
 
         // var formData = $(this).serialize();
         var formData = new FormData(this);
-        if ($('#image').val()) {
-            formData.append('image', $('#image')[0].files[0]);
-            formData.append('document', $('#document')[0].files[0]);
+        if ($('#image').length && $('#document').length) {
+            // Check if files are selected before appending them
+            if ($('#image')[0].files.length > 0) {
+                formData.append('image', $('#image')[0].files[0]);
+            }
+            if ($('#document')[0].files.length > 0) {
+                formData.append('document', $('#document')[0].files[0]);
+            }
         }
+
         $.ajax({
             url: "{{ route('partner.post.store') }}",
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
+            enctype: 'multipart/form-data',
             success: function(response) {
                 if (response.status == true) {
                     Swal.fire({
