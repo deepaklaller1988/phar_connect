@@ -300,7 +300,7 @@ $('#image').change(function() {
 
 $('#image').change(function() {
     var input = this;
-    var limit = 3;
+    var limit = 7;
     var uploadedImagesCount = $('#image-preview-container').children('.image-preview').length;
 
     if (input.files && (input.files.length + uploadedImagesCount) <= limit) {
