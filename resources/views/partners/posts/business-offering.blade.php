@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <form id="post-form">
@@ -17,7 +19,7 @@
                     <div class="error">{{ $errors->first('company_name') }}</div>
                     @endif
                 </div>
-            </div> 
+            </div>
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Company Website :</label>
@@ -65,7 +67,8 @@
             <div class="col-lg-6 mb-3">
                 <label>Country : </label>
                 <div class="common_input mb_15">
-                    <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect" name="country[]" multiple="multiple">
+                    <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect"
+                        name="country[]" multiple="multiple">
                         @foreach($data['countries'] as $country)
                         <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                         @endforeach
@@ -129,6 +132,16 @@
                     @endif
                 </div>
             </div>
+            <div class="col-lg-6 mb-3 ">
+                <div class="common_input mb_15">
+                    <label>Image: </label>
+                    <input type="file" name="image[]" id="image" class="form-control" multiple>
+                    <span id="imageerror"></span>
+                    @if($errors->has('image'))
+                    <div class="error">{{ $errors->first('image') }}</div>
+                    @endif
+                </div>
+            </div>
             <div class="col-lg-12 mb-3">
                 <div class="common_input mb_15">
                     <label>Business Description:</label>
@@ -143,20 +156,59 @@
                     </button>
                 </div>
             </div>
+            <div id="image-preview-container"></div>
         </div>
     </div>
 </form>
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}"></script>
-
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}">
 </script>
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+
+<script type="text/javascript"
+    src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
+</script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+<script>
+$('#summernote').summernote();
+//  $('#image').change(function() {
+//     var input = this;
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             $('#image-preview').attr('src', e.target.result);
+//         }
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// });
+$('#image').change(function() {
+    var input = this;
+    var limit = 3;
+    var uploadedImagesCount = $('#image-preview-container').children('.image-preview').length;
+
+    if (input.files && (input.files.length + uploadedImagesCount) <= limit) {
+        $('#image-preview-container').empty(); // Clear previous previews
+        for (var i = 0; i < input.files.length; i++) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview-container').append('<img class="image-preview" src="' + e.target.result +
+                    '">');
+            }
+            reader.readAsDataURL(input.files[i]);
+        }
+    } else {
+        // Show a message or take any other appropriate action when the limit is exceeded
+        alert('You can upload maximum ' + limit + ' images.');
+        // Clear the file input to reset it
+        $('#image').val('');
+    }
+});
+</script>
 <script>
 $(document).ready(function() {
     $('#business_description').summernote();
     $(document).on('focusout', '.note-editable', function() {
-    $('#description').val($(this).html());
-});
+        $('#description').val($(this).html());
+    });
 });
 </script>

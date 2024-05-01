@@ -127,10 +127,19 @@ class PostController extends Controller
        $post->education_level = $request->education_level;
        $post->zone = $request->zone;
        $post->location = $request->location;
-       if($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads/posts', 'public');
-            $post->images = $imagePath;
+    //    if($request->hasFile('image')) {
+    //         $imagePath = $request->file('image')->store('uploads/posts', 'public');
+    //         $post->images = $imagePath;
+    //     }
+    if ($request->hasFile('image')) {
+        $imagePaths = [];
+        foreach ($request->file('image') as $image) {
+            $imagePath = $image->store('uploads/posts', 'public');
+            $imagePaths[] = $imagePath;
         }
+        // Store image paths as comma-separated string or in JSON format based on your database schema
+        $post->images = implode(',', $imagePaths); // Example: store image paths as comma-separated string
+    }
         if($request->hasFile('document')) {
             $imagePath = $request->file('document')->store('uploads/documents', 'public');
             $post->document = $imagePath;
@@ -152,6 +161,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        // $data['images'] = explode(',', $post->images);
         $data['user'] = User::where('id',auth()->user()->id)->first();
         $categoryIdsString = $data['user']->category_ids;
         $categoryIdsArray = explode(',', $categoryIdsString);
@@ -257,9 +267,18 @@ class PostController extends Controller
         $post->position_type= $request->position_type;
         $post->experience_level = $request->experience_level;
         $post->zone = $request->zone;
-        if($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads/posts', 'public');
-            $post->images = $imagePath;
+        // if($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('uploads/posts', 'public');
+        //     $post->images = $imagePath;
+        // }
+        if ($request->hasFile('image')) {
+            $imagePaths = [];
+            foreach ($request->file('image') as $image) {
+                $imagePath = $image->store('uploads/posts', 'public');
+                $imagePaths[] = $imagePath;
+            }
+            // Store image paths as comma-separated string or in JSON format based on your database schema
+            $post->images = implode(',', $imagePaths); // Example: store image paths as comma-separated string
         }
         if($request->hasFile('document')) {
             $imagePath = $request->file('document')->store('uploads/documents', 'public');
