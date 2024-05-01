@@ -25,7 +25,6 @@
                         @if (Auth::check() && Auth::user())
                         {{ Auth::user()->name }}
                         @endif
-
                     </h6>
                     <p>Choose a category you want to display on your feed.</p>
                     <span>Selcted <b>5</b></span>

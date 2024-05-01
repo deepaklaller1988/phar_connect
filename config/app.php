@@ -56,6 +56,10 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'client_id' =>env('PAYPAL_SANDBOX_CLIENT_ID '),
+
+    'client_secret' => env('PAYPAL_SANDBOX_CLIENT_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
