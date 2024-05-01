@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\UserRegisterMail; 
+use Illuminate\Support\Facades\Mail;
 
 
 class RegisterController extends Controller
@@ -102,6 +104,7 @@ class RegisterController extends Controller
                 'read' => 0,
                 'notification_for' => $user->id
             ]);
+            Mail::to($user->email)->send(new UserRegisterMail($data));
             return $user;
         }else{
             // dd("0");
