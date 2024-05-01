@@ -90,7 +90,7 @@ class PayPalPaymentController extends Controller
             $transaction->plan_id = $plan->id;
             $transaction->transaction_id = $response['id'];
             $transaction->order_id = '#'.rand(100000, 999999);
-            $transaction->status = "completed";
+            $transaction->status = "success";
             $transaction->save();
             return 
                 view('payment-success')

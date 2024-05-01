@@ -88,7 +88,7 @@
                                         <input type="hidden" name="parent_id" id="parent_id"
                                             value="{{ $data['category']->parent_id }}">
                                         <div class="mb-3 row">
-                                            <label class="form-label col-sm-2 col-form-label">Category Image : </label>
+                                            <label class="form-label col-sm-2 col-form-label">Featured Image : </label>
                                             <div class="col-sm-10">
                                                 <input type="file" class="form-control" name="category_image">
                                                 <span class="messages"></span>

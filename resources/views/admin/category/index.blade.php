@@ -63,7 +63,7 @@
                                             <th>Name</th>
                                             <th>Status</th>
                                             <th>Parent</th>
-                                            <th>Images</th>
+                                            <th>Featured Image</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
