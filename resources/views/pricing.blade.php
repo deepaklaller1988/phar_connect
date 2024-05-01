@@ -27,7 +27,7 @@
                 {!! $plan->description !!}
                 </div>
 
-                <button class="button">Get Started</button>
+                <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
             </div>
             @endforeach
             <!--free plan ends -->
@@ -35,5 +35,12 @@
         </div>
     </div>
 </section>
-
+<script>
+    $(document).ready(function(){
+        $(document).on('click', '#payment', function(){
+            var id = $(this).data('id');
+            window.location.href = "{{ url('paypal/payment/') }}" + "/" + id;
+        })
+    });
+</script>
 @endsection
