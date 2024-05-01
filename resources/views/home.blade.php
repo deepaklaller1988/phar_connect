@@ -21,7 +21,7 @@ if(Auth::check()){
   <div class="selectYourCategory" {{ $style }}>
     <div class="selectSetCategory">
       <div class="selectedCategoryHead">
-      <h6>WELCOME {{ Auth::user()->name }}</h6>
+      <h6>WELCOME {{ Auth::check() ? Auth::user()->name : ''  }}</h6>
       <p>Choose a category you want to display on your feed.</p>
       <span>Selcted <b>5</b></span>
 </div>
