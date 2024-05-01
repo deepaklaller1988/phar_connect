@@ -57,7 +57,7 @@
                                         <p class="invo-addr-1 mb-0">
                                             {{ $user->name }} <br/>
                                             {{ $user->email }} <br/>
-                                            {{ $user->country }}<br/>
+                                            {{ $user->country->country_name }}<br/>
                                         </p>
                                     </div>
                                 </div>
@@ -90,18 +90,20 @@
                                     <table class="default-table invoice-table">
                                         <thead>
                                         <tr>
-                                            <th>Description</th>
+                                            
                                             <th>Price</th>
                                             <th>Txn_id</th>
                                             <th>Plan Name</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>Buy these Categories {{ $categories }}</td>
+                                           
                                             <td>$ {{ $transaction->amount }} </td>
                                             <td>{{ $transaction->transaction_id }} </td>
                                             <td>{{ $plan->title }} </td>
+                                            <td>{{ $transaction->status == 'success' ? 'success' : 'failed'}} </td>
                                         </tr>
                                         </tbody>
                                     </table>

@@ -29,7 +29,7 @@ if(Auth::check()){
       @foreach($allcategories['maincategories'] as $key => $mcategory)
         <li>
           <div class="catgeroyAccordion">
-            <input type="checkbox"/>
+            <input type="checkbox" name="mycategory[]" value="{{ $mcategory->id }}"/>
             <section>
               <span>
                 <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
@@ -39,7 +39,7 @@ if(Auth::check()){
             <div class="allListBelow">
               <ul>
               @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
-                <li><span><input type="checkbox"/><b></b></span> {{ $childcat->title }}</li>
+                <li><span><input type="checkbox" name="mycategory[]" value="{{ $childcat->id }}"/><b></b></span> {{ $childcat->title }}</li>
               @endforeach
             </ul>
             </div>
@@ -48,7 +48,8 @@ if(Auth::check()){
         @endforeach
       </ul>
       <div class="submItCategory">
-      <button>Submit</button>
+      <button id="choosed-category">Submit</button>
+      <button id="cancel-cat-popup" >Cancel</button>
 </div>
     </div>
   </div>
@@ -107,6 +108,7 @@ if(Auth::check()){
                  
                 </div>
                 <button>ENTER</button>
+                
               </div>
             </form>
           </div>
@@ -238,6 +240,7 @@ if(Auth::check()){
         </div>
       </div>
     </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @push('js')
@@ -363,5 +366,35 @@ if(Auth::check()){
         $('#hidden_selected-category').val(category_id);
       });
     });
+
+    $(document).on('click','#cancel-cat-popup',function(){
+      $('.selectYourCategory').css('display', 'none');
+    })
+
+    $(document).on('click','#choosed-category',function(e){
+      var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+        e.preventDefault();
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('selected-categories') }}',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            dataType: "json",
+            data: {data : val},
+            success: function(response){
+                $('.selectYourCategory').css('display', 'none');
+                window.location = '{{ route('partner.dashboard') }}';
+            },
+            error: function(xhr, status, error){
+                console.error(xhr.responseText);
+                // Handle errors appropriately
+            }
+        });
+    })
   </script>
 @endpush

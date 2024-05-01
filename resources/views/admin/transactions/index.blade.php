@@ -62,9 +62,8 @@
                                             <th>Plan</th>
                                             <th>Amount (in $)</A>
                                             <th>Status</th>
-                                            <th>Categories</th>
                                             <th>Expiry Date</th>
-                                            <th>Action</th>
+                                            <th>Invoice</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -117,10 +116,6 @@
                 {
                     data: 'status',
                     name: 'status'
-                },
-                {
-                    data: 'categories',
-                    name: 'categories'
                 },
                 {
                     data: 'expiry_date',

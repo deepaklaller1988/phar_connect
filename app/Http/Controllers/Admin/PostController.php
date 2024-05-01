@@ -37,7 +37,7 @@ class PostController extends Controller
                     })
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="'.route('admin.post.edit', $row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editCategory" ><i class="fa fa-edit" ></i></a>';
+                           $btn = '<a href="'.route('admin.post.edit', $row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editCategory" ><i class="fa fa-eye" ></i></a>';
    
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" id="deletePost" data-url="'.route("admin.post.delete", $row->id).'"><i class="fa fa-trash-alt ml-3"></i></a>';
     

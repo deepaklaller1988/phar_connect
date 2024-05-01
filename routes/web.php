@@ -63,6 +63,7 @@ Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
 Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'payment'])->name('pay.with.paypal');
 Route::get('cancel-payment', [PayPalPaymentController::class,'paymentCancel'])->name('cancel.payment');
 Route::get('payment-success', [PayPalPaymentController::class,'paymentSuccess'])->name('success.payment');
+Route::post('/selected-categories',[HomeController::class,'selected_categories'])->name('selected-categories');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
