@@ -17,6 +17,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PlanJobController;
 use App\Http\Controllers\CheckPlanDaysController;
 use App\Http\Controllers\PostJobsChangeStatusController;
+use App\Http\Controllers\PayPalPaymentController;
 
 
 use App\Http\Controllers\Admin\TransactionController;
@@ -59,6 +60,9 @@ Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts']
 Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
+Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'payment'])->name('pay.with.paypal');
+Route::get('cancel-payment', [PayPalPaymentController::class,'paymentCancel'])->name('cancel.payment');
+Route::get('payment-success', [PayPalPaymentController::class,'paymentSuccess'])->name('success.payment');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 

@@ -7,14 +7,26 @@
 
 <!-- partial -->
 </div>
-  <div class="selectYourCategory">
+@php
+if(Auth::check()){
+  if(auth()->user()->plan_id  <> NULL && auth()->user()->category_ids == NULL){
+    $style = "style=display:block;";
+  }else{
+    $style = "";
+  }
+}else{
+  $style = '';
+}
+@endphp
+  <div class="selectYourCategory" {{ $style }}>
     <div class="selectSetCategory">
       <div class="selectedCategoryHead">
-      <h6>WELCOME KATRINA KAIF</h6>
+      <h6>WELCOME {{ Auth::user()->name }}</h6>
       <p>Choose a category you want to display on your feed.</p>
       <span>Selcted <b>5</b></span>
 </div>
       <ul>
+      @foreach($allcategories['maincategories'] as $key => $mcategory)
         <li>
           <div class="catgeroyAccordion">
             <input type="checkbox"/>
@@ -22,104 +34,18 @@
               <span>
                 <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
               </span>
-              <h6>Consulting Services</h6>
+              <h6>{{ $mcategory->title  }}</h6>
             </section>
             <div class="allListBelow">
               <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+              @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
+                <li><span><input type="checkbox"/><b></b></span> {{ $childcat->title }}</li>
+              @endforeach
             </ul>
             </div>
           </div>
         </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div> 
-          </div>
-        </li>
+        @endforeach
       </ul>
       <div class="submItCategory">
       <button>Submit</button>

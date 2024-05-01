@@ -1273,6 +1273,7 @@ ul.linksSubcategories li:hover .sub-linksCategories, ul.linksSubcategories li:ho
     border-radius: 10px;
     max-height: 100%;
     overflow: auto;
+    margin: 0 auto;
 }
 
 .selectSetCategory ul {
