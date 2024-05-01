@@ -1,57 +1,87 @@
 <?php
+  
 namespace App\Http\Controllers;
+  
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
-use Srmklive\PayPal\Services\ExpressCheckout;
-use App\Models\Plan;
-use App\Models\User;
+  
 class PayPalPaymentController extends Controller
-{
-    public function handlePayment(Request $request, $id)
+{  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function payment(Request $request,$id)
     {
-        $plan =Plan::where('id', $id)->first();
-        $user = User::where('id', auth()->user()->id)->first();
-        $product = [];
-        $product['items'] = [
-            [
-                'name' => $user->name,
-                'price' => $plan->amount,
-                'desc'  => $plan->title,
-                'qty' => 1
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+  
+        $response = $provider->createOrder([
+            "intent" => "CAPTURE",
+            "application_context" => [
+                "return_url" => route('paypal.payment.success'),
+                "cancel_url" => route('paypal.payment/cancel'),
+            ],
+            "purchase_units" => [
+                0 => [
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => "100.00"
+                    ]
+                ]
             ]
-        ];
+        ]);
   
-        $product['invoice_id'] = rand(00000,99999);
-        $product['invoice_description'] = "Order #{$product['invoice_id']} Bill";
-        $product['return_url'] = route('success.payment');
-        $product['cancel_url'] = route('cancel.payment');
-        $product['total'] = $plan->amount;
+        if (isset($response['id']) && $response['id'] != null) {
   
-        $paypalModule = new ExpressCheckout;
+            foreach ($response['links'] as $links) {
+                if ($links['rel'] == 'approve') {
+                    return redirect()->away($links['href']);
+                }
+            }
   
-        $res = $paypalModule->setExpressCheckout($product);
-        $res = $paypalModule->setExpressCheckout($product, true);
+            return redirect()
+                ->route('cancel.payment')
+                ->with('error', 'Something went wrong.');
   
-        return redirect($res['paypal_link']);
+        } else {
+            return redirect()
+                ->route('create.payment')
+                ->with('error', $response['message'] ?? 'Something went wrong.');
+        }
+    
     }
-   
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
     public function paymentCancel()
     {
         return view('payment-cancel');
     }
   
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
     public function paymentSuccess(Request $request)
     {
-        $paypalModule = new ExpressCheckout;
-        $response = $paypalModule->getExpressCheckoutDetails($request->token);
-        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
-            $plan = Plan::where('amount',$response['AMT'])->first();
-            $user = User::find(auth()->user()->id);
-            $user->plan_id = $plan->id;
-            $user->plan_status = 'active';
-            $user->save();
-            return view('payment-success',compact('response','user','plan'));
-        }else{
-            return view('payment-cancel');
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request['token']);
+  
+        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            return redirect()
+                ->route('payment-success')
+                ->with('response', $response);
+        } else {
+            return view('cancel-payment');
         }
     }
 }

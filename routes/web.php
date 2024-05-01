@@ -60,7 +60,7 @@ Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts']
 Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
-Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'handlePayment'])->name('pay.with.paypal');
+Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'payment'])->name('pay.with.paypal');
 Route::get('cancel-payment', [PayPalPaymentController::class,'paymentCancel'])->name('cancel.payment');
 Route::get('payment-success', [PayPalPaymentController::class,'paymentSuccess'])->name('success.payment');
 Auth::routes();

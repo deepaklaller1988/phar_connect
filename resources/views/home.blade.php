@@ -11,6 +11,8 @@
 if(Auth::check()){
   if(auth()->user()->plan_id  <> NULL && auth()->user()->category_ids == NULL){
     $style = "style=display:block;";
+  }else{
+    $style = "";
   }
 }else{
   $style = '';
