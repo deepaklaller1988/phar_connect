@@ -422,4 +422,7 @@ span.closeUploadImages {
     border-bottom: 2px solid;
     border-right: 2px solid;
 }
+table.dataTable thead .sorting:before, table.dataTable thead .sorting:after {
+    opacity: 0 !important;
+}
 /* Custome css style */

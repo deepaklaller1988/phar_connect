@@ -75,7 +75,7 @@ table tr td:first-child, table tr th:first-child {
     background: #2ed8b6;
     color: white;
     margin: 0 auto;
-    display: block;
+    display: table;
     text-align: center;
 }
 .table-striped tbody tr:nth-of-type(odd) {
