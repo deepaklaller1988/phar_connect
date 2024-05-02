@@ -105,13 +105,14 @@
                 <p>Explore features of pharma</p>
             </div>
             <div class="pharmCategoryInner">
+                @if($data['featured_partners'])
                 <div class="innerDifferentSection">
                     <h4>Partners/Services</h4>
                     <section class="center slider">
                         @foreach($data['featured_partners'] as $featured_partner)
                         @if($featured_partner->logo == '')
                         <div>
-                            <h6>{{ $featured_partner->name }}</h6>
+                            <h6>{{ $featured_partner->company_name }}</h6>
                         </div>
                         @else
                         <div>
@@ -121,6 +122,7 @@
                         @endforeach
                     </section>
                 </div>
+                @endif
                 <div class="innerDifferentSection">
                     <h4>Meet the Experts</h4>
                     <section class="center slider">

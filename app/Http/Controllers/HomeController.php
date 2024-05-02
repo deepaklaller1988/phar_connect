@@ -150,8 +150,9 @@ class HomeController extends Controller
             $posts = Post::with('user','countrie','experience','education','position')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
             return view('jobs',compact('posts'));
         }else{
-            $posts = Post::with('user',)->where(['category_id'=>$getcat->id, 'status'=>1])->get();
-            return view('post-list',compact('posts'));
+            $posts = Post::with('user')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
+            $category = Category::where('id', $posts[0]->parent_id)->first();
+            return view('post-list',compact('posts','category','getcat'));
         }
     }
 
@@ -223,16 +224,17 @@ class HomeController extends Controller
             $category = Category::where('slug',$slug)->first();
             if($category){
                 $posts = Post::where(['category_id'=>$category->id, 'status'=>1])->get();
+                $country = null;
             }else{
                 $country = Country::where('abbreviation', $slug)->first();
                 $posts = Post::where(['country'=>$country->id, 'status'=>1])->get();
             }
-            return view('search-post-list',compact('posts'));
+            return view('search-post-list',compact('posts','country','category'));
         }else{
             $category = Category::where('slug',$slug)->first();
             $country = Country::where('abbreviation', $slug2)->first();
             $posts = Post::where(['category_id'=>$category->id, 'country'=>$country->id, 'status'=>1])->get();
-            return view('search-post-list',compact('posts'));
+            return view('search-post-list',compact('posts','category','country'));
         }
 
     }

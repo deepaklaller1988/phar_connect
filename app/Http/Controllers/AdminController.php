@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         $data['visitors'] = Visitor::count();
-        $data['partners'] = User::where('type',2)->where('plan_id','!=',0)->count();
+        $data['partners'] = User::where(['type'=>2,'status'=>1])->where('plan_id','!=',0)->count();
         $data['monthly_revenue'] = Transaction::whereMonth('created_at',date('m'))->sum('amount');
         $data['yearly_revenue'] = Transaction::whereYear('created_at',date('Y'))->sum('amount');
         $data['active'] = User::where(['status'=> 1,'type' => 2])->count();

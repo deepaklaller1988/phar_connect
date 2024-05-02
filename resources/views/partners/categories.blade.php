@@ -46,7 +46,7 @@
                                 <div class="selectedCategoryHead">
                                     <h6>WELCOME {{ Auth::check() ? Auth::user()->name : ''  }}</h6>
                                     <p>Choose a category you want to display on your feed.</p>
-                                    <span>Selcted <b>5</b></span>
+                                    <!-- <span>Selcted <b>5</b></span> -->
                                 </div>
                                 <ul>
                                     @foreach($allcategories['maincategories'] as $key => $mcategory)
@@ -76,7 +76,6 @@
                                 </ul>
                                 <div class="submItCategory">
                                     <button id="choosed-category">Submit</button>
-                                    <button id="cancel-cat-popup">Cancel</button>
                                 </div>
                             </div>
                         </div>

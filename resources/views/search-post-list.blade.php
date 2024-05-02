@@ -2,7 +2,7 @@
 @section('content')
 <div class="consultingServices">
     <div class="staticContent">
-    <span><h2>CATEGORY NAME</h2><p>Country India</p></span>
+    <span><h2>{{ isset($category) && $category->title ? $category->title : ''}}</h2><p>{{ isset($country) && $country->country_name ? $country->country_name : ''}}</p></span>
 </div>
     <div class="wrapper">
         <div class="consultingServicesInner padding-top-50">

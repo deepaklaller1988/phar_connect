@@ -13,14 +13,16 @@
                                 <li><a href="{{ route('category',$mcategory->slug) }}">{{ $mcategory->title }} </a>
                                     <ul class="linksSubcategories activeLinkSet" id="child-cat">
                                         @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
-                                        <li><a href="{{ route('subcategory',$childcat->slug) }}">{{ $childcat->title }}</a>
+                                        <li><a
+                                                href="{{ route('subcategory',$childcat->slug) }}">{{ $childcat->title }}</a>
                                             <div class="sub-linksCategories" id="sub-cat">
                                                 <ul>
-                                                  @foreach($allcategories[$key][$skey]['subcategories'] as $childcat)
+                                                    @foreach($allcategories[$key][$skey]['subcategories'] as $childcat)
                                                     <li><a href="{{ route('subcategory',$childcat->slug) }}"><span><img
                                                                     src="{{ url('storage/'.$childcat->image) }}"
-                                                                    alt="sub category" /></span><b>{{ $childcat->title }}</b></a></li>
-                                                  @endforeach
+                                                                    alt="sub category" /></span><b>{{ $childcat->title }}</b></a>
+                                                    </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </li>
@@ -34,24 +36,31 @@
                     <a href="{{ route('about-us') }}">About us</a>
                     <a href="{{ route('contact-us') }}">Contact us</a>
                     @if (Route::has('login'))
-                    @auth
-                    @if(auth()->user()->type == "partner")
-                    <a href="{{ url('partner/dashboard') }}">Dashboard</a>
-                    @endif
-                    @else
                     <a href="{{ route('login') }}">Sign in</a>
-                    @endauth
                     @endif
                 </nav>
                 @if (Route::has('login'))
                 @auth
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                <div class="dropOption">
+                    <button onclick="partnerFunction()">Dashboard</button>
+                    <ul id="partnerOption">
+                        @if(auth()->user()->type == "partner")
+                        <li><a href="{{ route('partner.dashboard') }}">Dashboard</a></li>
+                        @else
+                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        @endif
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
                 @else
                 <div class="dropOption">
                     <button onclick="partnerFunction()">CREATE AN ACCOUNT</button>
@@ -59,7 +68,8 @@
 
                         @if (Route::has('register'))
                         <li><a href="{{ route('partner.register') }}">Become a Partner</a></li>
-                        <li><a href="{{ route('register') }}">Become a Member</a><span>You will see only posts for now! After register you can apply.</span></li>
+                        <li><a href="{{ route('register') }}">Become a Member</a><span>You will see only posts for now!
+                                After register you can apply.</span></li>
                         @endif
                     </ul>
                 </div>
@@ -70,8 +80,8 @@
     </div>
 </header>
 <script>
-    $("#main-category").hover(function(){
-    $('#child-cat').css('z-index',2);
-    $('#sub-cat').css('z-index',2);
+$("#main-category").hover(function() {
+    $('#child-cat').css('z-index', 2);
+    $('#sub-cat').css('z-index', 2);
 });
 </script>

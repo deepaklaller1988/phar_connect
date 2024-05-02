@@ -1694,9 +1694,6 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
     max-width: 100%;
 }
 
-.selectSetCategory ul li input[type="checkbox"]:checked~.allListBelow {
-    max-height: 1000px;
-}
 
 .attachmentsSet {
     position: relative;
@@ -2797,4 +2794,10 @@ div#country_search_result {
     padding: 10px;
     border-radius: 6px;
     color: white;
+}
+.alert.alert-danger p {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin: 0 0 10px 0;
 }
