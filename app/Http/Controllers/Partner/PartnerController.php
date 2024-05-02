@@ -75,23 +75,17 @@ class PartnerController extends Controller
     }
 
     
-    public function city_suggestion(Request $request)
+    public function categories()
     {
-        if(isset($request->term)){
-            $url = 'https://api.teleport.org/api/cities/?search=' . urlencode($_GET['term']);
-            $response = file_get_contents($url);
-            dd($response);
-            if($response !== false){
-                echo $response;
-            } else {
-                http_response_code(500);
-                echo json_encode(array("error" => "Failed to fetch data from the server."));
-            }
-        } else {
-            http_response_code(400);
-            echo json_encode(array("error" => "Search term is required."));
-        }
+        return view('partners.categories');
     }
-
-
+    public function selected_categories(Request $request)
+    {
+       $categories = $request['data'];
+       $category = implode(',',$categories);
+       $user = User::where('id',auth()->user()->id)->first();
+       $user->category_ids = $category;
+       $user->save();
+       return response()->json('success',200);
+    } 
 }

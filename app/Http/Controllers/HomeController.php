@@ -243,13 +243,5 @@ class HomeController extends Controller
         return response()->json($post);
     }
 
-    public function selected_categories(Request $request)
-    {
-       $categories = $request['data'];
-       $category = implode(',',$categories);
-       $user = User::where('id',auth()->user()->id)->first();
-       $user->category_ids = $category;
-       $user->save();
-       return response()->json('success',200);
-    }    
+       
 }

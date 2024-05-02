@@ -23,7 +23,17 @@
                         <span class="pcoded-micon">
                             <i class="feather icon-bell"></i>
                         </span>
-                        <span class="pcoded-mtext">notification</span>
+                        <span class="pcoded-mtext">Notification</span>
+                    </a> 
+                </li>                
+                @endif
+                @if(auth()->user()->category_ids == NULL)
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="{{ route('partner.categories') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-bell"></i>
+                        </span>
+                        <span class="pcoded-mtext">Choose categories</span>
                     </a> 
                 </li>
                 @endif

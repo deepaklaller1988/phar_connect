@@ -63,7 +63,7 @@ Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
 Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'payment'])->name('pay.with.paypal');
 Route::get('cancel-payment', [PayPalPaymentController::class,'paymentCancel'])->name('cancel.payment');
 Route::get('payment-success', [PayPalPaymentController::class,'paymentSuccess'])->name('success.payment');
-Route::post('/selected-categories',[HomeController::class,'selected_categories'])->name('selected-categories');
+
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -124,6 +124,8 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
     Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
     Route::get('/partner/post/loadblade',[PostController::class,'loadBlade'])->name('partner.post.loadblade');
+    Route::get('partner/choose-categories',[PartnerController::class,'categories'])->name('partner.categories');
+    Route::post('partner/selected-categories',[PartnerController::class,'selected_categories'])->name('partner.selected-categories');
 });
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
