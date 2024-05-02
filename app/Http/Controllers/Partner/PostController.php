@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Notification;
+use App\Models\Authorityregion;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Position;
+
 use Illuminate\Support\Facades\View;
 use DataTables;
 
@@ -17,7 +23,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Post::where('partner_id',auth()->user()->id)->get();  
+            $data = Post::where('partner_id',auth()->user()->id)->with('category','parent_category')->get();  
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
@@ -30,6 +36,12 @@ class PostController extends Controller
                            $status = '<label class="form-label label label-inverse-default">Waiting</label>';
                        }
                         return $status;
+                    })
+                    ->addColumn('category', function ($model) {
+                        return $model->category ? $model->category->title : '-';    
+                    })
+                    ->addColumn('parent_category', function ($model) {
+                        return $model->parent_category ? $model->parent_category->title : '-';    
                     })
                     ->addColumn('action', function($row){
    
@@ -59,17 +71,22 @@ class PostController extends Controller
     {
         $data['categories'] = Category::where(['status'=>'1','parent_id'=>$request->id])->orderBy('title')->get();
         $data['user'] = User::where('id',auth()->user()->id)->first();
+        $data['countries'] = Country::all();
         $data['parent_id'] = $request->id;
         if($request->id == 1){
             $html = View::make('partners.posts.business-offering')->with('data',$data)->render();
         }elseif($request->id == 2){
-            $html = View::make('partners.posts.consulting')->render();
+            $html = View::make('partners.posts.consulting')->with('data',$data)->render();
         }elseif($request->id == 3){
-            $html = View::make('partners.posts.events')->render();
+            $html = View::make('partners.posts.events')->with('data',$data)->render();
         }elseif($request->id == 4){
-            
+            $data['zones'] = Authorityregion::all();
+            $html = View::make('partners.posts.authority')->with('data',$data)->render();
         }elseif($request->id == 5){
-            $html = View::make('partners.posts.jobs')->render();
+            $data['educations'] = Education::all();
+            $data['positions'] = Position::all();
+            $data['experiences'] = Experience::all();
+            $html = View::make('partners.posts.jobs')->with('data',$data)->render();
         }else{
 
         }
@@ -78,35 +95,54 @@ class PostController extends Controller
 
     public function store(request $request)
     {
-    dd($request);
-    //    $this->validate($request, [
-    //        'title' => 'required',
-    //        'description' => 'required', 
-    //        'time' => 'required',
-    //        'email' => 'required',
-    //        'phone'  => 'required',
-    //        'location' => 'required',
-    //        'key_services' => 'required',
-    //        'images' => 'required',
-    //        'category_id' => 'required'
-    //    ]);
-       $post = new Post;
-       $post->title = $request->title;
-       $post->email = $request->email;
-       $post->contact_info = $request->phone;
-       $post->description = $request->description;
-       $post->time = $request->time;
-       $post->category_id = $request->category_id;
-       $post->partner_id = auth()->user()->id;
-       $post->key_services = $request->key_services;
-       $images = []; 
-        if ($request->hasFile('images')) {    
-            foreach ($request->file('images') as $key => $image ) {
-                $imageFilename = $key . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('uploads/posts', $imageFilename);
-                $images[] =  $imageFilename;
-                $post->images = implode(',',$images);
-            }
+        $post = new Post; 
+        $post->title = $request->company_name;
+        // $str = str_replace('/', ' ', $request->company_name);
+        $string = strtolower($request->company_name);
+        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string =  preg_replace('/\s+/', ' ', $string);
+        $string = str_replace(' ', '-', $string);
+        $post->slug = $string;
+        $post->email = $request->email;
+        $post->contact_info = $request->phone; 
+        $post->category_id = $request->category_id;
+        $post->partner_id = auth()->user()->id;
+        $post->key_services = $request->key_services;
+        $post->certifications = $request->cerification;
+        $post->contact_name = $request->contact_name;
+        $post->company_website = $request->company_website;
+        $post->description = $request->description;
+        if($request->parent_id != 4){
+            $post->country = implode(',', $request->country) ?? $request->country;
+        }
+       $post->hourly_rate = $request->hourly_rate;
+       $post->profile_summary = $request->profile_summary;
+       $post->languages = $request->languages;
+       $post->parent_id = $request->parent_id;
+       $post->event_name = $request->event_name;
+       $post->start_date = $request->start_date;
+       $post->end_date = $request->end_date;
+       $post->position_type = $request->position_type;
+       $post->experience_level = $request->experience_level;
+       $post->education_level = $request->education_level;
+       $post->zone = $request->zone;
+       $post->location = $request->location;
+    //    if($request->hasFile('image')) {
+    //         $imagePath = $request->file('image')->store('uploads/posts', 'public');
+    //         $post->images = $imagePath;
+    //     }
+    if ($request->hasFile('image')) {
+        $imagePaths = [];
+        foreach ($request->file('image') as $image) {
+            $imagePath = $image->store('uploads/posts', 'public');
+            $imagePaths[] = $imagePath;
+        }
+        // Store image paths as comma-separated string or in JSON format based on your database schema
+        $post->images = implode(',', $imagePaths); // Example: store image paths as comma-separated string
+    }
+        if($request->hasFile('document')) {
+            $imagePath = $request->file('document')->store('uploads/documents', 'public');
+            $post->document = $imagePath;
         }
         if($post->save()){
             $notification = new Notification;
@@ -116,42 +152,137 @@ class PostController extends Controller
             $notification->type = "post";
             $notification->notification_for = $post->id;
             $notification->save();
-            return redirect()->route('partner.posts')->with('success','Post Added Successfully');
+            return response()->json(['message' => 'Post submitted successfully', 'status' => true]);
         }else{
-            return redirect()->route('partner.posts')->with('error','Something went wrong');
+            return response()->json(['message' => 'Something went wrong']);
         }
     }
 
     public function edit($id)
     {
         $post = Post::find($id);
+        // $data['images'] = explode(',', $post->images);
         $data['user'] = User::where('id',auth()->user()->id)->first();
         $categoryIdsString = $data['user']->category_ids;
         $categoryIdsArray = explode(',', $categoryIdsString);
         $data['categories'] = Category::whereIn('id', $categoryIdsArray)->get();
-       
-        return view('partners.posts.edit',compact('post','data'));
+        $data['cat'] = Category::where('id',$post->category_id)->first();
+        $data['getparentcat'] = Category::where('id',$data['cat']->parent_id)->first();
+        $data['countries'] = Country::all();
+       if($post->parent_id == 1){
+            if($data['getparentcat']->parent_id == 1){
+                $data['subsubcategories'] = Category::where('parent_id',$data['cat']->parent_id)->get();
+                $data['childcat'] = array();
+            }else{
+                $data['subsubcategories'] = Category::where('parent_id',$data['getparentcat']->parent_id)->get();
+                $data['childcat'] = Category::where('parent_id',$data['getparentcat']->id)->get();
+            }
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.business-offering',compact('post','data'));
+       }elseif($post->parent_id == 2){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.consulting',compact('post','data'));
+        }elseif($post->parent_id == 3){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.events',compact('post','data'));
+        }elseif($post->parent_id == 4){
+            // $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            $data['zones'] = Authorityregion::all();
+            return view('partners.posts.edit.authority',compact('post','data'));
+        }elseif($post->parent_id == 5){
+            $data['subcategories'] = Category::where('parent_id', $post->parent_id)->get();
+            return view('partners.posts.edit.jobs',compact('post','data'));
+        }else{
+
+        }
+        
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'company_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            
+        ]);
+        if($request->parent_id == 2){
+            $request->validate([
+                'contact_name' => 'required',
+                'country' => 'required',
+                'key_services' => 'required',
+                'languages' => 'required',
+                'profile_summary' => 'required',
+                'hourly_rate' => 'required',
+            ]);
+        }elseif($request->parent_id == 3){
+            $request->validate([
+                'contact_name' => 'required',
+                'country' => 'required',
+                'event_name' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+            ]);
+        }elseif($request->parent_id == 5){
+            $request->validate([
+                'contact_name' => 'required',
+                'country' => 'required',
+                'location' => 'required',
+                'position_type' => 'required',
+                'experience_level' => 'required',
+                'education_level' => 'required'
+            ]);
+        }elseif($request->parent_id == 4){
+            $request->validate([
+                'zone' => 'required',
+            ]);
+        }
         $post = Post::find($id);
-        $post->title = $request->title;
+        $post->title = $request->company_name;
+        $str = str_replace('/', ' ', $request->company_name);
+        $string = strtolower($str);
+        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string = str_replace(' ', '-', $string);
+        $post->slug = $string;
         $post->email = $request->email;
         $post->contact_info = $request->phone;
-        $post->description = $request->description;
-        $post->time = $request->time;
-        $post->category_id = $request->category;
+        $post->category_id = $request->category_id;
         $post->partner_id = auth()->user()->id;
         $post->key_services = $request->key_services;
-        $images = []; 
-        if ($request->hasFile('images')) {    
-            foreach ($request->file('images') as $key => $image ) {
-                $imageFilename = $key . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('uploads/posts', $imageFilename);
-                $images[] =  $imageFilename;
-                $post->images = $post->images.','. implode(',',$images);
+        $post->certifications = $request->certifications;
+        $post->contact_name = $request->contact_name;
+        $post->company_website = $request->company_website;
+        $post->description = $request->description;
+        if($request->parent_id != 4){
+            $post->country = implode(',', $request->country) ?? $request->country;
+        }
+        $post->hourly_rate = $request->hourly_rate;
+        $post->profile_summary = $request->profile_summary;
+        $post->languages = $request->languages;
+        $post->event_name = $request->event_name;
+        $post->start_date = $request->start_date;
+        $post->end_date = $request->end_date;
+        $post->location = $request->location;
+        $post->education_level = $request->education_level;
+        $post->position_type= $request->position_type;
+        $post->experience_level = $request->experience_level;
+        $post->zone = $request->zone;
+        // if($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('uploads/posts', 'public');
+        //     $post->images = $imagePath;
+        // }
+        if ($request->hasFile('image')) {
+            $imagePaths = [];
+            foreach ($request->file('image') as $image) {
+                $imagePath = $image->store('uploads/posts', 'public');
+                $imagePaths[] = $imagePath;
             }
+            // Store image paths as comma-separated string or in JSON format based on your database schema
+            $post->images = implode(',', $imagePaths); // Example: store image paths as comma-separated string
+        }
+        if($request->hasFile('document')) {
+            $imagePath = $request->file('document')->store('uploads/documents', 'public');
+            $post->document = $imagePath;
         }
         if($post->save()){
             

@@ -51,8 +51,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>All Categories</h5>
-                            <a href="{{ route('admin.category.add') }}"
-                                clas="btn btn-success waves-effect waves-light">Add Category</a>
+                            <select class="form-select" id="type_select" style="width:30%">
+                                <option value="">All</option>
+                                <option value="user">User</option>
+                                <option value="post">Post</option>
+                            </select>
                         </div>
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
@@ -64,6 +67,7 @@
                                             <th>notification</th>
                                             <th>Notification For</th>
                                             <th>status</th>
+                                            <th>action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -87,13 +91,14 @@
         var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
-            drawCallback: function(settings) {
-                if ($(this).find('tbody tr').length < 10) {
-                    $('#data-posts_paginate').hide();
-                    $('#data-posts_info').hide();
+            // ajax: "{{ route('admin.notifications') }}",
+            ajax: {
+                url: "{{ route('admin.notifications') }}",
+                type: 'GET',
+                data: function(d) {
+                    d.type_select = $('#type_select').val();
                 }
             },
-            ajax: "{{ route('admin.notifications') }}",
             columns: [
                 { 
                     data: 'DT_RowIndex', 
@@ -117,8 +122,17 @@
                     data: 'status',
                     name: 'status'
                 },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false, 
+                    searchable: false
+                }
                 
             ]
+        });
+        $('#type_select').change(function() {
+            table.ajax.reload();
         });
 
     })

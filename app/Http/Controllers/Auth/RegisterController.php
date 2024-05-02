@@ -9,6 +9,10 @@ use App\Models\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\UserRegisterMail; 
+use Illuminate\Support\Facades\Mail;
+
 
 class RegisterController extends Controller
 {
@@ -31,7 +35,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    // protected $redirectTo = '/';
+    // protected $redirectTo = 'pricing';
 
     /**
      * Create a new controller instance.
@@ -59,6 +63,7 @@ class RegisterController extends Controller
                 'phone' => ['required','numeric','regex:/^([0-9\s\-\+\(\)]*)$/'],
                 'company_website' => ['required'],
                 'company_profile' => ['required','string','max:300'],
+                'company_name' => ['required', 'string', 'max:255'],
             ]);
         }else{
             return Validator::make($data, [
@@ -83,6 +88,7 @@ class RegisterController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'company_name' => $data['company_name'],
                 'password' => Hash::make($data['password']),
                 'type' => $data['type'],
                 'phone' => $data['phone'],
@@ -98,8 +104,8 @@ class RegisterController extends Controller
                 'read' => 0,
                 'notification_for' => $user->id
             ]);
+            Mail::to($user->email)->send(new UserRegisterMail($data));
             return $user;
-         
         }else{
             // dd("0");
             return User::create([
@@ -112,5 +118,13 @@ class RegisterController extends Controller
         }
     }
 
-  
+    protected function redirectTo()
+    {
+        if (auth()->user()->type == "partner") {
+            return 'pricings';
+        }
+        return 'home';
+    }
+    
+        
 }

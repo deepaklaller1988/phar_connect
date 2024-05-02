@@ -31,7 +31,7 @@
             <div class="page-wrapper">
                 <div class="page-body">
                     @if(session('success'))
-                    <div class="card">
+                    <div class="card" id="successMessage">
                         <div class="card-header">
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -40,7 +40,7 @@
                     </div>
                     @endif
                     @if(session('error'))
-                    <div class="card">
+                    <div class="card" id="successMessage">
                         <div class="card-header">
                             <div class="alert alert-danger">
                                 {{ session('error') }}
@@ -51,7 +51,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>All Posts</h5>
+                            <select class="form-select" id="category_select" style="width:30%">
+                                <option value="">All</option>
+                                @foreach($category as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="card-block">
                             <div class="dt-responsive table-responsive">
                                 <table id="dt-http" class="table table-striped table-bordered nowrap">
@@ -60,6 +67,7 @@
                                             <th>Sr. No.</th>
                                             <th>Title</th>
                                             <th>Partner Name</th>
+                                            <th>Parent Category</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -78,26 +86,30 @@
     <script>
     $(function() {
         $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
         var table = $('#dt-http').DataTable({
             processing: true,
             serverSide: true,
-            drawCallback: function(settings) {
-                if ($(this).find('tbody tr').length < 10) {
-                    $('#data-posts_paginate').hide();
-                    $('#data-posts_info').hide();
+            // data: function(d) {
+            //     // Send category_id parameter if category filter is applied
+            //     d.category_id = $('#category_select').val();
+            // }
+            // ajax: "{{ route('admin.posts') }}",
+            ajax: {
+                url: "{{ route('admin.posts') }}",
+                type: 'GET',
+                data: function(d) {
+                    d.category_id = $('#category_select').val();
                 }
             },
-            ajax: "{{ route('admin.posts') }}",
-            columns: [
-                { 
-                    data: 'DT_RowIndex', 
-                    name: 'DT_RowIndex', 
-                    orderable: false, 
-                    searchable: false 
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: 'title',
@@ -106,6 +118,10 @@
                 {
                     data: 'partner',
                     name: 'partner'
+                },
+                {
+                    data: 'parent_category',
+                    name: 'parent_category'
                 },
                 {
                     data: 'status',
@@ -119,8 +135,31 @@
                 },
             ]
         });
-
+        $('#category_select').change(function() {
+            table.ajax.reload();
+        });
     })
+
+    // $(document).on('change','#category_select',function(){
+    //     var category_id = $(this).val();
+    //     $('#dt-http').DataTable().destroy();
+    //     // $('#dt-http').find('tbody').html('');
+    //     var table = $('#dt-http').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: {
+    //         url: "{{ route('admin.posts.category') }}"+category_id,
+    //     },
+    //     columns: [
+
+    //         {
+    //             data: 'title',
+    //             name: 'title'
+    //         },
+
+    //     ]
+    // });
+    // })
     </script>
 
     @endsection

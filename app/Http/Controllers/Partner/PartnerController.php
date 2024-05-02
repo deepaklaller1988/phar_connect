@@ -12,12 +12,15 @@ class PartnerController extends Controller
 {
     public function dashboard()
     {
-        // if(auth()->user()->plan_id != null){
-            $posts = Post::where('partner_id',auth()->user()->id)->count();
-            return view('partners.dashboard',compact('posts'));
-        // }else{
-        //     dd("kdjgj");
-        // }
+        $posts = Post::where('partner_id',auth()->user()->id)->count();
+        $countss = Post::withCount('views')->where('partner_id',auth()->user()->id)->get();
+        $active = Post::where('partner_id',auth()->user()->id)->where('status',1)->count();
+        $archive = Post::where('partner_id',auth()->user()->id)->where('status',2)->count();
+        $count = 0;
+        foreach ($countss as $counts) {
+            $count += $counts->views_count;
+        }
+        return view('partners.dashboard',compact('posts','count','active','archive'));
     }
 
     public function register()
@@ -27,7 +30,9 @@ class PartnerController extends Controller
     }
     public function profile()
     {
-        return view('partners.profile.profile');
+        $data['user'] = User::where('id',auth()->user()->id)->with('country')->first();
+        $data['countries'] = Country::all();
+        return view('partners.profile.profile',compact('data'));
     }
 
 
@@ -37,9 +42,10 @@ class PartnerController extends Controller
             'name' => 'required',
             'phone' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 
             'key_services' => 'required',
-            'location' => 'required',
+            'country' => 'required',
             'company_profile' => 'required',
             'company_website' => 'required',
+            'company_name' => 'required',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'banner' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -47,9 +53,11 @@ class PartnerController extends Controller
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->key_services = $request->key_services;
+        $user->company_name = $request->company_name;
         $user->certifications = $request->certifications;
         $user->company_website = $request->company_website;
         $user->company_profile = $request->company_profile;
+        $user->country_id = $request->country;
         if ($request->hasFile('logo')) {
             $imagePath = $request->file('logo')->store('uploads/partners/logo', 'public');
             $user->logo = $imagePath;
@@ -66,11 +74,7 @@ class PartnerController extends Controller
 
     }
 
-    public function plans()
-    {
-        dd('plans');
-    }
-
+    
     public function city_suggestion(Request $request)
     {
         if(isset($request->term)){

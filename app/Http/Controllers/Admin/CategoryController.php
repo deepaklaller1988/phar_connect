@@ -72,6 +72,11 @@ class CategoryController extends Controller
             $category->title = $request->name;
             $category->parent_id = $request->parent_id;
             $category->status = $request->status;
+            $str = str_replace('/', ' ', $request->name);
+            $string = strtolower($str);
+            $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+            $string = str_replace(' ', '-', $string);
+            $category->slug = $string;
             if ($request->hasFile('category_image')) {
                 $imagePath = $request->file('category_image')->store('uploads', 'public');
                 $category->image = $imagePath;
@@ -111,9 +116,16 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
+        $str = str_replace('/', ' ', $request->name);
+        $string = strtolower($str);
+        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string = str_replace(' ', '-', $string);
         $category->title = $request->name;
-        $category->parent_id = $request->parent_id;
+        if($id <> $request->parent_id){
+            $category->parent_id = $request->parent_id;
+        }
         $category->status = $request->status;
+        $category->slug = $string;
         if ($request->hasFile('category_image')) {
             $imagePath = $request->file('category_image')->store('uploads', 'public');
             $category->image = $imagePath;
@@ -130,4 +142,17 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return response()->json(['success'=>'Category deleted successfully.']);
     }
+
+    // public function slug()
+    // {
+    //     $category = Post::all();
+    //     foreach($category as $cat){
+    //         $str = str_replace('/', ' ', $cat->title);
+    //         $string = strtolower($str);
+    //         $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+    //         $string = str_replace(' ', '-', $string);
+    //         $cat->slug = $string;
+    //         $cat->save();
+    //     }
+    // }
 }

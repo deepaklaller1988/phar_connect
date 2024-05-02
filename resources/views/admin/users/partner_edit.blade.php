@@ -45,7 +45,8 @@
                                     <h5>Fill Partner Details</h5>
                                 </div>
                                 <div class="card-block">
-                                    <form id="main" enctype='multipart/form-data' method="post" action="{{ route('admin.partner.update',$partner->id) }}">
+                                    <form id="main" enctype='multipart/form-data' method="post"
+                                        action="{{ route('admin.partner.update',$partner->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3 row">
@@ -53,6 +54,14 @@
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="name" id="name"
                                                     placeholder="" value="{{ $partner->name }}">
+                                                <span class="messages"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="form-label col-sm-2 col-form-label"> Company Name : </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="company_name" id="company_name"
+                                                    placeholder="" value="{{ $partner->company_name }}">
                                                 <span class="messages"></span>
                                             </div>
                                         </div>
@@ -84,9 +93,14 @@
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Location : </label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="location" id="location"
-                                                    value="{{ $partner->location }}">
-                                                <span class="messages"></span>
+                                                <select name="country_id" class="form-select">
+                                                    <option value="">Choose Country</option>
+                                                    @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}"
+                                                        {{ $partner->country_id == $country->id ? 'selected' : '' }}>
+                                                        {{ $country->country_name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -120,8 +134,10 @@
                                             <div class="col-sm-10">
                                                 <select class="form-select" name="status">
                                                     <option value="">Choose an option</option>
-                                                    <option value="1" {{ $partner->status == 1 ? 'selected' : '' }}>Active</option>
-                                                    <option value="0"  {{ $partner->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                                    <option value="1" {{ $partner->status == 1 ? 'selected' : '' }}>
+                                                        Active</option>
+                                                    <option value="0" {{ $partner->status == 0 ? 'selected' : '' }}>
+                                                        Inactive</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -130,30 +146,34 @@
                                             <div class="col-sm-10">
                                                 <select class="form-select" name="is_featured">
                                                     <option value="">Choose an option</option>
-                                                    <option value="1" {{ $partner->is_featured == 1 ? 'selected' : '' }}>Yes</option>
-                                                    <option value="0"  {{ $partner->is_featured == 0 ? 'selected' : '' }}>No</option>
+                                                    <option value="1"
+                                                        {{ $partner->is_featured == 1 ? 'selected' : '' }}>Yes</option>
+                                                    <option value="0"
+                                                        {{ $partner->is_featured == 0 ? 'selected' : '' }}>No</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Logo : </label>
                                             <div class="col-sm-5">
-                                                <input type="file" class="form-control" name="logo"> 
+                                                <input type="file" class="form-control" name="logo">
                                             </div>
                                             @if($partner->logo != null)
                                             <div class="col-sm-5">
-                                                <img src="{{ asset('storage/'.$partner->logo )}}" width="150px" height="150px"> 
+                                                <img src="{{ asset('storage/'.$partner->logo )}}" width="150px"
+                                                    height="150px">
                                             </div>
                                             @endif
                                         </div>
                                         <div class="mb-3 row">
                                             <label class="form-label col-sm-2 col-form-label"> Banner : </label>
                                             <div class="col-sm-5">
-                                                <input type="file" class="form-control" name="banner"> 
+                                                <input type="file" class="form-control" name="banner">
                                             </div>
                                             @if($partner->banner != null)
                                             <div class="col-sm-5">
-                                                <img src="{{ asset('storage/'.$partner->banner )}}" width="400px" height="150px"> 
+                                                <img src="{{ asset('storage/'.$partner->banner )}}" width="400px"
+                                                    height="150px">
                                             </div>
                                             @endif
                                         </div>

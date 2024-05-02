@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'phone','company_website','company_profile','location','key_services','certifications','country_id'
+        'phone','company_website','company_profile','location','key_services','certifications','country_id','created_at',
+        'plan_id','plan_status','company_name'
     ];
   
     /**
@@ -65,4 +66,33 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class,'partner_id');
     }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    
+    // public function isPlanExpired()
+    // {
+    //     // Assuming you have a column 'expiry_date' in the plans table
+    
+    //     return now()->greaterThan($this->plan->created_at->addDays($this->plan->days));
+    // }
+
+    public function isPlanExpired()
+     {
+    if ($this->plan && $this->plan->created_at) {
+        return now()->greaterThan($this->plan->created_at->addDays($this->plan->days));
+    }
+    
+    // Handle the case where $this->plan or $this->plan->created_at is null
+    return false;
+     }
+
 }   

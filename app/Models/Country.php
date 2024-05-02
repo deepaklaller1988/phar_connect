@@ -10,4 +10,14 @@ class Country extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function countries()
+    {
+        return $this->belongsToMany('App\Models\Country','id');
+    }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

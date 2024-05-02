@@ -7,122 +7,49 @@
 
 <!-- partial -->
 </div>
-  <div class="selectYourCategory">
+@php
+if(Auth::check()){
+  if(auth()->user()->plan_id  <> NULL && auth()->user()->category_ids == NULL){
+    $style = "style=display:block;";
+  }else{
+    $style = "";
+  }
+}else{
+  $style = '';
+}
+@endphp
+  <div class="selectYourCategory" {{ $style }}>
     <div class="selectSetCategory">
       <div class="selectedCategoryHead">
-      <h6>WELCOME KATRINA KAIF</h6>
+      <h6>WELCOME {{ Auth::check() ? Auth::user()->name : ''  }}</h6>
       <p>Choose a category you want to display on your feed.</p>
       <span>Selcted <b>5</b></span>
 </div>
       <ul>
+      @foreach($allcategories['maincategories'] as $key => $mcategory)
         <li>
           <div class="catgeroyAccordion">
-            <input type="checkbox"/>
+            <input type="checkbox" name="mycategory[]" value="{{ $mcategory->id }}"/>
             <section>
               <span>
                 <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
               </span>
-              <h6>Consulting Services</h6>
+              <h6>{{ $mcategory->title  }}</h6>
             </section>
             <div class="allListBelow">
               <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
+              @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
+                <li><span><input type="checkbox" name="mycategory[]" value="{{ $childcat->id }}"/><b></b></span> {{ $childcat->title }}</li>
+              @endforeach
             </ul>
             </div>
           </div>
         </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="catgeroyAccordion">
-            <input type="checkbox"/>
-            <section>
-              <span>
-                <img src="{{asset('/assets/images/categoriesIcon/1.png') }}" alt="categoriy" />
-              </span>
-              <h6>Consulting Services</h6>
-            </section>
-            <div class="allListBelow">
-              <ul>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-                <li><span><input type="checkbox"/><b></b></span> Alert Service</li>
-            </ul>
-            </div>
-          </div>
-        </li>
+        @endforeach
       </ul>
       <div class="submItCategory">
-      <button>Submit</button>
+      <button id="choosed-category">Submit</button>
+      <button id="cancel-cat-popup" >Cancel</button>
 </div>
     </div>
   </div>
@@ -161,17 +88,27 @@
         </section>
         <div class="searchOptions">
           <div class="wrapper">
-            <form>
+            <form action="" id="myform" method="post">
+              @csrf
               <div class="searchOptionsInner">
                 <div class="searchSet">
                   <i class="fa fa-search" aria-hidden="true"></i>
-                  <input type="text" placeholder="Search Category Here..." />
+                  <input type="text" id="category_search" placeholder="Search Category Here..." />
+                  <input type="hidden" name="category" value="" id="hidden_selected-category">
+                </div>
+                <div id="category_search_result" style="display: none;">
+                 
                 </div>
                 <div class="searchSet countrySet">
                   <i class="fa fa-map-marker" aria-hidden="true"></i>
-                  <input type="text" placeholder="Search Country Here..." />
+                  <input type="text" id="country_search" placeholder="Search Country Here..." />
+                  <input type="hidden" name="country" value="" id="hidden_selected-country">
+                </div>
+                <div id="country_search_result" style="display: none;">
+                 
                 </div>
                 <button>ENTER</button>
+                
               </div>
             </form>
           </div>
@@ -187,7 +124,7 @@
             <section class="center slider">
               @foreach($data['categories'] as $category)
               <div>
-                <a href="{{ route('category',$category->id) }}">
+                <a href="{{ url('category',$category->slug) }}">
                   <span><img src="{{ url('storage/'.$category->image) }}" alt="categoriy" /></span>
                   <h4>{{ $category->title}}</h4>
                   <b>Learn More</b>
@@ -303,6 +240,7 @@
         </div>
       </div>
     </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @push('js')
@@ -345,5 +283,118 @@
         autoplaySpeed: 5000,
       });
     });
+
+    $(document).ready(function () {
+      $(document).on('keyup', '#category_search', function () {
+        var query = $(this).val();
+        var myLength = $(this).val().length;
+        if(myLength > 3){
+          $.ajax({
+                url: "{{ route('search') }}",
+                type: "GET",
+                data: {'query': query},
+                success: function(data){
+                  
+                    $('#category_search_result').empty();
+                    $('#category_search_result').css('display', 'block');
+                    $html = '<select id="selected-category" class="form-select" size="8"aria-label="Default select example">';
+                    $html += '<option value="">Select Category</option>';
+                    $.each(data, function(index, item){
+                          $html += '<option data-slug="' + item.slug + '" value="' + item.id + '">' + item.title + '</option>';
+                    });
+                    $html += '</select>';
+                    $('#category_search_result').append($html);
+                }
+            });
+        }else{
+          $('#category_search_result').empty();
+        }
+      })
+
+      $(document).on('keyup', '#country_search', function () {
+        var query = $(this).val();
+        var myLength = $(this).val().length;
+        if(myLength > 2){
+          $.ajax({
+                url: "{{ route('country-search') }}",
+                type: "GET",
+                data: {'query': query},
+                success: function(data){
+                  
+                    $('#country_search_result').empty();
+                    $('#country_search_result').css('display', 'block');
+                    $html = '<select id="selected-country" size="8" class="form-select" aria-label="Default select example">';
+                    $html += '<option value="">Select Country</option>';
+                    $.each(data, function(index, item){
+                          $html += '<option data-slug="' + item.abbreviation + '" value="' + item.id + '">' + item.country_name + '</option>';
+                    });
+                    $html += '</select>';
+                    $('#country_search_result').append($html);
+                }
+            });
+        }else{
+          $('#country_search_result').empty();
+        }
+      })
+
+      $(document).on('change', '#selected-country', function () {
+        var country_id = $(this).val();
+        var country = $(this).find(':selected').text();
+        var slug = $(this).find(':selected').data('slug');
+        var formaction = $("#myform").attr('action');
+        if(formaction){
+            $("#myform").attr('action', formaction+'/'+slug);
+        }else{
+          $("#myform").attr('action', '/search-posts/'+slug);
+        }
+        
+        $('#country_search').val(country);
+        $('#country_search_result').empty();
+        $('#country_search_result').css('display', 'none');
+        $('#hidden_selected-country').val(country_id);
+      });
+
+      $(document).on('change', '#selected-category', function () {
+        var category_id = $(this).val();
+        var category = $(this).find(':selected').text();
+        var slug = $(this).find(':selected').data('slug');
+        var url = $("#myform").attr('action');
+        $("#myform").attr('action', '/search-posts/'+slug);
+        $('#category_search').val(category);
+        $('#category_search_result').empty();
+        $('#category_search_result').css('display', 'none');
+        $('#hidden_selected-category').val(category_id);
+      });
+    });
+
+    $(document).on('click','#cancel-cat-popup',function(){
+      $('.selectYourCategory').css('display', 'none');
+    })
+
+    $(document).on('click','#choosed-category',function(e){
+      var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+        e.preventDefault();
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('selected-categories') }}',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            dataType: "json",
+            data: {data : val},
+            success: function(response){
+                $('.selectYourCategory').css('display', 'none');
+                window.location = '{{ route('partner.dashboard') }}';
+            },
+            error: function(xhr, status, error){
+                console.error(xhr.responseText);
+                // Handle errors appropriately
+            }
+        });
+    })
   </script>
 @endpush

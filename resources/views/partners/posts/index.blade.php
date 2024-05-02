@@ -62,6 +62,8 @@
                                             <th>Sr. No.</th>
                                             <th>Name</th>
                                             <th>Status</th>
+                                            <th>Parent Category</th>
+                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -75,7 +77,6 @@
     </div>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -88,12 +89,6 @@
         var table = $('#data-posts').DataTable({
             processing: true,
             serverSide: true,
-            drawCallback: function(settings) {
-                if ($(this).find('tbody tr').length < 10) {
-                    $('#data-posts_paginate').hide();
-                    $('#data-posts_info').hide();
-                }
-            },
             ajax: "{{ route('partner.posts') }}",
             columns: [{
                     data: 'DT_RowIndex',
@@ -106,6 +101,14 @@
                 {
                     data: 'status',
                     name: 'status'
+                },
+                {
+                    data: 'parent_category',
+                    name: 'parent_category'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
                 },
                 {
                     data: 'action',

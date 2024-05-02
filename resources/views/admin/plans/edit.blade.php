@@ -57,11 +57,22 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-2 col-form-label">Amount</label>
+                                            <label class="form-label col-sm-2 col-form-label">Amount (in $)</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="amount" value="{{ $plan->amount ? $plan->amount : '' }}" class="form-control">
+                                                <input type="text" name="amount" id="amount" value="{{ $plan->amount ? $plan->amount : '' }}" class="form-control">
+                                                <span id="amount-error"></span>
                                                 @if($errors->has('amount'))
                                                 <div class="error">{{ $errors->first('amount') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Days (in days)</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="days" id="days" value="{{ $plan->days ? $plan->days : '' }}" class="form-control">
+                                                <span id="days-error"></span>
+                                                @if($errors->has('days'))
+                                                <div class="error">{{ $errors->first('days') }}</div>
                                                 @endif
                                             </div>
                                         </div>
@@ -105,6 +116,20 @@ $(document).ready(function() {
 });
 $(document).on('focusout', '.note-editable', function() {
     $('#description').val($(this).html());
+});
+$('#amount').on('input', function() {
+    var num = $(this).val();
+    if (isNaN(num)) {
+        $('#amount-error').text('Please enter a valid Amount');
+        $(this).val('');
+    }
+});
+$('#days').on('input', function() {
+    var num = $(this).val();
+    if (isNaN(num)) {
+        $('#days-error').text('Please enter a valid days');
+        $(this).val('');
+    }
 });
 </script>
 @endsection

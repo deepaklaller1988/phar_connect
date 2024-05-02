@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Notification;
 use DataTables;
 
@@ -14,9 +15,14 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+     $category = Category::where(['parent_id'=> null])->orderBy('title','asc')->get();
         if ($request->ajax()) {
-  
-            $data = Post::latest()->with('user')->get();  
+            if ($request->has('category_id') && $request->category_id != null) {
+               $data = Post::where(['parent_id'=> $request->category_id])->with('user','parent_category')->orderBy('title','asc')->get();
+            }else{
+                $data = Post::latest()->with('user','parent_category')->get();
+            }
+             
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('status', function ($model) {
@@ -31,7 +37,7 @@ class PostController extends Controller
                     })
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="'.route('admin.post.edit', $row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editCategory" ><i class="fa fa-edit" ></i></a>';
+                           $btn = '<a href="'.route('admin.post.edit', $row->id).'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" id="editCategory" ><i class="fa fa-eye" ></i></a>';
    
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" id="deletePost" data-url="'.route("admin.post.delete", $row->id).'"><i class="fa fa-trash-alt ml-3"></i></a>';
     
@@ -41,36 +47,38 @@ class PostController extends Controller
    
                         $partner =  $row->user->name;
                          return $partner;
-                 })
-                    ->rawColumns(['status','action','partner'])
+                    })
+                    ->addColumn('parent_category', function($row){
+   
+                        $parent_category =  $row->parent_category->title;
+                         return $parent_category;
+                    })
+                    ->rawColumns(['status','action','partner',])
                     ->make(true);
         }
         
-        return view('admin.posts.index');
+        return view('admin.posts.index',compact('category'));
     }
 
     public function edit(Request $request, $id)
     {
-        $post= Post::find($id);
-        $data['user'] = User::where('id',$post->partner_id)->first();
-        $categoryIdsString = $data['user']->category_ids;
-        $categoryIdsArray = explode(',', $categoryIdsString);
-        $data['categories'] = Category::whereIn('id', $categoryIdsArray)->get();
-        $category = Category::find($post->category_id);
-        $cat = array();
-        if($category->parent_id != null){
-            $cat['grandchildcategories'] = Category::where('parent_id',$category->parent_id)->get();
-            $subcat = Category::where('id',$cat['grandchildcategories'][0]->id)->first();
-            if($subcat){
-                $cat['subcategories'] = Category::where('id',$subcat->parent_id)->get();
-                if($cat['subcategories'][0]->parent_id != null){
-                    $cat['childcategories'] = Category::where('parent_id',$cat['subcategories'][0]->parent_id)->get();
-                }
-            }
+        $post= Post::with('parent_category','category','zones')->find($id);
+        if($post){
+        $countries = Country::whereIn('id', explode(',',$post->country))->get();
+        if($post->parent_id == 1){
+            return view('admin.posts.edit.business-offering',compact('post','countries'));
+        }elseif($post->parent_id == 2){
+            return view('admin.posts.edit.consulting',compact('post','countries'));
+        }elseif($post->parent_id == 3){
+            return view('admin.posts.edit.events',compact('post','countries'));
+        }elseif($post->parent_id == 4){
+            return view('admin.posts.edit.authority',compact('post','countries'));
+        }elseif($post->parent_id == 5){
+            return view('admin.posts.edit.jobs',compact('post','countries'));
         }
-        // dd($cat);
-       
-        return view('admin.posts.edit',compact('data','post','cat'));
+    }else{
+        return redirect()->route('admin.posts')->with('error', 'Something went wrong');
+    }
     }
 
     public function update(Request $request, $id)
@@ -100,5 +108,12 @@ class PostController extends Controller
     {
         Post::find($id)->delete();
         return response()->json(['success'=>'Post deleted successfully.']);
+    }
+
+    public function category($id)   
+    {
+        $category = Category::where(['parent_id'=> $id])->orderBy('title','asc')->get();
+        dd($category);
+        return response()->json($category);
     }
 }

@@ -804,7 +804,25 @@ a.activeCategory {
     gap: 15px;
     border-bottom: 1px solid #e6e6e6;
 }
+.search-criteria span {
+    position: relative;
+}
 
+.search-criteria span div#category_search_result {
+    position: absolute;
+    background: white;
+    z-index: 1;
+    width: 100%;
+}
+.search-criteria span div#category_search_result select#selected-category {
+    border-radius: 0;
+    border: navajowhite;
+    padding: 0;
+}
+
+.search-criteria span div#category_search_result select#selected-category option {
+    height: 28px;
+}
 .search-criteria h5 {
     font-size: 16px;
     padding-bottom: 10px;
@@ -870,7 +888,7 @@ a.activeCategory {
     font-weight: 600;
     position: relative;
     display: block;
-    padding: 10px 0;
+    padding: 10px 15px 10px 0;
     cursor: pointer;
 }
 
@@ -1280,6 +1298,7 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
     border-radius: 10px;
     max-height: 100%;
     overflow: auto;
+    margin: 0 auto;
 }
 
 .selectSetCategory ul {
@@ -1589,9 +1608,7 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
     justify-content: center;
     color: white;
 }
-
-.container.loginRegister input,
-.container.loginRegister textarea {
+.container.loginRegister input, .container.loginRegister textarea, .container.loginRegister select {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
@@ -1829,6 +1846,7 @@ section.consultingServicesSet.postAll section>div {
 section.consultingServicesSet.postAll section {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 section.consultingServicesSet section>div a {
@@ -2601,6 +2619,40 @@ span.invalid-feedback * {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  
+/* plans css  */
+
+div#category_search_result, div#country_search_result {
+    position: absolute;
+    top: 100%;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(50% - 55px);
+}
+div#category_search_result {
+    left: 0;
+}
+.searchOptionsInner {
+    position: relative;
+    z-index: 1;
+}
+div#country_search_result {
+    left: calc(50% - 55px);
+}
+.searchOptionsInner select {
+    border: none;
+    max-height: 400px;
+    outline:none;
+    width:100%;
 }
 
-/* plans css  */
+.searchOptionsInner  select  option {
+    height: 28px;
+}
+.searchCategories ul li .myCategory {
+    color: black;
+    line-height: 40px;
+    font-weight: 600;
+}

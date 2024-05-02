@@ -10,14 +10,14 @@
                         <div class="hubAllLinksMenu">
                             <ul class="linksCategories">
                                 @foreach($allcategories['maincategories'] as $key => $mcategory)
-                                <li><a href="{{ route('category',$mcategory->id) }}">{{ $mcategory->title }} </a>
+                                <li><a href="{{ route('category',$mcategory->slug) }}">{{ $mcategory->title }} </a>
                                     <ul class="linksSubcategories activeLinkSet" id="child-cat">
                                         @foreach($allcategories[$key]['childcategories'] as $skey => $childcat)
-                                        <li><a href="{{ route('category',$childcat->id) }}">{{ $childcat->title }}</a>
+                                        <li><a href="{{ route('subcategory',$childcat->slug) }}">{{ $childcat->title }}</a>
                                             <div class="sub-linksCategories" id="sub-cat">
                                                 <ul>
                                                   @foreach($allcategories[$key][$skey]['subcategories'] as $childcat)
-                                                    <li><a href="{{ route('posts',['id' => $childcat->id]) }}"><span><img
+                                                    <li><a href="{{ route('subcategory',$childcat->slug) }}"><span><img
                                                                     src="{{ url('storage/'.$childcat->image) }}"
                                                                     alt="sub category" /></span><b>{{ $childcat->title }}</b></a></li>
                                                   @endforeach
@@ -36,9 +36,7 @@
                     @if (Route::has('login'))
                     @auth
                     @if(auth()->user()->type == "partner")
-                    <a href="{{ url('/partner/dashboard') }}">Dashboard</a>
-                    @else
-                    <a href="{{ url('/') }}">Dashboard</a>
+                    <a href="{{ url('partner/dashboard') }}">Dashboard</a>
                     @endif
                     @else
                     <a href="{{ route('login') }}">Sign in</a>
