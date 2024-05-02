@@ -232,7 +232,7 @@ class HomeController extends Controller
             $category = Category::where('slug',$slug)->first();
             $country = Country::where('abbreviation', $slug2)->first();
             $posts = Post::where(['category_id'=>$category->id, 'country'=>$country->id, 'status'=>1])->get();
-            return view('post-list',compact('posts'));
+            return view('search-post-list',compact('posts'));
         }
 
     }

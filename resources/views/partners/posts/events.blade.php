@@ -148,8 +148,20 @@
                     @if($errors->has('image'))
                     <div class="error">{{ $errors->first('image') }}</div>
                     @endif
+                </div> 
+            </div>
+            <div class="col-lg-12 mb-3 ">
+                <div class="common_input mb_15">
+                    <label>Event Description </label>
+                    <textarea id="summernote" class="form-control"></textarea>
+                    <span id="summaryerror"></span>
+                    @if($errors->has('document'))
+                    <div class="error">{{ $errors->first('document') }}</div>
+                    @endif
                 </div>
             </div>
+            <input type="hidden" name="profile_summary" id="profile_summary" value="{{ old('profile_summary') }}">
+            
             <div class="col-12 mb-3">
                 <div class="create_report_btn mt_30">
                     <button type="submit" class="btn_1 radius_btn d-block text-center btnsCZ">

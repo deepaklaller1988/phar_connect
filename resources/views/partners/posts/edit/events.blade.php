@@ -7,6 +7,8 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -204,6 +206,19 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="col-lg-12 mb-3 ">
+                                            <div class="common_input mb_15">
+                                                <label>Event Description </label>
+                                                <textarea id="summernote" class="form-control"></textarea>
+                                                <span id="summaryerror"></span>
+                                                @if($errors->has('document'))
+                                                <div class="error">{{ $errors->first('document') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="profile_summary" id="profile_summary"
+                                            value="{{ old('profile_summary') }}">
+
                                         <div class="col-12 mb-3">
                                             <div class="create_report_btn mt_30">
                                                 <button type="submit"
@@ -261,6 +276,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    $(document).ready(function(){
+        $('#summernote').summernote();
+    });
 $('#image').change(function() {
     var input = this;
     if (input.files && input.files[0]) {
@@ -301,6 +319,9 @@ $(document).ready(function() {
         $('#parent_id').val(category_id);
     });
 });
+$(document).on('focusout', '.note-editable', function() {
+        $('#profile_summary').val($(this).html());
+    });
 </script>
 
 @endsection

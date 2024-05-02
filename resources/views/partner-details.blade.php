@@ -2,9 +2,9 @@
 @section('content')
 <div class="consultInfo partnerPageMain">
     <div class="headConsult">
-        <section><img src="{{ asset('storage/'.$partner->banner) }}" alt="img"></section>
+        <section><img src="{{ $partner->banner ? asset('storage/'.$partner->banner) : asset('assets/images/consultBanner.jpg') }}" alt="img"></section>
         <div class="wrapper">
-            <span><img src="{{asset('storage/'.$partner->logo) }}" alt="img"></span>
+            <span><img src="{{ $partner->logo ? asset('storage/'.$partner->logo) : asset('assets/images/fav.png') }}" alt="img"></span>
         </div>
     </div>
     <div class="wrapper">
@@ -59,7 +59,7 @@
         @endif
         <h6>Full Company description</h6>
         <p>{!! $partner->company_profile !!}</p>
-        <div class="categoryTabs">
+        <!-- <div class="categoryTabs">
             <div class="wrapper">
                 <div class="categoryTabsInner">
                     @foreach($allcategories['maincategories'] as $key => $mcategory)
@@ -67,7 +67,7 @@
                     @endforeach
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
