@@ -59,7 +59,7 @@
 
                         @if (Route::has('register'))
                         <li><a href="{{ route('partner.register') }}">Become a Partner</a></li>
-                        <li><a href="{{ route('register') }}">Become a Member</a></li>
+                        <li><a href="{{ route('register') }}">Become a Member</a><span>You will see only posts for now! After register you can apply.</span></li>
                         @endif
                     </ul>
                 </div>

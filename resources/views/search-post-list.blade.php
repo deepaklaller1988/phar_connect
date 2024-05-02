@@ -1,15 +1,23 @@
 @extends('layouts.app')
 @section('content')
 <div class="consultingServices">
+    <div class="staticContent">
+    <span><h2>CATEGORY NAME</h2><p>Country India</p></span>
+</div>
     <div class="wrapper">
-        <div class="consultingServicesInner">
+        <div class="consultingServicesInner padding-top-50">
             @if(count($posts) > 0)
             <section class="consultingServicesSet postAll">
-            
                 <section>
                 @foreach($posts as $post)
-                    <div class="consult-Active">
+                    <div class="csearchedSet">
                         <a href="{{ route('post-details', $post->slug) }}">
+                            <section>
+                        <div class="searchImage">
+                            <img src="{{asset('/assets/images/logos/2.png') }}" alt="logo" />
+                            <!-- <b>C</b> Put first aphabet of Name only -->
+                        </div>
+                        <div class="serachPost">
                             <h4>{{ $post->title }}</h4>
                             <span>
                                 <p>{{ $post->user->name }}</p>
@@ -22,6 +30,8 @@
                                 @endforeach
                             </ul>
                             @endif
+</div>
+</section>
                             <ul class="consultList">
                                 @php
                                 if($post->description){
@@ -35,14 +45,14 @@
                                 @endphp
                                 {!! $truncatedContent !!}
 
-
+<b>Read More</b>
                             </ul>
                             <!-- <b>Active for
                                 {{ date_diff(new \DateTime($post->time), new \DateTime())->format(" %d days"); }}</b> -->
 
                         </a>
                     </div>
-                    @endforeach
+                @endforeach
                 </section>
                 
             </section>
