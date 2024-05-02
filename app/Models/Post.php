@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
     use HasFactory;
     protected $fillable = ['title','images','category_id','partner_id',
-    'key_services','description','contact_info','email','time','status','parent_id'];
+    'key_services','description','contact_info','email','time','status','parent_id','slug'];
 
     public function user()
     {
@@ -57,5 +58,22 @@ class Post extends Model
     public function views()
     {
         return $this->hasMany(PostView::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            $post->slug = Str::slug($post->title);
+            $originalSlug = $post->slug;
+            $count = 1;
+
+            // Check if the slug already exists
+            while (static::whereSlug($post->slug)->exists()) {
+                $post->slug = $originalSlug . '-' . $count;
+                $count++;
+            }
+        });
     }
 }

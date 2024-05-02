@@ -95,7 +95,7 @@ class PostController extends Controller
 
     public function store(request $request)
     {
-        $post = new Post;
+        $post = new Post; 
         $post->title = $request->company_name;
         // $str = str_replace('/', ' ', $request->company_name);
         $string = strtolower($request->company_name);

@@ -27,9 +27,10 @@ class HomeController extends Controller
             return view('home')->with('data',$data);
 
     }
-    public function category(Request $request,$slug)
+    public function category(Request $request,$slug) 
     {
         $category = Category::where('slug',$slug)->first();
+        $data['parent'] = $slug;
         $data['categories'] = Category::where(['parent_id'=> $category->id,'status'=> 1 ])->orderBy('title','asc')->get();
         if(count($data['categories']) > 0){
             return view('category')->with('data',$data);
@@ -235,7 +236,7 @@ class HomeController extends Controller
         }
 
     }
-
+ 
     public function getpost(Request $request,$id)
     {
         $post = Post::where(['id'=>$id, 'status'=>1])->with('user','countrie','experience','education','position')->first();

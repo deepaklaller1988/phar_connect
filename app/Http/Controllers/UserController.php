@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
   
-            $data = User::where(['type'=> 2,'plan_status' => NULL])->orderBy('id','desc')->get();  
+            $data = User::where(['type'=> 2])->where('plan_status','!=', NULL)->orderBy('id','desc')->get();  
             return Datatables::of($data)
                     ->addColumn('checkbox', function ($item) {
                         return '<input type="checkbox" value="'.$item->id.'" name="someCheckbox" />';
