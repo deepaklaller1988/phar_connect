@@ -1185,7 +1185,7 @@ ul.linksCategories>li a:hover:before {
 
 ul.linksSubcategories li {
     display: block;
-    position: relative;
+    /* position: relative; */
 }
 
 ul.linksSubcategories li a {
@@ -1239,7 +1239,7 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
     left: 300px;
     top: 0;
     width: calc(100% - 320px);
-    min-height: 300px;
+    height: 100%;
     overflow: auto;
     background: white;
     z-index: 1;
