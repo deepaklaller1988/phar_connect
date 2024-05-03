@@ -1,15 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <style>
-.item-category{
-    display:none;
+.item-category {
+    display: none;
 }
 </style>
 
 <div class="midContainer">
     <div class="bannerSet bannerSetcategory">
         <div class="wrapper">
-            <h4>Welcome to XXX, where expertise meet opportunity.</h4>
+
+            <h4>Welcome to {{ isset( auth()->user()->name)  ? auth()->user()->name : ' Guest'}}, where expertise meet
+                opportunity.</h4>
             <p>Our goal is to revolutionize how services and industries integral to all aspects of drug development and
                 commercialization
                 connect and collaborate with Biotechnology and Pharmaceutical companies.</p>
@@ -27,7 +29,7 @@
                     @php $count = 0; @endphp
                     @foreach($data['categories'] as $category)
                     @php $count++; @endphp
-                    <div class=" @if($count > 9) item-category @endif" >
+                    <div class=" @if($count > 9) item-category @endif">
                         <a href="{{ url('subcategory',$category->slug) }}">
                             <span><img src="{{ url('storage/'.$category->image) }}" alt="categoriy" /></span>
                             <h4>{{ $category->title}}</h4>
@@ -36,8 +38,8 @@
                     </div>
                     @endforeach
                     @if(count($data['categories']) > 9)
-                    <div id="all_categories">
-                        <a href="javacript:void(0)"  class="allcategoryShow">
+                    <div id="all_categories">  
+                        <a href="javacript:void(0)" class="allcategoryShow">
                             <b>View All</b>
                         </a>
                     </div>
@@ -46,8 +48,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <div class="pharmCategory pharmPartnersLogo">
         <div class="wrapper">

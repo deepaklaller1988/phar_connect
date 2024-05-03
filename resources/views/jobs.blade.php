@@ -1,36 +1,45 @@
 @extends('layouts.app')
 @section('content')
+<style>
+.item-category {
+    display: none;
+}
+</style>
 <div class="consultingServices">
     <div class="wrapper">
         @if(count($posts) > 0)
         <div class="consultingServicesInner">
             <section class="consultingServicesSet">
                 <section>
+                    @php $count = 0; @endphp
                     @foreach($posts as $key => $post)
-                    <div class="consult-Active" data-id="{{ $post->id }}">
-                        <a href="javascript:void(0);">
-                            <h4>{{ $post->title }}</h4>
-                            <span>
-                                <p>{{ $post->user->name }}</p>
-                                <p>{{ $post->countrie->country_name }} </p>
-                            </span>
-                            <ul class="tagsConsult">
-                                <li>{{ $post->position[0]->title }}</li>
-                                <li>{{ $post->experience[0]->title }}</li>
-                                <li>{{ $post->education[0]->title }}</li>
-                            </ul>
-                            <ul class="consultList">
-                                <li><b>Partition:</b> Partition with other team members, such as functional
-                                    <b>consultants</b>, provide
-                                    technical…
-                                </li>
-                            </ul>
-                            <b>Active 7 days ago</b>
-                        </a>
+                    @php $count++; @endphp
+                    <div class=" @if($count > 2) item-category @endif">
+                        <div class="consult-Active" data-id="{{ $post->id }}">
+                            <a href="javascript:void(0);">
+                                <h4>{{ $post->title }}</h4>
+                                <span>
+                                    <p>{{ $post->user->name }}</p>
+                                    <p>{{ $post->countrie->country_name }} </p>
+                                </span>
+                                <ul class="tagsConsult">
+                                    <li>{{ $post->position[0]->title }}</li>
+                                    <li>{{ $post->experience[0]->title }}</li>
+                                    <li>{{ $post->education[0]->title }}</li>
+                                </ul>
+                                <ul class="consultList">
+                                    <li><b>Partition:</b> Partition with other team members, such as functional
+                                        <b>consultants</b>, provide
+                                        technical…
+                                    </li>
+                                </ul>
+                                <b>Active 7 days ago</b>
+                            </a>
+                        </div>
                     </div>
                     @endforeach
                     <div>
-                        <a href="" class="allConsultShow">
+                        <a href="javascript:void(0);" id="alljobShow" class="allConsultShow">
                             <b>View All</b>
                         </a>
                     </div>
@@ -38,9 +47,13 @@
 
                 <div class="consultInfo">
                     <div class="headConsult">
-                        <section><img id="banner" src="{{ url('storage/',$post->user->banner ) }}" alt="img">
+                        <section><img id="banner"
+                                src="{{ $post->user->banner ? url('storage/',$post->user->banner ) : asset('/assets/images/consultBanner.jpg') }}"
+                                alt="img">
                         </section>
-                        <span><img id="logo" src="{{ url('storage/',$post->user->logo ) }}" alt="img"></span>
+                        <span><img id="logo"
+                                src="{{ $post->user->logo ?url('storage/',$post->user->logo ) : asset('/assets/images/fav.png') }}"
+                                alt="img"></span>
                     </div>
                     <div class="wrapper">
                         <h4><span id="name">{{ $post->user->name }}</span> <a id="link"
@@ -93,6 +106,12 @@
     </div>
 </div>
 <script>
+$(document).ready(function() {
+    $("#alljobShow").click(function() {
+        $(".item-category").show();
+        $("#alljobShow").hide();
+    });
+})
 $(".consult-Active").click(function() {
     $('#desc').html('');
     var id = $(this).data("id");
@@ -100,10 +119,15 @@ $(".consult-Active").click(function() {
         url: "{{ url('/getpost') }}/" + id,
         type: "GET",
         success: function(data) {
-            var banner = "{{ asset('storage/') }}/" + data.user.banner;
-            var logo = "{{ asset('storage/') }}/" + data.user.logo;
-            $('#banner').attr('src', banner);
-            $('#logo').attr('src', logo);
+            if (data.user.banner) {
+                var banner = "{{ asset('storage/') }}/" + data.user.banner;
+                $('#banner').attr('src', banner);
+            }
+            if (data.user.logo) {
+                var logo = "{{ asset('storage/') }}/" + data.user.logo;
+                $('#logo').attr('src', logo);
+            }
+
             $('#name').text(data.user.name);
             $('#link').attr('href', 'https://' + data.company_website);
             $('#company_name').text(data.user.company_name);

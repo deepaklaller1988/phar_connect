@@ -296,6 +296,8 @@ $(document).ready(function() {
     })
 
     $(document).on('change', '#selected-country', function() {
+        var base_url = window.location.pathname;;
+
         var country_id = $(this).val();
         var country = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
@@ -303,7 +305,7 @@ $(document).ready(function() {
         if (formaction) {
             $("#myform").attr('action', formaction + '/' + slug);
         } else {
-            $("#myform").attr('action', '/search-posts/' + slug);
+            $("#myform").attr('action', base_url+'search-posts/' + slug);
         }
 
         $('#country_search').val(country);
@@ -313,11 +315,12 @@ $(document).ready(function() {
     });
 
     $(document).on('change', '#selected-category', function() {
+        var base_url = window.location.pathname;
         var category_id = $(this).val();
         var category = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
         var url = $("#myform").attr('action');
-        $("#myform").attr('action', '/search-posts/' + slug);
+        $("#myform").attr('action', base_url+'search-posts/' + slug);
         $('#category_search').val(category);
         $('#category_search_result').empty();
         $('#category_search_result').css('display', 'none');

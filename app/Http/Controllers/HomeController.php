@@ -151,7 +151,11 @@ class HomeController extends Controller
             return view('jobs',compact('posts'));
         }else{
             $posts = Post::with('user')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
-            $category = Category::where('id', $posts[0]->parent_id)->first();
+            if(count($posts) > 0){
+                $category = Category::where('id', $posts[0]->parent_id)->first();
+            }else{
+                $category = '';
+            }
             return view('post-list',compact('posts','category','getcat'));
         }
     }

@@ -36,7 +36,10 @@
                     <a href="{{ route('about-us') }}">About us</a>
                     <a href="{{ route('contact-us') }}">Contact us</a>
                     @if (Route::has('login'))
+                    @auth
+                    @else
                     <a href="{{ route('login') }}">Sign in</a>
+                    @endauth
                     @endif
                 </nav>
                 @if (Route::has('login'))

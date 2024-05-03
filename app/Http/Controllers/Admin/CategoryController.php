@@ -75,6 +75,7 @@ class CategoryController extends Controller
             $str = str_replace('/', ' ', $request->name);
             $string = strtolower($str);
             $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+            $string =  preg_replace('/\s+/', ' ', $string);
             $string = str_replace(' ', '-', $string);
             $category->slug = $string;
             if ($request->hasFile('category_image')) {
@@ -119,6 +120,7 @@ class CategoryController extends Controller
         $str = str_replace('/', ' ', $request->name);
         $string = strtolower($str);
         $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        $string =  preg_replace('/\s+/', ' ', $string);
         $string = str_replace(' ', '-', $string);
         $category->title = $request->name;
         if($id <> $request->parent_id){
