@@ -4,36 +4,20 @@
 <div class="midContainer">
     <div class="bannerSet">
         <section class="regular slider">
+            @foreach($data['sliders'] as $slider)
             <div>
-                <img src="{{asset('/assets/images/slider/1.jpg')}}" alt="slider">
+                <img src="{{ asset('storage/'.$slider->image)}}" alt="slider">
                 <div class="bannerInner">
                     <div class="wrapper">
                         <section>
                             <div class="textPanel">
-                                <h1>YOUR GATEWAY</h1>
-                                <p>to Connecting Pharma & Biotech Excellence. You are
-                                    focused on the big biological question and are poised
-                                    to dramatically change millions of lives for the better.</p>
+                                {!! $slider->description !!}
                             </div>
                         </section>
                     </div>
                 </div>
             </div>
-            <div>
-                <img src="{{asset('/assets/images/slider/2.jpg')}}" alt="slider">
-                <div class="bannerInner">
-                    <div class="wrapper">
-                        <section>
-                            <div class="textPanel">
-                                <h1>YOUR GATEWAY</h1>
-                                <p>to Connecting Pharma & Biotech Excellence. You are
-                                    focused on the big biological question and are poised
-                                    to dramatically change millions of lives for the better.</p>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </section>
         <div class="searchOptions">
             <div class="wrapper">

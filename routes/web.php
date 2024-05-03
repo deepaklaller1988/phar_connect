@@ -107,7 +107,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
     Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
     Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
-
+    Route::get('/admin/pages/sliders',[PageController::class,'sliders'])->name('admin.pages.sliders');
+    Route::post('/admin/pages/sliders/store',[PageController::class,'store_slider'])->name('admin.pages.slider.store');
+    Route::get('admin/pages/slider/add',[PageController::class,'add'])->name('admin.pages.slider.add');
+    Route::get('admin/pages/slider/edit/{id}',[PageController::class,'edit'])->name('admin.pages.slider.edit');
+    Route::put('admin/pages/slider/update/{id}',[PageController::class,'update'])->name('admin.pages.slider.update');
+    Route::delete('admin/pages/slider/delete/{id}',[PageController::class,'delete'])->name('admin.pages.slider.delete');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

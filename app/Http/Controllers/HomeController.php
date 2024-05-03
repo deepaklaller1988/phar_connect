@@ -12,6 +12,7 @@ use App\Models\Visitor;
 use App\Models\Country;
 use App\Models\Authorityregion;
 use App\Models\PostView;
+use App\Models\Slider;
 class HomeController extends Controller
 {
     public function index()
@@ -21,7 +22,9 @@ class HomeController extends Controller
                 Visitor::create([
                     'ip_address' => request()->ip(),
                 ]);  
+
             }
+            $data['sliders'] = Slider::all();
             $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
             $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
             return view('home')->with('data',$data);
