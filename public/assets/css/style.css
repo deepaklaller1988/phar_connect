@@ -1898,7 +1898,7 @@ ul.tagsConsult li {
 }
 
 ul.tagsConsult.certifyMe li {
-    padding: 0;
+    /* padding: 0; */
 }
 
 ul.tagsConsult.certifyMe li a {

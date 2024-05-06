@@ -63,14 +63,17 @@ class PostController extends Controller
         $data['user'] = User::where('id',auth()->user()->id)->first();
         $categoryIdsString = $data['user']->category_ids;
         $categoryIdsArray = explode(',', $categoryIdsString);
-        $data['categories'] = Category::whereIn('id', $categoryIdsArray)->get();
+        $data['categories'] = Category::whereIn('id', $categoryIdsArray)->where('parent_id',NULL)->orderBy('title')->get();
         return view('partners.posts.add')->with('data' , $data);
     }
 
     public function loadBlade(Request $request)
     {
-        $data['categories'] = Category::where(['status'=>'1','parent_id'=>$request->id])->orderBy('title')->get();
+        // $data['categories'] = Category::where(['status'=>'1','parent_id'=>$request->id])->orderBy('title')->get();
         $data['user'] = User::where('id',auth()->user()->id)->first();
+        $categoryIdsString = $data['user']->category_ids;
+        $categoryIdsArray = explode(',', $categoryIdsString);
+        $data['categories'] = Category::whereIn('id', $categoryIdsArray)->where('parent_id',$request->id)->orderBy('title')->get();
         $data['countries'] = Country::all();
         $data['parent_id'] = $request->id;
         if($request->id == 1){
@@ -98,11 +101,11 @@ class PostController extends Controller
         $post = new Post; 
         $post->title = $request->company_name;
         // $str = str_replace('/', ' ', $request->company_name);
-        $string = strtolower($request->company_name);
-        $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
-        $string =  preg_replace('/\s+/', ' ', $string);
-        $string = str_replace(' ', '-', $string);
-        $post->slug = $string;
+        // $string = strtolower($request->company_name);
+        // $string = preg_replace('/[^A-Za-z0-9\-]/', ' ', $string);
+        // $string =  preg_replace('/\s+/', ' ', $string);
+        // $string = str_replace(' ', '-', $string);
+        // $post->slug = $string;
         $post->email = $request->email;
         $post->contact_info = $request->phone; 
         $post->category_id = $request->category_id;
@@ -133,10 +136,12 @@ class PostController extends Controller
     //     }
     if ($request->hasFile('image')) {
         $imagePaths = [];
+
         foreach ($request->file('image') as $image) {
             $imagePath = $image->store('uploads/posts', 'public');
             $imagePaths[] = $imagePath;
         }
+        // dd($imagePaths);
         // Store image paths as comma-separated string or in JSON format based on your database schema
         $post->images = implode(',', $imagePaths); // Example: store image paths as comma-separated string
     }

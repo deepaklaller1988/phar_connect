@@ -32,9 +32,9 @@ class TransactionController extends Controller
                 ->addIndexColumn()
                 ->addColumn('status', function($row){
                     if($row->status === "success"){
-                        $status = '<span class="badge badge-success">Paid</span>';
+                        $status = '<span class="form-label label label-inverse-success">Paid</span>';
                     }else{
-                        $status = '<span class="badge badge-danger">Unpaid</span>';
+                        $status = '<span class="form-label label label-inverse-danger">Unpaid</span>';
                     }
                     return $status;
                 })

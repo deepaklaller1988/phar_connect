@@ -125,7 +125,8 @@
                     @if($errors->has('image'))
                     <div class="error">{{ $errors->first('image') }}</div>
                     @endif
-                </div>
+                </div> 
+                <div id="image-preview-container"></div>
             </div>
             <div class="col-lg-6 mb-3 ">
                 <div class="common_input mb_15">
@@ -184,7 +185,7 @@
                     <img src="" id="image-preview" width="150px" height="150px">
                 </div>
             </div> -->
-            <div id="image-preview-container"></div>
+           
         </div>
     </div>
 </form>
@@ -210,7 +211,7 @@
         for (var i = 0; i < input.files.length; i++) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#image-preview-container').append('<img class="image-preview" src="' + e.target.result + '">');
+                $('#image-preview-container').append('<span><img class="image-preview" src="' + e.target.result + '"><b>+</b></span>');
             }
             reader.readAsDataURL(input.files[i]);
         }

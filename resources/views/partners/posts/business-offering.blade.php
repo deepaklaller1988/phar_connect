@@ -141,6 +141,7 @@
                     <div class="error">{{ $errors->first('image') }}</div>
                     @endif
                 </div>
+                <div id="image-preview-container"></div>
             </div>
             <div class="col-lg-12 mb-3">
                 <div class="common_input mb_15">
@@ -156,7 +157,6 @@
                     </button>
                 </div>
             </div>
-            <div id="image-preview-container"></div>
         </div>
     </div>
 </form>
@@ -191,8 +191,8 @@ $('#image').change(function() {
         for (var i = 0; i < input.files.length; i++) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#image-preview-container').append('<img class="image-preview" src="' + e.target.result +
-                    '">');
+                $('#image-preview-container').append('<span><img class="image-preview" src="' + e.target.result +
+                    '"><b>+</b></span>');
             }
             reader.readAsDataURL(input.files[i]);
         }
