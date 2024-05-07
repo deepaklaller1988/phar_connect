@@ -60,13 +60,13 @@
                                 @foreach($sliders as $key => $slider)
                                 <div class="col-md-12 col-lg-12 peity-chart priceSetting">
                                     <div class="card">
-                                        <div class="card-header">
+                                        <div class="card-header"> 
 
                                             <div class="editDeletePlans">
                                                 <ul>
                                                     <li><a href="{{ route('admin.pages.slider.edit', $slider->id)}}"><i class="feather icon-edit-1"></i></a></li>
                                                     <li>
-                                                        <a href="{{ route('admin.pages.slider.delete', $slider->id)}}"><i
+                                                        <a id="sliderDelete" data-id="{{ $slider->id }}"><i
                                                                 class="feather icon-trash close-card"></i></a>
                                                     </li>
                                                 </ul>
@@ -89,5 +89,53 @@
         </div>
     </div>
 </div>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+$(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
+    $(document).on('click', '#sliderDelete', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal.fire({
+                title: "Are you sure?",
+                text: "Once confirmed, the Slider will be deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showConfirmButton: true,
+                allowOutsideClick: false,
+                showCloseButton: true,
+            })
+            .then((result) => {
+                if (result['isConfirmed']) {
+                    $.ajax({
+                        url: "{{ url('admin/pages/slider/delete')}}" + '/' + id,
+                        type: 'DELETE',
+                        dataType: 'json',
+                        success: function(data) {
+                            Swal.fire({
+                                title: "Great!",
+                                text: "Slider Deleted Successfully",
+                                icon: "success"
+                            }).then(function() {
+                                window.location.reload();
+                            })
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                } else {
+                    // alert("23455");
+                }
+            });
+    });
+})
+</script>
 @endsection

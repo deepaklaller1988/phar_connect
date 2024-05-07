@@ -108,10 +108,9 @@ class PageController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        $slider = Slider::find($id);
-        $slider->delete();
-        return redirect()->back()->with('success', 'Slider Deleted Successfully');
+        Slider::find($id)->delete();
+        return response()->json(['success'=>'Slider deleted successfully.']);
     }
 }

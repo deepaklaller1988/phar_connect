@@ -39,12 +39,12 @@
       </div>
       <div class="footerSocialPartner">
         <div class="socialApps">
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="fa fa-twitter"></a>
-          <a href="#" class="fa fa-google"></a>
-          <a href="#" class="fa fa-linkedin"></a>
-          <a href="#" class="fa fa-youtube"></a>
-          <a href="#" class="fa fa-instagram"></a>
+          <a href="{{ customHelper('facebook')->facebook ? customHelper('facebook')->facebook : '#'}}" class="fa fa-facebook"></a>
+          <a href="{{ customHelper('twitter')->twitter ? customHelper('twitter')->twitter : '#' }}" class="fa fa-twitter"></a>
+          <a href="mailto:{{ customHelper('email')->email ? customHelper('email')->email : '#' }}" class="fa fa-google"></a>
+          <a href="{{ customHelper('linkedin')->linkedin ? customHelper('linkedin')->linkedin : '#'}}" class="fa fa-linkedin"></a>
+          <a href="{{ customHelper('youtube')->youtube ? customHelper('youtube')->youtube : '#' }}" class="fa fa-youtube"></a>
+          <a href="{{ customHelper('instagram')->instagram ? customHelper('instagram')->instagram : '#' }}" class="fa fa-instagram"></a>
         </div>
         <div class="socialPartner">
           <ul>

@@ -239,6 +239,8 @@ $(document).ready(function() {
             if ($('#image')[0].files.length > 0) {
                 formData.append('image[]', $('#image')[0].files[0]);
             }
+        }
+        if($('#document').length) {
             if ($('#document')[0].files.length > 0) {
                 formData.append('document', $('#document')[0].files[0]);
             }

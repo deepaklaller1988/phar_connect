@@ -1,7 +1,7 @@
 <header class="">
     <div class="wrapper">
         <div class="headerHub">
-            <a href="{{ url('/') }}"><img src="{{asset('/assets/images/logo.jpg') }}" alt="logo" /></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('storage/'.customHelper('logo')->logo) }}" alt="logo" /></a>
             <div class="headerNav">
                 <nav>
                     <span>

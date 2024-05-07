@@ -84,10 +84,12 @@
     </div>
     <div class="pharmCategory pharmPartnersLogo">
         <div class="wrapper">
+            @if($data['featured_partners'])
             <div class="headerTitle">
                 <h3>FEATURED</h3>
                 <p>Explore features of pharma</p>
             </div>
+            @endif
             <div class="pharmCategoryInner">
                 @if($data['featured_partners'])
                 <div class="innerDifferentSection">
@@ -316,5 +318,5 @@ $(document).on('click', '#cancel-cat-popup', function() {
     $('.selectYourCategory').css('display', 'none');
 })
 
-
+</script>
 @endpush

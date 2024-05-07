@@ -119,6 +119,14 @@
                         <span class="pcoded-mtext">Transactions</span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{ route('admin.settings') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-settings"></i>
+                        </span>
+                        <span class="pcoded-mtext">Settings</span>
+                    </a>
+                </li>
                 <li class=" ">
                     @if (Route::has('login'))
                     @auth

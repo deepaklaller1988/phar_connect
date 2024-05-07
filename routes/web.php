@@ -18,6 +18,7 @@ use App\Http\Controllers\PlanJobController;
 use App\Http\Controllers\CheckPlanDaysController;
 use App\Http\Controllers\PostJobsChangeStatusController;
 use App\Http\Controllers\PayPalPaymentController;
+use App\Http\Controllers\Admin\SettingController;
 
 
 use App\Http\Controllers\Admin\TransactionController;
@@ -113,6 +114,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/pages/slider/edit/{id}',[PageController::class,'edit'])->name('admin.pages.slider.edit');
     Route::put('admin/pages/slider/update/{id}',[PageController::class,'update'])->name('admin.pages.slider.update');
     Route::delete('admin/pages/slider/delete/{id}',[PageController::class,'delete'])->name('admin.pages.slider.delete');
+    Route::get('/admin/settings',[SettingController::class,'index'])->name('admin.settings');
+    Route::post('/admin/settings/update',[SettingController::class,'update'])->name('admin.settings.update');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
