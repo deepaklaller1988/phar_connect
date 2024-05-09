@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-md-6">
+                        <!-- <div class="col-xl-6 col-md-6">
                             <div class="card o-hidden">
                                 <div class="card-header">
                                     <h5>Users</h5>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div id="sal-income" style="height:100px"></div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-xl-4 col-md-12">
                             <div class="card comp-card">
                                 <div class="card-body">
@@ -161,6 +161,6 @@
     </div>
 </div>
 <script>
-    var mdata = {{ json_encode($data['users'])}};
+    // var mdata = {{ json_encode($data['users'])}};
 </script>
 @endsection

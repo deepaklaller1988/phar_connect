@@ -116,6 +116,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('admin/pages/slider/delete/{id}',[PageController::class,'delete'])->name('admin.pages.slider.delete');
     Route::get('/admin/settings',[SettingController::class,'index'])->name('admin.settings');
     Route::post('/admin/settings/update',[SettingController::class,'update'])->name('admin.settings.update');
+    Route::post('/admin/update-password',[AdminController::class,'update_password'])->name('admin.update-password');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {
