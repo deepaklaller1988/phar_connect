@@ -232,12 +232,26 @@ $(document).ready(function() {
         // }
 
         // var formData = $(this).serialize();
-        var formData = new FormData(this);
+        var formData = new FormData(this);  
         if ($('#image').length) {
-            
             // Check if files are selected before appending them
             if ($('#image')[0].files.length > 0) {
-                formData.append('image[]', $('#image')[0].files[0]);
+                var imageFile = $('#image')[0].files[0];
+                var fileName = imageFile.name; // Assuming filename is unique
+
+                // Check if the file with the same name already exists in formData
+                var fileExists = false;
+                formData.forEach(function(value, key) {
+                    if (key == 'image[]' && value.name == fileName) {
+                        fileExists = true;
+                        return false; // Exit loop early
+                    }
+                });
+
+                // If file doesn't exist, append it to formData
+                if (!fileExists) {
+                    formData.append('image[]', imageFile);
+                }
             }
         }
         if($('#document').length) {

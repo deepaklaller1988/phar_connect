@@ -134,7 +134,7 @@ class CategoryController extends Controller
         }
         
         if($category->save()){
-            return redirect()->route('admin.categories')->with('success', 'New Category created successfully.');
+            return redirect()->route('admin.categories')->with('success', 'Category updated successfully.');
         }else{
             return redirect()->route('admin.categories')->with('error', 'Error while creating new category');
         }

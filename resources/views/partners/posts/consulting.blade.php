@@ -1,8 +1,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 
-<form id="post-form">
+<form id="post-form" onsubmit="return validateForm()">
     @csrf
     <div class="white_card_body">
         <div class="row">
@@ -64,7 +66,8 @@
             <div class="col-lg-6 mb-3">
                 <label>Country : </label>
                 <div class="common_input mb_15">
-                    <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect" name="country[]" multiple="multiple">
+                    <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect"
+                        name="country[]" multiple="multiple">
                         @foreach($data['countries'] as $country)
                         <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                         @endforeach
@@ -75,15 +78,13 @@
             <div class="col-lg-6 mb-3">
                 <label>Category : </label>
                 <div class="common_input mb_15">
-                    <select id="sub_category_select" class="form-control selectFixCZ">
+                    <select id="sub_category_select" name="category_id" class="form-control selectFixCZ">
                         <option value="">Select Category</option>
                         @foreach($data['categories'] as $category)
                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
-                    @if($errors->has('category'))
-                    <div class="error">{{ $errors->first('category') }}</div>
-                    @endif
+                    <span id="category_error"></span>
                 </div>
             </div>
             <div class="col-lg-6 mb-3 " id="sub_sub_category_div" style="display: none">
@@ -125,20 +126,21 @@
                     @if($errors->has('image'))
                     <div class="error">{{ $errors->first('image') }}</div>
                     @endif
-                </div> 
+                </div>
                 <div id="image-preview-container"></div>
             </div>
             <div class="col-lg-6 mb-3 ">
                 <div class="common_input mb_15">
                     <label>CV/Resume: </label>
-                    <input type="file" name="document" id="document" class="form-control" accept="application/pdf,application/vnd.ms-excel">
+                    <input type="file" name="document" id="document" class="form-control"
+                        accept="application/pdf,application/vnd.ms-excel">
                     <span id="docerror"></span>
                     @if($errors->has('document'))
                     <div class="error">{{ $errors->first('document') }}</div>
                     @endif
                 </div>
             </div>
-            
+
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Languages:</label>
@@ -154,8 +156,8 @@
             <div class="col-lg-6 mb-3">
                 <div class="common_input mb_15">
                     <label>Hourly Rate (in $):</label>
-                    <input type="text" name="hourly_rate" id="hourly_rate" class="form-control" value="{{ old('hourly_rate') }}"
-                        placeholder="Hourly Rate">
+                    <input type="text" name="hourly_rate" id="hourly_rate" class="form-control"
+                        value="{{ old('hourly_rate') }}" placeholder="Hourly Rate">
                     <span id="hrate"></span>
                     @if($errors->has('hourly_rate'))
                     <div class="error">{{ $errors->first('emhourly_rateail') }}</div>
@@ -185,33 +187,47 @@
                     <img src="" id="image-preview" width="150px" height="150px">
                 </div>
             </div> -->
-           
+
         </div>
     </div>
 </form>
 <script>
-     $('#summernote').summernote();
-    //  $('#image').change(function() {
-    //     var input = this;
-    //     if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
-    //         reader.onload = function(e) {
-    //             $('#image-preview').attr('src', e.target.result);
-    //         }
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
-    // });
-    $('#image').change(function() {
+function validateForm() {
+    var categorySelect = document.getElementById("sub_category_select");
+    var categoryError = document.getElementById("category_error");
+    if (categorySelect.value == "") {
+        categoryError.innerText = "Please select category";
+        return false;
+    } else {
+        categoryError.innerText = ""; // Clear the error message if validation succeeds
+        return true;
+    }
+}
+</script>
+<script>
+$('#summernote').summernote();
+//  $('#image').change(function() {
+//     var input = this;
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             $('#image-preview').attr('src', e.target.result);
+//         }
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// });
+$('#image').change(function() {
     var input = this;
     var limit = 7;
     var uploadedImagesCount = $('#image-preview-container').children('.image-preview').length;
-    
+
     if (input.files && (input.files.length + uploadedImagesCount) <= limit) {
         $('#image-preview-container').empty(); // Clear previous previews
         for (var i = 0; i < input.files.length; i++) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#image-preview-container').append('<span><img class="image-preview" src="' + e.target.result + '"><b>+</b></span>');
+                $('#image-preview-container').append('<span><img class="image-preview" src="' + e.target
+                    .result + '"><b>+</b></span>');
             }
             reader.readAsDataURL(input.files[i]);
         }
@@ -223,9 +239,12 @@
     }
 });
 </script>
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}"></script>
-
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}">
 </script>
-<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+
+<script type="text/javascript"
+    src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
+</script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>

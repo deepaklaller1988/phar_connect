@@ -62,12 +62,12 @@ class HomeController extends Controller
             $cat = $parent->title;
         }
         if($parent->parent_id != NULL){
-            $datas['maincategories'] = Category::where('parent_id',$prnt)->get();
+            $datas['maincategories'] = Category::where('parent_id',$prnt)->orderBy('title','asc')->get();
         }
         foreach($datas['maincategories'] as $key=> $mcategory){
-            $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->get();
+            $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->orderBy('title','asc')->get();
             foreach($datas[$key]['subcategories'] as $skey => $scategory){
-                $datas[$key][$skey]['childcategory'] = Category::where('parent_id',$scategory->id)->get();
+                $datas[$key][$skey]['childcategory'] = Category::where('parent_id',$scategory->id)->orderBy('title','asc')->get();
             }
         }
        
