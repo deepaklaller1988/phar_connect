@@ -2763,10 +2763,16 @@ div#country_search_result {
     box-shadow: 0 0 10px silver;
     text-align: center;
 }
+
 @keyframes success {
-    from {transform: scale(.8);}
-    to {transform: scale(1);}
-  }
+    from {
+        transform: scale(.8);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
 
 .paymentSet span {
     animation: success 1s infinite;
@@ -2795,6 +2801,7 @@ div#country_search_result {
     border-radius: 6px;
     color: white;
 }
+
 .alert.alert-danger p {
     color: red;
     font-size: 12px;
