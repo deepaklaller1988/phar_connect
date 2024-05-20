@@ -79,25 +79,42 @@ class HomeController extends Controller
         }
     }
 
+    // public function categoryDetail(Request $request,$slug)
+    // {
+    //     $getcat = Category::where('slug',$slug)->first();
+
+    //     if($getcat->title == "Health Authority Sites"){
+    //         $zones = Authorityregion::all();
+    //         $data = array();
+    //         foreach($zones as $key => $zone){
+    //             $data[$key]['name'] = $zone->name;
+    //             $data[$key]['id'] = $zone->id;
+    //             $data[$key]['posts'] = Post::where(['zone' => $zone->id ,'status' => 1,'category_id' => $getcat->id])->get();
+    //         }
+    //         return view('health-authority',compact('data'));
+    //     }else{
+    //         return redirect()->route('posts',$slug);
+    //     }
+    // }
+
     public function categoryDetail(Request $request,$slug)
     {
         $getcat = Category::where('slug',$slug)->first();
 
         if($getcat->title == "Health Authority Sites"){
-            $zones = Authorityregion::all();
-            $data = array();
-            foreach($zones as $key => $zone){
-                $data[$key]['name'] = $zone->name;
-                $data[$key]['id'] = $zone->id;
-                $data[$key]['posts'] = Post::where(['zone' => $zone->id ,'status' => 1,'category_id' => $getcat->id])->get();
-            }
-            return view('health-authority',compact('data'));
+            // $zones = Authorityregion::all();
+            // $data = array();
+            // foreach($zones as $key => $zone){
+            //     $data[$key]['name'] = $zone->name;
+            //     $data[$key]['id'] = $zone->id;
+            //     $data[$key]['posts'] = Post::where(['zone' => $zone->id ,'status' => 1,'category_id' => $getcat->id])->get();
+            // }
+            $posts = Post::where(['status' => 1,'category_id' => $getcat->id])->orderBy('title','ASC')->get();
+            return view('health-authority',compact('posts'));
         }else{
             return redirect()->route('posts',$slug);
         }
     }
-
-   
 
     public function partner_details($slug)
     {
