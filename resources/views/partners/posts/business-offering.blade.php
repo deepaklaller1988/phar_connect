@@ -5,7 +5,7 @@
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<form id="post-form">
+<form id="post-form" onsubmit="return validateForm()">
     @csrf
     <div class="white_card_body">
         <div class="row">
@@ -79,15 +79,13 @@
             <div class="col-lg-6 mb-3">
                 <label>Category : </label>
                 <div class="common_input mb_15">
-                    <select id="sub_category_select" class="form-control selectFixCZ">
+                    <select id="sub_category_select" name="category_id" class="form-control selectFixCZ">
                         <option value="">Select Category</option>
                         @foreach($data['categories'] as $category)
                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
-                    @if($errors->has('category'))
-                    <div class="error">{{ $errors->first('category') }}</div>
-                    @endif
+                    <span id="category_error"></span>
                 </div>
             </div>
             <div class="col-lg-6 mb-3 " id="sub_sub_category_div" style="display: none">
@@ -141,6 +139,7 @@
                     <div class="error">{{ $errors->first('image') }}</div>
                     @endif
                 </div>
+                <div id="image-preview-container"></div>
             </div>
             <div class="col-lg-12 mb-3">
                 <div class="common_input mb_15">
@@ -156,7 +155,6 @@
                     </button>
                 </div>
             </div>
-            <div id="image-preview-container"></div>
         </div>
     </div>
 </form>
@@ -169,6 +167,19 @@
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+<script>
+function validateForm() {
+    var categorySelect = document.getElementById("sub_category_select");
+    var categoryError = document.getElementById("category_error");
+    if (categorySelect.value == "") {
+        categoryError.innerText = "Please select category";
+        return false;
+    } else {
+        categoryError.innerText = ""; // Clear the error message if validation succeeds
+        return true;
+    }
+}
+</script>
 <script>
 $('#summernote').summernote();
 //  $('#image').change(function() {
@@ -191,8 +202,8 @@ $('#image').change(function() {
         for (var i = 0; i < input.files.length; i++) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#image-preview-container').append('<img class="image-preview" src="' + e.target.result +
-                    '">');
+                $('#image-preview-container').append('<span><img class="image-preview" src="' + e.target.result +
+                    '"><b>+</b></span>');
             }
             reader.readAsDataURL(input.files[i]);
         }

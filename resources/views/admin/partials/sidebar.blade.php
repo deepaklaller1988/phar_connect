@@ -86,6 +86,11 @@
                                 <span class="pcoded-mtext">Contact Us</span>
                             </a>
                         </li>
+                        <li class="">
+                            <a href="{{ route('admin.pages.sliders')}}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Slider</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
@@ -112,6 +117,14 @@
                             <i class="feather icon-server"></i>
                         </span>
                         <span class="pcoded-mtext">Transactions</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ route('admin.settings') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-settings"></i>
+                        </span>
+                        <span class="pcoded-mtext">Settings</span>
                     </a>
                 </li>
                 <li class=" ">

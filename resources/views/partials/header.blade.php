@@ -1,7 +1,7 @@
 <header class="">
     <div class="wrapper">
         <div class="headerHub">
-            <a href="{{ url('/') }}"><img src="{{asset('/assets/images/logo.jpg') }}" alt="logo" /></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('storage/'.customHelper('logo')->logo) }}" alt="logo" /></a>
             <div class="headerNav">
                 <nav>
                     <span>
@@ -36,13 +36,16 @@
                     <a href="{{ route('about-us') }}">About us</a>
                     <a href="{{ route('contact-us') }}">Contact us</a>
                     @if (Route::has('login'))
+                    @auth
+                    @else
                     <a href="{{ route('login') }}">Sign in</a>
+                    @endauth
                     @endif
                 </nav>
                 @if (Route::has('login'))
                 @auth
                 <div class="dropOption">
-                    <button onclick="partnerFunction()">Dashboard</button>
+                    <button onclick="partnerFunction()">Profile</button>
                     <ul id="partnerOption">
                         @if(auth()->user()->type == "partner")
                         <li><a href="{{ route('partner.dashboard') }}">Dashboard</a></li>
@@ -68,8 +71,10 @@
 
                         @if (Route::has('register'))
                         <li><a href="{{ route('partner.register') }}">Become a Partner</a></li>
-                        <li><a href="{{ route('register') }}">Become a Member</a><span>You will see only posts for now!
-                                After register you can apply.</span></li>
+                        <li><a href="{{ route('register') }}">Become a Member</a>
+                        <!-- <span>You will see only posts for now!
+                                After register you can apply.</span> -->
+                            </li>
                         @endif
                     </ul>
                 </div>

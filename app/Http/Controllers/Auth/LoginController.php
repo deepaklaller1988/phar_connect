@@ -47,7 +47,7 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         // dd(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])));
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']),$remember = true))
         {
             // dd(auth()->user()->type);
             if (auth()->user()->type == 'admin') {

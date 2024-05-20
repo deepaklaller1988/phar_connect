@@ -7,7 +7,7 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <div class="pcoded-content">
     <div class="page-header card">
@@ -205,6 +205,19 @@
                                                 <div class="error">{{ $errors->first('image') }}</div>
                                                 @endif
                                             </div>
+                                            <div id="image-preview-container">
+                                                @if (!empty($post->images) && is_string($post->images))
+                                                @php
+                                                $imagePaths = explode(',', $post->images);
+                                                @endphp
+
+                                                @foreach($imagePaths as $image)
+                                                <span><img src="{{ asset('storage/' . trim($image)) }}"
+                                                        alt="multiple show" class="w-20 h-20 border border-blue-600"
+                                                        width="150px" height="150px"><b>+</b></span>
+                                                @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="col-lg-12 mb-3 ">
                                             <div class="common_input mb_15">
@@ -236,24 +249,7 @@
                                             </div>
                                         </div>
                                         @endif -->
-                                        <div id="image-preview-container">
-                                            <div class="col-lg-6 mb-3">
-                                                <div class="common_input mb_15">
-                                                    <label>Image:</label>
-                                                    @if (!empty($post->images) && is_string($post->images))
-                                                    @php
-                                                    $imagePaths = explode(',', $post->images);
-                                                    @endphp
 
-                                                    @foreach($imagePaths as $image)
-                                                    <img src="{{ asset('storage/' . trim($image)) }}"
-                                                        alt="multiple show" class="w-20 h-20 border border-blue-600"
-                                                        width="150px" height="150px">
-                                                    @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -276,9 +272,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $(document).ready(function(){
-        $('#summernote').summernote();
-    });
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
 $('#image').change(function() {
     var input = this;
     if (input.files && input.files[0]) {
@@ -320,8 +316,8 @@ $(document).ready(function() {
     });
 });
 $(document).on('focusout', '.note-editable', function() {
-        $('#profile_summary').val($(this).html());
-    });
+    $('#profile_summary').val($(this).html());
+});
 </script>
 
 @endsection

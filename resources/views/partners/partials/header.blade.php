@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="{{ route('partner.dashboard' ) }}">
-                <img class="img-fluid" src="{{ asset('assets/admin/logo.png') }}" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{ asset('storage/'.customHelper('logo')->logo) }}" alt="Theme-Logo" />
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>

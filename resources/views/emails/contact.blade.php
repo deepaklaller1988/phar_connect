@@ -6,11 +6,6 @@
 <h3>Phone: {{ $data['phone']}}</h3>
 <h3>Message: {{ $data['messages']}}</h3>
 
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

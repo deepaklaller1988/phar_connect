@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script async src="https://www.google.com/recaptcha/api.js"></script>
+
 <div class="container loginRegister loginRegisterSet">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,6 +13,13 @@
                     @if(session('error'))
                     <div class="alert alert-danger">
                         <p> * {{ session('error') }}</p>
+                    </div>
+                    @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <p>{{ $error }}<p>
+                        @endforeach
                     </div>
                     @endif
                     <form method="POST" action="{{ route('login') }}">
@@ -48,7 +57,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="g-recaptcha mt-4" data-sitekey={{config('services.recaptcha.key')}}></div>
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">

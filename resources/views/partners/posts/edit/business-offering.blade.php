@@ -220,6 +220,19 @@
                                                 <div class="error">{{ $errors->first('image') }}</div>
                                                 @endif
                                             </div>
+                                            <div id="image-preview-container">
+                                            @if (!empty($post->images) && is_string($post->images))
+                                                    @php
+                                                    $imagePaths = explode(',', $post->images);
+                                                    @endphp
+
+                                                    @foreach($imagePaths as $image)
+                                                    <span><img src="{{ asset('storage/' . trim($image)) }}"
+                                                        alt="multiple show" class="w-20 h-20 border border-blue-600"
+                                                        width="150px" height="150px"><b>+</b></span>
+                                                    @endforeach
+                                                    @endif
+                                            </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="common_input mb_15">
@@ -247,24 +260,7 @@
                                             </div>
                                         </div>
                                         @endif -->
-                                        <div id="image-preview-container">
-                                            <div class="col-lg-6 mb-3">
-                                                <div class="common_input mb_15">
-                                                    <label>Image:</label>
-                                                    @if (!empty($post->images) && is_string($post->images))
-                                                    @php
-                                                    $imagePaths = explode(',', $post->images);
-                                                    @endphp
-
-                                                    @foreach($imagePaths as $image)
-                                                    <img src="{{ asset('storage/' . trim($image)) }}"
-                                                        alt="multiple show" class="w-20 h-20 border border-blue-600"
-                                                        width="150px" height="150px">
-                                                    @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </form>

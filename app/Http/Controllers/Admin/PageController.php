@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
+use App\Models\Slider;
 class PageController extends Controller
 {
     public function about_us()
@@ -56,5 +57,60 @@ class PageController extends Controller
         }else{
             return redirect()->route()->with('error', 'Error while creating new category');
         }
+    }
+
+    public function sliders(){
+        $sliders = Slider::all();
+        return view('admin.pages.slider')->with('sliders',$sliders);
+    }
+    public function add()
+    {
+        return view('admin.pages.slider-add');
+    }
+
+    public function store_slider(Request $request)
+    {
+        $slider = new Slider;
+        $slider->description = $request->content;
+        $slider->image = $request->image;
+        if($request->has('slider_image')){
+            $image = $request->file('slider_image');
+            $imagePath = $image->store('uploads/sliders', 'public');
+            $slider->image = $imagePath;
+        }
+        if($slider->save()){
+            return redirect()->route('admin.pages.sliders')->with('success', 'Slider Added Successfully');
+        }else{
+            return redirect()->back()->with('error', 'Error while adding slider');
+        }
+    }
+
+    public function edit($id)
+    {
+        $slider = Slider::find($id);
+        return view('admin.pages.slider-edit')->with('slider',$slider);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $slider = Slider::find($id);
+        $slider->description = $request->content;
+        $slider->image = $request->image;
+        if($request->has('slider_image')){
+            $image = $request->file('slider_image');
+            $imagePath = $image->store('uploads/sliders', 'public');
+            $slider->image = $imagePath;
+        }
+        if($slider->save()){
+            return redirect()->route('admin.pages.sliders')->with('success', 'Slider Updated Successfully');
+        }else{
+            return redirect()->back()->with('error', 'Error while updating slider');
+        }
+    }
+
+    public function delete($id)
+    {
+        Slider::find($id)->delete();
+        return response()->json(['success'=>'Slider deleted successfully.']);
     }
 }

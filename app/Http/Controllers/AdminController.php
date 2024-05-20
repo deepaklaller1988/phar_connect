@@ -29,4 +29,18 @@ class AdminController extends Controller
         $data['users'] = $users;
         return view('admin.dashboard',compact('data'));
     }
+
+    public function update_password(Request $request)
+    {
+
+        $user = auth()->user();
+        if (\Hash::check($request->old_password, $user->password)) {
+            $user->update([
+                'password' => \Hash::make($request->new_password)
+            ]);
+            return response()->json(['message' => 'Password updated successfully','status' => true]);
+        } else {
+            return response()->json(['message' => 'Old Password does not match','status' => false]);
+        }
+    }
 }

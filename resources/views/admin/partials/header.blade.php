@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="{{ route('admin.dashboard' ) }}">
-                <img class="img-fluid" src="{{ asset('assets/admin/logo.png') }}" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{ asset('storage/'.customHelper('logo')->logo) }}" alt="Theme-Logo" />
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
@@ -20,8 +20,8 @@
                     </a>
                 </li>
             </ul>
-            <ul class="nav-right"> 
-            <li class="header-notification">
+            <ul class="nav-right">
+                <li class="header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="feather icon-bell"></i>
@@ -35,11 +35,15 @@
                             </li>
                             @foreach($adminnotifications as $notification)
                             @if($notification->type == "post")
-                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('admin.post.edit', $notification->notification_for) }}" id="noteupdate" data-id="{{ $notification->id }}">
+                            <li data-newurl="{{route('notification.update', $notification->id) }}"
+                                data-url="{{ route('admin.post.edit', $notification->notification_for) }}"
+                                id="noteupdate" data-id="{{ $notification->id }}">
                                 <p class="notification-msg">{{ $notification->notification }}</p>
                             </li>
                             @elseif($notification->type == "user")
-                            <li data-newurl="{{route('notification.update', $notification->id) }}" data-url="{{ route('admin.partner.edit', $notification->user_id) }}" id="noteupdate" data-id="{{ $notification->id }}">
+                            <li data-newurl="{{route('notification.update', $notification->id) }}"
+                                data-url="{{ route('admin.partner.edit', $notification->user_id) }}" id="noteupdate"
+                                data-id="{{ $notification->id }}">
                                 <p class="notification-msg">{{ $notification->notification }}</p>
                             </li>
                             @endif
@@ -55,7 +59,11 @@
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn"
                             data-dropdown-out="fadeOut">
-
+                            <li>
+                                <a href="javascript:void(0)" id="updatePassword">
+                                    <i class="feather icon-lock"></i> Update Password
+                                </a>
+                            </li>
                             <li>
                                 @if (Route::has('login'))
                                 @auth

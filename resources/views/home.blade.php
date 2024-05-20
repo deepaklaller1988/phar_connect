@@ -4,36 +4,20 @@
 <div class="midContainer">
     <div class="bannerSet">
         <section class="regular slider">
+            @foreach($data['sliders'] as $slider)
             <div>
-                <img src="{{asset('/assets/images/slider/1.jpg')}}" alt="slider">
+                <img src="{{ asset('storage/'.$slider->image)}}" alt="slider">
                 <div class="bannerInner">
                     <div class="wrapper">
                         <section>
                             <div class="textPanel">
-                                <h1>YOUR GATEWAY</h1>
-                                <p>to Connecting Pharma & Biotech Excellence. You are
-                                    focused on the big biological question and are poised
-                                    to dramatically change millions of lives for the better.</p>
+                                {!! $slider->description !!}
                             </div>
                         </section>
                     </div>
                 </div>
             </div>
-            <div>
-                <img src="{{asset('/assets/images/slider/2.jpg')}}" alt="slider">
-                <div class="bannerInner">
-                    <div class="wrapper">
-                        <section>
-                            <div class="textPanel">
-                                <h1>YOUR GATEWAY</h1>
-                                <p>to Connecting Pharma & Biotech Excellence. You are
-                                    focused on the big biological question and are poised
-                                    to dramatically change millions of lives for the better.</p>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </section>
         <div class="searchOptions">
             <div class="wrapper">
@@ -100,10 +84,12 @@
     </div>
     <div class="pharmCategory pharmPartnersLogo">
         <div class="wrapper">
+            @if($data['featured_partners'])
             <div class="headerTitle">
                 <h3>FEATURED</h3>
                 <p>Explore features of pharma</p>
             </div>
+            @endif
             <div class="pharmCategoryInner">
                 @if($data['featured_partners'])
                 <div class="innerDifferentSection">
@@ -212,25 +198,25 @@ $(window).scroll(function() {
 
 <script type="text/javascript">
 $(document).on('ready', function() {
-    $(".regular").slick({
-        dots: true,
-        prevArrow: false,
-        nextArrow: false,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    });
-    $(".center").slick({
-        dots: false,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 5,
-        slidesToScroll: 3,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    });
+    // $(".regular").slick({
+    //     dots: true,
+    //     prevArrow: false,
+    //     nextArrow: false,
+    //     infinite: true,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     autoplay: true,
+    //     autoplaySpeed: 5000,
+    // });
+    // $(".center").slick({
+    //     dots: false,
+    //     infinite: true,
+    //     centerMode: true,
+    //     slidesToShow: 5,
+    //     slidesToScroll: 3,
+    //     autoplay: true,
+    //     autoplaySpeed: 5000,
+    // });
 });
 
 $(document).ready(function() {
@@ -296,6 +282,8 @@ $(document).ready(function() {
     })
 
     $(document).on('change', '#selected-country', function() {
+        var base_url = window.location.pathname;;
+
         var country_id = $(this).val();
         var country = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
@@ -303,7 +291,7 @@ $(document).ready(function() {
         if (formaction) {
             $("#myform").attr('action', formaction + '/' + slug);
         } else {
-            $("#myform").attr('action', '/search-posts/' + slug);
+            $("#myform").attr('action', base_url+'search-posts/' + slug);
         }
 
         $('#country_search').val(country);
@@ -313,11 +301,12 @@ $(document).ready(function() {
     });
 
     $(document).on('change', '#selected-category', function() {
+        var base_url = window.location.pathname;
         var category_id = $(this).val();
         var category = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
         var url = $("#myform").attr('action');
-        $("#myform").attr('action', '/search-posts/' + slug);
+        $("#myform").attr('action', base_url+'search-posts/' + slug);
         $('#category_search').val(category);
         $('#category_search_result').empty();
         $('#category_search_result').css('display', 'none');
@@ -329,5 +318,5 @@ $(document).on('click', '#cancel-cat-popup', function() {
     $('.selectYourCategory').css('display', 'none');
 })
 
-
+</script>
 @endpush

@@ -37,9 +37,9 @@ class NotificationController extends Controller
                     })
                     ->addColumn('action', function($row){
                         if($row->type=="post"){
-                            return '<a href="'.route("admin.post.edit", $row->notification_for).'" class="btn btn-sm btn-primary">View</a>';
+                            return '<a href="'.route("admin.post.edit", $row->notification_for).'" class="">View</a>';
                         }elseif($row->type=="user"){
-                            return '<a href="'.route("admin.partner.edit", $row->user_id).'" class="btn btn-sm btn-primary">View</a>';       
+                            return '<a href="'.route("admin.partner.edit", $row->user_id).'" class="">View</a>';       
                         }
                     })
                     ->rawColumns(['status','parent_name','action'])

@@ -12,6 +12,7 @@ use App\Models\Visitor;
 use App\Models\Country;
 use App\Models\Authorityregion;
 use App\Models\PostView;
+use App\Models\Slider;
 class HomeController extends Controller
 {
     public function index()
@@ -21,7 +22,9 @@ class HomeController extends Controller
                 Visitor::create([
                     'ip_address' => request()->ip(),
                 ]);  
+
             }
+            $data['sliders'] = Slider::all();
             $data['featured_partners'] = User::where(['is_featured' => 1, 'type'=>2])->get();
             $data['categories'] = Category::where(['parent_id'=> NULL,'status'=> 1 ])->orderBy('title','asc')->take(5)->get();
             return view('home')->with('data',$data);
@@ -59,12 +62,12 @@ class HomeController extends Controller
             $cat = $parent->title;
         }
         if($parent->parent_id != NULL){
-            $datas['maincategories'] = Category::where('parent_id',$prnt)->get();
+            $datas['maincategories'] = Category::where('parent_id',$prnt)->orderBy('title','asc')->get();
         }
         foreach($datas['maincategories'] as $key=> $mcategory){
-            $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->get();
+            $datas[$key]['subcategories'] = Category::where('parent_id',$mcategory->id)->orderBy('title','asc')->get();
             foreach($datas[$key]['subcategories'] as $skey => $scategory){
-                $datas[$key][$skey]['childcategory'] = Category::where('parent_id',$scategory->id)->get();
+                $datas[$key][$skey]['childcategory'] = Category::where('parent_id',$scategory->id)->orderBy('title','asc')->get();
             }
         }
        
@@ -151,7 +154,11 @@ class HomeController extends Controller
             return view('jobs',compact('posts'));
         }else{
             $posts = Post::with('user')->where(['category_id'=>$getcat->id, 'status'=>1])->get();
-            $category = Category::where('id', $posts[0]->parent_id)->first();
+            if(count($posts) > 0){
+                $category = Category::where('id', $posts[0]->parent_id)->first();
+            }else{
+                $category = '';
+            }
             return view('post-list',compact('posts','category','getcat'));
         }
     }

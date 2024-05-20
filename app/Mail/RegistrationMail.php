@@ -32,4 +32,5 @@ class RegistrationMail extends Mailable
     {
         return $this->markdown('emails.registration');
     }
+
 }

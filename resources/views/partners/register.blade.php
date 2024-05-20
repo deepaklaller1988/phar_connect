@@ -165,31 +165,31 @@
 <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script>
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+// if ("geolocation" in navigator) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//         var latitude = position.coords.latitude;
+//         var longitude = position.coords.longitude;
 
-        // Make a request to reverse geocoding service
-        $.getJSON('https://nominatim.openstreetmap.org/reverse', {
-            lat: latitude,
-            lon: longitude,
-            format: 'json',
-            zoom: 10
-        }).done(function(data) {
-            var city = data.address.city;
-            if (!city) {
-                city = data.address.town || data.address.village || data.address.hamlet || data.address
-                    .suburb || data.address.state;
-            }
-            $('#location').val(city)
-        }).fail(function() {
-            alert("Failed to retrieve city information.");
-        });
-    });
-} else {
-    alert("Geolocation is not supported by your browser");
-}
+//         // Make a request to reverse geocoding service
+//         $.getJSON('https://nominatim.openstreetmap.org/reverse', {
+//             lat: latitude,
+//             lon: longitude,
+//             format: 'json',
+//             zoom: 10
+//         }).done(function(data) {
+//             var city = data.address.city;
+//             if (!city) {
+//                 city = data.address.town || data.address.village || data.address.hamlet || data.address
+//                     .suburb || data.address.state;
+//             }
+//             $('#location').val(city)
+//         }).fail(function() {
+//             alert("Failed to retrieve city information.");
+//         });
+//     });
+// } else {
+//     alert("Geolocation is not supported by your browser");
+// }
 
 $(document).ready(function() {
     $(document).on('focusout', '#email', function() {

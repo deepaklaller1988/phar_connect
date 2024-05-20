@@ -18,6 +18,7 @@ use App\Http\Controllers\PlanJobController;
 use App\Http\Controllers\CheckPlanDaysController;
 use App\Http\Controllers\PostJobsChangeStatusController;
 use App\Http\Controllers\PayPalPaymentController;
+use App\Http\Controllers\Admin\SettingController;
 
 
 use App\Http\Controllers\Admin\TransactionController;
@@ -57,7 +58,7 @@ Route::get('/pricings',[HomeController::class,'pricing'])->name('pricings');
 Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::get('/country-search',[HomeController::class,'country_search'])->name('country-search');
 Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts'])->name('search-posts');
-Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
+// Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
 Route::get('paypal/payment/{id}', [PayPalPaymentController::class, 'payment'])->name('pay.with.paypal');
@@ -107,7 +108,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/transactions',[TransactionController::class,'index'])->name('admin.transactions');
     Route::get('/admin/view-invoice/{id}',[TransactionController::class,'download_invoice'])->name('admin.download-invoice');
     Route::get('/admin/archive-partners',[UserController::class,'archive_partners'])->name('admin.archive-partners');
-
+    Route::get('/admin/pages/sliders',[PageController::class,'sliders'])->name('admin.pages.sliders');
+    Route::post('/admin/pages/sliders/store',[PageController::class,'store_slider'])->name('admin.pages.slider.store');
+    Route::get('admin/pages/slider/add',[PageController::class,'add'])->name('admin.pages.slider.add');
+    Route::get('admin/pages/slider/edit/{id}',[PageController::class,'edit'])->name('admin.pages.slider.edit');
+    Route::put('admin/pages/slider/update/{id}',[PageController::class,'update'])->name('admin.pages.slider.update');
+    Route::delete('admin/pages/slider/delete/{id}',[PageController::class,'delete'])->name('admin.pages.slider.delete');
+    Route::get('/admin/settings',[SettingController::class,'index'])->name('admin.settings');
+    Route::post('/admin/settings/update',[SettingController::class,'update'])->name('admin.settings.update');
+    Route::post('/admin/update-password',[AdminController::class,'update_password'])->name('admin.update-password');
 }); 
 
 Route::middleware(['auth', 'user-access:partner'])->group(function () {

@@ -34,7 +34,7 @@
                     <div class="row">
 
                         <div class="col-xl-6 col-md-6">
-                            <div class="card prod-p-card card-red">
+                            <div class="card prod-p-card card-theme-dark">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
@@ -42,7 +42,7 @@
                                             <h3 class="m-b-0 f-w-700 text-white">{{ $posts }}</h3>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-money-bill-alt text-c-red f-18"></i>
+                                            <i class="fas fa-money-bill-alt f-18"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -57,14 +57,14 @@
                                             <h3 class="m-b-0 f-w-700 text-white">{{ $active }}</h3>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-database text-c-blue f-18"></i>
+                                            <i class="fas fa-database  f-18"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
-                            <div class="card prod-p-card card-green">
+                            <div class="card prod-p-card card-theme-dark-minus">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
@@ -72,14 +72,14 @@
                                             <h3 class="m-b-0 f-w-700 text-white">{{ $archive }}</h3>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign text-c-green f-18"></i>
+                                            <i class="fas fa-dollar-sign f-18"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-6 col-md-6">
-                            <div class="card prod-p-card card-yellow">
+                            <div class="card prod-p-card card-theme-dark-tint">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
@@ -87,7 +87,7 @@
                                             <h3 class="m-b-0 f-w-700 text-white">{{ $count }}</h3>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-tags text-c-yellow f-18"></i>
+                                            <i class="fas fa-tags  f-18"></i>
                                         </div>
                                     </div>
                                 </div>
