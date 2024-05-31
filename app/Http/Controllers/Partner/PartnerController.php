@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Country;
+use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Position;
 
 class PartnerController extends Controller
 {
@@ -25,8 +30,23 @@ class PartnerController extends Controller
 
     public function register()
     {
+        // Retrieve all countries
         $countries = Country::all();
-        return view('partners.register',compact('countries'));
+
+        // Retrieve categories matching the title and with no parent
+        $categories = Category::where('title', '!=', 'Health Authority Sites')
+                            ->whereNull('parent_id')
+                            ->orderBy('title')
+                            ->get();
+
+        // Pass both countries and categories to the view
+        $data = [
+            'countries' => $countries,
+            'categories' => $categories,
+        ];
+
+        // Return the view 'partners.register' and pass the data variable to it
+        return view('partners.register', $data);
     }
     public function profile()
     {
@@ -88,4 +108,30 @@ class PartnerController extends Controller
        $user->save();
        return response()->json('success',200);
     } 
+    
+    public function registerAddBlade(Request $request)
+    {
+
+        $data['subcategories'] = Category::where('parent_id',$request->category_id)->orderBy('title')->get();
+        $data['countries'] = Country::all();
+        $data['parent_id'] = $request->category_id;
+        if($request->category_id == 1) {
+            $html = View::make('partners.partnerRegister.register-business-offering')->with('data',$data)->render();
+        } elseif($request->category_id == 2) {
+            $html = View::make('partners.partnerRegister.register-consulting')->with('data',$data)->render();
+        } elseif($request->category_id == 3) {
+            $html = View::make('partners.partnerRegister.register-events')->with('data',$data)->render();
+        } elseif($request->category_id == 5) {
+            $data['educations'] = Education::all();
+            $data['positions'] = Position::all();
+            $data['experiences'] = Experience::all();
+            $html = View::make('partners.partnerRegister.register-jobs')->with('data',$data)->render();
+        } else {
+            // Handle other cases if needed
+        }
+ 
+        return response()->json(['html' => $html]);
+    }
+
+
 }

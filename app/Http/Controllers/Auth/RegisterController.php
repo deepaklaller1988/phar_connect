@@ -55,8 +55,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['type'] == 2){
-            return Validator::make($data, [
+        if ($data['type'] == 2) {
+            $validationRules = [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -64,7 +64,43 @@ class RegisterController extends Controller
                 'company_website' => ['required'],
                 'company_profile' => ['required','string','max:300'],
                 'company_name' => ['required', 'string', 'max:255'],
-            ]);
+                'country_id' => ['required'],
+                'category_ids' => ['required'],
+            ];
+        
+            // Conditionally set the certifications rule
+            $validationRules['certifications'] = isset($data['certifications']) ? ['required'] : [];
+        
+            // Example for additional conditional rules
+            if (isset($data['event_name'])) {
+                $validationRules['event_name'] = ['required', 'string', 'max:255'];
+            }
+        
+            if (isset($data['location'])) {
+                $validationRules['location'] = ['required', 'string', 'max:255'];
+            }
+        
+            if (isset($data['industry'])) {
+                $validationRules['industry'] = ['required'];
+            }
+        
+            if (isset($data['education_level'])) {
+                $validationRules['education_level'] = ['required'];
+            }
+        
+            if (isset($data['position_type'])) {
+                $validationRules['position_type'] = ['required'];
+            }
+        
+            if (isset($data['experience_level'])) {
+                $validationRules['experience_level'] = ['required'];
+            }
+        
+            if (isset($data['position_title'])) {
+                $validationRules['position_title'] = ['required', 'string', 'max:255'];
+            }
+            return Validator::make($data, $validationRules);
+
         }else{
             return Validator::make($data, [
                 'name' => ['required', 'string', 'max:255'],
@@ -85,8 +121,10 @@ class RegisterController extends Controller
     {
         if($data['type'] == 2){
             // dd("2");
+           
             $user = User::create([
                 'name' => $data['name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'company_name' => $data['company_name'],
                 'password' => Hash::make($data['password']),
@@ -94,7 +132,23 @@ class RegisterController extends Controller
                 'phone' => $data['phone'],
                 'company_website' => $data['company_website'],
                 'company_profile' => $data['company_profile'],
-                'country_id' => $data['country_id'],
+                'country_id' => implode(',', $data['country_id']),
+                'category_ids' => implode(',', $data['category_ids']),
+                'linkedin_profile' => $data['linkedin_profile'],
+                'twiter_profile' => $data['twiter_profile'],
+                'representatives' => $data['representatives'],
+                'certifications' => isset($data['certifications']) ? implode(',', $data['certifications']) : null,
+                'event_name' => $data['event_name'] ?? null,
+                'start_date' => $data['start_date'] ?? null,
+                'end_date' => $data['end_date'] ?? null,
+                'location' => $data['location'] ?? null,
+                'agenda' => $data['agenda'] ?? null,
+
+                'education_level' => $data['education_level'] ?? null,
+                'position_type' => $data['position_type'] ?? null,
+                'experience_level' => $data['experience_level'] ?? null,
+                'position_title' => $data['position_title'] ?? null,
+                'industry' => $data['industry'] ?? null,
             ]);
            $note =  Notification::create([
                 'user_id' =>  $user->id,

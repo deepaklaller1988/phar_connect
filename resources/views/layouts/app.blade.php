@@ -23,8 +23,12 @@
     @yield('content')
     @include('/partials/footer')
   </div>
+ 
+  @if(request()->segment(2) == 'register')
 
+  @else
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  @endif
   <script src="{{asset('/assets/slick/slick.js')}}" type="text/javascript" charset="utf-8"></
   <script type="text/javascript">
         $(document).on('ready', function () {

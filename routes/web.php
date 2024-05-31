@@ -144,4 +144,7 @@ Route::get('plan/job',[PlanJobController::class,'planjob']);
 Route::put('/notification/update/{id}',[NotificationController::class,'update'])->name('notification.update');
 Route::get('check/plan/days',[CheckPlanDaysController::class,'check_plan_days']);
 Route::get('post/jobs/change/status',[PostJobsChangeStatusController::class,'post_jobs_change_status']);
+Route::post('/partner/register/addblade', [PartnerController::class,'registerAddBlade'])->name('partner.register.addblade');
+
+
 
