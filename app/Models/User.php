@@ -25,7 +25,25 @@ class User extends Authenticatable
         'password',
         'type',
         'phone','company_website','company_profile','location','key_services','certifications','country_id','created_at',
-        'plan_id','plan_status','company_name'
+        'plan_id','plan_status','company_name','category_ids',
+        'last_name',
+        'event_name',
+        'start_date',
+        'end_date',
+        'education_level',
+        'position_type',
+        'experience_level',
+        'position_title',
+        'representatives',
+        'industry',
+        'linkedin_profile',
+        'twiter_profile',
+        'event_name',
+        'start_date',
+        'end_date',
+        'agenda',
+        'logo'
+        
     ];
   
     /**
