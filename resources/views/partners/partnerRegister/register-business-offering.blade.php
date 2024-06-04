@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
 
-<div class="card-body">
+<div class="card-body-one">
     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         <div class="flexSet">
             @csrf
