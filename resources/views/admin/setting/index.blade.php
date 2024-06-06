@@ -138,7 +138,7 @@
 
                 reader.onload = function(e) {
                     $('#logoPreview').html('<img src="' + e.target.result +
-                        '" class="img-fluid" width="300px" height="100px">');
+                        '" class="img-fluid" width="300px">');
                 }
                 reader.readAsDataURL(input.files[0]);
             }

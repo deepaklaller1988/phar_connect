@@ -13,7 +13,7 @@
                 <div class="width100Set" id="tab">
                     <ul>
                         @foreach($posts as  $child)
-                        <li><a href="{{ $child['company_website'] }}" target="_blank">{{ $child['title'] }}</a></li>
+                        <li><a href="{{ $child['company_website'] }}" target="_blank"><span><img src="{{asset('/assets/images/link.png') }}" alt="link" /></span> {{ $child['title'] }}</a></li>
                         @endforeach
                         <ul>
                 </div>

@@ -1,6 +1,7 @@
 /* Slider */
 .slick-track {
     display: flex !important;
+    min-width: 100%;
   }
   
   .slick-slide {

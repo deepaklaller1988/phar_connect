@@ -89,7 +89,7 @@
       $(".center").slick({
         dots: false,
         infinite: true,
-        centerMode: true,
+        centerMode: false,
         slidesToShow: 5,
         slidesToScroll: 3,
         autoplay: true,
