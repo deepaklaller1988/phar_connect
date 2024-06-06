@@ -272,7 +272,7 @@ $(document).ready(function() {
                             '" value="' + item.id + '">' + item.country_name +
                             '</option>';
                     });
-                    $html += '</select>';
+                    $html += '</select>'; 
                     $('#country_search_result').append($html);
                 }
             });

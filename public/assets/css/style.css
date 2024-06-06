@@ -71,13 +71,13 @@ button {
     background-color: green;
     color: white;
 }
-
+.pcoded-inner-content{min-width: 100%;}
 header {
     position: sticky;
     top: 0;
     left: 0;
     background: white;
-    z-index: 1;
+    z-index: 2;
     border-bottom: 1px solid #f3f3f3;
 }
 
@@ -418,9 +418,9 @@ button.slick-next.slick-arrow {
     left: auto;
 }
 
-.pharmCategoryInner section.center {
+/* .pharmCategoryInner section.center {
     padding: 0 50px;
-}
+} */
 
 .pharmCategory.categoriesAll .slick-slide {
     padding: 0 6px;
@@ -2175,11 +2175,19 @@ section.healthLinksRedirect {
 }
 
 .fullHealthDetails a {
-    padding: 8px 0;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: black;
+    background: #f3f3f3;
+    padding: 10px;
+    border-radius: 6px;
+    height: 100%;
 }
-
+.fullHealthDetails a span {
+    min-width: 14px;
+    max-width: 15px;
+}
 section.healthAreas a {
     font-weight: bold;
     color: black;
@@ -2195,8 +2203,13 @@ section.healthAreas ul li:last-child {
 
 section.healthLinksRedirect ul {
     padding: 10px 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
-
+section.healthLinksRedirect ul li {
+    width: calc(33.33% - 10px);
+}
 section.healthLinksRedirect a:hover {
     text-decoration: underline;
 }
@@ -2763,10 +2776,16 @@ div#country_search_result {
     box-shadow: 0 0 10px silver;
     text-align: center;
 }
+
 @keyframes success {
-    from {transform: scale(.8);}
-    to {transform: scale(1);}
-  }
+    from {
+        transform: scale(.8);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
 
 .paymentSet span {
     animation: success 1s infinite;
@@ -2795,6 +2814,7 @@ div#country_search_result {
     border-radius: 6px;
     color: white;
 }
+
 .alert.alert-danger p {
     color: red;
     font-size: 12px;
