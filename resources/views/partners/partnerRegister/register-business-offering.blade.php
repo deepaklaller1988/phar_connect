@@ -199,7 +199,7 @@
             <strong class="text-danger">{{ $message }}</strong>
         </span>
         @enderror
-    </div>
+    </div> 
 </div>
 <div class="row mb-3 width100Set">
     <label for="representatives" class="col-md-4 col-form-label text-md-end">{{ __('Representative(s)') }}</label>
@@ -239,9 +239,9 @@ $(document).ready(function() {
                 '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
             );
         }
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 2000);
+        // setTimeout(function() {
+        //     $('.invalid-feedback').remove();
+        // }, 2000);
     });
 
     $(document).on('focusout', '#password', function() {
