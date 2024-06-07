@@ -45,7 +45,7 @@
                 @if (Route::has('login'))
                 @auth
                 <div class="dropOption">
-                    <button onclick="partnerFunction()">Profile</button>
+                    <button onclick="partnerFunction()">{{ auth()->user()->name }}</button>
                     <ul id="partnerOption">
                         @if(auth()->user()->type == "partner")
                         <li><a href="{{ route('partner.dashboard') }}">Dashboard</a></li>

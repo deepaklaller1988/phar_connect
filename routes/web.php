@@ -57,7 +57,7 @@ Route::post('/store/contact-us',[ContactUsController::class,'store'])->name('sto
 Route::get('/pricings',[HomeController::class,'pricing'])->name('pricings');
 Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::get('/country-search',[HomeController::class,'country_search'])->name('country-search');
-Route::any('/search-posts/{slug}/{slug2}',[HomeController::class,'search_posts'])->name('search-posts');
+Route::any('/search-posts/{slug}/{slug2?}',[HomeController::class,'search_posts'])->name('search-posts');
 // Route::any('/search-posts/{slug}',[HomeController::class,'search_posts'])->name('search-posts');
 Route::any('/slug',[CategoryController::class,'slug'])->name('slug');
 Route::get('/getpost/{id}',[HomeController::class,'getpost'])->name('getpost');
