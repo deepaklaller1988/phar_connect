@@ -261,7 +261,7 @@
                 </div>
             </div>
             <input type="hidden" name="category_ids[]" id="parent_id" value="{{ $data['parent_id']}}">
-            <div class="row mb-3" id="subcategory_div">
+            <div class="row mb-3 subCategories" id="subcategory_div">
                 <label for="sub_category" class="col-md-4 col-form-label text-md-end">{{ __('Sub Category') }}<span
                         class="text-danger">*</span></label>
                 <div class="col-md-6">

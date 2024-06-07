@@ -8,8 +8,17 @@
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 
 
-<div class="container loginRegister">
-    <div class="row justify-content-center">
+<div class="container loginRegister partnerSection">
+    <div class="wrapper">
+    <div class="partnerSectionHead">
+        <section>
+            <h4>Partner With Us!</h4>
+            <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our global team.</p>
+        </section>
+    </div>
+    <div class="partnerSectionHub">
+    
+    <div class="row justify-content-center partnerLeftCollumn">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div>
@@ -40,6 +49,14 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="partnerRightCollumn">
+        <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
+        <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future of science to deliver the technologies, medicines, and therapies to improve patient health and safety.
+
+Contact us to learn how our experienced team can help ensure regulatory and development success throughout the product lifecycle.</p>
+</div>
+    </div>
     </div>
 </div>
 

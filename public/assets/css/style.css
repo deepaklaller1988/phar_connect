@@ -10,7 +10,7 @@
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
 }
-
+textarea{resize: none;}
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -1574,7 +1574,36 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
 .rightCategoryInfo h6 {
     padding: 15px 0;
 }
+.container.loginRegister.partnerSection {
+    max-width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+}
 
+.container.loginRegister.partnerSection .partnerSectionHub {
+display: flex;
+align-items: flex-start;
+}
+
+.partnerSectionHead {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    padding: 0 100px;
+    background: url('../images/graphicPartner.png');
+    background-size: 500px;
+    background-repeat: no-repeat;
+    background-position: right 15px top -60px;
+}
+.partnerSectionHead section {
+    max-width: 500px;
+}
+.partnerSectionHead h4 {
+    font-size: 50px;
+    font-weight: 700;
+}
 .container.loginRegister {
     max-width: 700px;
     margin: 15vh auto;
@@ -1642,10 +1671,63 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
 }
 
 .container.loginRegister .card-body form .flexSet .row.mb-3 {
-    margin: 10px 0;
-    width: calc(50% - 5px);
+    /* width: calc(50% - 5px); */
+}
+.flexSet .row {
+    width: 100%;
+}
+.flexSet .select2-container--default .select2-selection--multiple {
+    width: 100%;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #ededed !important;
+    margin-top: 5px;
+    outline: none;
+    max-width: 100%;
+}
+.partnerLeftCollumn {
+    min-width: 400px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ebebeb;
+    overflow: hidden;
+    margin-left: 100px;
+    margin-bottom: 50px;
+    margin-top: -50px;
+    max-width: 400px;
+    margin-right: 60px;
 }
 
+.partnerRightCollumn {
+    margin-top: 100px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ebebeb;
+    padding: 50px;
+}
+
+.partnerRightCollumn h5 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.container.loginRegister .card-body form .flexSet .row.mb-3.fullWidth {
+    width: 100%;
+}
+.container.loginRegister .card-body form .flexSet .row.mb-3.subCategories {
+    width: 100%;
+}
+.container.loginRegister .card-body form .flexSet .row.mb-3.subCategories .col-md-6 {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 5px;
+}
+
+.container.loginRegister .card-body form .flexSet .row.mb-3.subCategories .col-md-6 .form-check {
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    padding: 10px;
+}
 .container.loginRegister .form-check {
     display: flex;
     align-items: center;
