@@ -9,19 +9,22 @@
 
 
 <div class="container loginRegister partnerSection">
-    <div class="wrapper">
+   
     <div class="partnerSectionHead">
+         <div class="wrapper">
         <section>
             <h4>Partner With Us!</h4>
             <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our global team.</p>
         </section>
+</div>
     </div>
+    <div class="wrapper">
     <div class="partnerSectionHub">
     
     <div class="row justify-content-center partnerLeftCollumn">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div>
+                <!-- <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">

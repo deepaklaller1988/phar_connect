@@ -93,6 +93,7 @@ header.fixHeader .headerHub>a {
     max-width: 1430px;
     margin: 0 auto;
     padding: 0 15px;
+    width:100%;
 }
 
 .headerHub {
@@ -1593,9 +1594,9 @@ align-items: flex-start;
     align-items: center;
     padding: 0 100px;
     background: url('../images/graphicPartner.png');
-    background-size: 500px;
     background-repeat: no-repeat;
-    background-position: right 15px top -60px;
+    background-size: cover;
+    background-position: right center;
 }
 .partnerSectionHead section {
     max-width: 500px;
@@ -1603,7 +1604,7 @@ align-items: flex-start;
 .partnerSectionHead h4 {
     font-size: 50px;
     font-weight: 700;
-    color: #003077;
+    /* color: #003077; */
 }
 .container.loginRegister {
     max-width: 700px;
@@ -1617,6 +1618,7 @@ align-items: flex-start;
 
 .card-body {
     padding: 25px;
+    background: #000;
 }
 
 .card-body form .flexSet {
@@ -1667,10 +1669,12 @@ align-items: flex-start;
 .container.loginRegister .row.mb-3 label {
     font-size: 14px;
     font-weight: 500;
-    color: #777;
+    color: #fff;
     cursor: pointer;
 }
-
+.flexSet label {
+    color: white;
+}
 .container.loginRegister .card-body form .flexSet .row.mb-3 {
     /* width: calc(50% - 5px); */
 }
@@ -1692,7 +1696,7 @@ align-items: flex-start;
     border-radius: 10px;
     box-shadow: 0 0 10px #ebebeb;
     overflow: hidden;
-    margin-left: 100px;
+    margin-left: 20px;
     margin-bottom: 50px;
     margin-top: -50px;
     max-width: 400px;
@@ -1711,7 +1715,7 @@ align-items: flex-start;
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #003077;
+    /* color: #003077; */
 }
 .container.loginRegister .card-body form .flexSet .row.mb-3.fullWidth {
     width: 100%;
