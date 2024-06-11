@@ -1603,6 +1603,7 @@ align-items: flex-start;
 .partnerSectionHead h4 {
     font-size: 50px;
     font-weight: 700;
+    color: #003077;
 }
 .container.loginRegister {
     max-width: 700px;
@@ -1710,6 +1711,7 @@ align-items: flex-start;
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 15px;
+    color: #003077;
 }
 .container.loginRegister .card-body form .flexSet .row.mb-3.fullWidth {
     width: 100%;
