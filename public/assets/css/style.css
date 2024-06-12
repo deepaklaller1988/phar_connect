@@ -1731,8 +1731,8 @@ align-items: flex-start;
 
 .container.loginRegister .card-body form .flexSet .row.mb-3.subCategories .col-md-6 .form-check {
     width: 100%;
-    border: 1px solid #f1f1f1;
-    padding: 10px;
+    /* border: 1px solid #f1f1f1;
+    padding: 10px; */
 }
 .container.loginRegister .form-check {
     display: flex;

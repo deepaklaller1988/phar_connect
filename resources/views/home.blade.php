@@ -26,7 +26,7 @@
                     <div class="searchOptionsInner">
                         <div class="searchSet">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" id="category_search" placeholder="Search Category Here..." />
+                            <input type="text" id="category_search" placeholder="Search Category Here..." autocomplete="off"/>
                             <input type="hidden" name="category" value="" id="hidden_selected-category">
                         </div>
                         <div id="category_search_result" style="display: none;">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="searchSet countrySet">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <input type="text" id="country_search" placeholder="Search Country Here..." />
+                            <input type="text" id="country_search" placeholder="Search Country Here..." autocomplete="off"/>
                             <input type="hidden" name="country" value="" id="hidden_selected-country">
                         </div>
                         <div id="country_search_result" style="display: none;">
@@ -220,6 +220,13 @@ $(document).on('ready', function() {
 });
 
 $(document).ready(function() {
+    $(document).on('click','#myform button',function(){
+        var csearch = $('#category_search').val();
+        var cnsearch = $('#country_search').val();
+        if((csearch == '') && (cnsearch == '')){
+            return false;
+        } 
+    });
     $(document).on('keyup', '#category_search', function() {
         var query = $(this).val();
         var myLength = $(this).val().length;
