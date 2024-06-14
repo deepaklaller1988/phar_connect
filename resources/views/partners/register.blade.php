@@ -9,57 +9,60 @@
 
 
 <div class="container loginRegister partnerSection">
-   
-    <div class="partnerSectionHead">
-         <div class="wrapper">
-        <section>
-            <h4>Partner With Us!</h4>
-            <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our global team.</p>
-        </section>
-</div>
-    </div>
-    <div class="wrapper">
-    <div class="partnerSectionHub">
-    
-    <div class="row justify-content-center partnerLeftCollumn">
-        <div class="col-md-8">
-            <div class="card">
-                <!-- <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        <div class="flexSet">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-12 mb-3">
-                                    <div class="common_input mb_15 d-flex align-items-center">
-                                        <label class="text-nowrap mr-1">Select Category :
-                                        </label>
-                                        <select id="select_main_category" class="form-control selectFixCZ"
-                                            name="category_ids[]">
-                                            <option value="" disabled selected>Select Category : </option>
-                                            @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">
-                                                {{ $category->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="custom-form"></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="partnerSectionHead">
+        <div class="wrapper">
+            <section>
+                <h4>Partner With Us!</h4>
+                <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our
+                    global team.</p>
+            </section>
         </div>
     </div>
-    <div class="partnerRightCollumn">
-        <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
-        <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future of science to deliver the technologies, medicines, and therapies to improve patient health and safety.
+    <div class="wrapper">
+        <div class="partnerSectionHub">
 
-Contact us to learn how our experienced team can help ensure regulatory and development success throughout the product lifecycle.</p>
-</div>
-    </div>
+            <div class="row justify-content-center partnerLeftCollumn">
+                <div class="col-md-8">
+                    <div class="card">
+                        <!-- <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
+
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <div class="flexSet">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="common_input mb_15 d-flex align-items-center">
+                                                <label class="text-nowrap mr-1">Select Category :
+                                                </label>
+                                                <select id="select_main_category" class="form-control selectFixCZ"
+                                                    name="category_ids[]">
+                                                    <option value="" disabled selected>Select Category : </option>
+                                                    @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="custom-form"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="partnerRightCollumn">
+                <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
+                <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future of
+                    science to deliver the technologies, medicines, and therapies to improve patient health and safety.
+
+                    Contact us to learn how our experienced team can help ensure regulatory and development success
+                    throughout the product lifecycle.</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -180,25 +183,31 @@ $(document).ready(function() {
         }, 1000);
     });
 });
-$(document).on('click','#btn-sb',function(){
-    if($('#name').val() == ''){
-        $('#name').css('border','1px solid red');
-        $('#name').after('<span class="invalid-feedback" role="alert"><strong>Please enter a valid name</strong></span>');
+$(document).on('click', '#btn-sb', function() {
+    if ($('#name').val() == '') {
+        $('#name').css('border', '1px solid red');
+        $('#name').after(
+            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid name</strong></span>');
         return false;
     }
-    if($('#email').val() == ''){
-        $('#email').css('border','1px solid red');
-        $('#email').after('<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>');
+    if ($('#email').val() == '') {
+        $('#email').css('border', '1px solid red');
+        $('#email').after(
+            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
+            );
         return false;
     }
-    if($('#password').val() == ''){
-        $('#password').css('border','1px solid red');
-        $('#password').after('<span class="invalid-feedback" role="alert"><strong>Please enter a valid password</strong></span>');
+    if ($('#password').val() == '') {
+        $('#password').css('border', '1px solid red');
+        $('#password').after(
+            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid password</strong></span>'
+            );
         return false;
     }
-    if($('#copmany-name').val() == ''){
-        $('#copmany-name').css('border','1px solid red');
-        $('#copmany-name').after('<span class="invalid-feedback" role="alert"><strong>Please enter company name</strong></span>');
+    if ($('#copmany-name').val() == '') {
+        $('#copmany-name').css('border', '1px solid red');
+        $('#copmany-name').after(
+            '<span class="invalid-feedback" role="alert"><strong>Please enter company name</strong></span>');
         return false;
     }
 })
