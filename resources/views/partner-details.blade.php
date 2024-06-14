@@ -34,7 +34,7 @@
                     <b>Year of Establishment:-</b>
                     <li>{{ date('Y') }}</li>
                 </ul>
-                @if($partner->certifications)
+                <!-- @if($partner->certifications)
                 <ul class="tagsConsult certifyMe">
                     <b>Certifications:-</b>
                     @php
@@ -44,9 +44,18 @@
                     <li>{{ $certification }}</li>
                     @endforeach
                 </ul>
-                @endif
+                @endif -->
             </section>
         </div>
+        <div class="certifyCations">
+                        <ul class="tagsConsult certifyMe">
+                    <b>Certifications:-</b>
+                    <li>GMP</li>
+                    <li>CE</li>
+                    <li>ISO 13485</li>
+                    <li>ISO 9001</li>
+                </ul>
+</div>
         <!-- <ul class="consultList">
                             <li><b>Description:</b> Best in class to make keys with <b>Sensor too...</b></li>
                             <li><b>Class A:</b> Making sensor sets as per your need.</li>

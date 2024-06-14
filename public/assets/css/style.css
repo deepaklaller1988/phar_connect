@@ -1984,7 +1984,30 @@ ul.tagsConsult li {
     color: #666;
     text-transform: capitalize;
 }
+.certifyCations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px dashed silver;
+    padding-top: 20px;
+    margin-top: 25px;
+}
 
+.certifyCations ul.tagsConsult.certifyMe {position: relative;padding-top: 40px;}
+
+.certifyCations ul.tagsConsult.certifyMe li {
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 14px solid black;
+    background: white;
+    text-align: center;
+}
+
+.certifyCations ul.tagsConsult.certifyMe  b {position: absolute;top: 0;width: 100%;text-align: center;}
 ul.tagsConsult.certifyMe li {
     /* padding: 0; */
 }
@@ -2234,14 +2257,41 @@ section.consultingServicesSet section>div a.allConsultShow b {
 }
 
 .globalHeaderSet {
-    background: #1fc8ec;
+    background: url(../images/dna.png);
+    background-position: center right;
+    background-size: cover;
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    text-align: center;
+}
+.fullHealthDetails a {
+    position: relative;
+    overflow: hidden;
+    transition: .5s;
 }
 
+.fullHealthDetails a:before {
+    width: 50px;
+    height: 50px;
+    content: '';
+    position: absolute;
+    background: transparent;
+    right: -85px;
+    top: 20%;
+    border-radius: 100px;
+    border: 15px solid #b3c7d7;
+    transition: .5s;
+}
+
+.fullHealthDetails a:hover:before {
+    right: 15px;
+    top: -100%;
+}
+
+.fullHealthDetails a:hover {background: #d1dee9;}
 section.healthLinksRedirect .width100Set {
     padding-top: 80px;
 }
@@ -2303,15 +2353,67 @@ section.healthLinksRedirect a:hover {
 }
 
 .staticContent>span {
-    background: #1fc8ec;
+    background: url(../images/dna.png);
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     flex-direction: column;
+    background-position: center right;
+    background-size: cover;
+}
+.ourValues {
+    padding: 0 100px 100px;
+    border-top: 1px solid silver;
+    padding-top: 100px;
+    position: relative;
 }
 
+.ourValues h6 {
+    color: #13314c;
+}
+
+.ourValues> h6 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.ourValuesHub {
+    display: flex;
+    gap: 60px;
+}
+
+.ourValuesHub h6 {
+    margin-bottom: 10px;
+}
+
+.ourValuesHub p {
+    font-style: italic;
+    line-height: 28px;
+    color: #444;
+}
+
+.ourValues:before {
+    position: absolute;
+    content: '/////////////////';
+    color: #1fc8ec;
+    top: -11px;
+    left: 50%;
+    width: 100px;
+    height: 22px;
+    background: white;
+    margin-left: -50px;
+}
+.ourValuesHub label {
+    margin-top: 10px;
+    display: block;
+}
+
+.ourValuesHub label a {
+    color: #1fc8ec;
+    font-weight:500;
+}
 .searchImage {
     max-width: 100px;
     min-width: 100px;
@@ -2355,14 +2457,19 @@ section.healthLinksRedirect a:hover {
 }
 
 .staticPages {
-    padding: 80px 0;
+    padding: 80px 100px;
     line-height: 24px;
 }
 
 .staticPages p {
     padding: 10px 0;
 }
-
+.staticPages p b {
+    font-style: italic;
+    font-size: 26px;
+    line-height: initial;
+    color: #13314c;
+}
 .staticPages ol li {
     list-style: auto;
     font-weight: bold;
