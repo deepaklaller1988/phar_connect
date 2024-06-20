@@ -5,7 +5,7 @@
     <div class="partnerSectionHead">
         <div class="wrapper">
             <section>
-                <h4>Partner With Us!</h4>
+                <h4>Reset Password!</h4>
                 <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our
                     global team.</p>
             </section>
@@ -19,7 +19,7 @@
                         <!-- <div class="card-header headerBG-register">{{ __('Reset Password') }}</div> -->
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('password.update') }}">
+                            <form class="loginFields"  method="POST" action="{{ route('password.update') }}">
                                 @csrf
 
                                 <input type="hidden" name="token" value="{{ $token }}">

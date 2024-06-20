@@ -5,7 +5,7 @@
     <div class="partnerSectionHead">
         <div class="wrapper">
             <section>
-                <h4>Partner With Us!</h4>
+                <h4>Forgot Password!</h4>
                 <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our
                     global team.</p>
             </section>
@@ -25,7 +25,7 @@
                             </div>
                             @endif
 
-                            <form method="POST" action="{{ route('password.email') }}">
+                            <form  class="loginFields"  method="POST" action="{{ route('password.email') }}">
                                 @csrf
 
                                 <div class="row mb-3">

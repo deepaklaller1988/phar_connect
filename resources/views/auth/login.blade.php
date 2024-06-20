@@ -8,7 +8,7 @@
     <div class="partnerSectionHead">
         <div class="wrapper">
             <section>
-                <h4>Partner With Us!</h4>
+                <h4>Login Here!</h4>
                 <p>PharmConect builds solutions at the intersection of innovation and flexibility. Partner with our
                     global team.</p>
             </section>
@@ -34,7 +34,7 @@
                                     @endforeach
                             </div>
                             @endif
-                            <form method="POST" action="{{ route('login') }}">
+                            <form class="loginFields" method="POST" action="{{ route('login') }}">
                                 @csrf
 
                                 <div class="row mb-3">

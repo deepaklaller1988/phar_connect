@@ -1586,6 +1586,7 @@ ul.linksSubcategories li:hover .sub-linksCategories .sub-linksCategories {
 .container.loginRegister.partnerSection .partnerSectionHub {
 display: flex;
 align-items: flex-start;
+padding-bottom:100px;
 }
 
 .partnerSectionHead {
@@ -1615,7 +1616,9 @@ align-items: flex-start;
     width: calc(100% - 30px);
     overflow: hidden;
 }
-
+form.loginFields .row.mb-3 {
+    width: 100%;
+}
 .card-body {
     padding: 25px;
     background: #000;
