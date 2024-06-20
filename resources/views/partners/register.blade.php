@@ -267,6 +267,9 @@ $(document).on('click', '#btn-sb', function() {
         $('#name').css('border', '1px solid red');
         $('#name').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter a valid name</strong></span>');
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
         return false;
     }
     if ($('#email').val() == '') {
@@ -274,6 +277,9 @@ $(document).on('click', '#btn-sb', function() {
         $('#email').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
         );
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
         return false;
     }
     if ($('#password').val() == '') {
@@ -281,12 +287,18 @@ $(document).on('click', '#btn-sb', function() {
         $('#password').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter a valid password</strong></span>'
         );
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
         return false;
     }
     if ($('#copmany-name').val() == '') {
         $('#copmany-name').css('border', '1px solid red');
         $('#copmany-name').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter company name</strong></span>');
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
         return false;
     }
 })
