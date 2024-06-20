@@ -29,11 +29,11 @@
                 @endif
                 @if(auth()->user()->category_ids == NULL)
                 <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
-                    <a href="{{ route('partner.categories') }}" class="waves-effect waves-dark">
+                    <a href="{{ route('partner.complete-profile') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-bell"></i>
                         </span>
-                        <span class="pcoded-mtext">Choose categories</span>
+                        <span class="pcoded-mtext">Complete Profile</span>
                     </a> 
                 </li>
                 @endif

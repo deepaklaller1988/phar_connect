@@ -133,8 +133,9 @@ Route::middleware(['auth', 'user-access:partner'])->group(function () {
     Route::get('/partner/cat',[CategoryController::class,'get_cat'])->name('partner.cat');
     Route::get('/partner/notifications',[NotificationController::class,'get_partner_notifications'])->name('partner.notifications');
     Route::get('/partner/post/loadblade',[PostController::class,'loadBlade'])->name('partner.post.loadblade');
-    Route::get('partner/choose-categories',[PartnerController::class,'categories'])->name('partner.categories');
+    Route::get('partner/complete-profile',[PartnerController::class,'categories'])->name('partner.complete-profile');
     Route::post('partner/selected-categories',[PartnerController::class,'selected_categories'])->name('partner.selected-categories');
+    Route::post('partner/complete-info/{id}',[PartnerController::class,'complete_profile'])->name('partner.complete-info');
 });
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('/partner/register',[PartnerController::class,'register'])->name('partner.register');
