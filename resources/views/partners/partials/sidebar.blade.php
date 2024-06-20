@@ -27,7 +27,7 @@
                     </a> 
                 </li>                
                 @endif
-                @if(auth()->user()->category_ids == NULL)
+                <!-- @if(auth()->user()->category_ids == NULL) -->
                 <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
                     <a href="{{ route('partner.complete-profile') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
@@ -36,7 +36,7 @@
                         <span class="pcoded-mtext">Complete Profile</span>
                     </a> 
                 </li>
-                @endif
+                <!-- @endif -->
                 <li class=" ">
                     @if (Route::has('login'))
                     @auth
