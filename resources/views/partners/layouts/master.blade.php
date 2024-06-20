@@ -63,10 +63,10 @@
         </div>
     </div>
 
-@include('partners.partials.footer')
+    @include('partners.partials.footer')
 
 
-   
+
     <script type="text/javascript" src="{{ asset('assets/admin/bower_components/jquery-ui/js/jquery-ui.min.js')}}">
     </script>
     <script type="text/javascript" src="{{ asset('assets/admin/bower_components/popper.js/js/popper.min.js')}}">
@@ -94,6 +94,9 @@
     <script src="{{ asset('assets/admin/js/vertical/vertical-layout.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/admin/pages/dashboard/crm-dashboard.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/admin/js/script.min.js')}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 </body>
 
 </html>

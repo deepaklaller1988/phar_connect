@@ -31,23 +31,149 @@
                             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                 <div class="flexSet">
                                     @csrf
-                                    <div class="row">
-                                        <div class="col-lg-12 mb-3">
-                                            <div class="common_input mb_15 d-flex align-items-center">
-                                                <label class="text-nowrap mr-1">Select Category :
-                                                </label>
-                                                <select id="select_main_category" class="form-control selectFixCZ"
-                                                    name="category_ids[]">
-                                                    <option value="" disabled selected>Select Category : </option>
-                                                    @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">
-                                                        {{ $category->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                    <div class="row mb-3">
+                                        <label for="name"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="name" type="text"
+                                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                                value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div id="custom-form"></div>
+                                    <div class="row mb-3">
+                                        <label for="last-name"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="last-name" type="text" class="form-control" name="last_name"
+                                                value="{{ old('lats_name') }}" autocomplete="last-name" autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 width100Set">
+                                        <label for="email"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Email') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email">
+
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="password"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Password') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required autocomplete="new-password">
+
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="password-confirm"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password-confirm" type="password" class="form-control"
+                                                name="password_confirmation" required autocomplete="new-password">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="phone"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input type="text" id="phone" class="form-control " name="phone"
+                                                value="{{ old('phone') }}" pattern="[789][0-9]{9}" required>
+                                            @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="company-name"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Company Name') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="company-name" type="text"
+                                                class="form-control @error('company_name') is-invalid @enderror"
+                                                name="company_name" value="{{ old('company_name') }}" required
+                                                autocomplete="company-name" autofocus>
+
+                                            @error('company_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="phone"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Alternate Contact Name') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input type="text" id="alternate_contact_name" class="form-control "
+                                                name="alternate_contact_name"
+                                                value="{{ old('alternate_contact_name') }}" required>
+                                            @error('alternate_contact_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="phone"
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Alternate Phone Number') }}<span
+                                                class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input type="text" id="alternate_phone_number" class="form-control "
+                                                name="alternate_phone_number"
+                                                value="{{ old('alternate_phone_number') }}" pattern="[789][0-9]{9}"
+                                                required>
+                                            @error('alternate_phone_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="type" id="cat_idd" value="2">
+                                    <div class="row mb-0  width100Set">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" id="btn-sb" class="btn btn-primary">
+                                                {{ __('Register') }}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -66,53 +192,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
-<!-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
-
-<script>
-$(document).ready(function() {
-    $('#select_main_category').change(function() {
-        var category_id = $(this).val();
-        if (category_id !== '') {
-            $.ajax({
-                url: "{{ route('partner.register.addblade') }}",
-                method: 'POST',
-                data: {
-                    category_id: category_id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(data) {
-                    if (data.html) {
-                        $('#custom-form').html(data.html);
-                        $('.default-form').remove();
-                    } else {
-                        $('#subcategory_div').hide();
-                    }
-                }
-            });
-        } else {
-            $('#subcategory_div').hide();
-        }
-    });
-});
-$(window).on('load', function() {
-    $.ajax({
-        url: "{{ route('partner.register.addblade') }}",
-        method: 'POST',
-        data: {
-            category_id: 1,
-            _token: '{{ csrf_token() }}'
-        },
-        success: function(data) {
-            if (data.html) {
-                $('#custom-form').html(data.html);
-                $('#select_main_category').val(1).attr('selected', 'selected');
-            }
-        }
-    });
-});
-</script>
 <script>
 $(document).ready(function() {
     $(document).on('focusout', '#email', function() {
@@ -123,9 +202,9 @@ $(document).ready(function() {
                 '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
             );
         }
-        // setTimeout(function() {
-        //     $('.invalid-feedback').remove();
-        // }, 2000);
+        setTimeout(function() {
+            $('.invalid-feedback').remove();
+        }, 1000);
     });
 
     $(document).on('focusout', '#password', function() {
@@ -194,14 +273,14 @@ $(document).on('click', '#btn-sb', function() {
         $('#email').css('border', '1px solid red');
         $('#email').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
-            );
+        );
         return false;
     }
     if ($('#password').val() == '') {
         $('#password').css('border', '1px solid red');
         $('#password').after(
             '<span class="invalid-feedback" role="alert"><strong>Please enter a valid password</strong></span>'
-            );
+        );
         return false;
     }
     if ($('#copmany-name').val() == '') {

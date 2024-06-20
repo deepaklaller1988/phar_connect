@@ -26,12 +26,12 @@
                                 <div class="serachPost">
                                     <h4>{{ $post->title }}</h4>
                                     <span>
-                                        <p>{{ $post->user->name }}</p>
-                                        <p>{{ $post->user->location }}</p>
+                                        <!-- <p> $post->user->name }}</p> -->
+                                        <p>{{ $getcat->title }}</p>
                                     </span>
-                                    @if($post->key_services)
+                                    @if($post->certifications)
                                     <ul class="tagsConsult">
-                                        @foreach(explode(',',$post->key_services) as $key_service)
+                                        @foreach(explode(',',$post->certifications) as $key_service)
                                         <li>{{ $key_service }}</li>
                                         @endforeach
                                     </ul>

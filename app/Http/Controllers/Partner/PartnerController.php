@@ -94,10 +94,18 @@ class PartnerController extends Controller
 
     }
 
+    public function complete_profile(Request $request,$id)
+    {
+        dd($request);
+        $user = User::findOrFail($id);
+        dd($user);
+    }
+
     
     public function categories()
     {
-        return view('partners.categories');
+        $categories = Category::where('parent_id',NULL)->where('id','!=',4)->orderBy('title')->get();
+        return view('partners.categories',compact('categories'));
     }
     public function selected_categories(Request $request)
     {
@@ -113,6 +121,12 @@ class PartnerController extends Controller
     {
 
         $data['subcategories'] = Category::where('parent_id',$request->category_id)->orderBy('title')->get();
+        foreach($data['subcategories'] as $key => $value) {
+            $data[$key]['childcategory'] = Category::where('parent_id',$value->id)->orderBy('title')->get();
+            foreach($data[$key]['childcategory'] as $k => $v) {
+                $data[$key][$k]['grandchildcategory'] = Category::where('parent_id',$v->id)->orderBy('title')->get();
+            }
+        }
         $data['countries'] = Country::all();
         $data['parent_id'] = $request->category_id;
         if($request->category_id == 1) {
