@@ -26,7 +26,8 @@
                     <div class="searchOptionsInner">
                         <div class="searchSet">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" id="category_search" placeholder="Search Category Here..." autocomplete="off"/>
+                            <input type="text" id="category_search" placeholder="Search Category Here..."
+                                autocomplete="off" />
                             <input type="hidden" name="category" value="" id="hidden_selected-category">
                         </div>
                         <div id="category_search_result" style="display: none;">
@@ -34,7 +35,8 @@
                         </div>
                         <div class="searchSet countrySet">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <input type="text" id="country_search" placeholder="Search Country Here..." autocomplete="off"/>
+                            <input type="text" id="country_search" placeholder="Search Country Here..."
+                                autocomplete="off" />
                             <input type="hidden" name="country" value="" id="hidden_selected-country">
                         </div>
                         <div id="country_search_result" style="display: none;">
@@ -220,17 +222,17 @@ $(document).on('ready', function() {
 });
 
 $(document).ready(function() {
-    $(document).on('click','#myform button',function(){
+    $(document).on('click', '#myform button', function() {
         var csearch = $('#category_search').val();
         var cnsearch = $('#country_search').val();
-        if((csearch == '') && (cnsearch == '')){
+        if ((csearch == '') && (cnsearch == '')) {
             return false;
-        } 
+        }
     });
     $(document).on('keyup', '#category_search', function() {
         var query = $(this).val();
         var myLength = $(this).val().length;
-        if (myLength > 3) {
+        if (myLength > 2) {
             $.ajax({
                 url: "{{ route('search') }}",
                 type: "GET",
@@ -253,7 +255,7 @@ $(document).ready(function() {
                 }
             });
         } else {
-            $('#category_search_result').empty();
+            $('#category_search_result').css('display', 'none');
         }
     })
 
@@ -279,12 +281,12 @@ $(document).ready(function() {
                             '" value="' + item.id + '">' + item.country_name +
                             '</option>';
                     });
-                    $html += '</select>'; 
+                    $html += '</select>';
                     $('#country_search_result').append($html);
                 }
             });
         } else {
-            $('#country_search_result').empty();
+            $('#country_search_result').css('display', 'none');
         }
     })
 
@@ -298,7 +300,7 @@ $(document).ready(function() {
         if (formaction) {
             $("#myform").attr('action', formaction + '/' + slug);
         } else {
-            $("#myform").attr('action', base_url+'search-posts/' + slug);
+            $("#myform").attr('action', base_url + 'search-posts/' + slug);
         }
 
         $('#country_search').val(country);
@@ -313,7 +315,7 @@ $(document).ready(function() {
         var category = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
         var url = $("#myform").attr('action');
-        $("#myform").attr('action', base_url+'search-posts/' + slug);
+        $("#myform").attr('action', base_url + 'search-posts/' + slug);
         $('#category_search').val(category);
         $('#category_search_result').empty();
         $('#category_search_result').css('display', 'none');
@@ -325,5 +327,10 @@ $(document).on('click', '#cancel-cat-popup', function() {
     $('.selectYourCategory').css('display', 'none');
 })
 
+$('#myform').on('submit', function(event) {
+    if ($(this).attr('action') === '') {
+        return false;
+    }
+});
 </script>
 @endpush

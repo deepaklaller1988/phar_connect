@@ -96,9 +96,36 @@ class PartnerController extends Controller
 
     public function complete_profile(Request $request,$id)
     {
-        dd($request);
+        $this->validate($request, [
+            'certifications' => 'required',
+            'category_ids' => 'required',
+            'company_profile'=>'required',
+            'company_website'=>'required'
+        ]);
         $user = User::findOrFail($id);
-        dd($user);
+        $user->certifications = $request->certifications;
+        $user->category_ids = implode(',', $request->category_ids);
+        $user->company_profile = $request->company_profile;
+        $user->company_website = $request->company_website;
+        $user->linkedin_profile = $request->linkedin_profile;
+        $user->twiter_profile = $request->twiter_profile;
+        $user->country_id = implode(',', $request->country_id);
+        $user->representatives = $request->representatives;
+        $user->location = $request->location;
+        $user->agenda = $request->agenda;
+        $user->end_date = $request->end_date;
+        $user->start_date = $request->start_date;
+        $user->event_name = $request->event_name;
+        $user->industry = $request->industry;
+        $user->position_type = $request->position_type;
+        $user->position_title = $request->position_title;
+        $user->education_level = $request->education_level;
+        $user->experience_level = $request->experience_level;
+        if($user->save()){
+            return redirect()->route('partner.dashboard')->with('success', 'Information Updated Successfully.');
+        }else{
+            return redirect()->route('partner.dashboard')->with('error', 'Error while updating information');
+        }
     }
 
     
