@@ -4,8 +4,8 @@
         <div class="col-md-6">
             <label for="industry">{{ __('Industry') }}<span class="text-danger">*</span></label>
             <input id="industry" type="text" class="form-control @error('industry') is-invalid @enderror"
-                name="industry" value="{{ old('industry') }}" required autocomplete="industry" autofocus>
-
+                name="industry" value="{{ old('industry') }}" autocomplete="industry" autofocus>
+            <span class="text-danger d-none" id="industry_error">Please Enter Industry</span>
             @error('industry')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -20,6 +20,7 @@
                 <option value="{{ $position_type->id }}">{{ $position_type->title }}</option>
                 @endforeach
             </select>
+            <span class="text-danger d-none" id="position_type_error">Please Select Position Type</span>
             @error('position_type')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
@@ -30,7 +31,7 @@
             <label for="name">{{ __('Position Title') }}<span class="text-danger">*</span></label>
             <input id="name" type="text" class="form-control @error('position_title') is-invalid @enderror"
                 name="position_title" value="{{ old('company_name') }}" required autofocus>
-
+            <span class="text-danger d-none" id="position_title_error">Please Enter Position Title</span>
             @error('position_title')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -45,6 +46,7 @@
                 <option value="{{ $education_level->id }}">{{ $education_level->title }}</option>
                 @endforeach
             </select>
+            <span class="text-danger d-none" id="education_level_error">Please Select Education Level</span>
             @error('education_level')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
@@ -59,6 +61,7 @@
                 <option value="{{ $experience_level->id }}">{{ $experience_level->title }}</option>
                 @endforeach
             </select>
+            <span class="text-danger d-none" id="experience_level_error">Please Select Experience Level</span>
             @error('experience_level')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
@@ -70,7 +73,7 @@
             <input id="company_website" type="text" class="form-control @error('company_website') is-invalid @enderror"
                 name="company_website" value="{{ old('company_website') }}" required autocomplete="company_website"
                 id="company_website" autofocus>
-
+            <span class="text-danger d-none" id="company_website_error">Please Enter a valid URL</span>
             @error('company_website')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
@@ -90,7 +93,8 @@
         <div class="col-md-6">
             <label for="location">{{ __('Location') }}<span class="text-danger">*</span></label>
             <input id="location" type="text" class="form-control @error('location') is-invalid @enderror"
-                name="location" value="{{ old('location') }}" required autocomplete="location" id="location" autofocus>
+                name="location" value="{{ old('location') }}" autocomplete="location" id="location" autofocus>
+            <span class="text-danger d-none" id="location_error">Please Enter Location</span>
             @error('location')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
@@ -121,7 +125,8 @@
         </div>
         <div id="subcategory_div">
             <div class="col-md-6">
-                <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span></label>
+                <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span
+                        class="text-danger d-none" id="cat_error">Please Select categories</span></label>
                 @foreach($data['subcategories'] as $key=> $subcategory)
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
@@ -167,9 +172,51 @@
     </div>
     <div class="row mb-0  width100Set">
         <div class="col-md-8 offset-md-4">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" id="btn-sb" class="btn btn-primary">
                 {{ __('Register') }}
             </button>
         </div>
     </div>
 </div>
+<script>
+$(document).on('click', '#btn-sb', function() {
+    url = $('#company_website').val();
+    var urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])\/?$/;
+    if (!urlPattern.test(url)) {
+        $('#company_website_error').removeClass('d-none');
+        return false;
+    }
+
+    if ($('input[name="category_ids[]"]').is(':checked')) {
+        return true;
+    } else {
+        $('#cat_error').removeClass('d-none');
+        return false;
+    }
+
+
+    if ($('#location').val() == '') {
+        $('#location_error').removeClass('d-none');
+        return false;
+    }
+
+    if ($('#industry').val() == '') {
+        $('#industry_error').removeClass('d-none');
+        return false;
+    }
+
+    if ($('#position_type').val() == '') {
+        $('#position_type_error').removeClass('d-none');
+        return false;
+    }
+
+    if ($('position_title').val() == '') {
+        $('#position_title_error').removeClass('d-none');
+        return false;
+    }
+    if ($('#experience_level').val() == '') {
+        $('#experience_level_error').removeClass('d-none');
+        return false;
+    }
+});
+</script>

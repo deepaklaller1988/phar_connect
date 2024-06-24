@@ -9,7 +9,7 @@
 <div class="flexSet">
     <div class="row mb-3">
         <div class="col-md-6">
-            <label for="certifications">{{ __('Certifications') }}<span class="text-danger">*</span></label>
+            <label for="certifications">{{ __('Certifications') }}</label>
             <select id="certifications" class="form-select js-example-placeholder-multiple col-sm-12"
                 name="certifications[]" multiple required autocomplete="Certifications" autofocus>
                 <option value="ISO 9001">ISO 9001</option>
@@ -28,10 +28,12 @@
             <input id="company_website" type="text" class="form-control @error('company_website') is-invalid @enderror"
                 name="company_website" value="{{ old('company_website') }}" required autocomplete="company_website"
                 id="company_website" autofocus>
-
+                <span class="d-none" id="company_website_error" role="alert">
+                    <strong class="text-danger" >Please Enter a valid URL</strong>
+                </span>
             @error('company_website')
             <span class="invalid-feedback" role="alert">
-                <strong class="text-danger">{{ $message }}</strong>
+                <strong class="text-danger" >{{ $message }}</strong>
             </span>
             @enderror
         </div>
@@ -47,13 +49,16 @@
         </div>
         <div class="col-md-6">
             <label for="country">{{ __('Country') }}<span class="text-danger">*</span></label>
-            <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect" name="country_id[]"
+            <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_country" name="country_id[]"
                 required multiple="multiple">
                 @foreach ($data['countries'] as $country)
                 <option value="{{$country->id}}">{{$country->country_name}}
                 </option>
                 @endforeach
             </select>
+            <span class="d-none" id="country_error" role="alert">
+                <strong class="text-danger">Please Select Country</strong>
+            </span>
             @error('country_id')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -80,7 +85,7 @@
     </div>
     <div id="subcategory_div">
         <div class="col-md-6">
-            <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span></label>
+            <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span class="text-danger d-none" id="cat_error">Please Select categories</span></label>
             @foreach($data['subcategories'] as $key=> $subcategory)
             <div class="form-check">
                 <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
@@ -145,6 +150,25 @@ $('.form-check-input ').change(function() {
     if ($(this).is(':checked')) {
         $('#sub-cat-step-' + checkboxValue).show();
     }
+});
 
+$(document).on('click','#btn-sb',function(){
+    url = $('#company_website').val();
+    var urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])\/?$/;
+    if (!urlPattern.test(url)) {
+        $('#company_website_error').removeClass('d-none');
+        return false;
+    } 
+
+    if($('#multiselect_country').val() == ''){
+        $('#country_error').removeClass('d-none');
+        return false;
+    }
+    if($('input[name="category_ids[]"]').is(':checked')){
+        return true;
+    }else{
+        $('#cat_error').removeClass('d-none');
+        return false;
+    }
 });
 </script>

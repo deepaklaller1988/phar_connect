@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="midContainer">
     <div class="bannerSet">
         <section class="regular slider">
@@ -199,27 +200,6 @@ $(window).scroll(function() {
 </script>
 
 <script type="text/javascript">
-$(document).on('ready', function() {
-    // $(".regular").slick({
-    //     dots: true,
-    //     prevArrow: false,
-    //     nextArrow: false,
-    //     infinite: true,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     autoplay: true,
-    //     autoplaySpeed: 5000,
-    // });
-    // $(".center").slick({
-    //     dots: false,
-    //     infinite: true,
-    //     centerMode: true,
-    //     slidesToShow: 5,
-    //     slidesToScroll: 3,
-    //     autoplay: true,
-    //     autoplaySpeed: 5000,
-    // });
-});
 
 $(document).ready(function() {
     $(document).on('click', '#myform button', function() {
@@ -292,7 +272,6 @@ $(document).ready(function() {
 
     $(document).on('change', '#selected-country', function() {
         var base_url = window.location.pathname;;
-
         var country_id = $(this).val();
         var country = $(this).find(':selected').text();
         var slug = $(this).find(':selected').data('slug');
@@ -302,7 +281,6 @@ $(document).ready(function() {
         } else {
             $("#myform").attr('action', base_url + 'search-posts/' + slug);
         }
-
         $('#country_search').val(country);
         $('#country_search_result').empty();
         $('#country_search_result').css('display', 'none');
