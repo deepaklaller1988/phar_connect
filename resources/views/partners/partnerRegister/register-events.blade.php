@@ -148,7 +148,16 @@
 <script>
 // $("#start_date").flatpickr();
 // $('#end_date').flatpickr();
-
+$('.form-check-input ').change(function() {
+    var checkboxValue = $(this).val();
+    if ($(this).is(':checked')) {
+        $('#sub-cat-step-' + checkboxValue).show();
+    }else{
+        $('#sub-cat-step-' + checkboxValue).css('display', 'none');
+        $('.subsub-category').css('display', 'none');
+        $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
+    }
+});
 
 $(document).on('click', '#btn-sb', function() {
     url = $('#company_website').val();

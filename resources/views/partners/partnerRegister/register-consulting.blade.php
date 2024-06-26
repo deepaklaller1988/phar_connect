@@ -154,6 +154,10 @@ $('.form-check-input ').change(function() {
     var checkboxValue = $(this).val();
     if ($(this).is(':checked')) {
         $('#sub-cat-step-' + checkboxValue).show();
+    }else{
+        $('#sub-cat-step-' + checkboxValue).css('display', 'none');
+        $('.subsub-category').css('display', 'none');
+        $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
     }
 });
 
