@@ -58,26 +58,23 @@ class PartnerController extends Controller
 
     public function update(Request $request,$id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'phone' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 
-            'key_services' => 'required',
-            'country' => 'required',
-            'company_profile' => 'required',
-            'company_website' => 'required',
-            'company_name' => 'required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'banner' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'phone' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 
+        //     'company_name' => 'required',
+        //     'alternate_phone_number' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/',
+        //     'alternate_contact_name' => 'required',
+        //     'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'banner' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+      
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->phone = $request->phone;
-        $user->key_services = $request->key_services;
         $user->company_name = $request->company_name;
-        $user->certifications = $request->certifications;
-        $user->company_website = $request->company_website;
+        $user->alternate_contact_name = $request->alternate_contact_name;
+        $user->alternate_phone_number = $request->alternate_phone_number;
         $user->company_profile = $request->company_profile;
-        $user->country_id = $request->country;
         if ($request->hasFile('logo')) {
             $imagePath = $request->file('logo')->store('uploads/partners/logo', 'public');
             $user->logo = $imagePath;

@@ -42,7 +42,9 @@ class User extends Authenticatable
         'start_date',
         'end_date',
         'agenda',
-        'logo'
+        'logo',
+        'alternate_contact_name',
+        'alternate_phone_number',
         
     ];
   

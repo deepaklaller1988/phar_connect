@@ -6,7 +6,11 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
-
+<style>
+label.error {
+    color: red !important;
+}
+</style>
 
 <div class="container loginRegister partnerSection">
 
@@ -28,7 +32,7 @@
                         <!-- <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                            <form method="POST" id="myForm" action="{{ route('register') }}" enctype="multipart/form-data">
                                 <div class="flexSet">
                                     @csrf
                                     <div class="row mb-3">
@@ -39,8 +43,8 @@
                                         <div class="col-md-6">
                                             <input id="name" type="text"
                                                 class="form-control @error('name') is-invalid @enderror" name="name"
-                                                value="{{ old('name') }}" required autocomplete="name" autofocus>
-
+                                                value="{{ old('name') }}" required autocomplete="name" id="name" autofocus>
+                                           
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -66,7 +70,6 @@
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
                                                 value="{{ old('email') }}" required autocomplete="email">
-
                                             @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -83,7 +86,6 @@
                                             <input id="password" type="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password" required autocomplete="new-password">
-
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -125,7 +127,6 @@
                                                 class="form-control @error('company_name') is-invalid @enderror"
                                                 name="company_name" value="{{ old('company_name') }}" required
                                                 autocomplete="company-name" autofocus>
-
                                             @error('company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -191,117 +192,57 @@
         </div>
     </div>
 </div>
-
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function() {
-    $(document).on('focusout', '#email', function() {
-        var email = $(this).val();
-        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regex.test(email)) {
-            $('#email').after(
-                '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
-            );
+    $("#myForm").validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 8
+            },
+            phone: {
+                required: true,
+                number: true
+            },
+            alternate_phone_number: {
+                required: true,
+                number: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter your name",
+            },
+            email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address"
+            },
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 8 characters long"
+            },
+            phone: {
+                required: "Please enter your phone number",
+                number: "Please enter a valid phone number"
+            },
+            alternate_phone_number: {
+                required: "Please enter your alternate phone number",
+                number: "Please enter a valid phone number"
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
         }
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
-    });
-
-    $(document).on('focusout', '#password', function() {
-        var password = $(this).val();
-        if (password.length < 8) {
-            $('#password').after(
-                '<span class="invalid-feedback" role="alert"><strong>Password length must be greater than 8 </strong></span>'
-            );
-        }
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 2000);
-    });
-
-    $(document).on('focusout', '#password-confirm', function() {
-        var password = $(this).val();
-        var password_confirm = $('#password').val();
-        if (password != password_confirm) {
-            $('#password-confirm').after(
-                '<span class="invalid-feedback" role="alert"><strong>Confirmed password does not match </strong></span>'
-            );
-        }
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 2000);
-    });
-
-    $(document).on('focusout', '#phone', function() {
-        var phoneNumber = $(this).val();
-        var regex = /^\d{10}$/;
-        if (!regex.test(phoneNumber)) {
-            $('#phone').after(
-                '<span class="invalid-feedback" role="alert"><strong>Enter a valid phone number </strong></span>'
-            );
-        }
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 2000);
-    });
-    var errorAppended = false;
-    $('#phone').keypress(function(event) {
-
-        var charCode = (event.which) ? event.which : event.keyCode;
-        if (charCode >= 48 && charCode <= 57 || charCode === 8 || charCode === 46) {
-
-        } else {
-            $('#phone').after(
-                '<span class="invalid-feedback" role="alert"><strong>Numbers allowed only</strong></span>'
-            );
-            errorAppended = false;
-        }
-
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
     });
 });
-$(document).on('click', '#btn-sb', function() {
-    if ($('#name').val() == '') {
-        $('#name').css('border', '1px solid red');
-        $('#name').after(
-            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid name</strong></span>');
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
-        return false;
-    }
-    if ($('#email').val() == '') {
-        $('#email').css('border', '1px solid red');
-        $('#email').after(
-            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid email address</strong></span>'
-        );
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
-        return false;
-    }
-    if ($('#password').val() == '') {
-        $('#password').css('border', '1px solid red');
-        $('#password').after(
-            '<span class="invalid-feedback" role="alert"><strong>Please enter a valid password</strong></span>'
-        );
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
-        return false;
-    }
-    if ($('#copmany-name').val() == '') {
-        $('#copmany-name').css('border', '1px solid red');
-        $('#copmany-name').after(
-            '<span class="invalid-feedback" role="alert"><strong>Please enter company name</strong></span>');
-        setTimeout(function() {
-            $('.invalid-feedback').remove();
-        }, 1000);
-        return false;
-    }
-})
 </script>
 
 @endsection

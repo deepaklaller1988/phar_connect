@@ -3,6 +3,16 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<style>
+    label.error {
+        color: red !important;
+    }
+</style>
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -53,7 +63,7 @@
                     </div>
 
                     <div class="card-block">
-                        <form action="{{ route('partner.update',auth()->user()->id ) }}" method="post"
+                        <form id="myForm" action="{{ route('partner.update',auth()->user()->id ) }}" method="post"
                             enctype='multipart/form-data'>
                             @csrf
                             <div class="white_card_body">
@@ -122,7 +132,7 @@
                                         <label>Phone Number : </label>
                                         <div class="common_input mb_15">
                                             <input type="text" name="phone" class="form-control"
-                                                value="{{ auth()->user()->phone }}" id="phone" pattern="[987][0-9]{9}"
+                                                value="{{ auth()->user()->phone }}" required id="phone" pattern="[987][0-9]{9}"
                                                 placeholder="Mobile No">
                                             @if($errors->has('phone'))
                                             <div class="error">{{ $errors->first('phone') }}</div>
@@ -136,57 +146,33 @@
                                                 value="{{ auth()->user()->password }}" placeholder="Password">
 
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
-                                            <label>Company Website</label>
-                                            <input type="text" name="company_website" class="form-control"
-                                                value="{{ auth()->user()->company_website }}" placeholder="Email">
-                                            @if($errors->has('company_website'))
-                                            <div class="error">{{ $errors->first('company_website') }}</div>
+                                            <label>Alternate Contact Name</label>
+                                            <input type="text" name="alternate_contact_name" class="form-control"
+                                                value="{{ auth()->user()->alternate_contact_name }}" required placeholder="Alternate Contact name">
+                                            @if($errors->has('alternate_contact_name'))
+                                            <div class="error">{{ $errors->first('alternate_contact_name') }}</div>
                                             @endif
                                         </div>
                                     </div>
+                                    
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
-                                            <label>Country</label>
-                                            <select name="country" class="form-control">
-                                                <option value="">Select Country</option>
-                                                @foreach($data['countries'] as $country)
-                                                <option value="{{ $country->id }}"
-                                                    {{ auth()->user()->country_id == $country->id ? 'selected' : '' }}>
-                                                    {{ $country->country_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @if($errors->has('country'))
-                                            <div class="error">{{ $errors->first('country') }}</div>
+                                            <label>Alternate Contact Number</label>
+                                            <input type="text" name="alternate_phone_number" required class="form-control"
+                                                value="{{ auth()->user()->alternate_phone_number }}" placeholder="Alternate Contact Number">
+                                            @if($errors->has('alternate_phone_number'))
+                                            <div class="error">{{ $errors->first('alternate_phone_number') }}</div>
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <div class="common_input mb_15">
-                                            <label>Key Services:</label>
-                                            <textarea name="key_services"
-                                                class="form-control">{{ auth()->user()->key_services }}</textarea>
-                                            <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-                                            @if($errors->has('key_services'))
-                                            <div class="error">{{ $errors->first('key_services') }}</div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <div class="common_input mb_15">
-                                            <label>Certifications : </label>
-                                            <textarea name="certifications"
-                                                class="form-control">{{ auth()->user()->certifications }}</textarea>
-                                            <small>Preference:- ASMO, Robotics.</small>
-                                            {{$errors->first('certifications')}}
-                                        </div>
-                                    </div>
+
                                     <div class="col-12 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Company Profile</label>
-                                            <textarea id="summernote" class="form-control"
+                                            <textarea id="summernote" required class="form-control"
                                                 name="">{{ auth()->user()->company_profile }}</textarea>
                                         </div>
                                     </div>
@@ -212,36 +198,46 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCRYmAROkEbregKex58kHyj64JnpSXRDWg">
 </script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}">
+</script>
+
+<script type="text/javascript"
+    src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#summernote').summernote();
 });
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+// if ("geolocation" in navigator) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//         var latitude = position.coords.latitude;
+//         var longitude = position.coords.longitude;
 
-        // Make a request to reverse geocoding service
-        $.getJSON('https://nominatim.openstreetmap.org/reverse', {
-            lat: latitude,
-            lon: longitude,
-            format: 'json',
-            zoom: 10
-        }).done(function(data) {
-            var city = data.address.city;
-            if (!city) {
-                city = data.address.town || data.address.village || data.address.hamlet ||
-                    data.address
-                    .suburb || data.address.state;
-            }
-            $('#location').val(city)
-        }).fail(function() {
-            alert("Failed to retrieve city information.");
-        });
-    });
-} else {
-    alert("Geolocation is not supported by your browser");
-}
+//         // Make a request to reverse geocoding service
+//         $.getJSON('https://nominatim.openstreetmap.org/reverse', {
+//             lat: latitude,
+//             lon: longitude,
+//             format: 'json',
+//             zoom: 10
+//         }).done(function(data) {
+//             var city = data.address.city;
+//             if (!city) {
+//                 city = data.address.town || data.address.village || data.address.hamlet ||
+//                     data.address
+//                     .suburb || data.address.state;
+//             }
+//             $('#location').val(city)
+//         }).fail(function() {
+//             alert("Failed to retrieve city information.");
+//         });
+//     });
+// } else {
+//     alert("Geolocation is not supported by your browser");
+// }
 
 $(document).on('focusout', '.note-editable', function() {
     $('#company_profile').val($(this).html());
@@ -271,6 +267,25 @@ $('#banner-input').change(function() {
 
 $(document).on('keypress', '#phone', function(key) {
     if (key.charCode < 48 || key.charCode > 57) return false;
+});
+
+$(document).ready(function() {
+    $("#myForm").validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            phone: {
+                required: true,
+            },
+            company_name: {
+                required: true,
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 });
 </script>
 @endsection
