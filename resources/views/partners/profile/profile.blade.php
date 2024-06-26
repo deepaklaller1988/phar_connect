@@ -3,6 +3,11 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/bower_components/select2/css/select2.min.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+<link rel="stylesheet" type="text/css"
+    href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -150,7 +155,9 @@
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Country</label>
-                                            <select name="country" class="form-control">
+                                            <select class="form-select js-example-placeholder-multiple col-sm-12"
+                                                id="multiselect_country" name="country_id[]" required
+                                                multiple="multiple">
                                                 <option value="">Select Country</option>
                                                 @foreach($data['countries'] as $country)
                                                 <option value="{{ $country->id }}"
@@ -163,7 +170,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-3">
+                                    <!-- <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Key Services:</label>
                                             <textarea name="key_services"
@@ -173,16 +180,25 @@
                                             <div class="error">{{ $errors->first('key_services') }}</div>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
+                                    </div> -->
+                                    <!-- <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Certifications : </label>
                                             <textarea name="certifications"
                                                 class="form-control">{{ auth()->user()->certifications }}</textarea>
                                             <small>Preference:- ASMO, Robotics.</small>
-                                            {{$errors->first('certifications')}}
+                                            {{$errors->first('certifications')}} 
+                                            <select id="certifications"
+                                                class="form-select js-example-placeholder-multiple col-sm-12"
+                                                name="certifications[]" multiple required autocomplete="Certifications"
+                                                autofocus placeholder="Certifications">
+                                                <option value="ISO 9001" {{ auth()->user()->certifications == 'ISO 9001' ? 'selected' : ''}}>ISO 9001</option>
+                                                <option value="GMP" {{ auth()->user()->certifications == 'GMP' ? 'selected' : ''}}>GMP</option>
+                                                <option value="CE" {{ auth()->user()->certifications == 'CE' ? 'selected' : ''}}>CE</option>
+                                                <option value="ISO 13485" {{ auth()->user()->certifications == 'ISO 13485' ? 'selected' : ''}}>ISO 13485</option>
+                                            </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-12 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Company Profile</label>
@@ -212,36 +228,46 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCRYmAROkEbregKex58kHyj64JnpSXRDWg">
 </script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/select2/js/select2.full.min.js') }}">
+</script>
+
+<script type="text/javascript"
+    src="{{ asset('assets/admin/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }} ">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
+</script>
+<script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
+
 <script>
 $(document).ready(function() {
     $('#summernote').summernote();
 });
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+// if ("geolocation" in navigator) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//         var latitude = position.coords.latitude;
+//         var longitude = position.coords.longitude;
 
-        // Make a request to reverse geocoding service
-        $.getJSON('https://nominatim.openstreetmap.org/reverse', {
-            lat: latitude,
-            lon: longitude,
-            format: 'json',
-            zoom: 10
-        }).done(function(data) {
-            var city = data.address.city;
-            if (!city) {
-                city = data.address.town || data.address.village || data.address.hamlet ||
-                    data.address
-                    .suburb || data.address.state;
-            }
-            $('#location').val(city)
-        }).fail(function() {
-            alert("Failed to retrieve city information.");
-        });
-    });
-} else {
-    alert("Geolocation is not supported by your browser");
-}
+//         // Make a request to reverse geocoding service
+//         $.getJSON('https://nominatim.openstreetmap.org/reverse', {
+//             lat: latitude,
+//             lon: longitude,
+//             format: 'json',
+//             zoom: 10
+//         }).done(function(data) {
+//             var city = data.address.city;
+//             if (!city) {
+//                 city = data.address.town || data.address.village || data.address.hamlet ||
+//                     data.address
+//                     .suburb || data.address.state;
+//             }
+//             $('#location').val(city)
+//         }).fail(function() {
+//             alert("Failed to retrieve city information.");
+//         });
+//     });
+// } else {
+//     alert("Geolocation is not supported by your browser");
+// }
 
 $(document).on('focusout', '.note-editable', function() {
     $('#company_profile').val($(this).html());
