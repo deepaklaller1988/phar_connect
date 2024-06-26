@@ -8,6 +8,11 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
+<style>
+    label.error {
+        color: red !important;
+    }
+</style>
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -58,7 +63,7 @@
                     </div>
 
                     <div class="card-block">
-                        <form action="{{ route('partner.update',auth()->user()->id ) }}" method="post"
+                        <form id="myForm" action="{{ route('partner.update',auth()->user()->id ) }}" method="post"
                             enctype='multipart/form-data'>
                             @csrf
                             <div class="white_card_body">
@@ -127,7 +132,7 @@
                                         <label>Phone Number : </label>
                                         <div class="common_input mb_15">
                                             <input type="text" name="phone" class="form-control"
-                                                value="{{ auth()->user()->phone }}" id="phone" pattern="[987][0-9]{9}"
+                                                value="{{ auth()->user()->phone }}" required id="phone" pattern="[987][0-9]{9}"
                                                 placeholder="Mobile No">
                                             @if($errors->has('phone'))
                                             <div class="error">{{ $errors->first('phone') }}</div>
@@ -141,68 +146,33 @@
                                                 value="{{ auth()->user()->password }}" placeholder="Password">
 
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
-                                            <label>Company Website</label>
-                                            <input type="text" name="company_website" class="form-control"
-                                                value="{{ auth()->user()->company_website }}" placeholder="Email">
-                                            @if($errors->has('company_website'))
-                                            <div class="error">{{ $errors->first('company_website') }}</div>
+                                            <label>Alternate Contact Name</label>
+                                            <input type="text" name="alternate_contact_name" class="form-control"
+                                                value="{{ auth()->user()->alternate_contact_name }}" required placeholder="Alternate Contact name">
+                                            @if($errors->has('alternate_contact_name'))
+                                            <div class="error">{{ $errors->first('alternate_contact_name') }}</div>
                                             @endif
                                         </div>
                                     </div>
+                                    
                                     <div class="col-lg-6 mb-3">
                                         <div class="common_input mb_15">
-                                            <label>Country</label>
-                                            <select class="form-select js-example-placeholder-multiple col-sm-12"
-                                                id="multiselect_country" name="country_id[]" required
-                                                multiple="multiple">
-                                                <option value="">Select Country</option>
-                                                @foreach($data['countries'] as $country)
-                                                <option value="{{ $country->id }}"
-                                                    {{ auth()->user()->country_id == $country->id ? 'selected' : '' }}>
-                                                    {{ $country->country_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @if($errors->has('country'))
-                                            <div class="error">{{ $errors->first('country') }}</div>
+                                            <label>Alternate Contact Number</label>
+                                            <input type="text" name="alternate_phone_number" required class="form-control"
+                                                value="{{ auth()->user()->alternate_phone_number }}" placeholder="Alternate Contact Number">
+                                            @if($errors->has('alternate_phone_number'))
+                                            <div class="error">{{ $errors->first('alternate_phone_number') }}</div>
                                             @endif
                                         </div>
                                     </div>
-                                    <!-- <div class="col-lg-6 mb-3">
-                                        <div class="common_input mb_15">
-                                            <label>Key Services:</label>
-                                            <textarea name="key_services"
-                                                class="form-control">{{ auth()->user()->key_services }}</textarea>
-                                            <small>Preference:- Drugs, Anabolics, Menabolics.</small>
-                                            @if($errors->has('key_services'))
-                                            <div class="error">{{ $errors->first('key_services') }}</div>
-                                            @endif
-                                        </div>
-                                    </div> -->
-                                    <!-- <div class="col-lg-6 mb-3">
-                                        <div class="common_input mb_15">
-                                            <label>Certifications : </label>
-                                            <textarea name="certifications"
-                                                class="form-control">{{ auth()->user()->certifications }}</textarea>
-                                            <small>Preference:- ASMO, Robotics.</small>
-                                            {{$errors->first('certifications')}} 
-                                            <select id="certifications"
-                                                class="form-select js-example-placeholder-multiple col-sm-12"
-                                                name="certifications[]" multiple required autocomplete="Certifications"
-                                                autofocus placeholder="Certifications">
-                                                <option value="ISO 9001" {{ auth()->user()->certifications == 'ISO 9001' ? 'selected' : ''}}>ISO 9001</option>
-                                                <option value="GMP" {{ auth()->user()->certifications == 'GMP' ? 'selected' : ''}}>GMP</option>
-                                                <option value="CE" {{ auth()->user()->certifications == 'CE' ? 'selected' : ''}}>CE</option>
-                                                <option value="ISO 13485" {{ auth()->user()->certifications == 'ISO 13485' ? 'selected' : ''}}>ISO 13485</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
+
                                     <div class="col-12 mb-3">
                                         <div class="common_input mb_15">
                                             <label>Company Profile</label>
-                                            <textarea id="summernote" class="form-control"
+                                            <textarea id="summernote" required class="form-control"
                                                 name="">{{ auth()->user()->company_profile }}</textarea>
                                         </div>
                                     </div>
@@ -237,7 +207,7 @@
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
-
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#summernote').summernote();
@@ -297,6 +267,25 @@ $('#banner-input').change(function() {
 
 $(document).on('keypress', '#phone', function(key) {
     if (key.charCode < 48 || key.charCode > 57) return false;
+});
+
+$(document).ready(function() {
+    $("#myForm").validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            phone: {
+                required: true,
+            },
+            company_name: {
+                required: true,
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 });
 </script>
 @endsection
