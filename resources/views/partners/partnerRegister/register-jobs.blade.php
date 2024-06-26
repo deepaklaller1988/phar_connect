@@ -124,52 +124,54 @@
             @enderror
         </div>
         <div id="subcategory_div">
-            <div class="col-md-6">
-                <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span
-                        class="text-danger d-none" id="cat_error">Please Select categories</span></label>
-                @foreach($data['subcategories'] as $key=> $subcategory)
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                        id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]"
-                        value="{{ $subcategory['id'] }}">
-                    <label class="form-check-label"
-                        for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
-                    <div id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
-                        @if(!empty($data[$key]['childcategory']))
-                        @foreach($data[$key]['childcategory'] as $skey => $childcategory)
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                                id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
-                                value="{{ $childcategory['id'] }}">
-                            <label class="form-check-label"
-                                for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
-                            <div id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
-                                @if(!empty($data[$key][$skey]['grandchildcategory']))
-                                @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
-                                <div class="form-check">
-                                    <input type="checkbox"
-                                        class="form-check-input @error('category_ids') is-invalid @enderror"
-                                        id="subcategory_{{ $grandchildcategory['id'] }}" name="category_ids[]"
-                                        value="{{ $grandchildcategory['id'] }}">
-                                    <label class="form-check-label"
-                                        for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
-                                </div>
-                                @endforeach
-                                @endif
+        <div class="col-md-6">
+            <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span
+                    class="text-danger d-none" id="cat_error">Please Select categories</span></label>
+            @foreach($data['subcategories'] as $key=> $subcategory)
+            <div class="form-check">
+                <section>
+                <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
+                    id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]" value="{{ $subcategory['id'] }}">
+                <label class="form-check-label"
+                    for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
+                </section>
+                <div class="sub-category" id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
+                    @if(!empty($data[$key]['childcategory']))
+                    @foreach($data[$key]['childcategory'] as $skey => $childcategory)
+                    <div class="form-check">
+                       <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
+                            id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
+                            value="{{ $childcategory['id'] }}">
+                        <label class="form-check-label"
+                            for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
+                </section>
+                        <div class="subsub-category" id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
+                            @if(!empty($data[$key][$skey]['grandchildcategory']))
+                            @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
+                            <div class="form-check">
+                                <input type="checkbox"
+                                    class="form-check-input @error('category_ids') is-invalid @enderror"
+                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_ids[]"
+                                    value="{{ $grandchildcategory['id'] }}">
+                                <label class="form-check-label"
+                                    for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
                             </div>
+                            @endforeach
+                            @endif
                         </div>
-                        @endforeach
-                        @endif
                     </div>
+                    @endforeach
+                    @endif
                 </div>
-                @endforeach
-                @error('category_ids')
-                <span class="invalid-feedback" role="alert">
-                    <strong class="text-danger">{{ $message }}</strong>
-                </span>
-                @enderror
             </div>
+            @endforeach
+            @error('category_ids')
+            <span class="invalid-feedback" role="alert">
+                <strong class="text-danger">{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
+    </div>
     </div>
     <div class="row mb-0  width100Set">
         <div class="col-md-8 offset-md-4">

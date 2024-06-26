@@ -89,20 +89,23 @@
                     class="text-danger d-none" id="cat_error">Please Select categories</span></label>
             @foreach($data['subcategories'] as $key=> $subcategory)
             <div class="form-check">
+                <section>
                 <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
                     id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]" value="{{ $subcategory['id'] }}">
                 <label class="form-check-label"
                     for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
-                <div id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
+                </section>
+                <div class="sub-category" id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
                     @if(!empty($data[$key]['childcategory']))
                     @foreach($data[$key]['childcategory'] as $skey => $childcategory)
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
+                       <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
                             id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
                             value="{{ $childcategory['id'] }}">
                         <label class="form-check-label"
                             for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
-                        <div id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
+                </section>
+                        <div class="subsub-category" id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
                             @if(!empty($data[$key][$skey]['grandchildcategory']))
                             @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
                             <div class="form-check">

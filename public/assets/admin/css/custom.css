@@ -144,13 +144,16 @@ div#image-preview-container span b {
 
 select.form-control.selectFixCZ {
     border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+    appearance: revert;
 }
-.form-control, select.form-control, select.form-control:focus, select.form-control:hover {
+/* .form-control, select.form-control, select.form-control:focus, select.form-control:hover {
     font-size: 14px;
     border-radius: 2px;
     border: 1px solid #ccc !important;
     appearance: revert;
-}
+} */
 .uploadFileCZ {
     width: 100%;
     cursor: pointer;
@@ -485,3 +488,81 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after {
     opacity: 0 !important;
 }
 /* Custome css style */
+
+.flexSet .select2-container--default .select2-selection--multiple {
+    padding: 0;
+    border-color: #ccc;
+}
+
+.flexSet .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #ccc;
+}
+
+.flexSet .form-control {
+    border-radius: 4px;
+}
+
+.flexSet .form-control:focus {
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.flexSet .col-md-6 {
+    margin-bottom: 6px;
+}
+
+.flexSet .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background: #263544;
+    border: none;
+}
+#subcategory_div .col-md-6 {
+    width: 100%;
+}
+
+#subcategory_div .col-md-6>label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.sub-category {
+    border-left: 1px solid green;
+    margin-left: -15px;
+    padding-left: 10px;
+}
+
+.sub-category label {
+    color: green;
+}
+
+.form-check input[type="checkbox"]:checked + label {
+    font-weight: bold;
+}
+
+.form-check input[type="checkbox"]:checked {
+    background-color: green;
+    border: none;
+}
+
+.subsub-category .form-check input[type="checkbox"]:checked {
+    background-color: #5684b3;
+}
+
+.subsub-category .form-check input[type="checkbox"] + label {
+    color: #5684b3;
+}
+
+.subsub-category {
+    margin-left: -15px;
+    padding-left: 15px;
+}
+
+.subsub-category .form-check {
+    position: relative;
+}
+
+.subsub-category .form-check:before {
+    content: '↳';
+    position: absolute;
+    left: -19px;
+    color: #5684b3;
+}
