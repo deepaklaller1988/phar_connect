@@ -199,7 +199,6 @@ $(document).ready(function() {
         rules: {
             name: {
                 required: true,
-                minlength: 3
             },
             email: {
                 required: true,
@@ -208,6 +207,14 @@ $(document).ready(function() {
             password: {
                 required: true,
                 minlength: 8
+            },
+            phone: {
+                required: true,
+                number: true
+            },
+            alternate_phone_number: {
+                required: true,
+                number: true
             }
         },
         messages: {
@@ -221,6 +228,14 @@ $(document).ready(function() {
             password: {
                 required: "Please provide a password",
                 minlength: "Your password must be at least 8 characters long"
+            },
+            phone: {
+                required: "Please enter your phone number",
+                number: "Please enter a valid phone number"
+            },
+            alternate_phone_number: {
+                required: "Please enter your alternate phone number",
+                number: "Please enter a valid phone number"
             }
         },
         submitHandler: function(form) {
