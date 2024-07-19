@@ -152,15 +152,15 @@ label.error {
                                     </div>
                                     <div class="row mb-3">
                                         <label for="phone"
-                                            class="col-md-4 col-form-label text-md-end">{{ __('Alternate Phone Number') }}<span
+                                            class="col-md-4 col-form-label text-md-end">{{ __('Alternate Email Address') }}<span
                                                 class="text-danger">*</span></label>
 
                                         <div class="col-md-6">
-                                            <input type="text" id="alternate_phone_number" class="form-control "
-                                                name="alternate_phone_number"
-                                                value="{{ old('alternate_phone_number') }}" pattern="[789][0-9]{9}"
+                                            <input type="text" id="alternate_email_address" class="form-control "
+                                                name="alternate_email_address"
+                                                value="{{ old('alternate_email_address') }}" pattern=""
                                                 required>
-                                            @error('alternate_phone_number')
+                                            @error('alternate_email_address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
                                             </span>

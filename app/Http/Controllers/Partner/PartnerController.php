@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Position;
+use App\Models\Plan;
 
 class PartnerController extends Controller
 {
@@ -153,6 +154,7 @@ class PartnerController extends Controller
         }
         $data['countries'] = Country::all();
         $data['parent_id'] = $request->category_id;
+        $data['plans']  = Plan::where('id',auth()->user()->plan_id)->first();
         if($request->category_id == 1) {
             $html = View::make('partners.partnerRegister.register-business-offering')->with('data',$data)->render();
         } elseif($request->category_id == 2) {

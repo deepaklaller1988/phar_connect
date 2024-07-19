@@ -48,7 +48,7 @@
                 value="{{ old('twiter_profile') }}" autocomplete="twiter-profile" id="twiter-profile" autofocus>
         </div>
         <div class="col-md-6">
-            <label for="country">{{ __('Country') }}<span class="text-danger">*</span></label>
+            <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
             <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_country"
                 name="country_id[]" required multiple="multiple">
                 @foreach ($data['countries'] as $country)
@@ -180,4 +180,34 @@ $(document).on('click', '#btn-sb', function() {
         return false;
     }
 });
+
+
+</script>
+<!-- <script>
+    var plan_country = "{{ $data['plans']['number_of_country']}}";
+    $(document).on('change','#subcategory_div',function(){
+        if($('#subcategory_div option:selected').length >= plan_country)
+        {
+
+            $('#subcategory_div option').attr('disabled','disabled');
+        }else{
+            $('#subcategory_div option').removeAttr('disabled');
+        }
+    });
+</script> -->
+
+<script>
+    var plan_country = "{{ $data['plans']['number_of_country'] }}";
+    $(document).on('change', '#multiselect_country', function() {
+        var selectedCount = $('#multiselect_country option:selected').length;
+        
+        if (selectedCount >= plan_country) {
+            $('#messages').text("You have selected "+plan_country+" Country According to Plan.");
+        } 
+        if (selectedCount >= plan_country) {
+            $('#multiselect_country option').not(':selected').attr('disabled', 'disabled');
+        } else {
+            $('#multiselect_country option').removeAttr('disabled');
+        }
+    });
 </script>

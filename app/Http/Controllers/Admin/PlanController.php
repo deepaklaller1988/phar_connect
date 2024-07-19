@@ -32,6 +32,7 @@ class PlanController extends Controller
             'amount' => 'required|numeric',
             'status' => 'required',
             'days' => 'required|numeric',
+            'number_of_country' => 'required'
         ]);
         $plan = new Plan(); 
         $plan->title = $request->title;   
@@ -39,6 +40,7 @@ class PlanController extends Controller
         $plan->amount= $request->amount; 
         $plan->status = $request->status;
         $plan->days = $request->days;
+        $plan->number_of_country = $request->number_of_country;
         if($plan->save()){
             return redirect()->route('admin.plans')->with('success','Plan Added Successfully');
         }
@@ -55,6 +57,7 @@ class PlanController extends Controller
             'amount' => 'required|numeric',
             'status' => 'required',
             'days' => 'required|numeric',
+            'number_of_country' => 'required'
         ]);
         $plan = Plan::findOrFail($id);
         $plan->title = $request->title;   
@@ -62,6 +65,7 @@ class PlanController extends Controller
         $plan->amount= $request->amount; 
         $plan->status = $request->status;
         $plan->days = $request->days;
+        $plan->number_of_country = $request->number_of_country;
         if($plan->save()){
             return redirect()->route('admin.plans')->with('success','Plan Updated Successfully');
         }

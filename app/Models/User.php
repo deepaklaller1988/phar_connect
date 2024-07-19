@@ -44,7 +44,7 @@ class User extends Authenticatable
         'agenda',
         'logo',
         'alternate_contact_name',
-        'alternate_phone_number',
+        'alternate_email_address',
         
     ];
   

@@ -64,7 +64,7 @@ class RegisterController extends Controller
                 'phone' => ['required','numeric','regex:/^([0-9\s\-\+\(\)]*)$/'],
                 'company_name' => ['required', 'string', 'max:255'],
                 'alternate_contact_name' => ['required', 'string', 'max:255'],
-                'alternate_phone_number' => ['required','numeric','regex:/^([0-9\s\-\+\(\)]*)$/'],
+                'alternate_email_address' => ['required', 'string', 'email', 'max:255'],
             ];
             return Validator::make($data, $validationRules);
 
@@ -86,6 +86,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         if($data['type'] == 2){
             $user = User::create([
                 'name' => $data['name'].' '.$data['last_name'],
@@ -95,7 +96,7 @@ class RegisterController extends Controller
                 'type' => $data['type'],
                 'phone' => $data['phone'],
                 'alternate_contact_name' => $data['alternate_contact_name'],
-                'alternate_phone_number' => $data['alternate_phone_number']
+                'alternate_email_address' => $data['alternate_email_address']
             ]);
            $note =  Notification::create([
                 'user_id' =>  $user->id,
@@ -105,7 +106,7 @@ class RegisterController extends Controller
                 'read' => 0,
                 'notification_for' => $user->id
             ]);
-            Mail::to($user->email)->send(new UserRegisterMail($data));
+            // Mail::to($user->email)->send(new UserRegisterMail($data));
             session()->flash('reg_success', 'Registration successful!');
             return $user;
         }else{
@@ -124,11 +125,11 @@ class RegisterController extends Controller
         // Get the authenticated user
         $user = Auth::user();
         if ($user->type == '1') {
-            echo "jkjkjk";die;
+           
             return '/admin/dashboard';
-        } elseif ($user->type == '2') {
-            echo "787878";die;
-            return '/partner/dashboard';
+        } elseif ($user->type == 'partner') {
+        
+            return '/pricings';
         }else{
             return '/home';
         }
