@@ -65,7 +65,6 @@
             </span>
             @enderror
         </div>
-        <input type="hidden" name="category_ids[]" id="parent_id" value="{{ $data['parent_id']}}">
         <div class="col-md-6">
             <label for="company_profile">{{ __('Company Profile') }}<span class="text-danger">*</span></label>
             <textarea class="form-control category_ids" required name="company_profile" maxlength="300"
@@ -91,7 +90,7 @@
             <div class="form-check">
                 <section>
                 <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                    id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]" value="{{ $subcategory['id'] }}">
+                    id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]" value="{{ $subcategory['id'] }}">
                 <label class="form-check-label"
                     for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
                 </section>
@@ -100,7 +99,7 @@
                     @foreach($data[$key]['childcategory'] as $skey => $childcategory)
                     <div class="form-check">
                        <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                            id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
+                            id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
                             value="{{ $childcategory['id'] }}">
                         <label class="form-check-label"
                             for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
@@ -111,7 +110,7 @@
                             <div class="form-check">
                                 <input type="checkbox"
                                     class="form-check-input @error('category_ids') is-invalid @enderror"
-                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_ids[]"
+                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_idss[]"
                                     value="{{ $grandchildcategory['id'] }}">
                                 <label class="form-check-label"
                                     for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
@@ -125,7 +124,7 @@
                 </div>
             </div>
             @endforeach
-            @error('category_ids')
+            @error('category_idss')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
@@ -156,7 +155,7 @@ $('.form-check-input ').change(function() {
         $('#sub-cat-step-' + checkboxValue).show();
     }else{
         $('#sub-cat-step-' + checkboxValue).css('display', 'none');
-        $('.subsub-category').css('display', 'none');
+        $('.subsub-category').css('display');
         $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
     }
 });
@@ -173,7 +172,7 @@ $(document).on('click', '#btn-sb', function() {
         $('#country_error').removeClass('d-none');
         return false;
     }
-    if ($('input[name="category_ids[]"]').is(':checked')) {
+    if ($('input[name="category_idss[]"]').is(':checked')) {
         return true;
     } else {
         $('#cat_error').removeClass('d-none');
@@ -211,3 +210,53 @@ $(document).on('click', '#btn-sb', function() {
         }
     });
 </script>
+
+<script>
+    var plan_category = "{{ $data['plans']['number_of_category'] }}";
+
+    $(document).on('change', '#subcategory_div input:checkbox', function() {
+        // Count checked boxes that are not disabled
+        var checkedBoxes = $('#subcategory_div input:checkbox:checked:not(:disabled)').length;
+
+        // Get current checkbox and its parent sections
+        var $currentCheckbox = $(this);
+        var $parentSection = $currentCheckbox.closest('.form-check').closest('.category, .sub-category, .subsub-category');
+        var $ancestorSections = $parentSection.prevAll('section').find('input:checkbox');
+
+        // Disable parent category if a subcategory is selected
+        if ($currentCheckbox.is(':checked')) {
+            $ancestorSections.prop('disabled', true);
+        } else {
+            // Enable parent category if no other subcategories are selected
+            var shouldEnable = true;
+            $parentSection.find('input:checkbox').each(function() {
+                if ($(this).is(':checked')) {
+                    shouldEnable = false;
+                }
+            });
+            if (shouldEnable) {
+                $ancestorSections.prop('disabled', false);
+            }
+        }
+      
+
+        // Disable further selection if plan limit is reached
+        if (checkedBoxes >= plan_category) {
+            $('#subcategory_div input:checkbox:not(:checked)').prop('disabled', true);
+        } else {
+            $('#subcategory_div input:checkbox:not(:checked)').prop('disabled', false);
+
+            // Ensure parent categories remain disabled if their subcategories are checked
+            $('#subcategory_div .category input:checkbox:checked').each(function() {
+                $(this).closest('.category').prev('section').find('input:checkbox').prop('disabled', true);
+            });
+            $('#subcategory_div .sub-category input:checkbox:checked').each(function() {
+                $(this).closest('.sub-category').prev('section').find('input:checkbox').prop('disabled', true);
+            });
+            $('#subcategory_div .subsub-category input:checkbox:checked').each(function() {
+                $(this).closest('.subsub-category').prev('section').find('input:checkbox').prop('disabled', true);
+            });
+        }
+    });
+</script>
+

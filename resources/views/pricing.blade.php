@@ -23,6 +23,7 @@
 
                 <div class="price"><b>$</b>{{ $plan->amount}}<span>/ month</span></div>
                 <div class=""><b>Number of Country:</b>{{$plan->number_of_country}}</div>
+                <div class=""><b>Number of Category:</b>{{$plan->number_of_category}}</div>
 
                 <div class="featureList">
                 {!! $plan->description !!}

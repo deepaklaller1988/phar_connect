@@ -106,7 +106,7 @@ class RegisterController extends Controller
                 'read' => 0,
                 'notification_for' => $user->id
             ]);
-            // Mail::to($user->email)->send(new UserRegisterMail($data));
+            Mail::to($user->email)->send(new UserRegisterMail($data));
             session()->flash('reg_success', 'Registration successful!');
             return $user;
         }else{

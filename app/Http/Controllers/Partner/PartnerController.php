@@ -94,20 +94,24 @@ class PartnerController extends Controller
 
     public function complete_profile(Request $request,$id)
     {
-        $this->validate($request, [
-            'certifications' => 'required',
-            'category_ids' => 'required',
-            'company_profile'=>'required',
-            'company_website'=>'required'
-        ]);
+        // dd($request->all());
+        // $this->validate($request, [
+        //     'certifications' => 'required',
+        //     'category_idss' => 'required',
+        //     'company_profile'=>'required',
+        //     'company_website'=>'required',
+
+        // ]);
         $user = User::findOrFail($id);
         $user->certifications = $request->certifications;
-        $user->category_ids = implode(',', $request->category_ids);
+         // $user->category_ids = implode(',', $request->category_ids);
+        $user->category_ids = is_array($request->category_idss) ? implode(',', $request->category_idss) : '';
         $user->company_profile = $request->company_profile;
         $user->company_website = $request->company_website;
         $user->linkedin_profile = $request->linkedin_profile;
         $user->twiter_profile = $request->twiter_profile;
-        $user->country_id = implode(',', $request->country_id);
+        // $user->country_id = implode(',', $request->country_id);
+        $user->country_id = is_array($request->country_id) ? implode(',', $request->country_id) : '';
         $user->representatives = $request->representatives;
         $user->location = $request->location;
         $user->agenda = $request->agenda;
@@ -125,8 +129,7 @@ class PartnerController extends Controller
             return redirect()->route('partner.dashboard')->with('error', 'Error while updating information');
         }
     }
-
-    
+   
     public function categories()
     {
         $categories = Category::where('parent_id',NULL)->where('id','!=',4)->orderBy('title')->get();
@@ -134,6 +137,7 @@ class PartnerController extends Controller
     }
     public function selected_categories(Request $request)
     {
+      
        $categories = $request['data'];
        $category = implode(',',$categories);
        $user = User::where('id',auth()->user()->id)->first();
@@ -144,7 +148,7 @@ class PartnerController extends Controller
     
     public function registerAddBlade(Request $request)
     {
-
+    
         $data['subcategories'] = Category::where('parent_id',$request->category_id)->orderBy('title')->get();
         foreach($data['subcategories'] as $key => $value) {
             $data[$key]['childcategory'] = Category::where('parent_id',$value->id)->orderBy('title')->get();

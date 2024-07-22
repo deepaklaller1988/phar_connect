@@ -101,7 +101,7 @@
             </span>
             @enderror
         </div>
-        <input type="hidden" name="category_ids[]" id="parent_id" value="{{ $data['parent_id']}}">
+        <input type="hidden" name="category_idss[]" id="parent_id" value="{{ $data['parent_id']}}">
         <div class="col-md-6">
             <label for="company_profile" required>{{ __('Company Profile') }}<span class="text-danger">*</span></label>
             <textarea class="form-control" name="company_profile" maxlength="300"
@@ -131,7 +131,7 @@
             <div class="form-check">
                 <section>
                 <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                    id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]" value="{{ $subcategory['id'] }}">
+                    id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]" value="{{ $subcategory['id'] }}">
                 <label class="form-check-label"
                     for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
                 </section>
@@ -140,7 +140,7 @@
                     @foreach($data[$key]['childcategory'] as $skey => $childcategory)
                     <div class="form-check">
                        <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                            id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
+                            id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
                             value="{{ $childcategory['id'] }}">
                         <label class="form-check-label"
                             for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
@@ -151,7 +151,7 @@
                             <div class="form-check">
                                 <input type="checkbox"
                                     class="form-check-input @error('category_ids') is-invalid @enderror"
-                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_ids[]"
+                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_idss[]"
                                     value="{{ $grandchildcategory['id'] }}">
                                 <label class="form-check-label"
                                     for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             @endforeach
-            @error('category_ids')
+            @error('category_idss')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
@@ -200,7 +200,7 @@ $(document).on('click', '#btn-sb', function() {
         return false;
     }
 
-    if ($('input[name="category_ids[]"]').is(':checked')) {
+    if ($('input[name="category_idss[]"]').is(':checked')) {
         return true;
     } else {
         $('#cat_error').removeClass('d-none');

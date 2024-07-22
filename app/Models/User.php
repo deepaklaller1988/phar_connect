@@ -25,7 +25,7 @@ class User extends Authenticatable
         'password',
         'type',
         'phone','company_website','company_profile','location','key_services','certifications','country_id','created_at',
-        'plan_id','plan_status','company_name','category_ids',
+        'plan_id','plan_status','company_name','category_idss',
         'last_name',
         'event_name',
         'start_date',
