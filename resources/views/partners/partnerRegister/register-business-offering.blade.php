@@ -183,7 +183,7 @@ $(document).on('click', '#btn-sb', function() {
 
 </script>
 <!-- <script>
-    var plan_country = "{{ $data['plans']['number_of_country']}}";
+    var plan_country = "{{ $data['plans']['number_of_category']}}";
     $(document).on('change','#subcategory_div',function(){
         if($('#subcategory_div option:selected').length >= plan_country)
         {
@@ -195,7 +195,7 @@ $(document).on('click', '#btn-sb', function() {
     });
 </script> -->
 
-<script>
+<!-- <script>
     var plan_country = "{{ $data['plans']['number_of_country'] }}";
     $(document).on('change', '#multiselect_country', function() {
         var selectedCount = $('#multiselect_country option:selected').length;
@@ -209,35 +209,57 @@ $(document).on('click', '#btn-sb', function() {
             $('#multiselect_country option').removeAttr('disabled');
         }
     });
-</script>
+</script> -->
 
-<script>
+<!-- <script>
     var plan_category = "{{ $data['plans']['number_of_category'] }}";
 
     $(document).on('change', '#subcategory_div input:checkbox', function() {
         // Count checked boxes that are not disabled
-        var checkedBoxes = $('#subcategory_div input:checkbox:checked:not(:disabled)').length;
+        // var checkedBoxes = $('#subcategory_div input:checkbox:checked:not(:disabled)').length;
 
-        // Get current checkbox and its parent sections
-        var $currentCheckbox = $(this);
-        var $parentSection = $currentCheckbox.closest('.form-check').closest('.category, .sub-category, .subsub-category');
-        var $ancestorSections = $parentSection.prevAll('section').find('input:checkbox');
+        // // Get current checkbox and its parent sections
+        // var currentCheckbox = $(this);
+        // var parentSection = currentCheckbox.closest('.form-check').closest('.category, .sub-category, .subsub-category');
+        // var ancestorSections = parentSection.prevAll('section').find('input:checkbox');
 
-        // Disable parent category if a subcategory is selected
-        if ($currentCheckbox.is(':checked')) {
-            $ancestorSections.prop('disabled', true);
-        } else {
-            // Enable parent category if no other subcategories are selected
-            var shouldEnable = true;
-            $parentSection.find('input:checkbox').each(function() {
-                if ($(this).is(':checked')) {
-                    shouldEnable = false;
-                }
-            });
-            if (shouldEnable) {
-                $ancestorSections.prop('disabled', false);
+        // // Disable parent category if a subcategory is selected
+        // if (currentCheckbox.is(':checked')) {
+        //     ancestorSections.prop('disabled', true);
+        // } else {
+        //     // Enable parent category if no other subcategories are selected
+        //     var shouldEnable = true;
+        //     parentSection.find('input:checkbox').each(function() {
+        //         if ($(this).is(':checked')) {
+        //             shouldEnable = false;
+        //         }
+        //     });
+        //     if (shouldEnable) {
+        //         ancestorSections.prop('disabled', false);
+        //     }
+        // }
+      
+
+          var nchild = '#sub-cat-step-' + $(this).val(); 
+          var checkboxes = $('#subcategory_ input[type="checkbox"]');
+          console.log(checkboxes);
+            if($(nchild).length) {
+                checkboxes.attr('disabled', 'disabled');
+            } else {
+                checkboxes.removeAttr('disabled');
             }
-        }
+
+    
+
+            // var nchild = '#sub-cat-step-' + $(this).val(); 
+            // var sections = $(this).attr('id');
+            // var checked = $(nchild).is(':checked'); 
+            // console.log(checked);
+            //         if (checked == false) { 
+            //             $('#subcategory_' + sections + ' input[type="checkbox"]').attr('disabled', true);
+            //         }
+        // console.log(nchild);
+        // console.log(nchild.children().length);
       
 
         // Disable further selection if plan limit is reached
@@ -257,6 +279,47 @@ $(document).on('click', '#btn-sb', function() {
                 $(this).closest('.subsub-category').prev('section').find('input:checkbox').prop('disabled', true);
             });
         }
+
+        // $('#subcategory_div input:checkbox').each(function() {
+        //     if ($(this).is(':disabled')) {
+        //         $(this).prop('checked', false);
+        //     }
+        // });
     });
-</script>
+</script> -->
+
+
+<!-- <script>
+    $(document).ready(function() {
+    $('#subcategory_div input:checkbox').change(function() {
+        var checkboxValue = $(this).val();
+        if (checkboxValue) {
+            var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+            if (childCount !== 0) {
+                $(this).prop('checked', false);
+            }
+            updateCheckboxState();
+        }
+    });
+
+    function updateCheckboxState() {
+        var maxSelections = "{{ $data['plans']['number_of_category'] }}"; 
+        var selectedCount = $('#subcategory_div input:checkbox:checked').length;
+        if (selectedCount >= maxSelections) {
+            $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
+        } else {
+            $('#subcategory_div input:checkbox').prop('disabled', false);
+        }
+    }
+   
+});
+</script> -->
+
+
+
+
+
+
+
+
 

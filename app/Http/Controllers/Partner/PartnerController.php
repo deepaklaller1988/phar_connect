@@ -124,11 +124,12 @@ class PartnerController extends Controller
         $user->education_level = $request->education_level;
         $user->experience_level = $request->experience_level;
         if($user->save()){
-            return redirect()->route('partner.dashboard')->with('success', 'Information Updated Successfully.');
+            return redirect()->route('pricings')->with('success', 'Information Updated Successfully.');
         }else{
-            return redirect()->route('partner.dashboard')->with('error', 'Error while updating information');
+            return redirect()->route('pricings')->with('error', 'Error while updating information');
         }
     }
+    
    
     public function categories()
     {
@@ -177,5 +178,62 @@ class PartnerController extends Controller
         return response()->json(['html' => $html]);
     }
 
+    // public function complete_profile(Request $request, $id)
+    // {
+    //     // Retrieve the authenticated user's plan ID
+    //     $planId = auth()->user()->plan_id;
+    
+    //     // Fetch the user to be updated
+    //     $user = User::findOrFail($id);
+    
+    //     // Update the user's profile with the request data
+    //     $user->certifications = $request->certifications;
+    //     $user->company_profile = $request->company_profile;
+    //     $user->company_website = $request->company_website;
+    //     $user->linkedin_profile = $request->linkedin_profile;
+    //     $user->twiter_profile = $request->twiter_profile;
+    //     $user->representatives = $request->representatives;
+    //     $user->location = $request->location;
+    //     $user->agenda = $request->agenda;
+    //     $user->end_date = $request->end_date;
+    //     $user->start_date = $request->start_date;
+    //     $user->event_name = $request->event_name;
+    //     $user->industry = $request->industry;
+    //     $user->position_type = $request->position_type;
+    //     $user->position_title = $request->position_title;
+    //     $user->education_level = $request->education_level;
+    //     $user->experience_level = $request->experience_level;
+    
+    //     // Process category_ids
+    //     $categoryIds = is_array($request->category_idss) ? implode(',', $request->category_idss) : '';
+    //     $countryId = is_array($request->country_id) ? implode(',', $request->country_id) : '';
+
+    //     $categoryIdsArray = array_filter(explode(',', $categoryIds));
+    //     $countryIdArray = array_filter(explode(',', $countryId));
+    
+     
+    //     // Update category_ids and country_id only if plan_id is valid
+    //     if ($planId) {
+    //         $user->category_ids = $categoryIds;
+    //         $user->country_id = $countryId;
+    
+    //         // Save the user data
+    //         if ($user->save()) {
+    //             return redirect()->route('partner.dashboard')->with('success', 'Information Updated Successfully.');
+    //         } else {
+    //             return redirect()->route('partner.dashboard')->with('error', 'Error while updating information');
+    //         }
+    //     } else {
+    //         if ($user->save()) {
+    //             return redirect()->route('pricings')->with([
+    //                 'success' => 'Information Updated Successfully.',
+
+    //             ]);
+    //         } else {
+    //             return redirect()->route('pricings')->with('error', 'Error while updating information');
+    //         }
+    //     }
+    // }
+    
 
 }

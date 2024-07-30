@@ -129,7 +129,7 @@ class RegisterController extends Controller
             return '/admin/dashboard';
         } elseif ($user->type == 'partner') {
         
-            return '/pricings';
+            return 'partner/complete-profile';
         }else{
             return '/home';
         }

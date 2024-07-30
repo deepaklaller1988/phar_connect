@@ -26,10 +26,27 @@
                 <div class=""><b>Number of Category:</b>{{$plan->number_of_category}}</div>
 
                 <div class="featureList">
-                {!! $plan->description !!}
+                    {!! $plan->description !!}
                 </div>
-
+                <!-- @if($categoryCount == $plan->number_of_category && $countryCount == $plan->number_of_country)
+               <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @elseif($categoryCount > $plan->number_of_category && $countryCount > $plan->number_of_country)
                 <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @else
+                <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
+                 @endif -->
+
+                @php
+                $isEligible = ($categoryCount == $plan->number_of_category && $countryCount == $plan->number_of_country);
+                @endphp
+
+                <button class="button" id="payment" data-id="{{ $plan->id }}" 
+                    @if (!$isEligible) 
+                        disabled 
+                        style="opacity: 0.5; cursor: not-allowed;"
+                    @endif>
+                    Get Started
+                </button>
             </div>
             @endforeach
             <!--free plan ends -->
@@ -38,11 +55,12 @@
     </div>
 </section>
 <script>
-    $(document).ready(function(){
-        $(document).on('click', '#payment', function(){
-            var id = $(this).data('id');
-            window.location.href = "{{ url('paypal/payment/') }}" + "/" + id;
-        })
-    });
+$(document).ready(function() {
+    $(document).on('click', '#payment', function() {
+        var id = $(this).data('id');
+        window.location.href = "{{ url('paypal/payment/') }}" + "/" + id;
+    })
+});
 </script>
+
 @endsection
