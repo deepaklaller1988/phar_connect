@@ -28,29 +28,27 @@
                 <div class="featureList">
                     {!! $plan->description !!}
                 </div>
-                <!-- @if($categoryCount == $plan->number_of_category && $countryCount == $plan->number_of_country)
+                <!-- @if($categoryCount <= $plan->number_of_category && $countryCount == $plan->number_of_country)
                <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
-                @elseif($categoryCount > $plan->number_of_category && $countryCount > $plan->number_of_country)
-                <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
                 @else
                 <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
                  @endif -->
 
-                @php
-                $isEligible = ($categoryCount == $plan->number_of_category && $countryCount == $plan->number_of_country);
-                @endphp
+                @if (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount == $plan->number_of_country))
+                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @elseif (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount >= 2 && $countryCount <= $plan->number_of_country))
+                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @else
+                    <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
+                @endif
 
-                <button class="button" id="payment" data-id="{{ $plan->id }}" 
-                    @if (!$isEligible) 
-                        disabled 
-                        style="opacity: 0.5; cursor: not-allowed;"
-                    @endif>
-                    Get Started
-                </button>
+
+                 <button class="btn btn-default" id="backButton">Back</button>
+
+
             </div>
             @endforeach
             <!--free plan ends -->
-
         </div>
     </div>
 </section>
@@ -62,5 +60,10 @@ $(document).ready(function() {
     })
 });
 </script>
-
+<script>
+        document.getElementById('backButton').addEventListener('click', function() {
+            // Navigate back in the history stack
+            window.history.back();
+        });
+    </script>
 @endsection
