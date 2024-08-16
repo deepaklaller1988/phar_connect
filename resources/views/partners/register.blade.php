@@ -181,13 +181,45 @@ label.error {
                     </div>
                 </div>
             </div>
-            <div class="partnerRightCollumn">
+            <div class="myPrices">
+                <div class="partnerRightCollumn">
                 <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
                 <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future of
                     science to deliver the technologies, medicines, and therapies to improve patient health and safety.
 
                     Contact us to learn how our experienced team can help ensure regulatory and development success
                     throughout the product lifecycle.</p>
+</div>
+<div class="myPricesDeal">
+    <section>
+        <span>GOLD</span>
+        <p><b>30</b> Days Plan</p>
+        <p><b>12</b> Countries Plan</p>
+        <p><b>06</b> Categories</p>
+<h4>5% Discount for annual plans</h4>
+    </section>
+    <section>
+        <span>GOLD</span>
+        <p><b>30</b> Days Plan</p>
+        <p><b>12</b> Countries Plan</p>
+        <p><b>06</b> Categories</p>
+<h4>5% Discount for annual plans</h4>
+    </section>
+    <section>
+        <span>GOLD</span>
+        <p><b>30</b> Days Plan</p>
+        <p><b>12</b> Countries Plan</p>
+        <p><b>06</b> Categories</p>
+<h4>5% Discount for annual plans</h4>
+    </section>
+    <section>
+        <span>GOLD</span>
+        <p><b>30</b> Days Plan</p>
+        <p><b>12</b> Countries Plan</p>
+        <p><b>06</b> Categories</p>
+<h4>5% Discount for annual plans</h4>
+    </section>
+</div>
             </div>
         </div>
     </div>
