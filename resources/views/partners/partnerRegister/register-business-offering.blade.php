@@ -48,7 +48,7 @@
                 value="{{ old('twiter_profile') }}" autocomplete="twiter-profile" id="twiter-profile" autofocus>
         </div>
         <div class="col-md-6">
-            <label for="country">{{ __('Country') }}<span class="text-danger">*</span></label>
+            <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
             <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_country"
                 name="country_id[]" required multiple="multiple">
                 @foreach ($data['countries'] as $country)
@@ -65,7 +65,6 @@
             </span>
             @enderror
         </div>
-        <input type="hidden" name="category_ids[]" id="parent_id" value="{{ $data['parent_id']}}">
         <div class="col-md-6">
             <label for="company_profile">{{ __('Company Profile') }}<span class="text-danger">*</span></label>
             <textarea class="form-control category_ids" required name="company_profile" maxlength="300"
@@ -91,7 +90,7 @@
             <div class="form-check">
                 <section>
                 <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                    id="subcategory_{{ $subcategory['id'] }}" name="category_ids[]" value="{{ $subcategory['id'] }}">
+                    id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]" value="{{ $subcategory['id'] }}">
                 <label class="form-check-label"
                     for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
                 </section>
@@ -100,7 +99,7 @@
                     @foreach($data[$key]['childcategory'] as $skey => $childcategory)
                     <div class="form-check">
                        <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                            id="subcategory_{{ $childcategory['id'] }}" name="category_ids[]"
+                            id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
                             value="{{ $childcategory['id'] }}">
                         <label class="form-check-label"
                             for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
@@ -111,7 +110,7 @@
                             <div class="form-check">
                                 <input type="checkbox"
                                     class="form-check-input @error('category_ids') is-invalid @enderror"
-                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_ids[]"
+                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_idss[]"
                                     value="{{ $grandchildcategory['id'] }}">
                                 <label class="form-check-label"
                                     for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
@@ -125,7 +124,7 @@
                 </div>
             </div>
             @endforeach
-            @error('category_ids')
+            @error('category_idss')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
@@ -155,7 +154,8 @@ $('.form-check-input ').change(function() {
     if ($(this).is(':checked')) {
         $('#sub-cat-step-' + checkboxValue).show();
     }else{
-        $('#sub-cat-step-' + checkboxValue).hide();
+        $('#sub-cat-step-' + checkboxValue).css('display', 'none');
+        $('.subsub-category').css('display');
         $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
     }
 });
@@ -172,11 +172,66 @@ $(document).on('click', '#btn-sb', function() {
         $('#country_error').removeClass('d-none');
         return false;
     }
-    if ($('input[name="category_ids[]"]').is(':checked')) {
+    if ($('input[name="category_idss[]"]').is(':checked')) {
         return true;
     } else {
         $('#cat_error').removeClass('d-none');
         return false;
     }
 });
+
+
 </script>
+<!-- <script>
+    $(document).ready(function() {
+    $('#subcategory_div input:checkbox').change(function() {
+        var checkboxValue = $(this).val();
+        if (checkboxValue) {
+            var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+            if (childCount !== 0) {
+                $(this).prop('checked', false);
+            }
+            updateCheckboxState();
+        }
+    });
+
+    function updateCheckboxState() {
+        var maxSelections = 1000; 
+        var selectedCount = $('#subcategory_div input:checkbox:checked').length;
+        if (selectedCount >= maxSelections) {
+            $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
+        } else {
+            $('#subcategory_div input:checkbox').prop('disabled', false);
+        }
+    }
+   
+});
+</script> -->
+<script>
+    $(document).ready(function() {
+        $('#subcategory_div input:checkbox').change(function() {
+            var checkboxValue = $(this).val();
+            if (checkboxValue) {
+                var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+                if (childCount !== 0) {
+                    $(this).prop('checked', false);
+                }
+                updateCheckboxState();
+            }
+        });
+
+        function updateCheckboxState() {
+            var selectedCount = $('#subcategory_div input:checkbox:checked').length;
+            $('#subcategory_div input:checkbox').prop('disabled', false);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+

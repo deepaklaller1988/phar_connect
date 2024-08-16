@@ -94,6 +94,8 @@
                                                         class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
                                                     <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
                                                     <h6>For  : {{ $plan->days}} days</h6>
+                                                    <h6>Number of Country  : {{ $plan->number_of_country}} </h6>
+                                                    <h6>Number of Category  : {{ $plan->number_of_category}} </h6>
                                                     <p>{!! $plan->description !!}</p>
                                                 </li>
                                             </ul>

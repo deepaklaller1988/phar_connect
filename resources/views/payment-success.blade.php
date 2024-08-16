@@ -12,7 +12,7 @@
             <p> Payment successfull for the plan {{ $plan['title']}} having Transaction id {{ $response['id']}}</p>
             <p> For the amount $ {{ $plan['amount']}}</p>
             <p> Thank you</p>
-            <a href="{{ route('partner.categories') }}">Back</a>
+            <a href="{{ route('partner.dashboard') }}">Back</a>
 </div>
         </div>
     </div>

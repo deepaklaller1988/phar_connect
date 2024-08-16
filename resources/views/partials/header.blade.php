@@ -48,7 +48,7 @@
                     <button onclick="partnerFunction()">{{ auth()->user()->name }}</button>
                     <ul id="partnerOption">
                         @if(auth()->user()->type == "partner")
-                        <li><a href="{{ route('partner.dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ route('pricings') }}">Dashboard</a></li>
                         @else
                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         @endif

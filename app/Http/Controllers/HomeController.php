@@ -196,8 +196,16 @@ class HomeController extends Controller
 
     public function pricing()
     {
+        $categoryId = auth()->user()->category_ids;
+        $categoryIdsArray = explode(',', $categoryId);
+        $categoryCount = count($categoryIdsArray);
+
+        $countryId = auth()->user()->country_id;
+        $countryIdArray = explode(',', $countryId);
+        $countryCount = count($countryIdArray);
+
         $plans = Plan::all();
-        return view('pricing', compact('plans'));
+        return view('pricing', compact('plans','categoryCount','countryCount'));
     }
 
     public function search(Request $request)

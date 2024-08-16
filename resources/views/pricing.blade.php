@@ -22,25 +22,48 @@
                 </div>
 
                 <div class="price"><b>$</b>{{ $plan->amount}}<span>/ month</span></div>
+                <div class=""><b>Number of Country:</b>{{$plan->number_of_country}}</div>
+                <div class=""><b>Number of Category:</b>{{$plan->number_of_category}}</div>
 
                 <div class="featureList">
-                {!! $plan->description !!}
+                    {!! $plan->description !!}
                 </div>
+                <!-- @if($categoryCount <= $plan->number_of_category && $countryCount == $plan->number_of_country)
+               <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @else
+                <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
+                 @endif -->
 
-                <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @if (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount == $plan->number_of_country))
+                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @elseif (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount >= 2 && $countryCount <= $plan->number_of_country))
+                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
+                @else
+                    <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
+                @endif
+
+
+                 <button class="btn btn-default" id="backButton">Back</button>
+
+
             </div>
             @endforeach
             <!--free plan ends -->
-
         </div>
     </div>
 </section>
 <script>
-    $(document).ready(function(){
-        $(document).on('click', '#payment', function(){
-            var id = $(this).data('id');
-            window.location.href = "{{ url('paypal/payment/') }}" + "/" + id;
-        })
-    });
+$(document).ready(function() {
+    $(document).on('click', '#payment', function() {
+        var id = $(this).data('id');
+        window.location.href = "{{ url('paypal/payment/') }}" + "/" + id;
+    })
+});
 </script>
+<script>
+        document.getElementById('backButton').addEventListener('click', function() {
+            // Navigate back in the history stack
+            window.history.back();
+        });
+    </script>
 @endsection

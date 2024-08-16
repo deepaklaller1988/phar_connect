@@ -79,6 +79,28 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Number of Country</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="number_of_country" id="number_of_country" value="{{ old('number_of_country') }}"
+                                                    class="form-control">
+                                                <span class="text-danger" id="number_of_country-error"></span>
+                                                @if($errors->has('number_of_country'))
+                                                <div class="error">{{ $errors->first('number_of_country') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Number of Category</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="number_of_category" id="number_of_category" value="{{ old('number_of_category') }}"
+                                                    class="form-control">
+                                                <span class="text-danger" id="number_of_category-error"></span>
+                                                @if($errors->has('number_of_category'))
+                                                <div class="error">{{ $errors->first('number_of_category') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Status</label>
                                             <div class="col-sm-10">
                                                 <select class="form-select" name="status">
