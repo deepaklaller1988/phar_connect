@@ -3034,7 +3034,7 @@ div#country_search_result {
     padding: 15px;
     position: relative;
     padding-top: 30px;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
     background: white;
     margin-top: 40px;
 }
@@ -3061,19 +3061,22 @@ div#country_search_result {
 }
 
 .myPricesDeal section h4 {
-    background: black;
-    position: absolute;
-    left: 0;
-    bottom: -26px;
-    font-size: 12px;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    width: 88%;
-    margin-left: 6%;
-    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 5px 0 5px 28px;
+    position: relative;
 }
-
+.myPricesDeal section h4:before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid;
+    left: 5px;
+    top: 8px;
+    border-bottom: 2px solid;
+    transform: rotate(45deg);
+}
 .myPricesDeal:before {
     position: absolute;
     content: '';

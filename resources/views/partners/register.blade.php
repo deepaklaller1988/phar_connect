@@ -197,6 +197,11 @@ label.error {
         <p><b>12</b> Countries Plan</p>
         <p><b>06</b> Categories</p>
 <h4>5% Discount for annual plans</h4>
+<h4>5% Discount for annual plans</h4>
+<h4>5% Discount for annual plans</h4>
+<h4>5% Discount for annual plans</h4>
+<h4>5% Discount for annual plans</h4>
+<h4>5% Discount for annual plans</h4>
     </section>
     <section>
         <span>GOLD</span>
