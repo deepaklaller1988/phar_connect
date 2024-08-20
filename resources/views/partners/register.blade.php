@@ -32,7 +32,8 @@ label.error {
                         <!-- <div class="card-header headerBG-register">{{ __('Partner With Us!') }}</div> -->
 
                         <div class="card-body">
-                            <form method="POST" id="myForm" action="{{ route('register') }}" enctype="multipart/form-data">
+                            <form method="POST" id="myForm" action="{{ route('register') }}"
+                                enctype="multipart/form-data">
                                 <div class="flexSet">
                                     @csrf
                                     <div class="row mb-3">
@@ -43,8 +44,9 @@ label.error {
                                         <div class="col-md-6">
                                             <input id="name" type="text"
                                                 class="form-control @error('name') is-invalid @enderror" name="name"
-                                                value="{{ old('name') }}" required autocomplete="name" id="name" autofocus>
-                                           
+                                                value="{{ old('name') }}" required autocomplete="name" id="name"
+                                                autofocus>
+
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -158,8 +160,7 @@ label.error {
                                         <div class="col-md-6">
                                             <input type="text" id="alternate_email_address" class="form-control "
                                                 name="alternate_email_address"
-                                                value="{{ old('alternate_email_address') }}" pattern=""
-                                                required>
+                                                value="{{ old('alternate_email_address') }}" pattern="" required>
                                             @error('alternate_email_address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -183,48 +184,28 @@ label.error {
             </div>
             <div class="myPrices">
                 <div class="partnerRightCollumn">
-                <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
-                <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future of
-                    science to deliver the technologies, medicines, and therapies to improve patient health and safety.
+                    <h5>PharmConnect has the bespoke solutions to your business’s complex challenges.</h5>
+                    <p>We partner with pharmaceutical, biotechnology, and medical device clients to inspire the future
+                        of
+                        science to deliver the technologies, medicines, and therapies to improve patient health and
+                        safety.
 
-                    Contact us to learn how our experienced team can help ensure regulatory and development success
-                    throughout the product lifecycle.</p>
-</div>
-<div class="myPricesDeal">
-    <section>
-        <span>GOLD</span>
-        <p><b>30</b> Days Plan</p>
-        <p><b>12</b> Countries Plan</p>
-        <p><b>06</b> Categories</p>
-<h4>5% Discount for annual plans</h4>
-<h4>5% Discount for annual plans</h4>
-<h4>5% Discount for annual plans</h4>
-<h4>5% Discount for annual plans</h4>
-<h4>5% Discount for annual plans</h4>
-<h4>5% Discount for annual plans</h4>
-    </section>
-    <section>
-        <span>GOLD</span>
-        <p><b>30</b> Days Plan</p>
-        <p><b>12</b> Countries Plan</p>
-        <p><b>06</b> Categories</p>
-<h4>5% Discount for annual plans</h4>
-    </section>
-    <section>
-        <span>GOLD</span>
-        <p><b>30</b> Days Plan</p>
-        <p><b>12</b> Countries Plan</p>
-        <p><b>06</b> Categories</p>
-<h4>5% Discount for annual plans</h4>
-    </section>
-    <section>
-        <span>GOLD</span>
-        <p><b>30</b> Days Plan</p>
-        <p><b>12</b> Countries Plan</p>
-        <p><b>06</b> Categories</p>
-<h4>5% Discount for annual plans</h4>
-    </section>
-</div>
+                        Contact us to learn how our experienced team can help ensure regulatory and development success
+                        throughout the product lifecycle.</p>
+                </div>
+                <div class="myPricesDeal">
+                    @foreach($plans as $plan)
+                    <section>
+                        <span>{{ $plan->title}}</span>
+                        <p><b>{{ $plan->days }}</b> Days Plan</p>
+                        <p><b>{{ $plan->number_of_country }}</b> Countries Plan</p>
+                        <p><b>{{ $plan->number_of_category }}</b> Categories</p>
+                        <h4>{!! $plan->description !!}</h4>
+                    </section>
+                    @endforeach
+                    
+                   
+                </div>
             </div>
         </div>
     </div>

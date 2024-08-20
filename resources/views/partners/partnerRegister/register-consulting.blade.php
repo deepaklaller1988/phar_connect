@@ -182,7 +182,7 @@ $(document).on('click','#btn-sb',function(){
 </script>
 
 <script>
-    var plan_country = "{{ $data['plans']['number_of_country'] }}";
+    var plan_country = "";
     $(document).on('change', '#multiselect_country', function() {
         var selectedCount = $('#multiselect_country option:selected').length;
         
@@ -198,7 +198,7 @@ $(document).on('click','#btn-sb',function(){
 </script>
 
 <script>
-    var plan_category = "{{ $data['plans']['number_of_category'] }}";
+    var plan_category = "";
 
     $(document).on('change', '#subcategory_div input:checkbox', function() {
         // Count checked boxes that are not disabled
