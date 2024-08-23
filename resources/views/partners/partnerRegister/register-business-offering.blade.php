@@ -7,20 +7,15 @@
 
 <hr>
 <div class="card" style="width: 42rem;">
-    <h5 class="card-title">Profile Information</h5>
+    <h5 class="card-title">Partner Information</h5>
     <ul class="list-group">
-        <li class="list-group-item">Certifications: {{$data['partnerInformation']['certifications']}}</li>
-        <li class="list-group-item">Company Website: {{$data['partnerInformation']['company_website']}}</li>
-        <li class="list-group-item">Linkedin Profile: {{$data['partnerInformation']['linkedin_profile']}}</li>
-        <li class="list-group-item">Twiter Profile: {{$data['partnerInformation']['twiter_profile'] }}</li>
-        <li class="list-group-item">
-            Country: {{ $data['partnerInformation']->country->country_name ?? 'Not Available' }}
-        </li>
-        <li class="list-group-item">Company Profile: {{ $data['partnerInformation']['company_profile']}}</li>
-        <li class="list-group-item">Representative(s): {{ $data['partnerInformation']['representatives']}}</li>
-        <li class="list-group-item">Category: {{ $data['partnerInformation']->category->title ?? 'Not Available'}}</li>
+        <li class="list-group-item">Name: {{$data['partnerInformation']['name']}}</li>
+        <li class="list-group-item">Email: {{$data['partnerInformation']['email']}}</li>
+        <li class="list-group-item">Phone: {{$data['partnerInformation']['phone']}}</li>
+        <li class="list-group-item">Company Name: {{$data['partnerInformation']['company_name'] }}</li>
+        <li class="list-group-item">Alternate Contact Name: {{ $data['partnerInformation']['alternate_contact_name']}}</li>
+        <li class="list-group-item">Alternate Email Address: {{ $data['partnerInformation']['alternate_email_address']}}</li>
     </ul>
-
 </div>
 <div class="flexSet">
     <div class="row mb-3">
@@ -190,17 +185,7 @@
 <script type="text/javascript" src="{{ asset('assets/admin/bower_components/multiselect/js/jquery.multi-select.js') }}">
 </script>
 <script type="text/javascript" src="{{ asset('assets/admin/pages/advance-elements/select2-custom.js') }}"></script>
-<script>
-$(document).ready(function() {
-    $('#yourForm').submit(function() {
-        if ($('#select_plan').val() == '') {
-            $('#plan_error').removeClass('d-none');
-            return false;
-        }
-        return true;
-    });
-});
-</script>
+
 
 <script>
 $('.form-check-input ').change(function() {
@@ -226,6 +211,10 @@ $(document).on('click', '#btn-sb', function() {
         $('#country_error').removeClass('d-none');
         return false;
     }
+    if ($('#select_plan').val() == '') {
+            $('#plan_error').removeClass('d-none');
+            return false;
+        }
     if ($('input[name="category_idss[]"]').is(':checked')) {
         return true;
     } else {
