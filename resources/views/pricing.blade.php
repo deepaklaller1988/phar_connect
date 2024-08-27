@@ -34,23 +34,18 @@
                 <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
                  @endif -->
 
-                @if (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount == $plan->number_of_country))
+                @if ($countryCount <= $plan->number_of_country && $categoryCount <= $plan->number_of_category)
                     <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
-                @elseif (($categoryCount >= 1 && $categoryCount <= $plan->number_of_category) && ($countryCount >= 2 && $countryCount <= $plan->number_of_country))
-                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
-                @else
-                    <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
-                @endif
-
-
-                 <button class="btn btn-default" id="backButton">Back</button>
-
+                    <button class="backbutton" id="backButton">Back</button>
+               @endif
 
             </div>
             @endforeach
+            
             <!--free plan ends -->
         </div>
     </div>
+    
 </section>
 <script>
 $(document).ready(function() {
