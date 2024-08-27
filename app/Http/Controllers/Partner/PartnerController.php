@@ -39,11 +39,13 @@ class PartnerController extends Controller
                             ->whereNull('parent_id')
                             ->orderBy('title')
                             ->get();
-
+        
+        $plans = Plan::all();
         // Pass both countries and categories to the view
         $data = [
             'countries' => $countries,
             'categories' => $categories,
+            'plans'     => $plans
         ];
 
         // Return the view 'partners.register' and pass the data variable to it
@@ -103,7 +105,7 @@ class PartnerController extends Controller
 
         // ]);
         $user = User::findOrFail($id);
-        $user->certifications = $request->certifications;
+        $user->certifications = is_array($request->certifications) ? implode(',', $request->certifications) : '';
          // $user->category_ids = implode(',', $request->category_ids);
         $user->category_ids = is_array($request->category_idss) ? implode(',', $request->category_idss) : '';
         $user->company_profile = $request->company_profile;
@@ -157,9 +159,11 @@ class PartnerController extends Controller
                 $data[$key][$k]['grandchildcategory'] = Category::where('parent_id',$v->id)->orderBy('title')->get();
             }
         }
+        $data['planTitle'] = Plan::all();
         $data['countries'] = Country::all();
         $data['parent_id'] = $request->category_id;
         $data['plans']  = Plan::where('id',auth()->user()->plan_id)->first();
+        $data['partnerInformation'] = User::where('id', auth()->user()->id)->first();
         if($request->category_id == 1) {
             $html = View::make('partners.partnerRegister.register-business-offering')->with('data',$data)->render();
         } elseif($request->category_id == 2) {

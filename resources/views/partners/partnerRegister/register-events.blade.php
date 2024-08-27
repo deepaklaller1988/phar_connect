@@ -1,7 +1,42 @@
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<div class="card" style="width: 42rem;">
+    <h5 class="card-title">Partner Information</h5>
+    <ul class="list-group">
+        <li class="list-group-item">Name: {{$data['partnerInformation']['name']}}</li>
+        <li class="list-group-item">Email: {{$data['partnerInformation']['email']}}</li>
+        <li class="list-group-item">Phone: {{$data['partnerInformation']['phone']}}</li>
+        <li class="list-group-item">Company Name: {{$data['partnerInformation']['company_name'] }}</li>
+        <li class="list-group-item">Alternate Contact Name: {{ $data['partnerInformation']['alternate_contact_name']}}</li>
+        <li class="list-group-item">Alternate Email Address: {{ $data['partnerInformation']['alternate_email_address']}}</li>
+    </ul>
+</div>
 <div class="card-body-one">
     <div class="row mb-3">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="common_input mb_15 d-flex align-items-center">
+                    <label class="text-nowrap mr-1">Plans :
+                    </label>
+                    <select id="select_plan" class="form-control selectFixCZ" name="plan_id">
+                        <option value="" disabled selected>Select Plans </option>
+                        @foreach($data['planTitle'] as $plan)
+                        <option value="{{ $plan->id }}" data-category-limit="{{ $plan->number_of_category }}">
+                            {{ $plan->title }}</option>
+                        @endforeach
+                    </select>
+                    <span class="d-none" id="plan_error" role="alert">
+                        <strong class="text-danger">Please Select Plan</strong>
+                    </span>
+                    @error('plan_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <label for="event-name">{{ __('Event Name') }}<span class="text-danger">*</span></label>
             <input id="event-name" type="text" class="form-control @error('event_name') is-invalid @enderror"
@@ -84,56 +119,59 @@
             </span>
             @enderror
         </div>
-        <input type="hidden" name="category_idss[]" id="parent_id" value="{{ $data['parent_id']}}">
+        <input type="hidden" name="category_ids[]" id="parent_id" value="{{ $data['parent_id']}}">
         <div id="subcategory_div">
-        <div class="col-md-6">
-            <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span
-                    class="text-danger d-none" id="cat_error">Please Select categories</span></label>
-            @foreach($data['subcategories'] as $key=> $subcategory)
-            <div class="form-check">
-                <section>
-                <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                    id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]" value="{{ $subcategory['id'] }}">
-                <label class="form-check-label"
-                    for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
-                </section>
-                <div class="sub-category" id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
-                    @if(!empty($data[$key]['childcategory']))
-                    @foreach($data[$key]['childcategory'] as $skey => $childcategory)
-                    <div class="form-check">
-                       <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                            id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
-                            value="{{ $childcategory['id'] }}">
+            <div class="col-md-6">
+                <label for="sub_category">{{ __('Category') }}<span class="text-danger">*</span>&nbsp; <span
+                        class="text-danger d-none" id="cat_error">Please Select categories</span></label>
+                @foreach($data['subcategories'] as $key=> $subcategory)
+                <div class="form-check">
+                    <section>
+                        <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
+                            id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]"
+                            value="{{ $subcategory['id'] }}">
                         <label class="form-check-label"
-                            for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
-                </section>
-                        <div class="subsub-category" id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
-                            @if(!empty($data[$key][$skey]['grandchildcategory']))
-                            @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
-                            <div class="form-check">
-                                <input type="checkbox"
+                            for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
+                    </section>
+                    <div class="sub-category" id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
+                        @if(!empty($data[$key]['childcategory']))
+                        @foreach($data[$key]['childcategory'] as $skey => $childcategory)
+                        <div class="form-check">
+                            <section> <input type="checkbox"
                                     class="form-check-input @error('category_ids') is-invalid @enderror"
-                                    id="subcategory_{{ $grandchildcategory['id'] }}" name="category_idss[]"
-                                    value="{{ $grandchildcategory['id'] }}">
+                                    id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
+                                    value="{{ $childcategory['id'] }}">
                                 <label class="form-check-label"
-                                    for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
+                                    for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
+                            </section>
+                            <div class="subsub-category" id="sub-cat-step-{{ $childcategory['id'] }}"
+                                style="display:none">
+                                @if(!empty($data[$key][$skey]['grandchildcategory']))
+                                @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
+                                <div class="form-check">
+                                    <input type="checkbox"
+                                        class="form-check-input @error('category_ids') is-invalid @enderror"
+                                        id="subcategory_{{ $grandchildcategory['id'] }}" name="category_idss[]"
+                                        value="{{ $grandchildcategory['id'] }}">
+                                    <label class="form-check-label"
+                                        for="subcategory_{{ $grandchildcategory['id'] }}">{{ $grandchildcategory['title'] }}</label>
+                                </div>
+                                @endforeach
+                                @endif
                             </div>
-                            @endforeach
-                            @endif
                         </div>
+                        @endforeach
+                        @endif
                     </div>
-                    @endforeach
-                    @endif
                 </div>
+                @endforeach
+                @error('category_idss')
+                <span class="invalid-feedback" role="alert">
+                    <strong class="text-danger">{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @endforeach
-            @error('category_idss')
-            <span class="invalid-feedback" role="alert">
-                <strong class="text-danger">{{ $message }}</strong>
-            </span>
-            @enderror
         </div>
-    </div>
     </div>
 
     <div class="row mb-0  width100Set">
@@ -152,7 +190,7 @@ $('.form-check-input ').change(function() {
     var checkboxValue = $(this).val();
     if ($(this).is(':checked')) {
         $('#sub-cat-step-' + checkboxValue).show();
-    }else{
+    } else {
         $('#sub-cat-step-' + checkboxValue).css('display', 'none');
         $('.subsub-category').css('display', 'none');
         $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
@@ -199,4 +237,39 @@ $(document).on('click', '#btn-sb', function() {
     }
 
 });
+</script>
+<script>
+    $(document).ready(function() {
+        // Handle changes to the checkboxes
+        $('#subcategory_div input:checkbox').change(function() {
+            var checkboxValue = $(this).val();
+            if (checkboxValue) {
+                var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+                if (childCount !== 0) {
+                    $(this).prop('checked', false);
+                }
+                updateCheckboxState();
+            }
+        });
+        $('#select_plan').change(function() {
+            updateCheckboxState();
+        });
+
+        // Function to update the state of checkboxes based on selected plan
+        function updateCheckboxState() {
+            var selectedOption = $('#select_plan option:selected');
+            var maxSelections = selectedOption.data('category-limit') || 0;
+            var selectedCount = $('#subcategory_div input:checkbox:checked').length;
+
+            if (maxSelections > 0) {
+                if (selectedCount >= maxSelections) {
+                    $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
+                } else {
+                    $('#subcategory_div input:checkbox').prop('disabled', false);
+                }
+            } else {
+                $('#subcategory_div input:checkbox').prop('disabled', false);
+            }
+        }
+    });
 </script>

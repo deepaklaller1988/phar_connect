@@ -28,16 +28,10 @@
                 <div class="featureList">
                     {!! $plan->description !!}
                 </div>
-                <!-- @if($categoryCount <= $plan->number_of_category && $countryCount == $plan->number_of_country)
+              
                <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
-                @else
-                <button class="button" id="payment" data-id="{{ $plan->id }}" disabled>Get Started</button>
-                 @endif -->
+                
 
-                @if ($countryCount <= $plan->number_of_country && $categoryCount <= $plan->number_of_category)
-                    <button class="button" id="payment" data-id="{{ $plan->id }}">Get Started</button>
-                    <button class="backbutton" id="backButton">Back</button>
-               @endif
 
             </div>
             @endforeach

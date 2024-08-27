@@ -5,9 +5,44 @@
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
 <hr>
+<div class="card" style="width: 42rem;">
+    <h5 class="card-title">Partner Information</h5>
+    <ul class="list-group">
+        <li class="list-group-item">Name: {{$data['partnerInformation']['name']}}</li>
+        <li class="list-group-item">Email: {{$data['partnerInformation']['email']}}</li>
+        <li class="list-group-item">Phone: {{$data['partnerInformation']['phone']}}</li>
+        <li class="list-group-item">Company Name: {{$data['partnerInformation']['company_name'] }}</li>
+        <li class="list-group-item">Alternate Contact Name: {{ $data['partnerInformation']['alternate_contact_name']}}</li>
+        <li class="list-group-item">Alternate Email Address: {{ $data['partnerInformation']['alternate_email_address']}}</li>
+    </ul>
+</div>
 
 <div class="flexSet">
     <div class="row mb-3">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="common_input mb_15 d-flex align-items-center">
+                    <label class="text-nowrap mr-1">Plans :
+                    </label>
+                    <select id="select_plan" class="form-control selectFixCZ" name="plan_id">
+                        <option value="" disabled selected>Select Plans </option>
+                        @foreach($data['planTitle'] as $plan)
+                        <option value="{{ $plan->id }}" data-country-limit="{{ $plan->number_of_country }}"
+                            data-category-limit="{{ $plan->number_of_category }}">
+                            {{ $plan->title }}</option>
+                        @endforeach
+                    </select>
+                    <span class="d-none" id="plan_error" role="alert">
+                        <strong class="text-danger">Please Select Plan</strong>
+                    </span>
+                    @error('plan_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <label for="certifications">{{ __('Certifications') }}</label>
             <select id="certifications" class="form-select js-example-placeholder-multiple col-sm-12"
@@ -28,12 +63,12 @@
             <input id="company_website" type="text" class="form-control @error('company_website') is-invalid @enderror"
                 name="company_website" value="{{ old('company_website') }}" required autocomplete="company_website"
                 id="company_website" autofocus>
-                <span class="d-none" id="company_website_error" role="alert">
-                    <strong class="text-danger" >Please Enter a valid URL</strong>
-                </span>
+            <span class="d-none" id="company_website_error" role="alert">
+                <strong class="text-danger">Please Enter a valid URL</strong>
+            </span>
             @error('company_website')
             <span class="invalid-feedback" role="alert">
-                <strong class="text-danger" >{{ $message }}</strong>
+                <strong class="text-danger">{{ $message }}</strong>
             </span>
             @enderror
         </div>
@@ -49,8 +84,8 @@
         </div>
         <div class="col-md-6">
             <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
-            <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_country" name="country_id[]"
-                required multiple="multiple">
+            <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_country"
+                name="country_id[]" required multiple="multiple">
                 @foreach ($data['countries'] as $country)
                 <option value="{{$country->id}}">{{$country->country_name}}
                 </option>
@@ -89,21 +124,23 @@
             @foreach($data['subcategories'] as $key=> $subcategory)
             <div class="form-check">
                 <section>
-                <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                    id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]" value="{{ $subcategory['id'] }}">
-                <label class="form-check-label"
-                    for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
+                    <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
+                        id="subcategory_{{ $subcategory['id'] }}" name="category_idss[]"
+                        value="{{ $subcategory['id'] }}">
+                    <label class="form-check-label"
+                        for="subcategory_{{ $subcategory['id'] }}">{{ $subcategory['title'] }}</label>
                 </section>
                 <div class="sub-category" id="sub-cat-step-{{ $subcategory['id'] }}" style="display:none">
                     @if(!empty($data[$key]['childcategory']))
                     @foreach($data[$key]['childcategory'] as $skey => $childcategory)
                     <div class="form-check">
-                       <section> <input type="checkbox" class="form-check-input @error('category_ids') is-invalid @enderror"
-                            id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
-                            value="{{ $childcategory['id'] }}">
-                        <label class="form-check-label"
-                            for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
-                </section>
+                        <section> <input type="checkbox"
+                                class="form-check-input @error('category_ids') is-invalid @enderror"
+                                id="subcategory_{{ $childcategory['id'] }}" name="category_idss[]"
+                                value="{{ $childcategory['id'] }}">
+                            <label class="form-check-label"
+                                for="subcategory_{{ $childcategory['id'] }}">{{ $childcategory['title'] }}</label>
+                        </section>
                         <div class="subsub-category" id="sub-cat-step-{{ $childcategory['id'] }}" style="display:none">
                             @if(!empty($data[$key][$skey]['grandchildcategory']))
                             @foreach($data[$key][$skey]['grandchildcategory'] as $ckey => $grandchildcategory)
@@ -153,95 +190,90 @@ $('.form-check-input ').change(function() {
     var checkboxValue = $(this).val();
     if ($(this).is(':checked')) {
         $('#sub-cat-step-' + checkboxValue).show();
-    }else{
+    } else {
         $('#sub-cat-step-' + checkboxValue).css('display', 'none');
         $('.subsub-category').css('display');
         $('#sub-cat-step-' + checkboxValue).find('input[type=checkbox]:checked').prop('checked', false);
     }
 });
 
-$(document).on('click','#btn-sb',function(){
+$(document).on('click', '#btn-sb', function() {
     url = $('#company_website').val();
     var urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])\/?$/;
     if (!urlPattern.test(url)) {
         $('#company_website_error').removeClass('d-none');
         return false;
-    } 
+    }
 
-    if($('#multiselect_country').val() == ''){
+    if ($('#multiselect_country').val() == '') {
         $('#country_error').removeClass('d-none');
         return false;
     }
-    if($('input[name="category_idss[]"]').is(':checked')){
+    if ($('input[name="category_idss[]"]').is(':checked')) {
         return true;
-    }else{
+    } else {
         $('#cat_error').removeClass('d-none');
         return false;
     }
 });
 </script>
-
 <script>
-    var plan_country = "{{ $data['plans']['number_of_country'] }}";
-    $(document).on('change', '#multiselect_country', function() {
-        var selectedCount = $('#multiselect_country option:selected').length;
-        
-        if (selectedCount >= plan_country) {
-            $('#messages').text("You have selected "+plan_country+" Country According to Plan.");
-        } 
-        if (selectedCount >= plan_country) {
-            $('#multiselect_country option').not(':selected').attr('disabled', 'disabled');
-        } else {
-            $('#multiselect_country option').removeAttr('disabled');
+    $(document).ready(function() {
+        // Update plan_country when a plan is selected
+        $('#select_plan').on('change', function() {
+            var selectedOption = $(this).find('option:selected');
+            plan_country = selectedOption.data('country-limit') || 0;
+            updateCountrySelection();
+        });
+        $(document).on('change', '#multiselect_country', function() {
+            updateCountrySelection();
+        });
+
+        function updateCountrySelection() {
+            var selectedCount = $('#multiselect_country option:selected').length;
+
+            if (selectedCount >= plan_country) {
+                $('#messages').text("You have selected " + plan_country + " Country According to Plan.");
+                $('#multiselect_country option').not(':selected').attr('disabled', 'disabled');
+            } else {
+                $('#messages').text('');
+                $('#multiselect_country option').removeAttr('disabled');
+            }
         }
     });
 </script>
-
 <script>
-    var plan_category = "{{ $data['plans']['number_of_category'] }}";
-
-    $(document).on('change', '#subcategory_div input:checkbox', function() {
-        // Count checked boxes that are not disabled
-        var checkedBoxes = $('#subcategory_div input:checkbox:checked:not(:disabled)').length;
-
-        // Get current checkbox and its parent sections
-        var $currentCheckbox = $(this);
-        var $parentSection = $currentCheckbox.closest('.form-check').closest('.category, .sub-category, .subsub-category');
-        var $ancestorSections = $parentSection.prevAll('section').find('input:checkbox');
-
-        // Disable parent category if a subcategory is selected
-        if ($currentCheckbox.is(':checked')) {
-            $ancestorSections.prop('disabled', true);
-        } else {
-            // Enable parent category if no other subcategories are selected
-            var shouldEnable = true;
-            $parentSection.find('input:checkbox').each(function() {
-                if ($(this).is(':checked')) {
-                    shouldEnable = false;
+    $(document).ready(function() {
+        // Handle changes to the checkboxes
+        $('#subcategory_div input:checkbox').change(function() {
+            var checkboxValue = $(this).val();
+            if (checkboxValue) {
+                var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+                if (childCount !== 0) {
+                    $(this).prop('checked', false);
                 }
-            });
-            if (shouldEnable) {
-                $ancestorSections.prop('disabled', false);
+                updateCheckboxState();
             }
-        }
-      
+        });
+        $('#select_plan').change(function() {
+            updateCheckboxState();
+        });
 
-        // Disable further selection if plan limit is reached
-        if (checkedBoxes >= plan_category) {
-            $('#subcategory_div input:checkbox:not(:checked)').prop('disabled', true);
-        } else {
-            $('#subcategory_div input:checkbox:not(:checked)').prop('disabled', false);
+        // Function to update the state of checkboxes based on selected plan
+        function updateCheckboxState() {
+            var selectedOption = $('#select_plan option:selected');
+            var maxSelections = selectedOption.data('category-limit') || 0;
+            var selectedCount = $('#subcategory_div input:checkbox:checked').length;
 
-            // Ensure parent categories remain disabled if their subcategories are checked
-            $('#subcategory_div .category input:checkbox:checked').each(function() {
-                $(this).closest('.category').prev('section').find('input:checkbox').prop('disabled', true);
-            });
-            $('#subcategory_div .sub-category input:checkbox:checked').each(function() {
-                $(this).closest('.sub-category').prev('section').find('input:checkbox').prop('disabled', true);
-            });
-            $('#subcategory_div .subsub-category input:checkbox:checked').each(function() {
-                $(this).closest('.subsub-category').prev('section').find('input:checkbox').prop('disabled', true);
-            });
+            if (maxSelections > 0) {
+                if (selectedCount >= maxSelections) {
+                    $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
+                } else {
+                    $('#subcategory_div input:checkbox').prop('disabled', false);
+                }
+            } else {
+                $('#subcategory_div input:checkbox').prop('disabled', false);
+            }
         }
     });
 </script>

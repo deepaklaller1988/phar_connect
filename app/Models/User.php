@@ -97,6 +97,13 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
+    // In your Product model
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_ids');
+    }
+
+
     
     // public function isPlanExpired()
     // {
