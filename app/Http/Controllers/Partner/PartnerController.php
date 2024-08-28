@@ -135,8 +135,10 @@ class PartnerController extends Controller
    
     public function categories()
     {
+        $data['partnerInformation'] = User::where('id', auth()->user()->id)->first();
+        $data['planTitle'] = Plan::all();
         $categories = Category::where('parent_id',NULL)->where('id','!=',4)->orderBy('title')->get();
-        return view('partners.categories',compact('categories'));
+        return view('partners.categories',compact('categories','data'));
     }
     public function selected_categories(Request $request)
     {

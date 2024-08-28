@@ -1,42 +1,7 @@
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-<div class="card" style="width: 42rem;">
-    <h5 class="card-title">Partner Information</h5>
-    <ul class="list-group">
-        <li class="list-group-item">Name: {{$data['partnerInformation']['name']}}</li>
-        <li class="list-group-item">Email: {{$data['partnerInformation']['email']}}</li>
-        <li class="list-group-item">Phone: {{$data['partnerInformation']['phone']}}</li>
-        <li class="list-group-item">Company Name: {{$data['partnerInformation']['company_name'] }}</li>
-        <li class="list-group-item">Alternate Contact Name: {{ $data['partnerInformation']['alternate_contact_name']}}</li>
-        <li class="list-group-item">Alternate Email Address: {{ $data['partnerInformation']['alternate_email_address']}}</li>
-    </ul>
-</div>
 <div class="card-body-one">
     <div class="row mb-3">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="common_input mb_15 d-flex align-items-center">
-                    <label class="text-nowrap mr-1">Plans :
-                    </label>
-                    <select id="select_plan" class="form-control selectFixCZ" name="plan_id">
-                        <option value="" disabled selected>Select Plans </option>
-                        @foreach($data['planTitle'] as $plan)
-                        <option value="{{ $plan->id }}" data-category-limit="{{ $plan->number_of_category }}">
-                            {{ $plan->title }}</option>
-                        @endforeach
-                    </select>
-                    <span class="d-none" id="plan_error" role="alert">
-                        <strong class="text-danger">Please Select Plan</strong>
-                    </span>
-                    @error('plan_id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-            </div>
-        </div>
         <div class="col-md-6">
             <label for="event-name">{{ __('Event Name') }}<span class="text-danger">*</span></label>
             <input id="event-name" type="text" class="form-control @error('event_name') is-invalid @enderror"
@@ -239,37 +204,41 @@ $(document).on('click', '#btn-sb', function() {
 });
 </script>
 <script>
-    $(document).ready(function() {
-        // Handle changes to the checkboxes
-        $('#subcategory_div input:checkbox').change(function() {
-            var checkboxValue = $(this).val();
-            if (checkboxValue) {
-                var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
-                if (childCount !== 0) {
-                    $(this).prop('checked', false);
-                }
-                updateCheckboxState();
+$(document).ready(function() {
+    // Handle changes to the checkboxes
+    $('#subcategory_div input:checkbox').change(function() {
+        var checkboxValue = $(this).val();
+        if (checkboxValue) {
+            var childCount = $('#sub-cat-step-' + checkboxValue).children().length;
+            if (childCount !== 0) {
+                $(this).prop('checked', false);
             }
-        });
-        $('#select_plan').change(function() {
             updateCheckboxState();
-        });
+        }
+    });
+    $('#select_plan').change(function() {
+        updateCheckboxState();
+    });
 
-        // Function to update the state of checkboxes based on selected plan
-        function updateCheckboxState() {
-            var selectedOption = $('#select_plan option:selected');
-            var maxSelections = selectedOption.data('category-limit') || 0;
-            var selectedCount = $('#subcategory_div input:checkbox:checked').length;
+    // Function to update the state of checkboxes based on selected plan
+    function updateCheckboxState() {
+        var selectedOption = $('#select_plan option:selected');
+        var maxSelections = selectedOption.data('category-limit') || 0;
+        var selectedCount = $('#subcategory_div input:checkbox:checked').length;
 
-            if (maxSelections > 0) {
-                if (selectedCount >= maxSelections) {
-                    $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
-                } else {
-                    $('#subcategory_div input:checkbox').prop('disabled', false);
-                }
+        if (maxSelections > 0) {
+            if (selectedCount >= maxSelections) {
+                $('#subcategory_div input:checkbox').not(':checked').prop('disabled', true);
             } else {
                 $('#subcategory_div input:checkbox').prop('disabled', false);
             }
+        } else {
+            $('#subcategory_div input:checkbox').prop('disabled', false);
         }
+    }
+    $(document).on('change', '#select_plan', function() {
+        $('.form-check').find('input[type=checkbox]:checked').prop('checked', false);
     });
+
+});
 </script>

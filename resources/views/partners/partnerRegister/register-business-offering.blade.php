@@ -4,45 +4,8 @@
     href="{{ asset('assets/admin/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/admin/bower_components/multiselect/css/multi-select.css') }}">
-
-<hr>
-<div class="card" style="width: 42rem;">
-    <h5 class="card-title">Partner Information</h5>
-    <ul class="list-group">
-        <li class="list-group-item">Name: {{$data['partnerInformation']['name']}}</li>
-        <li class="list-group-item">Email: {{$data['partnerInformation']['email']}}</li>
-        <li class="list-group-item">Phone: {{$data['partnerInformation']['phone']}}</li>
-        <li class="list-group-item">Company Name: {{$data['partnerInformation']['company_name'] }}</li>
-        <li class="list-group-item">Alternate Contact Name: {{ $data['partnerInformation']['alternate_contact_name']}}</li>
-        <li class="list-group-item">Alternate Email Address: {{ $data['partnerInformation']['alternate_email_address']}}</li>
-    </ul>
-</div>
 <div class="flexSet">
     <div class="row mb-3">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="common_input mb_15 d-flex align-items-center">
-                    <label class="text-nowrap mr-1">Plans :
-                    </label>
-                    <select id="select_plan" class="form-control selectFixCZ" name="plan_id">
-                        <option value="" disabled selected>Select Plans </option>
-                        @foreach($data['planTitle'] as $plan)
-                        <option value="{{ $plan->id }}" data-country-limit="{{ $plan->number_of_country }}"
-                            data-category-limit="{{ $plan->number_of_category }}">
-                            {{ $plan->title }}</option>
-                        @endforeach
-                    </select>
-                    <span class="d-none" id="plan_error" role="alert">
-                        <strong class="text-danger">Please Select Plan</strong>
-                    </span>
-                    @error('plan_id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-            </div>
-        </div>
         <div class="col-md-6">
             <label for="certifications">{{ __('Certifications') }}</label>
             <select id="certifications" class="form-select js-example-placeholder-multiple col-sm-12"
@@ -326,5 +289,10 @@ $(document).ready(function() {
             $('#subcategory_div input:checkbox').prop('disabled', false);
         }
     }
+
+    $(document).on('change','#select_plan',function(){
+        $('.form-check').find('input[type=checkbox]:checked').prop('checked',false);
+    });
+
 });
 </script>

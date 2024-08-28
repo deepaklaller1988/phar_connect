@@ -32,11 +32,54 @@
                 <div class="page-body">
                     <div class="card">
                         <div class="card-block">
-                            <form method="POST" action="{{ route('partner.complete-info',auth()->user()->id ) }}" enctype="multipart/form-data">
+                            <h5 class="card-title">Partner Information</h5>
+                            <div class="flexSet">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Full Name') }}</label>
+                                        <input id="company_website" value="{{$data['partnerInformation']['name']}}"
+                                            readonly type="text" class="form-control ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Email') }}</label>
+                                        <input id="company_website" value="{{$data['partnerInformation']['email']}}"
+                                            readonly type="text" class="form-control ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Phone') }}</label>
+                                        <input id="company_website" value="{{$data['partnerInformation']['phone']}}"
+                                            readonly type="text" class="form-control ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Company Name') }}</label>
+                                        <input id="company_website"
+                                            value="{{$data['partnerInformation']['Company_name']}}" readonly type="text"
+                                            class="form-control ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Alternate Contact Name') }}</label>
+                                        <input id="company_website"
+                                            value="{{$data['partnerInformation']['alternate_contact_name']}}" readonly
+                                            type="text" class="form-control ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="company_website">{{ __('Alternate Email Address') }}</label>
+                                        <input id="company_website"
+                                            value="{{$data['partnerInformation']['alternate_email_address']}}" readonly
+                                            type="text" class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-block">
+                            <form method="POST" action="{{ route('partner.complete-info',auth()->user()->id ) }}"
+                                enctype="multipart/form-data">
                                 <div class="flexSet">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-lg-12 mb-3">
+                                        <div class="col-lg-6 mb-3">
                                             <div class="common_input mb_15 d-flex align-items-center">
                                                 <label class="text-nowrap mr-1">Select Group :
                                                 </label>
@@ -50,6 +93,30 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="common_input mb_15 d-flex align-items-center">
+                                                <label class="text-nowrap mr-1">Plans :
+                                                </label>
+                                                <select id="select_plan" class="form-control selectFixCZ"
+                                                    name="plan_id">
+                                                    <option value="" disabled selected>Select Plans </option>
+                                                    @foreach($data['planTitle'] as $plan)
+                                                    <option value="{{ $plan->id }}"
+                                                        data-country-limit="{{ $plan->number_of_country }}"
+                                                        data-category-limit="{{ $plan->number_of_category }}">
+                                                        {{ $plan->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="d-none" id="plan_error" role="alert">
+                                                    <strong class="text-danger">Please Select Plan</strong>
+                                                </span>
+                                                @error('plan_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <div id="custom-form"></div>
                                 </div>
@@ -60,7 +127,7 @@
             </div>
         </div>
     </div>
-   
+
     <script>
     $(document).ready(function() {
         $('#select_main_category').change(function() {
