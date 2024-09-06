@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
-use App\models\Notification;
+use App\Models\Notification;
 class HeaderServiceProvider extends ServiceProvider
 {
     /**

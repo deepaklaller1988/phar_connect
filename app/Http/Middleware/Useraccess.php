@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
   
-class Useraccess
+class UserAccess
 {
     /**
      * Handle an incoming request.
