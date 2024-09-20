@@ -56,6 +56,9 @@
                                 Plan</a>
                         </div>
                         <div class="card-block">
+                            <div class="card-header">
+                                <h5>Business Offering & Consulting Services</h5>
+                            </div>
                             <div class="row">
                                 @foreach($plans as $plan)
                                 <div class="col-md-12 col-lg-4 peity-chart priceSetting">
@@ -93,9 +96,117 @@
                                                     <i
                                                         class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
                                                     <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
-                                                    <h6>For  : {{ $plan->days}} days</h6>
-                                                    <h6>Number of Country  : {{ $plan->number_of_country}} </h6>
-                                                    <h6>Number of Category  : {{ $plan->number_of_category}} </h6>
+                                                    <h6>For : {{ $plan->days}} days</h6>
+                                                    <h6>Number of Country : {{ $plan->number_of_country}} </h6>
+                                                    <h6>Number of Category : {{ $plan->number_of_category}} </h6>
+                                                    <p>{!! $plan->description !!}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="card-block">
+                            <div class="card-header">
+                                <h5>Events and Conferences Services</h5>
+                            </div>
+                            <div class="row">
+                                @foreach($plans1 as $plan)
+                                <div class="col-md-12 col-lg-4 peity-chart priceSetting">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>
+                                                {{ $plan->title }}
+                                                <div class="planAct">
+                                                    @if($plan->status == 1)
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-success">Active</label>
+                                                    </div>
+                                                    @else
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-danger">Inactive</label>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </h5>
+                                            <div class="editDeletePlans">
+                                                <ul>
+                                                    <li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
+                                                                class="feather icon-edit-1"></i></a></li>
+                                                    <li>
+                                                        <a id="planDelete" data-id="{{ $plan->id }}"><i
+                                                                class="feather icon-trash close-card"></i></a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-block">
+                                            <ul class="basic-list list-icons">
+                                                <li>
+                                                    <i
+                                                        class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
+                                                    <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
+                                                    <h6>For : {{ $plan->days}} days</h6>
+                                                    <h6>Number of Country : {{ $plan->number_of_country}} </h6>
+                                                    <h6>Number of Category : {{ $plan->number_of_category}} </h6>
+                                                    <p>{!! $plan->description !!}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="card-block">
+                            <div class="card-header">
+                                <h5>Jobs</h5>
+                            </div>
+                            <div class="row">
+                                @foreach($plans2 as $plan)
+                                <div class="col-md-12 col-lg-4 peity-chart priceSetting">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>
+                                                {{ $plan->title }}
+                                                <div class="planAct">
+                                                    @if($plan->status == 1)
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-success">Active</label>
+                                                    </div>
+                                                    @else
+                                                    <div class="label-main">
+                                                        <label class="form-label label label-danger">Inactive</label>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </h5>
+                                            <div class="editDeletePlans">
+                                                <ul>
+                                                    <li><a href="{{ route('admin.plan.edit',$plan->id) }}"><i
+                                                                class="feather icon-edit-1"></i></a></li>
+                                                    <li>
+                                                        <a id="planDelete" data-id="{{ $plan->id }}"><i
+                                                                class="feather icon-trash close-card"></i></a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-block">
+                                            <ul class="basic-list list-icons">
+                                                <li>
+                                                    <i
+                                                        class="icofont icofont-speech-comments text-primary p-absolute text-center d-block f-30"></i>
+                                                    <h6>Amount <b>In $</b> : {{ $plan->amount}}</h6>
+                                                    <h6>For : {{ $plan->days}} days</h6>
+                                                    <h6>Number of Country : {{ $plan->number_of_country}} </h6>
+                                                    <h6>Number of Category : {{ $plan->number_of_category}} </h6>
                                                     <p>{!! $plan->description !!}</p>
                                                 </li>
                                             </ul>

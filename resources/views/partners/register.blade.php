@@ -193,7 +193,9 @@ label.error {
                         Contact us to learn how our experienced team can help ensure regulatory and development success
                         throughout the product lifecycle.</p>
                 </div>
+                <h5 style="margin-top: 10px;"> Plans for Business offering and consulting services</h5>
                 <div class="myPricesDeal">
+                
                     @foreach($plans as $plan)
                     <section>
                         <span>{{ $plan->title}}</span>
@@ -203,8 +205,30 @@ label.error {
                         <h4>{!! $plan->description !!}</h4>
                     </section>
                     @endforeach
-                    
-                   
+                </div>
+                <h5 style="margin-top: 10px;">Plans for Events and Conferences services</h5>
+                <div class="myPricesDeal">
+                    @foreach($plans1 as $plan)
+                    <section>
+                        <span>{{ $plan->title}}</span>
+                        <p><b>{{ $plan->days }}</b> Days Plan</p>
+                        <p><b>{{ $plan->number_of_country }}</b> Countries Plan</p>
+                        <p><b>{{ $plan->number_of_category }}</b> Categories</p>
+                        <h4>{!! $plan->description !!}</h4>
+                    </section>
+                    @endforeach
+                </div>
+                <h5 style="margin-top: 10px;">Plans for Jobs services</h5>
+                <div class="myPricesDeal">
+                    @foreach($plans2 as $plan)
+                    <section>
+                        <span>{{ $plan->title}}</span>
+                        <p><b>{{ $plan->days }}</b> Days Plan</p>
+                        <p><b>{{ $plan->number_of_country }}</b> Countries Plan</p>
+                        <p><b>{{ $plan->number_of_category }}</b> Categories</p>
+                        {!! $plan->description !!}
+                    </section>
+                    @endforeach
                 </div>
             </div>
         </div>

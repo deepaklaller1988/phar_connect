@@ -40,12 +40,16 @@ class PartnerController extends Controller
                             ->orderBy('title')
                             ->get();
         
-        $plans = Plan::all();
+        $plans = Plan::where(['status'=>1, 'category_id'=>1])->get();
+        $plans1 = Plan::where(['status'=>1, 'category_id'=>3])->get();
+        $plans2 = Plan::where(['status'=>1, 'category_id'=>5])->get();
         // Pass both countries and categories to the view
         $data = [
             'countries' => $countries,
             'categories' => $categories,
-            'plans'     => $plans
+            'plans'     => $plans,
+            'plans1'     => $plans1,
+            'plans2'     => $plans2,
         ];
 
         // Return the view 'partners.register' and pass the data variable to it

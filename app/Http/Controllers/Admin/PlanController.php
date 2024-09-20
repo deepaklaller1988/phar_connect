@@ -5,23 +5,27 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plan;
-
+use App\Models\Category;
 class PlanController extends Controller
 {
     public function index(){
-        $plans = Plan::where('status',1)->get();
-        return view('admin.plans.index')->with('plans',$plans);
+        $plans = Plan::where(['status'=>1, 'category_id'=>1])->get();
+        $plans1 = Plan::where(['status'=>1, 'category_id'=>3])->get();
+        $plans2 = Plan::where(['status'=>1, 'category_id'=>5])->get();
+        return view('admin.plans.index',compact('plans','plans1','plans2'));
     }
 
     public function edit($id)
     {
         $plan = Plan::findOrFail($id);
-        return view('admin.plans.edit')->with('plan',$plan);
+        $categories = Category::where('status', 1)->where('parent_id', NULL)->where('id','!=',4)->get();
+        return view('admin.plans.edit')->with(['categories' => $categories,'plan'=>$plan]);
     }
 
     public function add()
     {
-        return view('admin.plans.add');
+        $categories = Category::where('status', 1)->where('parent_id', NULL)->where('id','!=',4)->get();
+        return view('admin.plans.add',compact('categories'));
     }
 
     public function create(Request $request)
@@ -29,6 +33,7 @@ class PlanController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
+            'category_id' => 'required',
             'amount' => 'required|numeric',
             'status' => 'required',
             'days' => 'required|numeric',
@@ -38,6 +43,11 @@ class PlanController extends Controller
         $plan = new Plan(); 
         $plan->title = $request->title;   
         $plan->description = $request->description;
+        if($request->category_id == 2){
+            $plan->category_id = 1;
+        }else{
+            $plan->category_id = $request->category_id;
+        }
         $plan->amount= $request->amount; 
         $plan->status = $request->status;
         $plan->days = $request->days;
@@ -66,6 +76,11 @@ class PlanController extends Controller
         $plan->title = $request->title;   
         $plan->description = $request->description;
         $plan->amount= $request->amount; 
+        if($request->category_id == 2){
+            $plan->category_id = 1;
+        }else{
+            $plan->category_id = $request->category_id;
+        }
         $plan->status = $request->status;
         $plan->days = $request->days;
         $plan->number_of_country = $request->number_of_country;

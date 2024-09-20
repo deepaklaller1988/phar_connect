@@ -48,6 +48,16 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Group</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" name="category_id">
+                                                    @foreach($categories as $category)
+                                                        <option {{ $plan->category_id == $category->id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Title</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="title" value="{{ $plan->title ? $plan->title : '' }}" class="form-control">
