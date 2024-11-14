@@ -13,6 +13,7 @@ use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Position;
 use App\Models\Plan;
+use App\Models\Authorityregion;
 
 class PartnerController extends Controller
 {
@@ -109,6 +110,7 @@ class PartnerController extends Controller
 
         // ]);
         $user = User::findOrFail($id);
+        // dd($user);
         $user->certifications = is_array($request->certifications) ? implode(',', $request->certifications) : '';
          // $user->category_ids = implode(',', $request->category_ids);
         $user->category_ids = is_array($request->category_idss) ? implode(',', $request->category_idss) : '';
@@ -170,6 +172,7 @@ class PartnerController extends Controller
         $data['parent_id'] = $request->category_id;
         $data['plans']  = Plan::where('id',auth()->user()->plan_id)->first();
         $data['partnerInformation'] = User::where('id', auth()->user()->id)->first();
+        $data['autorityregions'] = Authorityregion::all();
         if($request->category_id == 1) {
             $html = View::make('partners.partnerRegister.register-business-offering')->with('data',$data)->render();
         } elseif($request->category_id == 2) {

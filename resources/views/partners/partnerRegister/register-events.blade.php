@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-6">
             <label for="agenda">{{ __('Agenda') }}</label>
-            <input id="agenda" type="text" class="form-control" name="agenda" value="{{ old('agenda') }}"
+            <input id="agenda" type="file" class="form-control" name="agenda" value="{{ old('agenda') }}"
                 autocomplete="agenda" id="agenda">
             <span class="text-danger d-none" id="agenda-error">Please Enter Agenda</span>
         </div>
@@ -40,27 +40,41 @@
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
             @enderror
-        </div>
+        </div> 
         <div class="col-md-6">
-            <label for="linkedin-pfofile">{{ __('Linkedin Profile') }}</label>
-            <input id="linkedin-pfofile" type="text" class="form-control" name="linkedin_profile"
-                value="{{ old('linkedin_profile') }}" autocomplete="linkedin-pfofile" id="linkedin-pfofile">
-        </div>
-        <div class="col-md-6">
-            <label for="twiter-profile">{{ __('Twiter Profile') }}</label>
-            <input id="twiter-profile" type="text" class="form-control" name="twiter_profile"
-                value="{{ old('twiter_profile') }}" autocomplete="twiter-profile" id="twiter-profile">
+            <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
+            <select class="form-select  col-sm-12" id="multiselect_country"
+                name="country_id[]" required>
+                @foreach ($data['countries'] as $country)
+                <option value="{{$country->id}}">{{$country->country_name}}
+                </option>
+                @endforeach
+            </select>
+            <span class="d-none" id="country_error" role="alert">
+                <strong class="text-danger">Please Select Country</strong>
+            </span>
+            @error('country_id')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="location">{{ __('Location') }}<span class="text-danger">*</span></label>
             <input id="location" type="text" class="form-control @error('location') is-invalid @enderror"
-                name="location" value="{{ old('location') }}" required autocomplete="location" id="location">
+                name="location" value="{{ old('location') }}" placeholder="State/Province/County, City" required autocomplete="location" id="location">
             <span class="d-none" id="location-error">Please Enter Location</span>
             @error('location')
             <span class="invalid-feedback" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
             @enderror
+        </div>
+        <div class="col-md-6">
+            <label for="event_profile">{{ __('Event Profile') }}</label>
+            <input id="event_profile" type="text" class="form-control" name="event_profile" value="{{ old('event_profile') }}"
+                autocomplete="event_profile" id="event_profile">
+            <span class="text-danger d-none" id="event_profile-error">Please Enter Event Profile</span>
         </div>
         <div class="col-md-6">
             <label for="company_profile">{{ __('Company Profile') }}<span class="text-danger">*</span></label>
@@ -75,10 +89,10 @@
         </div>
 
         <div class="col-md-6">
-            <label for="representatives">{{ __('Representative(s)') }}</label>
-            <textarea class="form-control" name="representatives" maxlength="300" placeholder=""
-                id="representatives">{{ old('representative') }}</textarea>
-            @error('representatives')
+            <label for="representatives">{{ __('Company Address') }}</label>
+            <textarea class="form-control" name="company_address" maxlength="300" placeholder=""
+                id="company_address">{{ old('representative') }}</textarea>
+            @error('company_address')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

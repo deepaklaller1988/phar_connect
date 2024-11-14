@@ -53,7 +53,7 @@
                                     <div class="col-md-6">
                                         <label for="company_website">{{ __('Company Name') }}</label>
                                         <input id="company_website"
-                                            value="{{$data['partnerInformation']['Company_name']}}" readonly type="text"
+                                            value="{{$data['partnerInformation']['company_name']}}" readonly type="text"
                                             class="form-control ">
                                     </div>
                                     <div class="col-md-6">

@@ -28,45 +28,16 @@
             @enderror
         </div>
         <div class="col-md-6">
-            <label for="name">{{ __('Position Title') }}<span class="text-danger">*</span></label>
-            <input id="name" type="text" class="form-control @error('position_title') is-invalid @enderror"
-                name="position_title" value="{{ old('company_name') }}" required autofocus>
-            <span class="text-danger d-none" id="position_title_error">Please Enter Position Title</span>
-            @error('position_title')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+            <label for="job_description">{{ __('Job Description') }}</label>
+            <input id="job_description" type="file" class="form-control" name="job_description" value="{{ old('job_description') }}"
+                autocomplete="job_description" id="job_description">
+            <span class="text-danger d-none" id="job_description-error">Please Enter Agenda</span>
         </div>
         <div class="col-md-6">
-            <label for="education-level">{{ __('Education Level') }}<span class="text-danger">*</span></label>
-            <select class="form-select" id="education_level" name="education_level" required>
-                <option value="">Select Education Level</option>
-                @foreach($data['educations'] as $education_level)
-                <option value="{{ $education_level->id }}">{{ $education_level->title }}</option>
-                @endforeach
-            </select>
-            <span class="text-danger d-none" id="education_level_error">Please Select Education Level</span>
-            @error('education_level')
-            <span class="invalid-feedback" role="alert">
-                <strong class="text-danger">{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-        <div class="col-md-6">
-            <label for="experience-level">{{ __('Experience Level') }}<span class="text-danger">*</span></label>
-            <select class="form-select" id="experience_level" name="experience_level" required>
-                <option value="">Select Experience Level</option>
-                @foreach($data['experiences'] as $experience_level)
-                <option value="{{ $experience_level->id }}">{{ $experience_level->title }}</option>
-                @endforeach
-            </select>
-            <span class="text-danger d-none" id="experience_level_error">Please Select Experience Level</span>
-            @error('experience_level')
-            <span class="invalid-feedback" role="alert">
-                <strong class="text-danger">{{ $message }}</strong>
-            </span>
-            @enderror
+            <label for="position_link">{{ __('Position Link') }}</label>
+            <input id="position_link" type="text" class="form-control" name="position_link" value="{{ old('position_link') }}"
+                autocomplete="position_link" id="position_link">
+            <span class="text-danger d-none" id="position_link-error">Please Enter Agenda</span>
         </div>
         <div class="col-md-6">
             <label for="company_website">{{ __('Company Website') }}<span class="text-danger">*</span></label>
@@ -81,19 +52,27 @@
             @enderror
         </div>
         <div class="col-md-6">
-            <label for="linkedin-pfofile">{{ __('Linkedin Profile') }}</label>
-            <input id="linkedin-pfofile" type="text" class="form-control" name="linkedin_profile"
-                value="{{ old('linkedin_profile') }}" autocomplete="linkedin-pfofile" id="linkedin-pfofile" autofocus>
-        </div>
-        <div class="col-md-6">
-            <label for="twiter-profile">{{ __('Twiter Profile') }}</label>
-            <input id="twiter-profile" type="text" class="form-control" name="twiter_profile"
-                value="{{ old('twiter_profile') }}" autocomplete="twiter-profile" id="twiter-profile" autofocus>
+            <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
+            <select class="form-select  col-sm-12" id="multiselect_country"
+                name="country_id[]" required>
+                @foreach ($data['countries'] as $country)
+                <option value="{{$country->id}}">{{$country->country_name}}
+                </option>
+                @endforeach
+            </select>
+            <span class="d-none" id="country_error" role="alert">
+                <strong class="text-danger">Please Select Country</strong>
+            </span>
+            @error('country_id')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="location">{{ __('Location') }}<span class="text-danger">*</span></label>
             <input id="location" type="text" class="form-control @error('location') is-invalid @enderror"
-                name="location" value="{{ old('location') }}" autocomplete="location" id="location" autofocus>
+                name="location" value="{{ old('location') }}" autocomplete="location" placeholder="State/Province/County, City" id="location" autofocus>
             <span class="text-danger d-none" id="location_error">Please Enter Location</span>
             @error('location')
             <span class="invalid-feedback" role="alert">

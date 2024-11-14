@@ -7,21 +7,6 @@
 <div class="flexSet">
     <div class="row mb-3">
         <div class="col-md-6">
-            <label for="certifications">{{ __('Certifications') }}</label>
-            <select id="certifications" class="form-select js-example-placeholder-multiple col-sm-12"
-                name="certifications[]" multiple required autocomplete="Certifications" autofocus>
-                <option value="ISO 9001">ISO 9001</option>
-                <option value="GMP">GMP</option>
-                <option value="CE">CE</option>
-                <option value="ISO 13485">ISO 13485</option>
-            </select>
-            @error('certifications')
-            <span class="invalid-feedback" role="alert">
-                <strong class="text-danger">{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-        <div class="col-md-6">
             <label for="company_website">{{ __('Company Website') }}<span class="text-danger">*</span></label>
             <input id="company_website" type="text" class="form-control @error('company_website') is-invalid @enderror"
                 name="company_website" value="{{ old('company_website') }}" required autocomplete="company_website"
@@ -36,14 +21,22 @@
             @enderror
         </div>
         <div class="col-md-6">
-            <label for="linkedin-pfofile">{{ __('Linkedin Profile') }}</label>
-            <input id="linkedin-pfofile" type="text" class="form-control" name="linkedin_profile"
-                value="{{ old('linkedin_profile') }}" autocomplete="linkedin-pfofile" id="linkedin-pfofile" autofocus>
-        </div>
-        <div class="col-md-6">
-            <label for="twiter-profile">{{ __('Twiter Profile') }}</label>
-            <input id="twiter-profile" type="text" class="form-control" name="twiter_profile"
-                value="{{ old('twiter_profile') }}" autocomplete="twiter-profile" id="twiter-profile" autofocus>
+            <label for="regions">{{ __('Regions') }}<span class="text-danger" id="messages">*</span></label>
+            <select class="form-select js-example-placeholder-multiple col-sm-12" id="multiselect_regions"
+                name="regions[]" required multiple="multiple">
+                @foreach ($data['autorityregions'] as $autorityregion)
+                <option value="{{$autorityregion->id}}">{{$autorityregion->name}}
+                </option>
+                @endforeach
+            </select>
+            <span class="d-none" id="authority_error" role="alert">
+                <strong class="text-danger">Please Select Region</strong>
+            </span>
+            @error('region')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="country">{{ __('Country') }}<span class="text-danger" id="messages">*</span></label>
@@ -75,9 +68,9 @@
             @enderror
         </div>
         <div class="col-md-6">
-            <label for="representatives">{{ __('Representative(s)') }}</label>
-            <textarea class="form-control" name="representatives" maxlength="300" placeholder=""
-                id="representatives">{{ old('representatives') }}</textarea>
+            <label for="company_address">{{ __('Company Address') }}</label>
+            <textarea class="form-control" name="company_address" maxlength="300" placeholder=""
+                id="company_address">{{ old('company_address') }}</textarea>
         </div>
     </div>
     <div id="subcategory_div">
@@ -133,9 +126,10 @@
     </div>
     <div class="row mb-0  width100Set">
         <div class="col-md-8 offset-md-4">
-            <button type="submit" id="btn-sb" class="btn btn-primary">
+            <!-- <button type="submit" id="btn-sb" class="btn btn-primary">
                 {{ __('Register') }}
-            </button>
+            </button> -->
+            <input type="submit" name="submit" id="btn-sb" class="btn btn-primary" value="Complete Profile">
         </div>
     </div>
 </div>
@@ -164,11 +158,11 @@ $('.form-check-input ').change(function() {
 
 $(document).on('click', '#btn-sb', function() {
     url = $('#company_website').val();
-    var urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])\/?$/;
-    if (!urlPattern.test(url)) {
-        $('#company_website_error').removeClass('d-none');
-        return false;
-    }
+    // var urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])\/?$/;
+    // if (!urlPattern.test(url)) {
+    //     $('#company_website_error').removeClass('d-none');
+    //     return false;
+    // }
 
     if ($('#multiselect_country').val() == '') {
         $('#country_error').removeClass('d-none');
